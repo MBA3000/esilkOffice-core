@@ -19,6 +19,88 @@
 #include "config_features.h"
 #include "macros.inc"
 
+#if defined ESILK_KZ_BUNDLED
+// This build validates a machine-wide installation in protected Program Files.
+// Reject arbitrary/per-user roots before installed code is run as SYSTEM.
+WindowsCustomAction gid_Customaction_EsilkExtensionExpectedLocation
+    Name = "EsilkExtensionExpectedLocation";
+    Typ = "51";
+    Source = "EsilkExtensionExpectedLocation";
+    Target = "[ProgramFiles64Folder]esilkOffice\\";
+    Inbinarytable = 0;
+    Styles = (NO_FILE);
+    Assignment1 = ("InstallExecuteSequence", "Not REMOVE=\"ALL\" And Not ACTION=\"ADMIN\" And Not (ProductName >< \"SDK\")", "behind_CostFinalize");
+End
+
+WindowsCustomAction gid_Customaction_EsilkExtensionLocationRequired
+    Name = "EsilkExtensionLocationRequired";
+    Typ = "19";
+    Source = "";
+    Target = "This esilkOffice build requires a machine-wide installation in the default esilkOffice directory under Program Files.";
+    Inbinarytable = 0;
+    Styles = (NO_FILE);
+    Assignment1 = ("InstallExecuteSequence", "Not REMOVE=\"ALL\" And Not ACTION=\"ADMIN\" And Not (ProductName >< \"SDK\") And (ALLUSERS <> \"1\" Or INSTALLLOCATION ~<> EsilkExtensionExpectedLocation)", "behind_InstallValidate");
+End
+
+// RollbackDisabled reflects installer policy; DISABLEROLLBACK also covers an
+// explicit command-line request. REMOVE=ALL is reliable after InstallValidate.
+// Reject before RemoveExistingProducts can uninstall the previous product.
+WindowsCustomAction gid_Customaction_EsilkExtensionRollbackRequired
+    Name = "EsilkExtensionRollbackRequired";
+    Typ = "19";
+    Source = "";
+    Target = "esilkOffice bundled extension installation requires Windows Installer rollback. Enable rollback before installing or repairing this product.";
+    Inbinarytable = 0;
+    Styles = (NO_FILE);
+    Assignment1 = ("InstallExecuteSequence", "Not REMOVE=\"ALL\" And Not ACTION=\"ADMIN\" And (RollbackDisabled Or DISABLEROLLBACK)", "behind_EsilkExtensionLocationRequired");
+End
+
+// The external package owns its migration logic. Installed Python is resolved
+// to its File-table key by the installer generator; NO_FILE must not be used.
+// Queue rollback before migration, after InstallFiles, so installed files are
+// still available when the rollback script executes in reverse order.
+// Date/Time are live MSI properties. Snapshot the session once so deferred,
+// rollback and commit actions identify the same private backup transaction.
+WindowsCustomAction gid_Customaction_EsilkExtensionPrepare
+    Name = "EsilkExtensionPrepare";
+    Typ = "51";
+    Source = "EsilkExtensionSession";
+    Target = "[Date]T[Time].[CLIENTPROCESSID]";
+    Inbinarytable = 0;
+    Styles = (NO_FILE);
+    Assignment1 = ("InstallExecuteSequence", "Not REMOVE=\"ALL\" And Not PATCH", "behind_InstallFiles");
+End
+
+WindowsCustomAction gid_Customaction_EsilkExtensionRollback
+    Name = "EsilkExtensionRollback";
+    Typ = "3346";
+    Source = "python.exe";
+    Target = "\"[INSTALLLOCATION]share\\extensions\\esilk-kz-calc\\installer_migration.py\" --action rollback --transaction \"[ProductCode]\" --session \"[EsilkExtensionSession]\"";
+    Inbinarytable = 0;
+    Assignment1 = ("InstallExecuteSequence", "Not REMOVE=\"ALL\" And Not PATCH", "behind_EsilkExtensionPrepare");
+End
+
+WindowsCustomAction gid_Customaction_EsilkExtensionMigrate
+    Name = "EsilkExtensionMigrate";
+    Typ = "3090";
+    Source = "python.exe";
+    Target = "\"[INSTALLLOCATION]share\\extensions\\esilk-kz-calc\\installer_migration.py\" --action migrate --transaction \"[ProductCode]\" --session \"[EsilkExtensionSession]\"";
+    Inbinarytable = 0;
+    Assignment1 = ("InstallExecuteSequence", "Not REMOVE=\"ALL\" And Not PATCH", "behind_EsilkExtensionRollback");
+End
+
+WindowsCustomAction gid_Customaction_EsilkExtensionCommit
+    Name = "EsilkExtensionCommit";
+    // Cleanup must not trigger rollback after recovery data has been deleted.
+    // Only commit ignores failure; migration and restoration remain checked.
+    Typ = "3666";
+    Source = "python.exe";
+    Target = "\"[INSTALLLOCATION]share\\extensions\\esilk-kz-calc\\installer_migration.py\" --action commit --transaction \"[ProductCode]\" --session \"[EsilkExtensionSession]\"";
+    Inbinarytable = 0;
+    Assignment1 = ("InstallExecuteSequence", "Not REMOVE=\"ALL\" And Not PATCH", "InstallFinalize");
+End
+#endif
+
 WindowsCustomAction gid_Customaction_Regallmsdocdll
 	Name = "Regallmsdocdll";
 	Typ = "65";

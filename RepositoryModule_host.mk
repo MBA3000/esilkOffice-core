@@ -78,6 +78,7 @@ $(eval $(call gb_Module_add_moduledirs,libreoffice,\
 	editeng \
 	embeddedobj \
 	embedserv \
+	$(if $(strip $(ESILK_OXT_DIR)),esilk) \
 	eventattacher \
 	extensions \
 	external \

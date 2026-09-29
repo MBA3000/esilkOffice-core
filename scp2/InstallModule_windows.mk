@@ -10,6 +10,7 @@
 $(eval $(call gb_InstallModule_InstallModule,scp2/windows))
 
 $(eval $(call gb_InstallModule_add_defs,scp2/windows,\
+	$(if $(strip $(ESILK_OXT_DIR)),-DESILK_KZ_BUNDLED) \
 	$(if $(WINDOWS_SDK_HOME),\
 		-DHAVE_WINDOWS_SDK \
 	) \

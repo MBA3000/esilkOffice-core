@@ -32,6 +32,10 @@
 #include "config_dconf.h"
 #include "config_folders.h"
 
+#if defined ESILK_KZ_BUNDLED
+PACKAGE_FILELIST(gid_Brand_File_Esilk_Kz_Calc, "esilk-kz-calc.filelist")
+#endif
+
 Module gid_Module_Root_Brand
     ParentID = gid_Module_Root;
     InstallOrder = "150";
@@ -52,6 +56,9 @@ Module gid_Module_Root_Brand
             gid_Brand_Dir_Share_Registry,
             gid_Brand_Dir_Share_Xdg);
     Files = (auto_brand_ALL,
+#if defined ESILK_KZ_BUNDLED
+             gid_Brand_File_Esilk_Kz_Calc,
+#endif
 	     gid_Brand_File_Desktophelper_Txt,
              gid_Brand_File_Share_Xdg_Base,
              gid_Brand_File_Share_Xdg_Calc,
