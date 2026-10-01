@@ -48,6 +48,16 @@ sub create_upgrade_table
     $newline = $installer::globals::upgradecode . "\t" . $installer::globals::msiproductversion . "\t" . "\t" . "\t" . "2" . "\t" . "\t" . "NEWPRODUCTS" . "\n";
     push(@upgradetable, $newline);
 
+    # An esilk bundled build shares upstream registrations (ProgIDs, UNO
+    # install path, COM server, App Paths) with LibreOffice. Only detect any
+    # installed LibreOffice (OnlyDetect + VersionMinInclusive); a custom action
+    # then refuses a new installation of this unsupported combination.
+    if ( $ENV{ESILK_OXT_DIR} && ( ! $installer::globals::languagepack ) && ( ! $installer::globals::helppack ) )
+    {
+        $newline = "{4B17E523-5D91-4E69-BD96-7FD81CFA81BB}" . "\t" . "0.0.0" . "\t" . "\t" . "\t" . "258" . "\t" . "\t" . "ESILKLIBREOFFICEFOUND" . "\n";
+        push(@upgradetable, $newline);
+    }
+
     # Saving the file
 
     my $upgradetablename = $basedir . $installer::globals::separator . "Upgrade.idt";

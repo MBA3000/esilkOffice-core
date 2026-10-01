@@ -428,6 +428,8 @@ sub update_property_table
         ${$propertyfile}[$i] =~ s/\bWINDOWSMINVERSIONTEXTTEMPLATE\b/$windowsminversiontext/;
         ${$propertyfile}[$i] =~ s/\bWINMAJORVERMINTEMPLATE\b/$winmajorvermin/;
         if ( ${$propertyfile}[$i] =~ m/\bARPNOMODIFY\b/ ) { $hasarpnomodify = 1; }
+        # Upgrade-table detection properties must be secure (see upgrade.pm).
+        if ( $ENV{ESILK_OXT_DIR} ) { ${$propertyfile}[$i] =~ s/^(SecureCustomProperties\t[^\r\n]*)/$1;ESILKLIBREOFFICEFOUND/; }
     }
 
     # Check if are building silent MSI

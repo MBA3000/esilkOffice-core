@@ -42,6 +42,20 @@ WindowsCustomAction gid_Customaction_EsilkExtensionLocationRequired
     Assignment1 = ("InstallExecuteSequence", "Not REMOVE=\"ALL\" And Not ACTION=\"ADMIN\" And Not (ProductName >< \"SDK\") And (ALLUSERS <> \"1\" Or INSTALLLOCATION ~<> EsilkExtensionExpectedLocation)", "behind_InstallValidate");
 End
 
+// esilkOffice shares upstream Windows registrations with LibreOffice. The
+// Upgrade table only detects LibreOffice; refuse a new installation (including
+// a major upgrade) before any change. Repair and removal stay available.
+WindowsCustomAction gid_Customaction_EsilkLibreOfficeConflict
+    Name = "EsilkLibreOfficeConflict";
+    Typ = "19";
+    Source = "";
+    Target = "esilkOffice cannot be installed while LibreOffice is installed on this computer. Uninstall LibreOffice first, then run this installer again.";
+    Inbinarytable = 0;
+    Styles = (NO_FILE);
+    Assignment1 = ("InstallExecuteSequence", "ESILKLIBREOFFICEFOUND And Not Installed And Not (ProductName >< \"SDK\")", "behind_FindRelatedProducts");
+    Assignment2 = ("InstallUISequence", "ESILKLIBREOFFICEFOUND And Not Installed And Not (ProductName >< \"SDK\")", "behind_FindRelatedProducts");
+End
+
 // RollbackDisabled reflects installer policy; DISABLEROLLBACK also covers an
 // explicit command-line request. REMOVE=ALL is reliable after InstallValidate.
 // Reject before RemoveExistingProducts can uninstall the previous product.
