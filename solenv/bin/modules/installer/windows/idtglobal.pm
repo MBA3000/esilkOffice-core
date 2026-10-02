@@ -1002,6 +1002,10 @@ sub set_custom_action
     my $customaction_exefilename = $exefilename;
     my $uniquename = "";
 
+    # SCP string literals escape quotes and backslashes. CustomAction.Target
+    # needs the decoded command line (as sequence conditions already do).
+    $actionparameter =~ s/\\(["\\])/$1/g;
+
     # when the style NO_FILE is set, no searching for the file is needed, no filtering is done, we can add that custom action
     if ( $styles =~ /\bNO_FILE\b/ )
     {
