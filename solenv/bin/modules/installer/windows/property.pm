@@ -205,6 +205,15 @@ sub set_important_properties
         push(@{$propertyfile}, $onepropertyline);
     }
 
+    # esilkOffice installs every shipped UI language by default; upstream's
+    # SelectLanguage otherwise keeps only those matching the Windows UI (so an
+    # English Windows would lose Kazakh). UI_LANGS on the command line overrides.
+    if ( $ENV{ESILK_OXT_DIR} && $$languagestringref =~ /_/ )
+    {
+        my $uilangs = join(",", map { my $lang = $_; $lang =~ s/-/_/g; $lang } split(/_/, $$languagestringref));
+        push(@{$propertyfile}, "UI_LANGS" . "\t" . $uilangs . "\n");
+    }
+
     if ( $allvariables->{'PRODUCTVERSION'} )
     {
         my $onepropertyline = "DEFINEDVERSION" . "\t" . $allvariables->{'PRODUCTVERSION'} . "\n";

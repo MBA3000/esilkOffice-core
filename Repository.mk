@@ -937,6 +937,7 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo,\
 endif
 
 $(eval $(call gb_Helper_register_packages_for_install,ooo,\
+	$(if $(strip $(ESILK_OXT_DIR)),esilk-defaults) \
 	$(if $(SYSTEM_LIBEXTTEXTCAT),,libexttextcat_fingerprint) \
 	officecfg_misc \
 	$(if $(filter $(OS),MACOSX), \

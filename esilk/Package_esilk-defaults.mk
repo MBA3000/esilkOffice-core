@@ -5,11 +5,10 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
 
-$(eval $(call gb_Module_Module,esilk))
+$(eval $(call gb_Package_Package,esilk-defaults,$(SRCDIR)/esilk/registry))
 
-$(eval $(call gb_Module_add_targets,esilk,\
-	ExtensionPackage_esilk-kz-calc \
-	Package_esilk-defaults \
+$(eval $(call gb_Package_add_files,esilk-defaults,$(LIBO_SHARE_FOLDER)/registry,\
+	esilk-defaults.xcd \
 ))
 
 # vim: set noet sw=4 ts=4:
