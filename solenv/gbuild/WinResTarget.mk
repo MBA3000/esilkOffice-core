@@ -21,6 +21,23 @@
 
 gb_WinResTarget_DEFAULTDEFS := $(gb_RCDEFS)
 
+# Version inputs shared by the resources. The .d files cannot track them:
+# rc.exe has no dependency output, and soltools makedepend no longer acts on
+# #include (parse.c only handles #if/#elif/#error), so every
+# Dep/WinResTarget/*.d is empty and a version or branding change never rebuilt
+# a .res. So each .res depends explicitly on version.hrc, config_version.h
+# (configure keeps its timestamp when the content is unchanged) and a stamp of
+# the configured -D values. The stamp recipe runs on every make but replaces
+# the stamp only when those values change (the write-if-different helper that
+# LinkTarget.mk uses for its dep lists), so a no-op make rebuilds nothing.
+# None of these inputs depends on a WinResTarget, so there is no cycle.
+gb_WinResTarget_DEFS_STAMP := $(WORKDIR)/WinResTarget/default-defs.stamp
+
+$(gb_WinResTarget_DEFS_STAMP) : $(gb_Helper_PHONY)
+	mkdir -p $(dir $@) && \
+	printf '%s\n' '$(subst ','\'',$(strip $(gb_WinResTarget_DEFAULTRC_DEFS)))' > $@.tmp && \
+	$(call gb_Helper_replace_if_different_and_touch,$@.tmp,$@)
+
 define gb_WinResTarget_WinResTarget
 $(call gb_WinResTarget_WinResTarget_init,$(1))
 $$(eval $$(call gb_Module_register_target,$(call gb_WinResTarget_get_target,$(1)),$(call gb_WinResTarget_get_clean_target,$(1))))
@@ -34,6 +51,10 @@ $(call gb_WinResTarget_get_target,$(1)) : FLAGS := $(gb_RCFLAGS)
 $(call gb_WinResTarget_get_target,$(1)) : INCLUDE := -I$(SRCDIR)/include $(subst -isystem,-I,$(SOLARINC)) -I$(BUILDDIR)/config_$(gb_Side)
 $(call gb_WinResTarget_get_clean_target,$(1)) : RCFILE :=
 $(call gb_WinResTarget_get_target,$(1)) : RCFILE :=
+$(call gb_WinResTarget_get_target,$(1)) : \
+	$(SRCDIR)/include/version.hrc \
+	$(BUILDDIR)/config_$(gb_Side)/config_version.h \
+	$(gb_WinResTarget_DEFS_STAMP)
 
 ifeq ($(gb_FULLDEPS),$(true))
 $(call gb_WinResTarget_get_dep_target,$(1)) : DEFS := $$(gb_WinResTarget_DEFAULTDEFS)

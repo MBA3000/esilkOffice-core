@@ -14,6 +14,24 @@ $(eval $(call gb_WinResTarget_set_include,sofficebin/officeloader,\
     -I$(SRCDIR)/sysui/desktop \
 ))
 
+# esilk: the icons come from ESILK_BRAND_DIR when it is set (esilk/Brand.mk)
+$(eval $(call gb_WinResTarget_use_esilk_brand_icons,sofficebin/officeloader,\
+    soffice.ico \
+    oasis-text.ico \
+    oasis-text-template.ico \
+    oasis-spreadsheet.ico \
+    oasis-spreadsheet-template.ico \
+    oasis-drawing.ico \
+    oasis-drawing-template.ico \
+    oasis-presentation.ico \
+    oasis-presentation-template.ico \
+    oasis-master-document.ico \
+    oasis-web-template.ico \
+    oasis-database.ico \
+    oasis-formula.ico \
+    oxt-extension.ico \
+))
+
 $(eval $(call gb_WinResTarget_add_defs,sofficebin/officeloader,\
     -DRES_APP_ICON=icons/soffice.ico \
 ))

@@ -496,4 +496,24 @@ gb_Library_DLLDIR_FOR_BUILD := $(WORKDIR_FOR_BUILD)/LinkTarget/Library
 gb_CppunitTest_DLLDIR := $(WORKDIR)/LinkTarget/CppunitTest
 gb_POLOCATION := $(SRCDIR)/translations/source
 
+# esilk: po overlays (see esilk/l10n/README.md). A po file at the same relative
+# path under gb_POOVERLAYLOCATION is passed to ulfex/xrmex after the upstream po
+# files; l10ntools keys merge entries by source file, group and id, and a later po
+# file of the same language replaces the text, so the overlay msgstr wins while
+# the translations submodule stays unmodified.
+gb_POOVERLAYLOCATION := $(SRCDIR)/esilk/l10n/translations/source
+
+# $(call gb_POLOCATION_get_overlays,pofiles): existing overlays of the given po files
+gb_POLOCATION_get_overlays = $(wildcard $(patsubst $(gb_POLOCATION)/%,$(gb_POOVERLAYLOCATION)/%,$(filter $(gb_POLOCATION)/%,$(1))))
+
+# Because the msgid is not part of the key, an overlay whose msgid is no longer
+# the en-US text would still be merged. A merge that uses overlays therefore first
+# runs esilk/l10n/check_overlays.py with the build's python; the check fails the
+# build on a stale or unknown overlay entry. Both expand to nothing when the po
+# files have no overlays.
+# $(call gb_POLOCATION_check_overlays,pofiles): recipe line that runs the check
+gb_POLOCATION_check_overlays = $(if $(call gb_POLOCATION_get_overlays,$(1)),$(call gb_ExternalExecutable_get_command,python) $(SRCDIR)/esilk/l10n/check_overlays.py --quiet)
+# $(call gb_POLOCATION_get_overlay_check_deps,pofiles): its order-only prerequisites
+gb_POLOCATION_get_overlay_check_deps = $(if $(call gb_POLOCATION_get_overlays,$(1)),$(SRCDIR)/esilk/l10n/check_overlays.py $(call gb_ExternalExecutable_get_dependencies,python))
+
 # vim: set noet sw=4:

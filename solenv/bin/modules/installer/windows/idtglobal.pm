@@ -780,7 +780,18 @@ sub prepare_language_idt_directory
     {
         my $iconfilename = ${$iconfilecollector}[$i];
         installer::pathanalyzer::make_absolute_filename_to_relative_filename(\$iconfilename);
-        installer::systemactions::copy_one_file(${$iconfilecollector}[$i], $destinationdir . $installer::globals::separator . "Icon" . $installer::globals::separator . $iconfilename);
+        my $iconsource = ${$iconfilecollector}[$i];
+
+        # esilk: with ESILK_BRAND_DIR the ARP icon (sysui/desktop/icons/soffice.ico, added in shortcut.pm)
+        # is the brand icon that esilk/Brand.mk staged; the Icon table keeps the name soffice.ico.
+        if ( $ENV{'ESILK_BRAND_ARP_ICON'} && $iconsource =~ /[\/\\]sysui[\/\\]desktop[\/\\]icons[\/\\]soffice\.ico$/ )
+        {
+            $iconsource = $ENV{'ESILK_BRAND_ARP_ICON'};
+            if ( ! -f $iconsource ) { installer::exiter::exit_program("ERROR: Brand ARP icon $iconsource not found!", "prepare_language_idt_directory"); }
+            push(@installer::globals::logfileinfo, "Using brand ARP icon $iconsource for $iconfilename\n");
+        }
+
+        installer::systemactions::copy_one_file($iconsource, $destinationdir . $installer::globals::separator . "Icon" . $installer::globals::separator . $iconfilename);
     }
 
     # Copying all files in $binarytablefiles in the binary directory

@@ -90,10 +90,12 @@ $(gb_CustomTarget_workdir)/instsetoo_native/install/msi_templates/%: $(SRCDIR)/i
 	$(call gb_Output_announce,setting up msi templates for type $(@F),$(true),AWK,4)
 	rm -rf $@ && mkdir -p $@ && cd $@ $(foreach file,$(^F),&& awk '!/^#/{print}' $(<D)/$(file) > $(file))
 
+# esilk: with ESILK_BRAND_DIR the dialog bitmaps come from the brand set (esilk/Brand.mk)
 $(gb_CustomTarget_workdir)/instsetoo_native/install/msi_templates/%/Binary: $(SRCDIR)/instsetoo_native/inc_common/windows/msi_templates/Binary/*.* \
-            $(gb_CustomTarget_workdir)/instsetoo_native/install/msi_templates/%
+            $(gb_CustomTarget_workdir)/instsetoo_native/install/msi_templates/% \
+            $(esilk_brand_MSI_DEPS)
 	$(call gb_Output_announce,setting up msi templates for type $* - copying binary assets,$(true),CPY,4)
-	rm -rf $@ && mkdir -p $@ && cd $@ && cp $(SRCDIR)/instsetoo_native/inc_common/windows/msi_templates/Binary/*.* ./
+	rm -rf $@ && mkdir -p $@ && cd $@ && cp $(SRCDIR)/instsetoo_native/inc_common/windows/msi_templates/Binary/*.* ./ $(esilk_brand_MSI_COPY)
 
 gb_Make_JobLimiter := $(WORKDIR)/job-limiter.exe
 

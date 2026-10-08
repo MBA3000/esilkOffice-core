@@ -14,6 +14,9 @@ $(eval $(call gb_WinResTarget_set_include,smath/launcher,\
     -I$(SRCDIR)/sysui/desktop \
 ))
 
+# esilk: the icons come from ESILK_BRAND_DIR when it is set (esilk/Brand.mk)
+$(eval $(call gb_WinResTarget_use_esilk_brand_icons,smath/launcher,math_app.ico))
+
 $(eval $(call gb_WinResTarget_add_defs,smath/launcher,\
     -DRES_APP_ICON=icons/math_app.ico \
 ))

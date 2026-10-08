@@ -57,7 +57,8 @@ ifneq ($(WITH_LANG),)
 define gb_CustomTarget_ulfex__command
 $(call gb_Output_announce,$(1),$(true),ULF,1)
 	$(call gb_Trace_StartRange,$(1),ULF)
-MERGEINPUT=$(call gb_var2file,$(shell $(gb_MKTEMP)),$(3)) && \
+	$(call gb_POLOCATION_check_overlays,$(3))
+MERGEINPUT=$(call gb_var2file,$(shell $(gb_MKTEMP)),$(3) $(call gb_POLOCATION_get_overlays,$(3))) && \
 $(call gb_Helper_abbreviate_dirs,\
 	$(call gb_Executable_get_command,ulfex) -i $(2) -o $(1) -m $${MERGEINPUT} -l all) && \
 rm -rf $${MERGEINPUT}
@@ -73,8 +74,15 @@ endef
 endif
 
 # $(call gb_CustomTarget_ulfex_rule,ulftargetpattern,ulfsource,pofiles)
+# The merged file also depends on its po files, their overlays and the language
+# list; without these a translation update or a newly configured language never
+# reached e.g. the MSI tables. (A pofiles argument that is a target-specific
+# variable reference, as for ScpMergeTarget, adds nothing here: such callers
+# declare their own po dependencies.)
 define gb_CustomTarget_ulfex_rule
-$(1) : $(2) $(if $(WITH_LANG),$(call gb_Executable_get_runtime_dependencies,ulfex)) | $(dir $(1)).dir
+$(1) : $(2) $(wildcard $(3)) $(call gb_POLOCATION_get_overlays,$(3)) $(gb_Helper_LANGSTARGET) \
+	$(if $(WITH_LANG),$(call gb_Executable_get_runtime_dependencies,ulfex)) | $(dir $(1)).dir \
+	$(call gb_POLOCATION_get_overlay_check_deps,$(3))
 	$$(call gb_CustomTarget_ulfex__command,$$@,$(subst %,$$*,$(strip $(2))),$(strip $(3)))
 
 endef

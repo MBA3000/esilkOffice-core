@@ -15,6 +15,9 @@ $(eval $(call gb_WinResTarget_set_include,quickstart/QuickStart,\
     -I$(SRCDIR)/sysui/desktop \
 ))
 
+# esilk: the icons come from ESILK_BRAND_DIR when it is set (esilk/Brand.mk)
+$(eval $(call gb_WinResTarget_use_esilk_brand_icons,quickstart/QuickStart,soffice.ico))
+
 $(eval $(call gb_WinResTarget_add_dependencies,quickstart/QuickStart,\
     sysui/desktop/icons/soffice.ico \
 ))

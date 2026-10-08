@@ -4,8 +4,49 @@
  License, v. 2.0. If a copy of the MPL was not distributed with this
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
- esilkOffice product defaults. Kazakh is the default user interface for a
+ esilkOffice product defaults (share layer). A value stored in the user
+ profile overrides them.
+
+ Linguistic/General/UILocale=kk: Kazakh is the default user interface for a
  new profile; a language the user selects is stored in the user profile and
  overrides this default, including after an upgrade.
+
+ No LibreOffice fundraising or community prompts (sfx2/source/view/viewfrm.cxx,
+ sfx2/source/dialog/infobar.cxx, sfx2/source/dialog/backingwindow.cxx):
+ * Office.UI/Infobar/Enabled/{Donate,GetInvolved,WhatsNew}=false: the infobar
+   container refuses these infobars, whatever the date or version.
+ * Setup/Product/LastTime{Donate,GetInvolved}Shown=4102444800 (2100-01-01
+   00:00 UTC): the periodic check is never due, so the office never stores
+   its own timestamps for these prompts in the profile.
+ * Setup/Product/WhatsNewDialog=false: after a version upgrade the office
+   takes the infobar branch (disabled above) instead of opening the What's
+   New dialog. Setup/Product/WhatsNew deliberately stays true: it also drives
+   the first-start Welcome dialog (interface and appearance choice) and the
+   upgrade bookkeeping (ooSetupLastVersion, Misc/FirstRun, tdf#35568).
+ * Office.Common/Misc/ShowDonation=false: the Start Center shows its
+   Extensions button instead of Donate and never shows the donation banner.
+ * Office.Common/Misc/ShowTipOfTheDay=false: the Tip of the Day dialog no
+   longer opens by itself (SfxApplication::IsTipOfTheDayDue, used by sfx2 and
+   sd). The upstream tip list (cui/inc/tipoftheday.hrc) asks for donations,
+   invites users to join the LibreOffice community and links to
+   libreoffice.org. Help > Tip of the Day still opens it on request.
+
+ No LibreOffice community links where esilkOffice has its own identity:
+ * Office.Commands/Execute/Disabled: Help > Donate, Get Involved and Send
+   Feedback are hidden and cannot be dispatched (menubarmanager.cxx hides
+   disabled commands). Get Help Online and User Guides stay.
+ * Help/StartCenter/InfoURL empty: the About dialog hides its Website button
+   (cui/source/dialogs/about.cxx). Menus/VolunteerURL empty: clicking the Start
+   Center brand image does nothing (sfx2/source/dialog/backingwindow.cxx).
+   Both rely on the esilk guards in that code; set the esilk URL when the
+   product website exists.
+ * Help/BuiltInHelpNotInstalledPopUp=false: F1 opens the online help directly
+   instead of a popup that offers to install a LibreOffice help pack.
+
+ The other LibreOffice URLs (Office.Common/Menus/*URL, Help/HelpRootURL,
+ ExtensionManager/ExtensionRepositories/WebsiteLink) are deliberately not
+ blanked: their callers append a query or a language code and pass the result
+ to SystemShellExecute (URIS_ONLY), so an empty value turns a link into an
+ error dialog instead of hiding it.
 -->
-<oor:data xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oor="http://openoffice.org/2001/registry"><dependency file="main"/><oor:component-data oor:name="Linguistic" oor:package="org.openoffice.Office"><node oor:name="General"><prop oor:name="UILocale"><value>kk</value></prop></node></oor:component-data></oor:data>
+<oor:data xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oor="http://openoffice.org/2001/registry"><dependency file="main"/><oor:component-data oor:name="Linguistic" oor:package="org.openoffice.Office"><node oor:name="General"><prop oor:name="UILocale"><value>kk</value></prop></node></oor:component-data><oor:component-data oor:name="Infobar" oor:package="org.openoffice.Office.UI"><node oor:name="Enabled"><prop oor:name="Donate"><value>false</value></prop><prop oor:name="GetInvolved"><value>false</value></prop><prop oor:name="WhatsNew"><value>false</value></prop></node></oor:component-data><oor:component-data oor:name="Setup" oor:package="org.openoffice"><node oor:name="Product"><prop oor:name="LastTimeDonateShown"><value>4102444800</value></prop><prop oor:name="LastTimeGetInvolvedShown"><value>4102444800</value></prop><prop oor:name="WhatsNewDialog"><value>false</value></prop></node></oor:component-data><oor:component-data oor:name="Common" oor:package="org.openoffice.Office"><node oor:name="Misc"><prop oor:name="ShowDonation"><value>false</value></prop><prop oor:name="ShowTipOfTheDay"><value>false</value></prop></node><node oor:name="Help"><prop oor:name="BuiltInHelpNotInstalledPopUp"><value>false</value></prop><node oor:name="StartCenter"><prop oor:name="InfoURL"><value></value></prop></node></node><node oor:name="Menus"><prop oor:name="VolunteerURL"><value></value></prop></node></oor:component-data><oor:component-data oor:name="Commands" oor:package="org.openoffice.Office"><node oor:name="Execute"><node oor:name="Disabled"><node oor:name="esilkDonation" oor:op="replace"><prop oor:name="Command"><value>Donation</value></prop></node><node oor:name="esilkGetInvolved" oor:op="replace"><prop oor:name="Command"><value>GetInvolved</value></prop></node><node oor:name="esilkSendFeedback" oor:op="replace"><prop oor:name="Command"><value>SendFeedback</value></prop></node></node></node></oor:component-data></oor:data>

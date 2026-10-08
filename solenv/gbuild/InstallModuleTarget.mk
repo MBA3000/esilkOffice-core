@@ -94,11 +94,14 @@ $(call gb_ScpMergeTarget_get_clean_target,%) :
 
 # gb_ScpMergeTarget_ScpMergeTarget(<target>)
 define gb_ScpMergeTarget_ScpMergeTarget
-$(call gb_ScpMergeTarget_get_target,$(1)) :| $(dir $(call gb_ScpMergeTarget_get_target,$(1))).dir
+$(call gb_ScpMergeTarget_get_target,$(1)) :| $(dir $(call gb_ScpMergeTarget_get_target,$(1))).dir \
+	$(call gb_POLOCATION_get_overlay_check_deps,$(foreach lang,$(gb_TRANS_LANGS),$(gb_POLOCATION)/$(lang)/$(patsubst %/,%,$(dir $(1))).po))
 $(call gb_ScpMergeTarget_get_target,$(1)) : \
 	SCP_POFILES := $(foreach lang,$(gb_TRANS_LANGS),$(gb_POLOCATION)/$(lang)/$(patsubst %/,%,$(dir $(1))).po)
 $(call gb_ScpMergeTarget_get_target,$(1)) : \
-	$(foreach lang,$(gb_TRANS_LANGS),$(gb_POLOCATION)/$(lang)/$(patsubst %/,%,$(dir $(1))).po)
+	$(foreach lang,$(gb_TRANS_LANGS),$(gb_POLOCATION)/$(lang)/$(patsubst %/,%,$(dir $(1))).po) \
+	$(call gb_POLOCATION_get_overlays,$(foreach lang,$(gb_TRANS_LANGS),$(gb_POLOCATION)/$(lang)/$(patsubst %/,%,$(dir $(1))).po)) \
+	$(gb_Helper_LANGSTARGET)
 $(foreach lang,$(gb_TRANS_LANGS),$(gb_POLOCATION)/$(lang)/$(patsubst %/,%,$(dir $(1))).po) :
 
 endef

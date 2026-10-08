@@ -14,6 +14,9 @@ $(eval $(call gb_WinResTarget_set_include,soffice/launcher,\
     -I$(SRCDIR)/sysui/desktop \
 ))
 
+# esilk: the icons come from ESILK_BRAND_DIR when it is set (esilk/Brand.mk)
+$(eval $(call gb_WinResTarget_use_esilk_brand_icons,soffice/launcher,soffice.ico))
+
 $(eval $(call gb_WinResTarget_add_defs,soffice/launcher,\
     -DRES_APP_ICON=icons/soffice.ico \
 ))
