@@ -17,16 +17,22 @@
  */
 
 /*
- * esilk: OOO_ARPHELPLINKTEMPLATE, OOO_ARPURLINFOABOUTTEMPLATE and
- * OOO_ARPURLUPDATEINFOTEMPLATE are intentionally not defined. Property.idt
- * then gets an empty value for ARPHELPLINK, ARPURLINFOABOUT and
- * ARPURLUPDATEINFO in every language, and property.pm drops those rows, so
- * Apps and Features shows no LibreOffice links. Define them again (with kk/ru
- * entries in esilk/l10n) once esilk has its own web site.
+ * esilk: the Apps and Features links point to the esilkOffice website, in the
+ * language of the installer (kk and ru entries in esilk/l10n). An undefined
+ * template gives an empty value, and property.pm then drops the row.
  */
 
 [OOO_ARPCONTACTTEMPLATE]
 en-US = "esilk"
+
+[OOO_ARPHELPLINKTEMPLATE]
+en-US = "https://esilk.akbrd.com/en/"
+
+[OOO_ARPURLINFOABOUTTEMPLATE]
+en-US = "https://esilk.akbrd.com/en/"
+
+[OOO_ARPURLUPDATEINFOTEMPLATE]
+en-US = "https://esilk.akbrd.com/en/"
 
 [OOO_STR_NEW_DISPLAY_NAME]
 en-US = "~New"

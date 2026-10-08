@@ -19,3 +19,30 @@ msgctxt ""
 "LngText.text"
 msgid "esilk"
 msgstr "esilk"
+
+#. esilk: Apps and Features link to the esilkOffice website in this language
+#: Property.ulf
+msgctxt ""
+"Property.ulf\n"
+"OOO_ARPHELPLINKTEMPLATE\n"
+"LngText.text"
+msgid "https://esilk.akbrd.com/en/"
+msgstr "https://esilk.akbrd.com/ru/"
+
+#. esilk: Apps and Features link to the esilkOffice website in this language
+#: Property.ulf
+msgctxt ""
+"Property.ulf\n"
+"OOO_ARPURLINFOABOUTTEMPLATE\n"
+"LngText.text"
+msgid "https://esilk.akbrd.com/en/"
+msgstr "https://esilk.akbrd.com/ru/"
+
+#. esilk: Apps and Features link to the esilkOffice website in this language
+#: Property.ulf
+msgctxt ""
+"Property.ulf\n"
+"OOO_ARPURLUPDATEINFOTEMPLATE\n"
+"LngText.text"
+msgid "https://esilk.akbrd.com/en/"
+msgstr "https://esilk.akbrd.com/ru/"

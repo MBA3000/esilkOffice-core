@@ -19,6 +19,7 @@
 			<h1 id="Welcome" xml:lang="en-US">${PRODUCTNAME} ${PRODUCTVERSION} ReadMe</h1>
 			<p id="A6" xml:lang="en-US">This file contains important information about the ${PRODUCTNAME} software. You are recommended to read this information very carefully before starting installation.</p>
 			<p id="esilkBasedOn" xml:lang="en-US">${PRODUCTNAME} is based on LibreOffice, the office suite developed by the LibreOffice community and The Document Foundation. The license and copyright notices of LibreOffice and of the third-party components it includes are in the files LICENSE.html, NOTICE and CREDITS.fodt in the ${PRODUCTNAME} installation folder.</p>
+			<p id="esilkWebsite" xml:lang="en-US">${PRODUCTNAME} website: https://esilk.akbrd.com/en/</p>
 		</div>
 
 		<div id="Installation">

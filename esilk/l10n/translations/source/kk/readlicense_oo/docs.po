@@ -18,3 +18,12 @@ msgctxt ""
 "readmeitem.text"
 msgid "${PRODUCTNAME} is based on LibreOffice, the office suite developed by the LibreOffice community and The Document Foundation. The license and copyright notices of LibreOffice and of the third-party components it includes are in the files LICENSE.html, NOTICE and CREDITS.fodt in the ${PRODUCTNAME} installation folder."
 msgstr "${PRODUCTNAME} LibreOffice негізінде жасалған. LibreOffice — LibreOffice қоғамдастығы мен The Document Foundation әзірлейтін кеңсе бағдарламалары. LibreOffice және оның құрамындағы үшінші тарап компоненттерінің лицензиялық және авторлық құқық туралы мәліметтері ${PRODUCTNAME} орнатылған бумадағы LICENSE.html, NOTICE және CREDITS.fodt файлдарында берілген."
+
+#. esilk: readme line with the esilkOffice website
+#: readme.xrm
+msgctxt ""
+"readme.xrm\n"
+"esilkWebsite\n"
+"readmeitem.text"
+msgid "${PRODUCTNAME} website: https://esilk.akbrd.com/en/"
+msgstr "${PRODUCTNAME} сайты: https://esilk.akbrd.com/"
