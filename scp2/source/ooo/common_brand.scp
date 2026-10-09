@@ -573,7 +573,8 @@ ProfileItem gid_Brand_Profileitem_Version_Extensionupdateurl
     Section = "Version";
     Order = 18;
     Key = "ExtensionUpdateURL";
-    #if defined(ENABLE_EXTENSION_UPDATE)
+    // esilk: no default extension update server (privacy); see instsetoo_native/CustomTarget_setup.mk
+    #if defined(ENABLE_EXTENSION_UPDATE) && !defined(ESILK_BUILD)
       Value = "https://updateexte.libreoffice.org/ExtensionUpdateService/check.Update";
     #else
       Value = "";

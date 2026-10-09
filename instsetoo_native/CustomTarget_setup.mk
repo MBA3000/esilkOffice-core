@@ -178,11 +178,18 @@ $(gb_CustomTarget_workdir)/instsetoo_native/setup/$(call gb_Helper_get_rcfile,un
 
 
 
+# esilk build (ESILK_OXT_DIR set): no default extension update server, so the
+# Extension Manager never queries updateexte.libreoffice.org. Extensions with
+# their own update URL are still checked. Only the manual "Check for Updates",
+# with a non-bundled extension that has no URL of its own, notices the empty
+# value: it reports no installable updates and shows the lookup error under
+# "Show all updates" (as upstream does when offline). This version.ini is the
+# instdir one; the installed one comes from scp2/source/ooo/common_brand.scp.
 define instsetoo_native_genversionini
 [Version]
 AllLanguages=$(if $(gb_WITH_LANG),$(gb_WITH_LANG),en-US)
 buildid=$(shell cd $(SRCDIR) && git log -1 --format=%H)
-ExtensionUpdateURL=https://updateexte.libreoffice.org/ExtensionUpdateService/check.Update
+ExtensionUpdateURL=$(if $(strip $(ESILK_OXT_DIR)),,https://updateexte.libreoffice.org/ExtensionUpdateService/check.Update)
 UpdateChannel=$(if $(ENABLE_ONLINE_UPDATE_MAR),LOOnlineUpdater)
 ReferenceOOoMajorMinor=4.1
 UpdateID=$(PRODUCTNAME)_$(LIBO_VERSION_MAJOR)_en-US

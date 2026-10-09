@@ -45,6 +45,25 @@ const OUString& GetSofficeExe()
     return s_sPath;
 }
 
+// Product name for messages shown before soffice runs: ProductKey ("<product> <version>")
+// from the bootstrap.ini that the installer writes next to soffice.exe and this helper.
+const OUString& GetProductKey()
+{
+    static const OUString s_sProductKey = []() {
+        OUString sKey;
+        const OUString& sSoffice = GetSofficeExe();
+        if (const sal_Int32 nSlashPos = sSoffice.lastIndexOf('\\'); nSlashPos >= 0)
+        {
+            const OUString sIni = sSoffice.copy(0, nSlashPos + 1) + SAL_CONFIGFILE(u"bootstrap");
+            OUString sIniUrl;
+            if (osl::FileBase::getFileURLFromSystemPath(sIni, sIniUrl) == osl::FileBase::E_None)
+                rtl::Bootstrap(sIniUrl).getFrom(u"ProductKey"_ustr, sKey);
+        }
+        return sKey.isEmpty() ? sSoffice : sKey;
+    }();
+    return s_sProductKey;
+}
+
 OUString GetString(TranslateId pResId)
 {
     static const std::locale s_pLocale = [] {
@@ -131,7 +150,7 @@ DWORD LOStart(const wchar_t* sModeArg, const wchar_t* sFilePath)
     if (!CreateProcessW(nullptr, pCmdLine, nullptr, nullptr, FALSE, 0, nullptr, nullptr, &si, &pi))
     {
         DWORD dwError = GetLastError();
-        const OUString sErrorMsg = "Could not start LibreOffice. Error is 0x"
+        const OUString sErrorMsg = "Could not start " + GetProductKey() + ". Error is 0x"
                                    + OUString::number(dwError, 16) + ":\n\n"
                                    + comphelper::WindowsErrorString(dwError);
 

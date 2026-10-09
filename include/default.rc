@@ -20,6 +20,16 @@
 #include <windows.h>
 #include "version.hrc"
 
+// RES_APP_PRODUCTNAME and RES_APP_VENDOR come from configure (PRODUCTNAME,
+// OOO_VENDOR) through gb_WinResTarget_DEFAULTRC_DEFS in com_MSC_class.mk.
+// RES_APP_PRODUCT_COPYRIGHT (esilk builds only) appends the vendor's notice for
+// its own modifications after the unchanged LibreOffice contributors notice.
+#ifdef RES_APP_PRODUCT_COPYRIGHT
+#define VER_PRODUCT_COPYRIGHT " " PPS(RES_APP_PRODUCTNAME) " modifications \251 " PPS(LIBO_THIS_YEAR) " " PPS(RES_APP_VENDOR) "."
+#else
+#define VER_PRODUCT_COPYRIGHT
+#endif
+
 
 //                 version information
 
@@ -45,12 +55,12 @@ VS_VERSION_INFO VERSIONINFO
             {
                 // International StringTable
                 VALUE "CompanyName",      PPS(RES_APP_VENDOR) "\0"
-                VALUE "ProductName",      "LibreOffice\0"
+                VALUE "ProductName",      PPS(RES_APP_PRODUCTNAME) "\0"
                 VALUE "ProductVersion",   PPS(VER_LEVEL) "\0"
                 VALUE "FileVersion",      PPS(VER_LEVEL) "\0"
                 VALUE "OriginalFilename", PPS(ORG_NAME) "\0"
                 VALUE "InternalName",     PPS(INTERNAL_NAME) "\0"
-                VALUE "LegalCopyright",   S_CRIGHT " LibreOffice contributors. All rights reserved.\0"
+                VALUE "LegalCopyright",   S_CRIGHT " LibreOffice contributors. All rights reserved." VER_PRODUCT_COPYRIGHT "\0"
                 ADDITIONAL_VERINFO1
                 ADDITIONAL_VERINFO2
                 ADDITIONAL_VERINFO3

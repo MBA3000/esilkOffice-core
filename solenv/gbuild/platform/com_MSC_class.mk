@@ -418,12 +418,21 @@ $(call gb_LinkTarget_get_headers_target,$(2)) : PDBFILE = $(call gb_LinkTarget_g
 
 endef
 
+# Configured values used by include/default.rc (VERSIONINFO of every EXE/DLL).
+# They are -D values, not header content, so WinResTarget.mk records them in
+# gb_WinResTarget_DEFS_STAMP to rebuild the resources when one of them changes.
+# The esilk build (ESILK_OXT_DIR set) appends its own notice to LegalCopyright.
+gb_WinResTarget_DEFAULTRC_DEFS := \
+		-DVERVARIANT="$(LIBO_VERSION_PATCH)" \
+		-DRES_APP_VENDOR="$(OOO_VENDOR)" \
+		-DRES_APP_PRODUCTNAME="$(PRODUCTNAME)" \
+		$(if $(strip $(ESILK_OXT_DIR)),-DRES_APP_PRODUCT_COPYRIGHT) \
+
 define gb_Library_add_default_nativeres
 $(call gb_WinResTarget_WinResTarget_init,$(2))
 $(call gb_WinResTarget_set_rcfile,$(2),include/default)
 $(call gb_WinResTarget_add_defs,$(2),\
-		-DVERVARIANT="$(LIBO_VERSION_PATCH)" \
-		-DRES_APP_VENDOR="$(OOO_VENDOR)" \
+		$(gb_WinResTarget_DEFAULTRC_DEFS) \
 		-DORG_NAME="$(call gb_Library_get_filename,$(1))"\
 		-DINTERNAL_NAME="$(subst $(gb_Library_DLLEXT),,$(call gb_Library_get_filename,$(1)))" \
 		-DADDITIONAL_VERINFO1="" \
@@ -439,8 +448,7 @@ define gb_Executable_add_default_nativeres
 $(call gb_WinResTarget_WinResTarget_init,$(1)/default)
 $(call gb_WinResTarget_set_rcfile,$(1)/default,include/default)
 $(call gb_WinResTarget_add_defs,$(1)/default,\
-		-DVERVARIANT="$(LIBO_VERSION_PATCH)" \
-		-DRES_APP_VENDOR="$(OOO_VENDOR)" \
+		$(gb_WinResTarget_DEFAULTRC_DEFS) \
 		-DORG_NAME="$(call gb_Executable_get_filename,$(1))"\
 		-DINTERNAL_NAME="$(subst $(gb_Executable_EXT),,$(call gb_Executable_get_filename,$(1)))" \
 		-DADDITIONAL_VERINFO1="$(if $(2),VALUE \"FileDescription\"$(COMMA) \"$(2)\\0\")" \

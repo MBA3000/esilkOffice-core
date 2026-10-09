@@ -146,13 +146,22 @@ public:
         if (rMEvt.IsLeft())
         {
             OUString sURL = officecfg::Office::Common::Menus::VolunteerURL::get();
+            if (sURL.isEmpty())
+                return true; // no link configured for the brand image
             localizeWebserviceURI(sURL);
 
-            Reference<css::system::XSystemShellExecute> const xSystemShellExecute(
-                css::system::SystemShellExecute::create(
-                    ::comphelper::getProcessComponentContext()));
-            xSystemShellExecute->execute(sURL, OUString(),
-                                         css::system::SystemShellExecuteFlags::URIS_ONLY);
+            try
+            {
+                Reference<css::system::XSystemShellExecute> const xSystemShellExecute(
+                    css::system::SystemShellExecute::create(
+                        ::comphelper::getProcessComponentContext()));
+                xSystemShellExecute->execute(sURL, OUString(),
+                                             css::system::SystemShellExecuteFlags::URIS_ONLY);
+            }
+            catch (const Exception&)
+            {
+                TOOLS_WARN_EXCEPTION("sfx.dialog", "BrandImage::MouseButtonUp");
+            }
         }
         return true;
     }

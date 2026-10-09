@@ -441,6 +441,12 @@ sub update_property_table
         if ( $ENV{ESILK_OXT_DIR} ) { ${$propertyfile}[$i] =~ s/^(SecureCustomProperties\t[^\r\n]*)/$1;ESILKLIBREOFFICEFOUND/; }
     }
 
+    # An ARP* template (contact, help/about/update links) whose string is not
+    # defined in Property.ulf translates to an empty value. The Property table
+    # does not allow an empty Value, and the ARP* properties are optional, so
+    # leave such rows out (Apps and Features then shows no such entry).
+    @{$propertyfile} = grep { !/^ARP\w+\t\s*$/ } @{$propertyfile};
+
     # Check if are building silent MSI
     if ( $ENV{ENABLE_SILENT_MSI} eq "TRUE" )
     {

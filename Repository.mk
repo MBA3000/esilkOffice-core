@@ -17,6 +17,9 @@
 #   the License at http://www.apache.org/licenses/LICENSE-2.0 .
 #
 
+# esilk: brand art from ESILK_BRAND_DIR (no-op when unset). Must precede the CUSTOM_BRAND_DIR test below.
+include $(SRCDIR)/esilk/Brand.mk
+
 ifneq ($(ENABLE_WASM_STRIP_CANVAS),TRUE)
 $(eval $(call gb_Helper_register_executables,NONE, \
 	canvasdemo \

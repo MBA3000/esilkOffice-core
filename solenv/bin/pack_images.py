@@ -482,7 +482,8 @@ def find_custom(custom_paths):
 
         for filename in custom_files:
             if filename.startswith(path):
-                key = filename.replace(os.path.join(path, ''), '')
+                # image names always use '/', also on Windows where os.walk joins with os.sep
+                key = filename.replace(os.path.join(path, ''), '').replace(os.sep, '/')
                 if key not in custom_image_list:
                     custom_image_list[key] = path
 

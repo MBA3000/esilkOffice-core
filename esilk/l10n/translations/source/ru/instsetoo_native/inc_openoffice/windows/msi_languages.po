@@ -1,0 +1,48 @@
+# esilk overlay of
+# translations/source/ru/instsetoo_native/inc_openoffice/windows/msi_languages.po,
+# merged after the upstream file (see esilk/l10n/README.md). Keep the entries of
+# one source file together and never put a "# " comment inside an entry:
+# l10ntools then skips the whole file.
+msgid ""
+msgstr ""
+"Project-Id-Version: esilkOffice\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. esilk: Apps and Features "Support contact"; a name, not translated
+#: Property.ulf
+msgctxt ""
+"Property.ulf\n"
+"OOO_ARPCONTACTTEMPLATE\n"
+"LngText.text"
+msgid "esilk"
+msgstr "esilk"
+
+#. esilk: Apps and Features link to the esilkOffice website in this language
+#: Property.ulf
+msgctxt ""
+"Property.ulf\n"
+"OOO_ARPHELPLINKTEMPLATE\n"
+"LngText.text"
+msgid "https://esilk.akbrd.com/en/"
+msgstr "https://esilk.akbrd.com/ru/"
+
+#. esilk: Apps and Features link to the esilkOffice website in this language
+#: Property.ulf
+msgctxt ""
+"Property.ulf\n"
+"OOO_ARPURLINFOABOUTTEMPLATE\n"
+"LngText.text"
+msgid "https://esilk.akbrd.com/en/"
+msgstr "https://esilk.akbrd.com/ru/"
+
+#. esilk: Apps and Features link to the esilkOffice website in this language
+#: Property.ulf
+msgctxt ""
+"Property.ulf\n"
+"OOO_ARPURLUPDATEINFOTEMPLATE\n"
+"LngText.text"
+msgid "https://esilk.akbrd.com/en/"
+msgstr "https://esilk.akbrd.com/ru/"

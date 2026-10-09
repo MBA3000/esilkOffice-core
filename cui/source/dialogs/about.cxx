@@ -79,7 +79,10 @@ AboutDialog::AboutDialog(weld::Window* pParent)
     if (IsStringValidGitHash(sbuildId))
     {
         const tools::Long nMaxChar = 25;
-        m_pBuildLabel->set_uri("https://git.libreoffice.org/core/commit/" + sbuildId);
+        // A derived product is not built from this upstream commit alone:
+        // show the id as text, without a link to the LibreOffice repository.
+        if (utl::ConfigManager::getProductName() == "LibreOffice")
+            m_pBuildLabel->set_uri("https://git.libreoffice.org/core/commit/" + sbuildId);
         m_pBuildLabel->set_label(
             sbuildId.getLength() > nMaxChar
                 ? sbuildId.replaceAt(nMaxChar, sbuildId.getLength() - nMaxChar, u"...")
@@ -128,8 +131,13 @@ AboutDialog::AboutDialog(weld::Window* pParent)
     m_pCreditsButton->set_uri(officecfg::Office::Common::Menus::CreditsURL::get());
 
     OUString sURL(officecfg::Office::Common::Help::StartCenter::InfoURL::get());
-    localizeWebserviceURI(sURL);
-    m_pWebsiteButton->set_uri(sURL);
+    if (sURL.isEmpty())
+        m_pWebsiteButton->hide(); // no product website configured
+    else
+    {
+        localizeWebserviceURI(sURL);
+        m_pWebsiteButton->set_uri(sURL);
+    }
 
     // See also SID_WHATSNEW in sfx2/source/appl/appserv.cxx
     sURL = officecfg::Office::Common::Menus::ReleaseNotesURL::get()

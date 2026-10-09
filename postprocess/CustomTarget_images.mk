@@ -40,6 +40,9 @@ $(packimages_DIR)/%_links.txt : $(packimages_DIR)/sorted.lst
 	fi
 	$(call gb_Helper_replace_if_different_and_touch,$@.tmp,$@)
 
+# esilk: with ESILK_BRAND_DIR the PNG themes take the product logo images from the brand set
+# (esilk/Brand.mk: esilk_brand_IMAGES_CUSTOM goes before the theme's own custom path); a changed
+# brand directory (esilk_brand_STAMP) repacks the archive.
 $(packimages_DIR)/images_%.zip : \
 		$(packimages_DIR)/sorted.lst \
 		$(packimages_DIR)/commandimagelist.ilst \
@@ -47,16 +50,19 @@ $(packimages_DIR)/images_%.zip : \
 		$(SRCDIR)/wizards/source/imagelists/imagelists.ilst \
 		$(packimages_DIR)/%_links.txt \
 		$(call gb_Helper_get_imagelists) \
+		$(esilk_brand_IMAGES_DEPS) \
 		| $(call gb_ExternalExecutable_get_dependencies,python)
 	$(call gb_Output_announce,$(subst $(WORKDIR)/,,$@),$(true),PRL,2)
 	$(call gb_Trace_StartRange,$(subst $(WORKDIR)/,,$@),PRL)
 	$(call gb_Helper_abbreviate_dirs, \
+		$(if $(filter $(esilk_brand_STAMP),$?),rm -f $@ &&) \
 		ILSTFILE=$(call gb_var2file,$(shell $(gb_MKTEMP)),$(filter %.ilst,$^)) && \
 		$(call gb_ExternalExecutable_get_command,python) \
 			$(SRCDIR)/solenv/bin/pack_images.py \
 			$(if $(DEFAULT_THEME),\
 				-g $(packimages_DIR) -m $(packimages_DIR) -c $(packimages_DIR),\
-				-g $(SRCDIR)/icon-themes/$* -m $(SRCDIR)/icon-themes/$* -c $(SRCDIR)/icon-themes/$* \
+				-g $(SRCDIR)/icon-themes/$* -m $(SRCDIR)/icon-themes/$* \
+				$(if $(filter-out %_svg,$*),$(esilk_brand_IMAGES_CUSTOM)) -c $(SRCDIR)/icon-themes/$* \
 			) \
 			-l $${ILSTFILE} \
 			-L $(packimages_DIR)/$*_links.txt \

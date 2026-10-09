@@ -1,0 +1,29 @@
+# esilk overlay of translations/source/kk/scp2/source/ooo.po, merged after the
+# upstream file (see esilk/l10n/README.md). Keep the entries of one source file
+# together and never put a "# " comment inside an entry: l10ntools then skips
+# the whole file.
+msgid ""
+msgstr ""
+"Project-Id-Version: esilkOffice\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. esilk: Start menu and desktop shortcut tooltip
+#: folderitem_ooo.ulf
+msgctxt ""
+"folderitem_ooo.ulf\n"
+"STR_FI_TOOLTIP_SOFFICE\n"
+"LngText.text"
+msgid "%PRODUCTNAME, the Kazakhstani office suite based on LibreOffice"
+msgstr "%PRODUCTNAME — LibreOffice негізіндегі қазақстандық кеңсе бағдарламалары"
+
+#. esilk: description in Windows Default apps
+#: registryitem_ooo.ulf
+msgctxt ""
+"registryitem_ooo.ulf\n"
+"STR_REG_VAL_APPCAPABILITY_DESCRIPTION_OOO\n"
+"LngText.text"
+msgid "Kazakhstani office suite based on LibreOffice"
+msgstr "LibreOffice негізіндегі қазақстандық кеңсе бағдарламалары"
