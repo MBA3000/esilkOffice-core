@@ -31,11 +31,14 @@
 #include <i18nlangtag/languagetag.hxx>
 #include <tools/debug.hxx>
 #include <unotools/configitem.hxx>
+#include <unotools/configmgr.hxx>
 #include <unotools/lingucfg.hxx>
 #include <unotools/linguprops.hxx>
 #include <comphelper/getexpandeduri.hxx>
+#include <comphelper/configuration.hxx>
 #include <comphelper/processfactory.hxx>
 #include <o3tl/string_view.hxx>
+#include <officecfg/Office/Linguistic.hxx>
 #include <mutex>
 
 #include "itemholder1.hxx"
@@ -83,6 +86,40 @@ static LanguageType lcl_CfgAnyToLanguage( const uno::Any &rVal )
     OUString aTmp;
     rVal >>= aTmp;
     return (aTmp.isEmpty()) ? LANGUAGE_SYSTEM : LanguageTag::convertToLanguageTypeWithFallback( aTmp );
+}
+
+// esilk: upstream, an empty Linguistic/General/DefaultLocale means "the system
+// locale", so on an English Windows a new document is English (USA) even in a
+// Kazakh user interface. In a Kazakh or Russian user interface an empty value
+// means the language of the interface instead: Kazakh (kk-KZ) or Russian (ru-RU).
+// Other interface languages keep the upstream behaviour. Only the western
+// default language is affected; Asian and CTL defaults stay as they are. A
+// language chosen in Tools > Options > Language Settings is stored and wins.
+static LanguageType lcl_DefaultLanguageForUI()
+{
+    if (comphelper::IsFuzzing())
+        return LANGUAGE_SYSTEM;
+    try
+    {
+        // ooLocale is the UI language the office resolved at startup
+        // (desktop/source/app/langselect.cxx); UILocale is the selected one.
+        OUString aUILocale = utl::ConfigManager::getUILocale();
+        if (aUILocale.isEmpty())
+            aUILocale = officecfg::Office::Linguistic::General::UILocale::get();
+        if (!aUILocale.isEmpty())
+        {
+            const OUString aLanguage = LanguageTag(aUILocale).getLanguage();
+            if (aLanguage == "kk")
+                return LANGUAGE_KAZAKH;
+            if (aLanguage == "ru")
+                return LANGUAGE_RUSSIAN;
+        }
+    }
+    catch (const uno::Exception&)
+    {
+        // no configuration (e.g. some unit tests): keep the upstream default
+    }
+    return LANGUAGE_SYSTEM;
 }
 
 SvtLinguOptions::SvtLinguOptions()
@@ -150,6 +187,10 @@ SvtLinguOptions::SvtLinguOptions()
 class SvtLinguConfigItem : public utl::ConfigItem
 {
     SvtLinguOptions     aOpt;
+    // esilk: aOpt.nDefaultLanguage comes from the UI language, not from the
+    // configuration (see lcl_DefaultLanguageForUI); it is saved as empty so that
+    // it keeps following the UI language.
+    bool                bDefaultLanguageFromUI = false;
 
     static bool GetHdlByName( sal_Int32 &rnHdl, std::u16string_view rPropertyName, bool bFullPropName = false );
     static uno::Sequence< OUString > GetPropertyNames();
@@ -468,6 +509,8 @@ bool SvtLinguConfigItem::SetProperty( sal_Int32 nPropertyHandle, const uno::Any 
         {
             bSucc = lcl_SetLocale( rOpt.nDefaultLanguage, rValue );
             bMod = bSucc;
+            if (bSucc)
+                bDefaultLanguageFromUI = false;
             break;
         }
         case UPH_DEFAULT_LOCALE_CJK :
@@ -589,7 +632,21 @@ void SvtLinguConfigItem::LoadOptions( const uno::Sequence< OUString > &rProperyN
             switch ( nPropertyHandle )
             {
                 case UPH_DEFAULT_LOCALE :
-                    { rOpt.bRODefaultLanguage = pROStates[i]; rOpt.nDefaultLanguage = lcl_CfgAnyToLanguage( rVal ); } break;
+                {
+                    rOpt.bRODefaultLanguage = pROStates[i];
+                    rOpt.nDefaultLanguage = lcl_CfgAnyToLanguage( rVal );
+                    bDefaultLanguageFromUI = false;
+                    if (rOpt.nDefaultLanguage == LANGUAGE_SYSTEM)
+                    {
+                        const LanguageType nUILanguage = lcl_DefaultLanguageForUI();
+                        if (nUILanguage != LANGUAGE_SYSTEM)
+                        {
+                            rOpt.nDefaultLanguage = nUILanguage;
+                            bDefaultLanguageFromUI = true;
+                        }
+                    }
+                }
+                break;
                 case UPH_ACTIVE_DICTIONARIES :
                     { rOpt.bROActiveDics = pROStates[i]; rVal >>= rOpt.aActiveDics;   } break;
                 case UPH_IS_USE_DICTIONARY_LIST :
@@ -699,7 +756,8 @@ bool SvtLinguConfigItem::SaveOptions( const uno::Sequence< OUString > &rProperyN
     {
         const SvtLinguOptions &rOpt = aOpt;
 
-        OUString aTmp( lcl_LanguageToCfgLocaleStr( rOpt.nDefaultLanguage ) );
+        OUString aTmp( bDefaultLanguageFromUI ? OUString()
+                                              : lcl_LanguageToCfgLocaleStr( rOpt.nDefaultLanguage ) );
         *pValue++ <<= aTmp;                               //   0
         *pValue++ <<= rOpt.aActiveDics;                   //   1
         *pValue++ <<= rOpt.bIsUseDictionaryList;        //   2
