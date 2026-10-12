@@ -20,6 +20,7 @@ msgstr ""
 
 #. PqEay
 #: include/svx/strings.hrc:1408
+#. esilk-replaces: "Your user profile has been exported as 'libreoffice-profile.zip'."
 msgctxt "RID_SVXSTR_SAFEMODE_USER_PROFILE_EXPORTED"
 msgid "Your user profile has been exported as '%PRODUCTNAME-profile.zip'."
 msgstr "Пайдаланушы профиліңіз '%PRODUCTNAME-profile.zip' ретінде экспортталды."

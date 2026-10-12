@@ -20,6 +20,7 @@ msgstr ""
 
 #. j9Lh8
 #: sd/uiconfig/simpress/ui/presentationdialog.ui:826
+#. esilk-replaces: "Download LibreOffice Impress Remote to remotely control the presentation from your smartphone or smartwatch."
 msgctxt "presentationdialog|learnmore|tooltip_text"
 msgid "Download the Impress Remote app to remotely control the presentation from your smartphone or smartwatch."
 msgstr "Презентацияны смартфоннан немесе смарт-сағаттан қашықтан басқару үшін Impress Remote қолданбасын жүктеп алыңыз."

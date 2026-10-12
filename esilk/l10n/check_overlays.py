@@ -117,6 +117,19 @@ def en_us_ui(path):
     return strings
 
 
+def po_key(block):
+    """(msgctxt, msgid) of a po block, unescaped; plural entries are fine here."""
+    out, cur = {}, None
+    for line in block.splitlines():
+        m = re.match(r'(msgctxt|msgid|msgid_plural|msgstr(?:\[\d+\])?) "(.*)"$', line)
+        if m:
+            cur = m.group(1)
+            out[cur] = [m.group(2)]
+        elif line.startswith('"') and cur:
+            out[cur].append(line[1:-1])
+    return (unescape(''.join(out.get('msgctxt', []))), unescape(''.join(out.get('msgid', []))))
+
+
 def po_header(path):
     """The header fields (name -> value) of a po file."""
     text = path.read_text(encoding='utf-8')
@@ -140,6 +153,14 @@ def check_messages(po, rel, lang, entries, problems):
             if mine.get(field) != theirs.get(field):
                 problems.append(f'{rel.as_posix()}: header {field} differs from the upstream po\n'
                                 f'    upstream: {theirs.get(field)}\n    overlay:  {mine.get(field)}')
+        # "#. esilk-replaces" must name an upstream entry (merge_po.py drops it)
+        upstream_keys = {po_key(b) for b in re.split(r'\n\s*\n', upstream.read_text(encoding='utf-8'))}
+        for block in re.split(r'\n\s*\n', po.read_text(encoding='utf-8')):
+            for m in re.finditer(r'^#\. esilk-replaces: "(.*)"$', block, re.M):
+                ctxt = po_key(block)[0]
+                if (ctxt, unescape(m.group(1))) not in upstream_keys:
+                    problems.append(f'{rel.as_posix()}: {ctxt}: esilk-replaces names no upstream entry: '
+                                    f'{unescape(m.group(1))[:80]}')
     seen = set()
     for ref, ctxt, msgid, msgstr in entries:
         where = f'{rel.as_posix()}: {ctxt}'

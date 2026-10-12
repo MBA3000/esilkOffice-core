@@ -211,12 +211,14 @@ msgstr "Предварительный просмотр"
 
 #. W5PzH
 #: include/sfx2/strings.hrc:60
+#. esilk-replaces: "The document format version is set to ODF 1.1 (OpenOffice.org 2.x) in Tools-Options-Load/Save-General. Signing documents requires ODF 1.2 (OpenOffice.org 3.x)."
 msgctxt "STR_XMLSEC_ODF12_EXPECTED"
 msgid "The document format version is set to ODF 1.1 in Tools-Options-Load/Save-General. Signing documents requires ODF 1.2."
 msgstr "Версия формата документа установлена в ODF 1.1 в Сервис -Параметры - Загрузка/сохранение - Общие. Для подписи документов необходима версия ODF 1.2."
 
 #. XB6Mn
 #: sfx2/uiconfig/ui/licensedialog.ui:68
+#. esilk-replaces: "%PRODUCTNAME is made available subject to the terms of the Mozilla Public License, v. 2.0. A copy of the MPL can be obtained at http://mozilla.org/MPL/2.0/.\n\nThird Party Code Additional copyright notices and license terms applicable to portions of the Software are set forth in the LICENSE.html file; choose Show License to see exact details in English.\n\nAll trademarks and registered trademarks mentioned herein are the property of their respective owners.\n\nCopyright © 2000–2026 LibreOffice contributors. All rights reserved.\n\nThis product was created by %OOOVENDOR, based on OpenOffice.org, which is Copyright 2000, 2011 Oracle and/or its affiliates. %OOOVENDOR acknowledges all community members, please see http://www.libreoffice.org/ for more details."
 msgctxt "licensedialog|label"
 msgid "%PRODUCTNAME is made available subject to the terms of the Mozilla Public License, v. 2.0. A copy of the MPL can be obtained at http://mozilla.org/MPL/2.0/.\n\nThird Party Code Additional copyright notices and license terms applicable to portions of the Software are set forth in the LICENSE.html file; choose Show License to see exact details in English.\n\nAll trademarks and registered trademarks mentioned herein are the property of their respective owners."
 msgstr "%PRODUCTNAME доступен в соответствии с условиями Mozilla Public License версии 2.0. Копию лицензии MPL можно найти на http://mozilla.org/MPL/2.0/.\n\nДополнительные уведомления об авторских правах и условия лицензии на код третьих лиц, применяемые к отдельным частям программного обеспечения, изложены в файле LICENSE.html; выберите Показать лицензию для просмотра подробностей на английском языке.\n\nВсе товарные знаки, упомянутые здесь, являются собственностью их владельцев."

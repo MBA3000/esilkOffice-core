@@ -20,6 +20,7 @@ msgstr ""
 
 #. m4G3E
 #: uui/inc/ids.hrc:41
+#. esilk-replaces: "You are saving a password protected Basic library containing the following large module(s): \n$(ARG1)\nStoring those large module(s) in binary format, which is necessary for password protection, makes them unreadable in versions older than LibreOffice 5.0.3. If you want to avoid this please split the module into smaller pieces."
 msgctxt "RID_UUI_ERRHDL"
 msgid "You are saving a password protected Basic library containing the following large module(s): \n$(ARG1)\nStoring those large module(s) in binary format, which is necessary for password protection, makes them unreadable in office versions older than 5.0.3. If you want to avoid this please split the module into smaller pieces."
 msgstr "Выполняется сохранение защищённой паролем библиотеки Basic, которая содержит следующие крупные модули: \n$(ARG1)\nСохранение этих модулей в бинарном формате, необходимое для защиты паролем, сделает их недоступными для чтения в старых версиях офисных пакетов (ниже 5.0.3). Если этого следует избежать, разделите модули на части меньшего размера."

@@ -20,12 +20,14 @@ msgstr ""
 
 #. uPZs8
 #: sc/inc/scfuncs.hrc:385
+#. esilk-replaces: "Calculates the calendar week corresponding to the given date.\nThis function only provides interoperability with %PRODUCTNAME 5.0 and earlier and OpenOffice.org."
 msgctxt "ocWEEKNUM_OOO"
 msgid "Calculates the calendar week corresponding to the given date.\nThis function only provides interoperability with old office versions."
 msgstr "Вычисляет номер календарной недели для заданной даты.\nЭта функция предназначена только для совместимости со старыми версиями офисных пакетов."
 
 #. 3mLBb
 #: sc/uiconfig/scalc/ui/optcompatibilitypage.ui:54
+#. esilk-replaces: "OpenOffice.org legacy"
 msgctxt "optcompatibilitypage|keybindings"
 msgid "Legacy"
 msgstr "Как в старых версиях"

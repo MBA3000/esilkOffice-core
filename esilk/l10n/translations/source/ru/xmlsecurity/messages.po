@@ -20,6 +20,7 @@ msgstr ""
 
 #. YFxBG
 #: xmlsecurity/inc/strings.hrc:39
+#. esilk-replaces: "This document contains signatures in ODF 1.1 (OpenOffice.org 2.x) format. Signing documents in %PRODUCTNAME %PRODUCTVERSION requires ODF 1.2 format version. Thus no signatures can be added or removed to this document.\n\nSave document in ODF 1.2 format and add all desired signatures again."
 msgctxt "STR_XMLSECDLG_OLD_ODF_FORMAT"
 msgid "This document contains signatures in ODF 1.1 format. Signing documents in %PRODUCTNAME %PRODUCTVERSION requires ODF 1.2 format version. Thus no signatures can be added or removed to this document.\n\nSave document in ODF 1.2 format and add all desired signatures again."
 msgstr "Документ содержит подписи в формате ODF 1.1. Подписи документов в %PRODUCTNAME %PRODUCTVERSION требуют формат ODF 1.2. Поэтому подписи не могут быть удалены или добавлены.\n\nСохраните документ в формате ODF 1.2 и добавьте все нужные подписи заново."

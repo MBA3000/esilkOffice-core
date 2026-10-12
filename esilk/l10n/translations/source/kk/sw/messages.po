@@ -20,24 +20,28 @@ msgstr ""
 
 #. H94UE
 #: sw/inc/strings.hrc:1520
+#. esilk-replaces: "Use OpenOffice.org 1.1 tabstop formatting"
 msgctxt "STR_COMPAT_OPT_USEOURTABSTOPFORMAT"
 msgid "Use legacy tabstop formatting"
 msgstr "Табуляцияның ескі пішімдеуін қолдану"
 
 #. faQQK
 #: sw/inc/strings.hrc:1522
+#. esilk-replaces: "Use OpenOffice.org 1.1 line spacing"
 msgctxt "STR_COMPAT_OPT_USELINESPACING"
 msgid "Use legacy line spacing"
 msgstr "Ескі жоларалық интервалды қолдану"
 
 #. tE6DS
 #: sw/inc/strings.hrc:1524
+#. esilk-replaces: "Use OpenOffice.org 1.1 object positioning"
 msgctxt "STR_COMPAT_OPT_USEOBJECTPOSITIONING"
 msgid "Use legacy object positioning"
 msgstr "Объекттерді ескі тәсілмен орналастыруды қолдану"
 
 #. szFCh
 #: sw/inc/strings.hrc:1525
+#. esilk-replaces: "Use OpenOffice.org 1.1 text wrapping around objects"
 msgctxt "STR_COMPAT_OPT_USEOURTEXTWRAPPING"
 msgid "Use legacy text wrapping around objects"
 msgstr "Мәтіннің объекттерді ескі тәсілмен айналып өтуін қолдану"

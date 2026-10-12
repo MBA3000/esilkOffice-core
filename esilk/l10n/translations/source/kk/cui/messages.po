@@ -20,12 +20,14 @@ msgstr ""
 
 #. puyKW
 #: cui/uiconfig/ui/opthtmlpage.ui:629
+#. esilk-replaces: "LibreOffice _Basic"
 msgctxt "opthtmlpage|starbasic"
 msgid "%PRODUCTNAME _Basic"
 msgstr "%PRODUCTNAME _Basic"
 
 #. cFC6E
 #: cui/uiconfig/ui/aboutdialog.ui:138
+#. esilk-replaces: "Credits"
 msgctxt "aboutdialog|credits"
 msgid "Licenses"
 msgstr "Лицензиялар"

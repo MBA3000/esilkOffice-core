@@ -20,12 +20,14 @@ msgstr ""
 
 #. kGwZa
 #: desktop/inc/strings.hrc:114
+#. esilk-replaces: "Extension requires at least OpenOffice.org reference version %VERSION"
 msgctxt "RID_DEPLOYMENT_DEPENDENCIES_OOO_MIN"
 msgid "Extension requires at least version %VERSION of the office API"
 msgstr "Кеңейту кеңсе пакеті API-інің кем дегенде %VERSION нұсқасын талап етеді"
 
 #. rcfFe
 #: desktop/inc/strings.hrc:115
+#. esilk-replaces: "Extension does not support OpenOffice.org reference versions greater than %VERSION"
 msgctxt "RID_DEPLOYMENT_DEPENDENCIES_OOO_MAX"
 msgid "Extension does not support office API versions greater than %VERSION"
 msgstr "Кеңейту кеңсе пакеті API-інің %VERSION нұсқасынан жоғары нұсқаларын қолдамайды"
