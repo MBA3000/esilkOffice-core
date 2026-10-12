@@ -3215,6 +3215,25 @@ bool ScCompiler::ParseOpCode( const OUString& rName, bool bInArray )
         }
     }
 
+    if (!bFound && ((mxSymbols->isODFF() && rName.equalsIgnoreAsciiCase("COM.MICROSOFT.SINGLE"))
+                    || (mxSymbols->isOOXML() && rName.equalsIgnoreAsciiCase("_xlfn.SINGLE"))))
+    {
+        // Excel's implicit intersection operator '@', which Excel writes as SINGLE(...) in
+        // OOXML and as COM.MICROSOFT.SINGLE(...) in ODF (e.g. around IFS in an .ods it saves).
+        // Calc intersects implicitly in a non-array formula anyway, so read SINGLE(x) as (x):
+        // the name becomes the opening parenthesis, and the '(' after it is skipped. Without
+        // this, the unknown name made every such cell an error after recalculation.
+        sal_Int32 nPos = nSrcPos;
+        while (nPos < aFormula.getLength() && aFormula[nPos] == ' ')
+            ++nPos;
+        if (nPos < aFormula.getLength() && aFormula[nPos] == '(')
+        {
+            nSrcPos = nPos + 1;
+            maRawToken.SetOpCode(ocOpen);
+            return true;
+        }
+    }
+
     if (!bFound)
     {
         OUString aIntName, aFuncName = rName, sUDPrefix = mxSymbols->getSymbol(ocUDExternal);

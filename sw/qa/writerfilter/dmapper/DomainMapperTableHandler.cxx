@@ -20,6 +20,9 @@
 #include <com/sun/star/text/XTextViewCursorSupplier.hpp>
 #include <com/sun/star/text/XPageCursor.hpp>
 #include <com/sun/star/qa/XDumper.hpp>
+#include <com/sun/star/text/XTextField.hpp>
+#include <com/sun/star/text/XTextFieldsSupplier.hpp>
+#include <com/sun/star/util/XRefreshable.hpp>
 
 #include <frmatr.hxx>
 #include <swtable.hxx>
@@ -333,6 +336,57 @@ CPPUNIT_TEST_FIXTURE(Test, testDOCXFloatingTableHidemark)
     CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(1), rPage2Objs.size());
     CPPUNIT_ASSERT(!pPage2->GetNext());
 }
+}
+
+CPPUNIT_TEST_FIXTURE(Test, testFormulaAboveGridSpan)
+{
+    // Given a table whose total row merges its first two grid columns (w:gridSpan), so the
+    // =SUM(ABOVE) field is the 2nd cell of its row, but it is in the 3rd grid column, under the
+    // numbers 10 and 20:
+    loadFromFile(u"formula-above-gridspan.docx");
+
+    auto verify = [this]() {
+        uno::Reference<text::XTextFieldsSupplier> xFieldsSupplier(mxComponent, uno::UNO_QUERY);
+        uno::Reference<util::XRefreshable>(xFieldsSupplier->getTextFields(), uno::UNO_QUERY_THROW)
+            ->refresh();
+        uno::Reference<container::XEnumeration> xFields
+            = xFieldsSupplier->getTextFields()->createEnumeration();
+        uno::Reference<text::XTextField> xField(xFields->nextElement(), uno::UNO_QUERY);
+        // Without the accompanying fix in place, this test would have failed with:
+        // - Expected: SUM(<C3:C2>)
+        // - Actual  : SUM(<B3:B1>)
+        // i.e. ABOVE used the 2nd cell of the rows above (text), and the sum was 0.
+        CPPUNIT_ASSERT_EQUAL(u"SUM(<C3:C2>)"_ustr, xField->getPresentation(true).trim());
+        CPPUNIT_ASSERT_EQUAL(u"30"_ustr, xField->getPresentation(false).trim());
+    };
+    verify();
+
+    // When saving as DOCX, the original formula and the right result are written:
+    saveAndReload(TestFilter::DOCX);
+    verify();
+    xmlDocUniquePtr pXmlDoc = parseExport(u"word/document.xml"_ustr);
+    assertXPathContent(pXmlDoc, "//w:tbl/w:tr[4]/w:tc[2]/w:p/w:r/w:instrText", u" =SUM(ABOVE)");
+    assertXPathContent(pXmlDoc, "//w:tbl/w:tr[4]/w:tc[2]/w:p/w:r/w:t", u"30");
+}
+
+CPPUNIT_TEST_FIXTURE(Test, testDOCXFloatingTableFooterLast)
+{
+    // Given a footer whose only content is a page-high floating table at the right page edge, with
+    // no paragraph after it (the e-signature stamp of e-document systems), and 20 short body
+    // paragraphs:
+    loadFromFile(u"floattable-footer-last.docx");
+
+    // Then make sure the table is floating and the body text is on a single page:
+    uno::Reference<text::XTextFramesSupplier> xFramesSupplier(mxComponent, uno::UNO_QUERY);
+    // Without the accompanying fix in place, this test would have failed with:
+    // - Expected: 1
+    // - Actual  : 0
+    // i.e. the table stayed inline, the footer grew to the table height and the body got only a
+    // line or two per page.
+    uno::Reference<container::XIndexAccess> xFrames(xFramesSupplier->getTextFrames(),
+                                                    uno::UNO_QUERY);
+    CPPUNIT_ASSERT_EQUAL(static_cast<sal_Int32>(1), xFrames->getCount());
+    CPPUNIT_ASSERT_EQUAL(1, getPages());
 }
 
 CPPUNIT_PLUGIN_IMPLEMENT();

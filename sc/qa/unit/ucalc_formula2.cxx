@@ -6011,6 +6011,33 @@ CPPUNIT_TEST_FIXTURE(TestFormula2, testDynamicArrayResizeDuringCopyUpdated)
     m_pDoc->DeleteTab(0);
 }
 
+CPPUNIT_TEST_FIXTURE(TestFormula2, testExcelSingleImplicitIntersection)
+{
+    m_pDoc->InsertTab(0, u"Test"_ustr);
+    sc::AutoCalcSwitch aACSwitch(*m_pDoc, true);
+
+    m_pDoc->SetValue(ScAddress(0, 0, 0), 80.0); // A1
+    m_pDoc->SetValue(ScAddress(0, 1, 0), 5.0); // A2
+
+    // Excel saving as .ods wraps IFS in its implicit intersection operator:
+    m_pDoc->SetFormula(ScAddress(1, 0, 0),
+                       u"=COM.MICROSOFT.SINGLE(COM.MICROSOFT.IFS([.A1]>=90;\"A\";[.A1]>=75;\"B\";"
+                       "TRUE();\"C\"))"_ustr,
+                       formula::FormulaGrammar::GRAM_ODFF); // B1
+    // Without the fix in place, this test would have failed with
+    // - Expected: B
+    // - Actual  : #NAME?
+    CPPUNIT_ASSERT_EQUAL(u"B"_ustr, m_pDoc->GetString(ScAddress(1, 0, 0)));
+
+    // The same in OOXML, where the '@' operator is written as _xlfn.SINGLE:
+    m_pDoc->SetFormula(ScAddress(2, 1, 0), u"_xlfn.SINGLE(A1:A2)*2"_ustr,
+                       formula::FormulaGrammar::GRAM_OOXML); // C2
+    // implicit intersection with row 2: A2 * 2
+    CPPUNIT_ASSERT_EQUAL(10.0, m_pDoc->GetValue(ScAddress(2, 1, 0)));
+
+    m_pDoc->DeleteTab(0);
+}
+
 CPPUNIT_PLUGIN_IMPLEMENT();
 
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */
