@@ -944,6 +944,7 @@ public:
     css::uno::Reference<css::drawing::XShape> PopPendingShape();
 
     void PopPageHeaderFooter(PagePartType ePagePartType, PageType eType);
+    bool IsInTrailingHeaderFooterTable() const { return m_bInTrailingHeaderFooterTable; }
     bool IsInHeaderFooter() const { auto const type(m_StreamStateStack.top().eSubstreamType); return type == SubstreamType::Header || type == SubstreamType::Footer; }
     void ConvertHeaderFooterToTextFrame(bool, bool);
     static void fillEmptyFrameProperties(std::vector<css::beans::PropertyValue>& rFrameProperties, bool bSetAnchorToChar);
@@ -1292,6 +1293,9 @@ private:
     std::vector<css::uno::Reference< css::drawing::XShape > > m_vTextFramesForChaining ;
     /// SAXException was seen so document will be abandoned
     bool m_bSaxError;
+    /// A floating table that is the last element of a header/footer is being resolved at the end
+    /// of that header/footer stream (see DomainMapper_Impl::substream).
+    bool m_bInTrailingHeaderFooterTable = false;
 
     std::unordered_map<OUString, CommentProperties> m_aCommentProps;
 };

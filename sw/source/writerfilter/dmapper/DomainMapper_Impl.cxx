@@ -10329,6 +10329,20 @@ void DomainMapper_Impl::substream(Id rName,
         throw;
     }
 
+    // A floating table can be the last element of a header or footer, with no paragraph after
+    // it: e-document systems (Documentolog, ИС «ИПГО») print their e-signature stamp that way, as
+    // a page-high table at the page edge. The table is otherwise only resolved by the
+    // endLevel() below, after the header/footer was left, so it could not become a floating
+    // table there: it stayed an inline table that made the footer page-high and left room for
+    // one body line per page. Resolve it now, while the header/footer is still the current text.
+    if (IsInHeaderFooter() && hasTableManager() && getTableManager().isInTable()
+        && getTableManager().getCurrentTablePosition().hasElements())
+    {
+        m_bInTrailingHeaderFooterTable = true;
+        comphelper::ScopeGuard g([this] { m_bInTrailingHeaderFooterTable = false; });
+        getTableManager().endLevel();
+    }
+
     switch( rName )
     {
     case NS_ooxml::LN_headerl:

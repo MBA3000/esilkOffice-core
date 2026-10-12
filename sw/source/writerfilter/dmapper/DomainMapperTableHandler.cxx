@@ -37,6 +37,7 @@
 #include <com/sun/star/text/SizeType.hpp>
 #include <com/sun/star/text/TextContentAnchorType.hpp>
 #include <com/sun/star/text/WritingMode2.hpp>
+#include <com/sun/star/text/WrapTextMode.hpp>
 #include <com/sun/star/text/XTextField.hpp>
 #include <com/sun/star/text/XTextRangeCompare.hpp>
 #include <com/sun/star/text/RelOrientation.hpp>
@@ -59,6 +60,9 @@
 #include <unotbl.hxx>
 #include <unoparagraph.hxx>
 #include <unotextrange.hxx>
+#include <swtable.hxx>
+#include <frmfmt.hxx>
+#include <fmtfsize.hxx>
 
 #ifdef DBG_UTIL
 #include "PropertyMapHelper.hxx"
@@ -1380,6 +1384,54 @@ void DomainMapperTableHandler::ApplyParagraphPropertiesFromTableStyle(TableParag
     }
 }
 
+// horizontal start of a table cell (sum of the widths of the cells before it in its row)
+static SwTwips lcl_getCellLeft(const SwTableBox* pBox)
+{
+    SwTwips nLeft = 0;
+    const SwTableLine* pLine = pBox ? pBox->GetUpper() : nullptr;
+    if (!pLine)
+        return 0;
+    for (const SwTableBox* pOther : pLine->GetTabBoxes())
+    {
+        if (pOther == pBox)
+            break;
+        nLeft += pOther->GetFrameFormat()->GetFrameSize().GetWidth();
+    }
+    if (pLine->GetUpper())
+        nLeft += lcl_getCellLeft(pLine->GetUpper());
+    return nLeft;
+}
+
+// In a table with horizontally merged cells (w:gridSpan), the n-th cell of a row is not in the
+// same column as the n-th cell of another row. Find the cell of row nRow that starts at nLeft
+// (the start of the formula cell), as Word does for ABOVE and BELOW; -1 if there is none.
+static sal_Int32 lcl_getColumnAt(const rtl::Reference<SwXTextTable>& xTable, sal_Int32 nRow,
+                                 SwTwips nLeft)
+{
+    // tolerate rounding of the cell widths
+    constexpr SwTwips nTolerance = 20;
+    try
+    {
+        for (sal_Int32 nCol = 0; nCol < MAXTABLECELLS; ++nCol)
+        {
+            rtl::Reference<SwXCell> xCell = xTable->getSwCellByPosition(nCol, nRow);
+            const SwTableBox* pBox = xCell ? xCell->GetTableBox() : nullptr;
+            if (!pBox)
+                return -1;
+            SwTwips nCellLeft = lcl_getCellLeft(pBox);
+            SwTwips nCellRight = nCellLeft + pBox->GetFrameFormat()->GetFrameSize().GetWidth();
+            if (nLeft + nTolerance >= nCellLeft && nLeft + nTolerance < nCellRight)
+                return nCol;
+            if (nCellLeft > nLeft + nTolerance)
+                return -1;
+        }
+    }
+    catch (const lang::IndexOutOfBoundsException&)
+    {
+    }
+    return -1;
+}
+
 // convert formula range identifier ABOVE, BELOW, LEFT and RIGHT
 static void lcl_convertFormulaRanges(const rtl::Reference<SwXTextTable> & xTable)
 {
@@ -1425,13 +1477,33 @@ static void lcl_convertFormulaRanges(const rtl::Reference<SwXTextTable> & xTable
                                 OUString sLastCell;
                                 OUString sLastValueCell;
                                 // walk through the cells of the range
+                                // ABOVE and BELOW follow the grid column of the formula cell, not
+                                // its index in the row (they differ after horizontal merges)
+                                const bool bVertical = rRange.m_nRow != 0;
+                                const SwTwips nFormulaLeft
+                                    = bVertical ? lcl_getCellLeft(xCellProperties->GetTableBox()) : 0;
                                 try
                                 {
                                     sal_Int32 nCell = 0;
                                     while (++nCell)
                                     {
+                                        const sal_Int32 nOtherRow = nRow + nCell * rRange.m_nRow;
+                                        sal_Int32 nOtherCol = nCol + nCell * rRange.m_nCol;
+                                        if (bVertical)
+                                        {
+                                            if (nOtherRow < 0 || nOtherRow >= nRows)
+                                                break;
+                                            nOtherCol = lcl_getColumnAt(xTable, nOtherRow, nFormulaLeft);
+                                            if (nOtherCol < 0)
+                                            {
+                                                // no cell in this column: end of the range, like a text cell
+                                                if (bFoundFirst)
+                                                    break;
+                                                continue;
+                                            }
+                                        }
                                         rtl::Reference<SwXCell> xCell(
-                                                xTable->getSwCellByPosition(nCol + nCell * rRange.m_nCol, nRow + nCell * rRange.m_nRow));
+                                                xTable->getSwCellByPosition(nOtherCol, nOtherRow));
                                         // empty cell or cell with text content is end of the range
                                         sLastCell = xCell->getPropertyValue(u"CellName"_ustr).get<OUString>();
                                         if (sNextCell.isEmpty())
@@ -1761,8 +1833,21 @@ void DomainMapperTableHandler::endTable(unsigned int nestedTableLevel)
                     comphelper::makePropertyValue(u"IsFollowingTextFlow"_ustr, bIsFollowingTextFlow));
             }
 
-            // A text frame created for floating tables is always allowed to split.
-            aFrameProperties.push_back(comphelper::makePropertyValue(u"IsSplitAllowed"_ustr, true));
+            if (m_rDMapper_Impl.IsInTrailingHeaderFooterTable())
+            {
+                // The e-signature stamp of e-document systems: a page-high table at the page edge,
+                // outside the body text. Let the body text run past it: wrapping around a page-high
+                // fly in the footer could send the body layout into a loop.
+                aFrameProperties.push_back(
+                    comphelper::makePropertyValue(u"Surround"_ustr, text::WrapTextMode_THROUGH));
+            }
+
+            // A text frame created for floating tables is always allowed to split, except in a
+            // header or footer: their content never continues on the next page, and a page-high
+            // split fly there (the e-signature stamp of e-document systems) can send the layout
+            // into a loop.
+            aFrameProperties.push_back(comphelper::makePropertyValue(
+                u"IsSplitAllowed"_ustr, !m_rDMapper_Impl.IsInHeaderFooter()));
 
             sal_Int32 nTableWidth = 0;
             m_aTableProperties->getValue(TablePropertyMap::TABLE_WIDTH, nTableWidth);
@@ -1788,7 +1873,17 @@ void DomainMapperTableHandler::endTable(unsigned int nestedTableLevel)
                 std::vector<OUString> redTable;
                 BeforeConvertToTextFrame(rFramedRedlines, redPos, redLen, redCell, redTable);
 
-                rtl::Reference<SwXTextFrame> xContent = xTextAppendAndConvert->convertToSwTextFrame(xStart, xEnd, aFrameProperties);
+                rtl::Reference<SwXTextFrame> xContent;
+                try
+                {
+                    xContent = xTextAppendAndConvert->convertToSwTextFrame(xStart, xEnd, aFrameProperties);
+                }
+                catch (const lang::IllegalArgumentException&)
+                {
+                    // The table could not be moved into a frame: keep it as an inline table
+                    // instead of failing the whole import.
+                    TOOLS_WARN_EXCEPTION("writerfilter.dmapper", "floating table conversion failed");
+                }
                 if (xContent)
                     xFrameAnchor = xContent->getSwAnchor();
 
