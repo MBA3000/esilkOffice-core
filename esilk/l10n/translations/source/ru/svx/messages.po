@@ -29,7 +29,7 @@ msgstr "Профиль пользователя экспортирован ка�
 #: include/svx/strings.hrc:210
 msgctxt "STR_DiagramModelDissolveData"
 msgid "Diagram model dissolve %1"
-msgstr "Разъединение модели схемы %1"
+msgstr "Разгруппирование модели схемы %1"
 
 #. EBWZY
 #: svx/uiconfig/ui/crashreportdlg.ui:163

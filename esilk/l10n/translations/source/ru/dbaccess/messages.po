@@ -29,7 +29,7 @@ msgid ""
 "If you edit it in Design View, the comments will be lost.\n"
 "\n"
 "Continue anyway?"
-msgstr "$object$ содержит комментарии SQL.\n\nПри редактировании в режиме дизайна комментарии будут потеряны.\n\nВсё равно продолжить?"
+msgstr "$object$ содержит комментарии SQL.\n\nПри редактировании в режиме конструктора комментарии будут потеряны.\n\nВсё равно продолжить?"
 
 #. DLsMY
 #: dbaccess/uiconfig/ui/postgrespage.ui:154
