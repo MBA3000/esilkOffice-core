@@ -8,10 +8,33 @@
  */
 
 #include <sfx2/AdditionsDialogHelper.hxx>
+#include <i18nlangtag/languagetag.hxx>
+#include <officecfg/Office/Common.hxx>
+#include <openuriexternally.hxx>
+#include <rtl/uri.hxx>
+#include <unotools/configmgr.hxx>
 #include <vcl/abstdlg.hxx>
+#include <vcl/weld/Dialog.hxx>
 
 void AdditionsDialogHelper::RunAdditionsDialog(weld::Window* pParent, const OUString& rAdditionsTag)
 {
+    // esilk: the Additions dialog lists LibreOffice extensions from
+    // extensions.libreoffice.org. A derived product opens its own extensions
+    // page (Office.Common/Menus/ExtensionsURL) instead, with the same query as
+    // the Start Center Extensions button plus the requested category.
+    if (utl::ConfigManager::getProductName() != "LibreOffice")
+    {
+        OUString sURL = officecfg::Office::Common::Menus::ExtensionsURL::get() + "?LOvers="
+                        + utl::ConfigManager::getProductVersion() + "&LOlocale="
+                        + LanguageTag(utl::ConfigManager::getUILocale()).getBcp47();
+        if (!rAdditionsTag.isEmpty())
+            sURL += "&tag="
+                    + rtl::Uri::encode(rAdditionsTag, rtl_UriCharClassUricNoSlash,
+                                       rtl_UriEncodeIgnoreEscapes, RTL_TEXTENCODING_UTF8);
+        sfx2::openUriExternally(sURL, true, pParent);
+        return;
+    }
+
     VclAbstractDialogFactory* pFact = VclAbstractDialogFactory::Create();
     VclPtr<AbstractAdditionsDialog> pDialog = pFact->CreateAdditionsDialog(pParent, rAdditionsTag);
     pDialog->StartExecuteAsync(

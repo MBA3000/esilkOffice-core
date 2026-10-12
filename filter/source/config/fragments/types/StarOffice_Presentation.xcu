@@ -22,6 +22,6 @@
         <value>StarOffice_Presentation</value>
     </prop>
     <prop oor:name="UIName">
-        <value>Legacy StarOffice Presentation</value>
+        <value>Legacy binary office presentation</value>
     </prop>
 </node>

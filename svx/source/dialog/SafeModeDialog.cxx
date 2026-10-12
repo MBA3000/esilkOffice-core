@@ -271,7 +271,10 @@ IMPL_LINK(SafeModeDialog, DialogBtnHdl, weld::Button&, rBtn, void)
 
 IMPL_LINK(SafeModeDialog, CreateZipBtnHdl, weld::Button&, /*rBtn*/, void)
 {
-    const OUString zipFileURL(comphelper::BackupFileHelper::getUserProfileURL() + "/libreoffice-profile.zip");
+    // esilk: named after the product, as RID_SVXSTR_SAFEMODE_USER_PROFILE_EXPORTED
+    // ('%PRODUCTNAME-profile.zip') tells the user
+    const OUString zipFileURL(comphelper::BackupFileHelper::getUserProfileURL() + "/"
+                              + utl::ConfigManager::getProductName() + "-profile.zip");
     osl::File::remove(zipFileURL); // Remove previous exports
     try
     {

@@ -1,0 +1,180 @@
+#. esilk overlay of translations/source/ru/svtools/messages.po (esilk/l10n/README.md).
+#. Keep the upstream header.
+#. extracted from svtools
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: https://bugs.libreoffice.org/enter_bug.cgi?product=LibreOffice&bug_status=UNCONFIRMED&component=UI\n"
+"POT-Creation-Date: 2026-09-15 17:06+0200\n"
+"PO-Revision-Date: 2026-02-26 21:10+0000\n"
+"Last-Translator: bormant <bormant@mail.ru>\n"
+"Language-Team: Russian <https://translations.documentfoundation.org/projects/libo_ui-master/svtoolsmessages/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: ~\n"
+"X-Generator: LibreOffice\n"
+"X-POOTLE-MTIME: 1562678205.000000\n"
+
+#. MFnoA
+#: include/svtools/strings.hrc:87
+#. esilk-replaces: "OpenOffice.org 1.0 Writer object"
+msgctxt "STR_FORMAT_ID_STARWRITER_60"
+msgid "Legacy Office XML Writer object"
+msgstr "Объект Writer в устаревшем формате XML"
+
+#. WuSEB
+#: include/svtools/strings.hrc:88
+#. esilk-replaces: "OpenOffice.org 1.0 Writer/Web object"
+msgctxt "STR_FORMAT_ID_STARWRITERWEB_60"
+msgid "Legacy Office XML Writer/Web object"
+msgstr "Объект Writer/Web в устаревшем формате XML"
+
+#. GZwRa
+#: include/svtools/strings.hrc:89
+#. esilk-replaces: "OpenOffice.org 1.0 Writer/Master object"
+msgctxt "STR_FORMAT_ID_STARWRITERGLOB_60"
+msgid "Legacy Office XML Writer/Master object"
+msgstr "Объект Writer/Составной документ в устаревшем формате XML"
+
+#. iEkCL
+#: include/svtools/strings.hrc:90
+#. esilk-replaces: "OpenOffice.org 1.0 Draw object"
+msgctxt "STR_FORMAT_ID_STARDRAW_60"
+msgid "Legacy Office XML Draw object"
+msgstr "Объект Draw в устаревшем формате XML"
+
+#. nitPp
+#: include/svtools/strings.hrc:91
+#. esilk-replaces: "OpenOffice.org 1.0 Impress object"
+msgctxt "STR_FORMAT_ID_STARIMPRESS_60"
+msgid "Legacy Office XML Impress object"
+msgstr "Объект Impress в устаревшем формате XML"
+
+#. B37DU
+#: include/svtools/strings.hrc:92
+#. esilk-replaces: "OpenOffice.org 1.0 Calc object"
+msgctxt "STR_FORMAT_ID_STARCALC_60"
+msgid "Legacy Office XML Calc object"
+msgstr "Объект Calc в устаревшем формате XML"
+
+#. CHCYo
+#: include/svtools/strings.hrc:93
+#. esilk-replaces: "OpenOffice.org 1.0 Chart object"
+msgctxt "STR_FORMAT_ID_STARCHART_60"
+msgid "Legacy Office XML Chart object"
+msgstr "Объект Chart в устаревшем формате XML"
+
+#. 67SN7
+#: include/svtools/strings.hrc:94
+#. esilk-replaces: "OpenOffice.org 1.0 Math object"
+msgctxt "STR_FORMAT_ID_STARMATH_60"
+msgid "Legacy Office XML Math object"
+msgstr "Объект Math в устаревшем формате XML"
+
+#. QbFAy
+#: include/svtools/strings.hrc:99
+#. esilk-replaces: "OpenOffice.org 1.0 dialog"
+msgctxt "STR_FORMAT_ID_DIALOG_60"
+msgid "Legacy Office XML dialog"
+msgstr "Диалог в устаревшем формате XML"
+
+#. DiNGB
+#: include/svtools/strings.hrc:324
+#. esilk-replaces: "OpenOffice.org 1.0 Spreadsheet Template"
+msgctxt "STR_DESCRIPTION_CALC_TEMPLATE"
+msgid "Legacy Office XML spreadsheet template (.stc)"
+msgstr "Шаблон электронной таблицы в устаревшем формате XML (.stc)"
+
+#. FYKGV
+#: include/svtools/strings.hrc:325
+#. esilk-replaces: "OpenOffice.org 1.0 Drawing Template"
+msgctxt "STR_DESCRIPTION_DRAW_TEMPLATE"
+msgid "Legacy Office XML drawing template (.std)"
+msgstr "Шаблон рисунка в устаревшем формате XML (.std)"
+
+#. CTUQg
+#: include/svtools/strings.hrc:326
+#. esilk-replaces: "OpenOffice.org 1.0 Presentation Template"
+msgctxt "STR_DESCRIPTION_IMPRESS_TEMPLATE"
+msgid "Legacy Office XML presentation template (.sti)"
+msgstr "Шаблон презентации в устаревшем формате XML (.sti)"
+
+#. Cbvtx
+#: include/svtools/strings.hrc:327
+#. esilk-replaces: "OpenOffice.org 1.0 Text Document Template"
+msgctxt "STR_DESCRIPTION_WRITER_TEMPLATE"
+msgid "Legacy Office XML text document template (.stw)"
+msgstr "Шаблон текстового документа в устаревшем формате XML (.stw)"
+
+#. fHGcD
+#: include/svtools/strings.hrc:335
+#. esilk-replaces: "OpenOffice.org 1.0 Formula"
+msgctxt "STR_DESCRIPTION_SXMATH_DOC"
+msgid "Legacy Office XML formula (.sxm)"
+msgstr "Формула в устаревшем формате XML (.sxm)"
+
+#. CFw78
+#: include/svtools/strings.hrc:336
+#. esilk-replaces: "OpenOffice.org 1.0 Chart"
+msgctxt "STR_DESCRIPTION_SXCHART_DOC"
+msgid "Legacy Office XML chart (.sxs)"
+msgstr "Диаграмма в устаревшем формате XML (.sxs)"
+
+#. tJhDC
+#: include/svtools/strings.hrc:337
+#. esilk-replaces: "OpenOffice.org 1.0 Drawing"
+msgctxt "STR_DESCRIPTION_SXDRAW_DOC"
+msgid "Legacy Office XML drawing (.sxd)"
+msgstr "Рисунок в устаревшем формате XML (.sxd)"
+
+#. f9ZNL
+#: include/svtools/strings.hrc:338
+#. esilk-replaces: "OpenOffice.org 1.0 Spreadsheet"
+msgctxt "STR_DESCRIPTION_SXCALC_DOC"
+msgid "Legacy Office XML spreadsheet (.sxc)"
+msgstr "Электронная таблица в устаревшем формате XML (.sxc)"
+
+#. PCBqi
+#: include/svtools/strings.hrc:339
+#. esilk-replaces: "OpenOffice.org 1.0 Presentation"
+msgctxt "STR_DESCRIPTION_SXIMPRESS_DOC"
+msgid "Legacy Office XML presentation (.sxi)"
+msgstr "Презентация в устаревшем формате XML (.sxi)"
+
+#. Npija
+#: include/svtools/strings.hrc:340
+#. esilk-replaces: "OpenOffice.org 1.0 Text Document"
+msgctxt "STR_DESCRIPTION_SXWRITER_DOC"
+msgid "Legacy Office XML text document (.sxw)"
+msgstr "Текстовый документ в устаревшем формате XML (.sxw)"
+
+#. tVnQQ
+#: include/svtools/strings.hrc:341
+#. esilk-replaces: "OpenOffice.org 1.0 Master Document"
+msgctxt "STR_DESCRIPTION_SXGLOBAL_DOC"
+msgid "Legacy Office XML master document (.sxg)"
+msgstr "Составной документ в устаревшем формате XML (.sxg)"
+
+#. gBQzN
+#: include/svtools/strings.hrc:305
+#. esilk-replaces: "StarOffice Database"
+msgctxt "STR_DESCRIPTION_SDATABASE_DOC"
+msgid "Legacy office database"
+msgstr "База данных в устаревшем формате"
+
+#. 33Dez
+#: include/svtools/strings.hrc:307
+#. esilk-replaces: "StarOffice Image"
+msgctxt "STR_DESCRIPTION_SIMAGE_DOC"
+msgid "Legacy office image"
+msgstr "Изображение в устаревшем формате"
+
+#. hDFtd
+#: include/svtools/strings.hrc:310
+#. esilk-replaces: "StarOffice 3.0 - 5.0 Template"
+msgctxt "STR_DESCRIPTION_SOFFICE_TEMPLATE_DOC"
+msgid "Legacy office template (versions 3.0–5.0)"
+msgstr "Шаблон в устаревшем формате (версии 3.0–5.0)"

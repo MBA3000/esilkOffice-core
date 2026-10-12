@@ -2974,7 +2974,8 @@ void PowerPointExport::WriteNotesMaster()
     // note master has his own theme associated.
 
     // For now just use the default theme
-    auto const* pDefaultColorSet = svx::ColorSets::get().getColorSet(u"LibreOffice");
+    // esilk: the default theme is named esilkOffice (svx/uiconfig/themes/Libreoffice.theme)
+    auto const* pDefaultColorSet = svx::ColorSets::get().getColorSet(u"esilkOffice");
     if (pDefaultColorSet)
     {
         auto pTheme = std::make_shared<model::Theme>("Office Theme");

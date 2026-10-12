@@ -128,7 +128,16 @@ AboutDialog::AboutDialog(weld::Window* pParent)
     }
 
     // Links
-    m_pCreditsButton->set_uri(officecfg::Office::Common::Menus::CreditsURL::get());
+    if (utl::ConfigManager::getProductName() == "LibreOffice")
+        m_pCreditsButton->set_uri(officecfg::Office::Common::Menus::CreditsURL::get());
+    else
+    {
+        // esilk: the first link ("Licenses", aboutdialog|credits) opens the
+        // license file of the installation instead of the LibreOffice credits page.
+        OUString aLicenseURL(u"$BRAND_BASE_DIR/LICENSE.html"_ustr);
+        rtl::Bootstrap::expandMacros(aLicenseURL);
+        m_pCreditsButton->set_uri(aLicenseURL);
+    }
 
     OUString sURL(officecfg::Office::Common::Help::StartCenter::InfoURL::get());
     if (sURL.isEmpty())
@@ -256,6 +265,10 @@ OUString AboutDialog::GetMiscString()
 OUString AboutDialog::GetCopyrightString()
 {
     OUString sVendorTextStr(CuiResId(RID_CUISTR_ABOUT_VENDOR));
+    // esilk: a derived product shows only its vendor line; the copyright and
+    // "derived from LibreOffice" notices stay in LICENSE.html (Licenses link).
+    if (utl::ConfigManager::getProductName() != "LibreOffice")
+        return sVendorTextStr;
     OUString aCopyrightString = sVendorTextStr + "\n" + CuiResId(RID_CUISTR_ABOUT_COPYRIGHT) + "\n";
 
     if (utl::ConfigManager::getProductName() == "LibreOffice")

@@ -23,6 +23,7 @@
 #include <tools/urlobj.hxx>
 #include <tools/json_writer.hxx>
 #include <osl/file.hxx>
+#include <unotools/configmgr.hxx>
 #include <unotools/pathoptions.hxx>
 #include <sfx2/objsh.hxx>
 #include <svx/drawitem.hxx>
@@ -132,7 +133,13 @@ void PaletteManager::LoadPalettes()
                             else if (aFNameWithoutExt == "material")
                                 aFNameWithoutExt = SvxResId(RID_SVXSTR_COLOR_PALETTE_MATERIAL);
                             else if (aFNameWithoutExt == "libreoffice")
+                            {
+                                // esilk: the LibreOffice brand colours palette is not
+                                // offered in a derived product (no LibreOffice name in the UI)
+                                if (utl::ConfigManager::getProductName() != "LibreOffice")
+                                    continue;
                                 aFNameWithoutExt = "LibreOffice";
+                            }
                             else if (aFNameWithoutExt == "freecolour-hlc")
                                 aFNameWithoutExt = SvxResId(RID_SVXSTR_COLOR_PALETTE_FREECOLOURHLC);
                             pPalette.reset(new PaletteSOC(aFileStat.getFileURL(), aFNameWithoutExt));

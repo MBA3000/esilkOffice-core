@@ -1,0 +1,26 @@
+#. esilk overlay of translations/source/kk/sd/messages.po (esilk/l10n/README.md).
+#. Keep the upstream header.
+#. extracted from sd/inc
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: https://bugs.libreoffice.org/enter_bug.cgi?product=LibreOffice&bug_status=UNCONFIRMED&component=UI\n"
+"POT-Creation-Date: 2026-08-14 17:02+0200\n"
+"PO-Revision-Date: 2026-07-06 11:11+0000\n"
+"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
+"Language-Team: Kazakh <https://translations.documentfoundation.org/projects/libo_ui-master/sdmessages/kk/>\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Accelerator-Marker: ~\n"
+"X-Generator: LibreOffice\n"
+"X-POOTLE-MTIME: 1563104657.000000\n"
+
+#. j9Lh8
+#: sd/uiconfig/simpress/ui/presentationdialog.ui:826
+#. esilk-replaces: "Download LibreOffice Impress Remote to remotely control the presentation from your smartphone or smartwatch."
+msgctxt "presentationdialog|learnmore|tooltip_text"
+msgid "Download the Impress Remote app to remotely control the presentation from your smartphone or smartwatch."
+msgstr "Презентацияны смартфоннан немесе смарт-сағаттан қашықтан басқару үшін Impress Remote қолданбасын жүктеп алыңыз."

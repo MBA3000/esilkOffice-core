@@ -1,0 +1,47 @@
+#. esilk overlay of translations/source/ru/sw/messages.po (esilk/l10n/README.md).
+#. Keep the upstream header.
+#. extracted from sw/inc
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: https://bugs.libreoffice.org/enter_bug.cgi?product=LibreOffice&bug_status=UNCONFIRMED&component=UI\n"
+"POT-Creation-Date: 2026-06-26 13:25+0200\n"
+"PO-Revision-Date: 2026-06-22 14:30+0000\n"
+"Last-Translator: Sergey <kazorin@basealt.ru>\n"
+"Language-Team: Russian <https://translations.documentfoundation.org/projects/libo_ui-master/swmessages/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: ~\n"
+"X-Generator: LibreOffice\n"
+"X-POOTLE-MTIME: 1563892980.000000\n"
+
+#. H94UE
+#: sw/inc/strings.hrc:1520
+#. esilk-replaces: "Use OpenOffice.org 1.1 tabstop formatting"
+msgctxt "STR_COMPAT_OPT_USEOURTABSTOPFORMAT"
+msgid "Use legacy tabstop formatting"
+msgstr "Использовать табуляцию старых версий"
+
+#. faQQK
+#: sw/inc/strings.hrc:1522
+#. esilk-replaces: "Use OpenOffice.org 1.1 line spacing"
+msgctxt "STR_COMPAT_OPT_USELINESPACING"
+msgid "Use legacy line spacing"
+msgstr "Использовать межстрочный интервал старых версий"
+
+#. tE6DS
+#: sw/inc/strings.hrc:1524
+#. esilk-replaces: "Use OpenOffice.org 1.1 object positioning"
+msgctxt "STR_COMPAT_OPT_USEOBJECTPOSITIONING"
+msgid "Use legacy object positioning"
+msgstr "Использовать размещение объектов старых версий"
+
+#. szFCh
+#: sw/inc/strings.hrc:1525
+#. esilk-replaces: "Use OpenOffice.org 1.1 text wrapping around objects"
+msgctxt "STR_COMPAT_OPT_USEOURTEXTWRAPPING"
+msgid "Use legacy text wrapping around objects"
+msgstr "Использовать обтекание объектов текстом старых версий"

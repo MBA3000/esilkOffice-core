@@ -15,7 +15,7 @@
         <value>org.libreoffice.comp.Draw.StarOfficeDrawImportFilter</value>
     </prop>
     <prop oor:name="UIName">
-        <value xml:lang="en-US">Legacy StarOffice Drawing</value>
+        <value xml:lang="en-US">Legacy binary office drawing</value>
     </prop>
     <prop oor:name="FileFormatVersion">
         <value>0</value>

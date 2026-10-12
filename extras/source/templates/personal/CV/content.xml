@@ -200,7 +200,7 @@
             <text:p text:style-name="Standard">Software</text:p>
           </table:table-cell>
           <table:table-cell table:style-name="Table1.A1" office:value-type="string">
-            <text:p text:style-name="Standard">LibreOffice, LaTeX, Git</text:p>
+            <text:p text:style-name="Standard">Office suites, LaTeX, Git</text:p>
           </table:table-cell>
         </table:table-row>
         <table:table-row>

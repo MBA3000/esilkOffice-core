@@ -1,0 +1,33 @@
+#. esilk overlay of translations/source/kk/cui/messages.po (esilk/l10n/README.md).
+#. Keep the upstream header.
+#. extracted from cui/inc
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: https://bugs.libreoffice.org/enter_bug.cgi?product=LibreOffice&bug_status=UNCONFIRMED&component=UI\n"
+"POT-Creation-Date: 2026-09-15 17:05+0200\n"
+"PO-Revision-Date: 2026-08-15 19:00+0000\n"
+"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
+"Language-Team: Kazakh <https://translations.documentfoundation.org/projects/libo_ui-26-8/cuimessages/kk/>\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Accelerator-Marker: ~\n"
+"X-Generator: LibreOffice\n"
+"X-POOTLE-MTIME: 1563102986.000000\n"
+
+#. puyKW
+#: cui/uiconfig/ui/opthtmlpage.ui:629
+#. esilk-replaces: "LibreOffice _Basic"
+msgctxt "opthtmlpage|starbasic"
+msgid "%PRODUCTNAME _Basic"
+msgstr "%PRODUCTNAME _Basic"
+
+#. cFC6E
+#: cui/uiconfig/ui/aboutdialog.ui:138
+#. esilk-replaces: "Credits"
+msgctxt "aboutdialog|credits"
+msgid "Licenses"
+msgstr "Лицензиялар"

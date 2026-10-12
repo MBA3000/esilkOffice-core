@@ -33,9 +33,9 @@
         <value>StarOffice XML (Base) Report Chart</value>
       </prop>
       <prop oor:name="UIName">
-        <value xml:lang="en-US">StarOffice XML (Base) Report Chart 9</value>
+        <value xml:lang="en-US">Legacy Office XML report chart</value>
       </prop>
       <prop oor:name="ClipboardFormat">
-        <value>StarOffice XML (Base) Report Chart 9</value>
+        <value>Legacy Office XML report chart</value>
       </prop>
     </node>

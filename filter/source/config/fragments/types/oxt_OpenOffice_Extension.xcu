@@ -21,7 +21,7 @@
         <prop oor:name="MediaType"/>
         <prop oor:name="Preferred"><value>false</value></prop>
         <prop oor:name="UIName">
-            <value>OpenOffice Extension</value>
+            <value>Office Extension</value>
         </prop>
         <prop oor:name="ClipboardFormat"/>
         <prop oor:name="DetectService"><value>com.sun.star.comp.framework.OXTFileHandler</value></prop>

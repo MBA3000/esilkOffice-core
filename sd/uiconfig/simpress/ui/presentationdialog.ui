@@ -823,11 +823,11 @@
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
-                        <property name="tooltip-text" translatable="yes" context="presentationdialog|learnmore|tooltip_text">Download LibreOffice Impress Remote to remotely control the presentation from your smartphone or smartwatch.</property>
+                        <property name="tooltip-text" translatable="yes" context="presentationdialog|learnmore|tooltip_text">Download the Impress Remote app to remotely control the presentation from your smartphone or smartwatch.</property>
                         <property name="halign">end</property>
                         <property name="hexpand">True</property>
                         <property name="relief">none</property>
-                        <property name="uri">https://hub.libreoffice.org/impress-remote</property>
+                        <property name="uri">https://esilk.akbrd.com/go/impress-remote</property>
                       </object>
                       <packing>
                         <property name="left-attach">1</property>

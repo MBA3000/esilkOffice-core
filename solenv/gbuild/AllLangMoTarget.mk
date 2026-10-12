@@ -32,14 +32,44 @@ $(call gb_MoTarget_get_clean_target,%) :
 			$(call gb_MoTarget_get_target,$*) \
 			$(call gb_MoTarget_get_install_target,$*))
 
+# esilk: UI po overlays (esilk/l10n/README.md). When
+# esilk/l10n/translations/source/<lang>/<polocation>/messages.po exists,
+# esilk/l10n/merge_po.py (run by the build's python after check_overlays.py)
+# writes <target>.po: the upstream header, the overlay entries, and the upstream
+# entries the overlay does not replace (same msgctxt + msgid, or named by an
+# "esilk-replaces" comment). msgfmt then compiles that file instead of the
+# upstream po: the overlay translation wins, an untranslated upstream message
+# gets the overlay translation, and the old entry of a rewritten en-US string
+# leaves the .mo.
+# $(call gb_MoTarget_get_po,lang,polocation): the upstream po file
+gb_MoTarget_get_po = $(gb_POLOCATION)/$(1)/$(2)/messages.po
+# $(call gb_MoTarget_get_overlay,lang,polocation): its overlay, if one exists
+gb_MoTarget_get_overlay = $(call gb_POLOCATION_get_overlays,$(call gb_MoTarget_get_po,$(1),$(2)))
+
 # wsl1 seems to have issues with writing to stdout/pipes when running with high parallelism
 # so as a workaround run the two statements in a single command run by a shell
 $(call gb_MoTarget_get_target,%) : $(gb_Helper_MISCDUMMY)
 	$(call gb_Output_announce,$*,$(true),MO ,2)
 	$(call gb_Trace_StartRange,$*,MO )
+	$(call gb_POLOCATION_check_overlays,$(call gb_MoTarget_get_po,$(LANGUAGE),$(POLOCATION)))
 	$(call gb_Helper_abbreviate_dirs,mkdir -p $(dir $@)) && \
-	$(call gb_Helper_wsl_path,$(WSL) /bin/sh -c "$(MSGUNIQ) --force-po $(gb_POLOCATION)/$(LANGUAGE)/$(POLOCATION)/messages.po | $(MSGFMT) - -o $@")
+	$(if $(call gb_MoTarget_get_overlay,$(LANGUAGE),$(POLOCATION)),\
+		$(call gb_ExternalExecutable_get_command,python) $(SRCDIR)/esilk/l10n/merge_po.py \
+			$(call gb_MoTarget_get_overlay,$(LANGUAGE),$(POLOCATION)) \
+			$(call gb_MoTarget_get_po,$(LANGUAGE),$(POLOCATION)) $@.po && \
+		$(call gb_Helper_wsl_path,$(WSL) /bin/sh -c "$(MSGUNIQ) --force-po $@.po | $(MSGFMT) - -o $@") && \
+		rm -f $@.po,\
+		$(call gb_Helper_wsl_path,$(WSL) /bin/sh -c "$(MSGUNIQ) --force-po $(call gb_MoTarget_get_po,$(LANGUAGE),$(POLOCATION)) | $(MSGFMT) - -o $@"))
 	$(call gb_Trace_EndRange,$*,MO )
+
+# $(call gb_MoTarget__add_overlay_deps,motarget,polocation,lang): rebuild the .mo
+# when its overlay changes; the overlay check needs the build's python first.
+define gb_MoTarget__add_overlay_deps
+$(call gb_MoTarget_get_target,$(1)) : $(call gb_MoTarget_get_overlay,$(3),$(2)) \
+	$(if $(call gb_MoTarget_get_overlay,$(3),$(2)),$(SRCDIR)/esilk/l10n/merge_po.py) \
+	| $(call gb_POLOCATION_get_overlay_check_deps,$(call gb_MoTarget_get_po,$(3),$(2)))
+
+endef
 
 #$(info $(call gb_MoTarget_get_target,$(1)))
 define gb_MoTarget_MoTarget
@@ -47,11 +77,14 @@ $(call gb_MoTarget_get_target,$(1)) : LIBRARY = $(2)
 $(call gb_MoTarget_get_target,$(1)) : LANGUAGE = $(3)
 $(call gb_MoTarget_get_target,$(1)) : POLOCATION = $(2)
 $(call gb_AllLangMoTarget_get_clean_target,$(2)) : $(call gb_MoTarget_get_clean_target,$(1))
+$(call gb_MoTarget__add_overlay_deps,$(1),$(2),$(3))
 
 endef
 
+# $(call gb_MoTarget_set_polocation,motarget,polocation,lang)
 define gb_MoTarget_set_polocation
 $(call gb_MoTarget_get_target,$(1)) : POLOCATION = $(2)
+$(call gb_MoTarget__add_overlay_deps,$(1),$(2),$(3))
 
 endef
 
@@ -94,7 +127,7 @@ endef
 
 define gb_AllLangMoTarget_set_polocation
 $(foreach lang,$(gb_AllLangMoTarget_LANGS),\
-        $(call gb_MoTarget_set_polocation,$(1)$(lang),$(2)))
+        $(call gb_MoTarget_set_polocation,$(1)$(lang),$(2),$(lang)))
 
 endef
 

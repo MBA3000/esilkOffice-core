@@ -1,0 +1,33 @@
+#. esilk overlay of translations/source/ru/sc/messages.po (esilk/l10n/README.md).
+#. Keep the upstream header.
+#. extracted from sc/inc
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: https://bugs.libreoffice.org/enter_bug.cgi?product=LibreOffice&bug_status=UNCONFIRMED&component=UI\n"
+"POT-Creation-Date: 2026-08-14 17:02+0200\n"
+"PO-Revision-Date: 2026-02-26 21:10+0000\n"
+"Last-Translator: bormant <bormant@mail.ru>\n"
+"Language-Team: Russian <https://translations.documentfoundation.org/projects/libo_ui-master/scmessages/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: ~\n"
+"X-Generator: LibreOffice\n"
+"X-POOTLE-MTIME: 1562910466.000000\n"
+
+#. uPZs8
+#: sc/inc/scfuncs.hrc:385
+#. esilk-replaces: "Calculates the calendar week corresponding to the given date.\nThis function only provides interoperability with %PRODUCTNAME 5.0 and earlier and OpenOffice.org."
+msgctxt "ocWEEKNUM_OOO"
+msgid "Calculates the calendar week corresponding to the given date.\nThis function only provides interoperability with old office versions."
+msgstr "Вычисляет номер календарной недели для заданной даты.\nЭта функция предназначена только для совместимости со старыми версиями офисных пакетов."
+
+#. 3mLBb
+#: sc/uiconfig/scalc/ui/optcompatibilitypage.ui:54
+#. esilk-replaces: "OpenOffice.org legacy"
+msgctxt "optcompatibilitypage|keybindings"
+msgid "Legacy"
+msgstr "Как в старых версиях"

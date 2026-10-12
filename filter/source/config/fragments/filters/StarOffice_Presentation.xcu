@@ -15,7 +15,7 @@
         <value>org.libreoffice.comp.Impress.StarOfficePresentationImportFilter</value>
     </prop>
     <prop oor:name="UIName">
-        <value xml:lang="en-US">Legacy StarOffice Presentation</value>
+        <value xml:lang="en-US">Legacy binary office presentation</value>
     </prop>
     <prop oor:name="FileFormatVersion">
         <value>0</value>

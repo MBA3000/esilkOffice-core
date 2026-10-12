@@ -1,0 +1,180 @@
+#. esilk overlay of translations/source/kk/svtools/messages.po (esilk/l10n/README.md).
+#. Keep the upstream header.
+#. extracted from svtools
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: https://bugs.libreoffice.org/enter_bug.cgi?product=LibreOffice&bug_status=UNCONFIRMED&component=UI\n"
+"POT-Creation-Date: 2026-09-15 17:06+0200\n"
+"PO-Revision-Date: 2026-07-06 11:12+0000\n"
+"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
+"Language-Team: Kazakh <https://translations.documentfoundation.org/projects/libo_ui-master/svtoolsmessages/kk/>\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Accelerator-Marker: ~\n"
+"X-Generator: LibreOffice\n"
+"X-POOTLE-MTIME: 1563104930.000000\n"
+
+#. MFnoA
+#: include/svtools/strings.hrc:87
+#. esilk-replaces: "OpenOffice.org 1.0 Writer object"
+msgctxt "STR_FORMAT_ID_STARWRITER_60"
+msgid "Legacy Office XML Writer object"
+msgstr "Ескі XML пішіміндегі Writer объекті"
+
+#. WuSEB
+#: include/svtools/strings.hrc:88
+#. esilk-replaces: "OpenOffice.org 1.0 Writer/Web object"
+msgctxt "STR_FORMAT_ID_STARWRITERWEB_60"
+msgid "Legacy Office XML Writer/Web object"
+msgstr "Ескі XML пішіміндегі Writer/Web объекті"
+
+#. GZwRa
+#: include/svtools/strings.hrc:89
+#. esilk-replaces: "OpenOffice.org 1.0 Writer/Master object"
+msgctxt "STR_FORMAT_ID_STARWRITERGLOB_60"
+msgid "Legacy Office XML Writer/Master object"
+msgstr "Ескі XML пішіміндегі Writer/Құрамдас құжат объекті"
+
+#. iEkCL
+#: include/svtools/strings.hrc:90
+#. esilk-replaces: "OpenOffice.org 1.0 Draw object"
+msgctxt "STR_FORMAT_ID_STARDRAW_60"
+msgid "Legacy Office XML Draw object"
+msgstr "Ескі XML пішіміндегі Draw объекті"
+
+#. nitPp
+#: include/svtools/strings.hrc:91
+#. esilk-replaces: "OpenOffice.org 1.0 Impress object"
+msgctxt "STR_FORMAT_ID_STARIMPRESS_60"
+msgid "Legacy Office XML Impress object"
+msgstr "Ескі XML пішіміндегі Impress объекті"
+
+#. B37DU
+#: include/svtools/strings.hrc:92
+#. esilk-replaces: "OpenOffice.org 1.0 Calc object"
+msgctxt "STR_FORMAT_ID_STARCALC_60"
+msgid "Legacy Office XML Calc object"
+msgstr "Ескі XML пішіміндегі Calc объекті"
+
+#. CHCYo
+#: include/svtools/strings.hrc:93
+#. esilk-replaces: "OpenOffice.org 1.0 Chart object"
+msgctxt "STR_FORMAT_ID_STARCHART_60"
+msgid "Legacy Office XML Chart object"
+msgstr "Ескі XML пішіміндегі Chart объекті"
+
+#. 67SN7
+#: include/svtools/strings.hrc:94
+#. esilk-replaces: "OpenOffice.org 1.0 Math object"
+msgctxt "STR_FORMAT_ID_STARMATH_60"
+msgid "Legacy Office XML Math object"
+msgstr "Ескі XML пішіміндегі Math объекті"
+
+#. QbFAy
+#: include/svtools/strings.hrc:99
+#. esilk-replaces: "OpenOffice.org 1.0 dialog"
+msgctxt "STR_FORMAT_ID_DIALOG_60"
+msgid "Legacy Office XML dialog"
+msgstr "Ескі XML пішіміндегі сұхбат терезесі"
+
+#. DiNGB
+#: include/svtools/strings.hrc:324
+#. esilk-replaces: "OpenOffice.org 1.0 Spreadsheet Template"
+msgctxt "STR_DESCRIPTION_CALC_TEMPLATE"
+msgid "Legacy Office XML spreadsheet template (.stc)"
+msgstr "Ескі XML пішіміндегі электрондық кесте үлгісі (.stc)"
+
+#. FYKGV
+#: include/svtools/strings.hrc:325
+#. esilk-replaces: "OpenOffice.org 1.0 Drawing Template"
+msgctxt "STR_DESCRIPTION_DRAW_TEMPLATE"
+msgid "Legacy Office XML drawing template (.std)"
+msgstr "Ескі XML пішіміндегі сурет үлгісі (.std)"
+
+#. CTUQg
+#: include/svtools/strings.hrc:326
+#. esilk-replaces: "OpenOffice.org 1.0 Presentation Template"
+msgctxt "STR_DESCRIPTION_IMPRESS_TEMPLATE"
+msgid "Legacy Office XML presentation template (.sti)"
+msgstr "Ескі XML пішіміндегі презентация үлгісі (.sti)"
+
+#. Cbvtx
+#: include/svtools/strings.hrc:327
+#. esilk-replaces: "OpenOffice.org 1.0 Text Document Template"
+msgctxt "STR_DESCRIPTION_WRITER_TEMPLATE"
+msgid "Legacy Office XML text document template (.stw)"
+msgstr "Ескі XML пішіміндегі мәтіндік құжат үлгісі (.stw)"
+
+#. fHGcD
+#: include/svtools/strings.hrc:335
+#. esilk-replaces: "OpenOffice.org 1.0 Formula"
+msgctxt "STR_DESCRIPTION_SXMATH_DOC"
+msgid "Legacy Office XML formula (.sxm)"
+msgstr "Ескі XML пішіміндегі формула (.sxm)"
+
+#. CFw78
+#: include/svtools/strings.hrc:336
+#. esilk-replaces: "OpenOffice.org 1.0 Chart"
+msgctxt "STR_DESCRIPTION_SXCHART_DOC"
+msgid "Legacy Office XML chart (.sxs)"
+msgstr "Ескі XML пішіміндегі диаграмма (.sxs)"
+
+#. tJhDC
+#: include/svtools/strings.hrc:337
+#. esilk-replaces: "OpenOffice.org 1.0 Drawing"
+msgctxt "STR_DESCRIPTION_SXDRAW_DOC"
+msgid "Legacy Office XML drawing (.sxd)"
+msgstr "Ескі XML пішіміндегі сурет (.sxd)"
+
+#. f9ZNL
+#: include/svtools/strings.hrc:338
+#. esilk-replaces: "OpenOffice.org 1.0 Spreadsheet"
+msgctxt "STR_DESCRIPTION_SXCALC_DOC"
+msgid "Legacy Office XML spreadsheet (.sxc)"
+msgstr "Ескі XML пішіміндегі электрондық кесте (.sxc)"
+
+#. PCBqi
+#: include/svtools/strings.hrc:339
+#. esilk-replaces: "OpenOffice.org 1.0 Presentation"
+msgctxt "STR_DESCRIPTION_SXIMPRESS_DOC"
+msgid "Legacy Office XML presentation (.sxi)"
+msgstr "Ескі XML пішіміндегі презентация (.sxi)"
+
+#. Npija
+#: include/svtools/strings.hrc:340
+#. esilk-replaces: "OpenOffice.org 1.0 Text Document"
+msgctxt "STR_DESCRIPTION_SXWRITER_DOC"
+msgid "Legacy Office XML text document (.sxw)"
+msgstr "Ескі XML пішіміндегі мәтіндік құжат (.sxw)"
+
+#. tVnQQ
+#: include/svtools/strings.hrc:341
+#. esilk-replaces: "OpenOffice.org 1.0 Master Document"
+msgctxt "STR_DESCRIPTION_SXGLOBAL_DOC"
+msgid "Legacy Office XML master document (.sxg)"
+msgstr "Ескі XML пішіміндегі құрамдас құжат (.sxg)"
+
+#. gBQzN
+#: include/svtools/strings.hrc:305
+#. esilk-replaces: "StarOffice Database"
+msgctxt "STR_DESCRIPTION_SDATABASE_DOC"
+msgid "Legacy office database"
+msgstr "Ескі пішімдегі дерекқор"
+
+#. 33Dez
+#: include/svtools/strings.hrc:307
+#. esilk-replaces: "StarOffice Image"
+msgctxt "STR_DESCRIPTION_SIMAGE_DOC"
+msgid "Legacy office image"
+msgstr "Ескі пішімдегі сурет"
+
+#. hDFtd
+#: include/svtools/strings.hrc:310
+#. esilk-replaces: "StarOffice 3.0 - 5.0 Template"
+msgctxt "STR_DESCRIPTION_SOFFICE_TEMPLATE_DOC"
+msgid "Legacy office template (versions 3.0–5.0)"
+msgstr "Ескі пішімдегі үлгі (3.0–5.0 нұсқалары)"

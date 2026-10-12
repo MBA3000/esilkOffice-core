@@ -35,6 +35,6 @@
         <value>com.sun.star.chart2.ChartDocument</value>
       </prop>
       <prop oor:name="UIName">
-        <value xml:lang="en-US">OpenOffice.org 1.0 Report Chart</value>
+        <value xml:lang="en-US">Legacy Office XML report chart</value>
       </prop>
     </node>

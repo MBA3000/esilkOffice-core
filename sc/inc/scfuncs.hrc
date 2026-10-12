@@ -382,7 +382,7 @@ const TranslateId ocISOWEEKNUM_ARY[] =
 
 const TranslateId ocWEEKNUM_OOO_ARY[] =
 {
-    NC_("ocWEEKNUM_OOO", "Calculates the calendar week corresponding to the given date.\nThis function only provides interoperability with %PRODUCTNAME 5.0 and earlier and OpenOffice.org."),
+    NC_("ocWEEKNUM_OOO", "Calculates the calendar week corresponding to the given date.\nThis function only provides interoperability with old office versions."),
     NC_("ocWEEKNUM_OOO", "Number"),
     NC_("ocWEEKNUM_OOO", "The internal number of the date."),
     NC_("ocWEEKNUM_OOO", "Mode"),
