@@ -25,6 +25,6 @@
         <prop oor:name="TemplateName"/>
         <prop oor:name="DocumentService"><value>com.sun.star.text.WebDocument</value></prop>
         <prop oor:name="UIName">
-            <value xml:lang="en-US">StarOffice XML HTML Template</value>
+            <value xml:lang="en-US">Legacy Office XML HTML template</value>
         </prop>
     </node>

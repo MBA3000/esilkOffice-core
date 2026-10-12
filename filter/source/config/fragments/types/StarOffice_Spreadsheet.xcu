@@ -22,6 +22,6 @@
         <value>StarOffice_Spreadsheet</value>
     </prop>
     <prop oor:name="UIName">
-        <value>Legacy StarOffice Spreadsheet</value>
+        <value>Legacy binary office spreadsheet</value>
     </prop>
 </node>

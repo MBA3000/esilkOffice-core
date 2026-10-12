@@ -25,6 +25,6 @@
         <prop oor:name="TemplateName"/>
         <prop oor:name="DocumentService"><value>com.sun.star.drawing.DrawingDocument</value></prop>
         <prop oor:name="UIName">
-            <value xml:lang="en-US">StarOffice XML Drawing Template</value>
+            <value xml:lang="en-US">Legacy Office XML drawing template</value>
         </prop>
     </node>

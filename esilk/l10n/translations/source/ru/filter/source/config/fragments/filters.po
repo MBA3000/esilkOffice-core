@@ -1,5 +1,5 @@
 #. esilk overlay of translations/source/ru/filter/source/config/fragments/filters.po (esilk/l10n/README.md):
-#. filter UI names without the OpenOffice.org name.
+#. UI names without OpenOffice.org or StarOffice.
 #. extracted from filter/source/config/fragments/filters
 msgid ""
 msgstr ""
@@ -25,8 +25,48 @@ msgctxt ""
 "StarOffice XML (Base) Report Chart\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Report Chart"
-msgstr "Отчёт-диаграмма StarOffice XML"
+msgid "Legacy Office XML report chart"
+msgstr "Отчёт-диаграмма в устаревшем формате XML"
+
+#. a9ZBj
+#: StarOffice_Drawing.xcu
+msgctxt ""
+"StarOffice_Drawing.xcu\n"
+"StarOffice_Drawing\n"
+"UIName\n"
+"value.text"
+msgid "Legacy binary office drawing"
+msgstr "Рисунок в устаревшем двоичном формате"
+
+#. AA8DU
+#: StarOffice_Presentation.xcu
+msgctxt ""
+"StarOffice_Presentation.xcu\n"
+"StarOffice_Presentation\n"
+"UIName\n"
+"value.text"
+msgid "Legacy binary office presentation"
+msgstr "Презентация в устаревшем двоичном формате"
+
+#. wU9ui
+#: StarOffice_Spreadsheet.xcu
+msgctxt ""
+"StarOffice_Spreadsheet.xcu\n"
+"StarOffice_Spreadsheet\n"
+"UIName\n"
+"value.text"
+msgid "Legacy binary office spreadsheet"
+msgstr "Электронная таблица в устаревшем двоичном формате"
+
+#. eLzL6
+#: StarOffice_Writer.xcu
+msgctxt ""
+"StarOffice_Writer.xcu\n"
+"StarOffice_Writer\n"
+"UIName\n"
+"value.text"
+msgid "Legacy binary office text document"
+msgstr "Текстовый документ в устаревшем двоичном формате"
 
 #. GV3iH
 #: StarOffice_XML__Calc_.xcu
@@ -35,8 +75,8 @@ msgctxt ""
 "StarOffice XML (Calc)\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Spreadsheet"
-msgstr "Эл. таблица StarOffice XML"
+msgid "Legacy Office XML spreadsheet"
+msgstr "Электронная таблица в устаревшем формате XML"
 
 #. ybPJp
 #: StarOffice_XML__Chart_.xcu
@@ -45,8 +85,8 @@ msgctxt ""
 "StarOffice XML (Chart)\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Chart"
-msgstr "Диаграмма StarOffice XML"
+msgid "Legacy Office XML chart"
+msgstr "Диаграмма в устаревшем формате XML"
 
 #. wnAXQ
 #: StarOffice_XML__Draw_.xcu
@@ -55,8 +95,8 @@ msgctxt ""
 "StarOffice XML (Draw)\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Drawing"
-msgstr "Рисунок StarOffice XML"
+msgid "Legacy Office XML drawing"
+msgstr "Рисунок в устаревшем формате XML"
 
 #. rGSr3
 #: StarOffice_XML__Impress_.xcu
@@ -65,8 +105,8 @@ msgctxt ""
 "StarOffice XML (Impress)\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Presentation"
-msgstr "Презентация StarOffice XML"
+msgid "Legacy Office XML presentation"
+msgstr "Презентация в устаревшем формате XML"
 
 #. QCoxC
 #: StarOffice_XML__Math_.xcu
@@ -75,8 +115,8 @@ msgctxt ""
 "StarOffice XML (Math)\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Formula"
-msgstr "Формула StarOffice XML"
+msgid "Legacy Office XML formula"
+msgstr "Формула в устаревшем формате XML"
 
 #. 4Lr4M
 #: StarOffice_XML__Writer_.xcu
@@ -85,8 +125,8 @@ msgctxt ""
 "StarOffice XML (Writer)\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Text Document"
-msgstr "Текстовый документ StarOffice XML"
+msgid "Legacy Office XML text document"
+msgstr "Текстовый документ в устаревшем формате XML"
 
 #. QuUM5
 #: calc_StarOffice_XML_Calc_Template.xcu
@@ -95,8 +135,8 @@ msgctxt ""
 "calc_StarOffice_XML_Calc_Template\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Spreadsheet Template"
-msgstr "Шаблон эл. таблицы StarOffice XML"
+msgid "Legacy Office XML spreadsheet template"
+msgstr "Шаблон электронной таблицы в устаревшем формате XML"
 
 #. XqdTg
 #: draw_StarOffice_XML_Draw_Template.xcu
@@ -105,8 +145,8 @@ msgctxt ""
 "draw_StarOffice_XML_Draw_Template\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Drawing Template"
-msgstr "Шаблон рисунка StarOffice XML"
+msgid "Legacy Office XML drawing template"
+msgstr "Шаблон рисунка в устаревшем формате XML"
 
 #. KDAFg
 #: impress_StarOffice_XML_Draw.xcu
@@ -115,8 +155,8 @@ msgctxt ""
 "impress_StarOffice_XML_Draw\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Drawing (Impress)"
-msgstr "Рисунок (Impress) StarOffice XML"
+msgid "Legacy Office XML drawing (Impress)"
+msgstr "Рисунок (Impress) в устаревшем формате XML"
 
 #. oviUa
 #: impress_StarOffice_XML_Impress_Template.xcu
@@ -125,8 +165,8 @@ msgctxt ""
 "impress_StarOffice_XML_Impress_Template\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Presentation Template"
-msgstr "Шаблон презентации StarOffice XML"
+msgid "Legacy Office XML presentation template"
+msgstr "Шаблон презентации в устаревшем формате XML"
 
 #. xxieP
 #: writer_StarOffice_XML_Writer_Template.xcu
@@ -135,8 +175,8 @@ msgctxt ""
 "writer_StarOffice_XML_Writer_Template\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Text Document Template"
-msgstr "Шаблон текстового документа StarOffice XML"
+msgid "Legacy Office XML text document template"
+msgstr "Шаблон текстового документа в устаревшем формате XML"
 
 #. vu9L5
 #: writer_globaldocument_StarOffice_XML_Writer.xcu
@@ -145,8 +185,8 @@ msgctxt ""
 "writer_globaldocument_StarOffice_XML_Writer\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Text Document"
-msgstr "Текстовый документ StarOffice XML"
+msgid "Legacy Office XML text document"
+msgstr "Текстовый документ в устаревшем формате XML"
 
 #. ngztG
 #: writer_globaldocument_StarOffice_XML_Writer_GlobalDocument.xcu
@@ -155,8 +195,8 @@ msgctxt ""
 "writer_globaldocument_StarOffice_XML_Writer_GlobalDocument\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Master Document"
-msgstr "Составной документ StarOffice XML"
+msgid "Legacy Office XML master document"
+msgstr "Составной документ в устаревшем формате XML"
 
 #. ipApD
 #: writer_web_StarOffice_XML_Writer.xcu
@@ -165,8 +205,8 @@ msgctxt ""
 "writer_web_StarOffice_XML_Writer\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML Text Document (Writer/Web)"
-msgstr "Текстовый документ (Writer/Web) StarOffice XML"
+msgid "Legacy Office XML text document (Writer/Web)"
+msgstr "Текстовый документ (Writer/Web) в устаревшем формате XML"
 
 #. kp5x8
 #: writer_web_StarOffice_XML_Writer_Web_Template.xcu
@@ -175,5 +215,5 @@ msgctxt ""
 "writer_web_StarOffice_XML_Writer_Web_Template\n"
 "UIName\n"
 "value.text"
-msgid "StarOffice XML HTML Template"
-msgstr "Шаблон документа HTML StarOffice XML"
+msgid "Legacy Office XML HTML template"
+msgstr "Шаблон документа HTML в устаревшем формате XML"

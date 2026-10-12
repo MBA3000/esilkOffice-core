@@ -15,7 +15,7 @@
         <value>org.libreoffice.comp.Calc.StarOfficeCalcImportFilter</value>
     </prop>
     <prop oor:name="UIName">
-        <value xml:lang="en-US">Legacy StarOffice Spreadsheet</value>
+        <value xml:lang="en-US">Legacy binary office spreadsheet</value>
     </prop>
     <prop oor:name="FileFormatVersion">
         <value>0</value>
