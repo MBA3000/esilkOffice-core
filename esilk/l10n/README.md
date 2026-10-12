@@ -61,8 +61,12 @@ Installer and readme strings (`ulfex`/`xrmex`):
 - Keep all entries of one source file together. Never put a `# ` comment
   inside an entry: the parser stops there and l10ntools skips the whole file.
   `#.` comments are fine.
-- Menu and toolbar command labels (`officecfg/.../UI.po`, merged by `cfgex`)
-  have no overlay support yet.
+- Configuration strings merged by `cfgex` (`gb_XcuMergeTarget`, e.g. the filter
+  UI names) take overlays like `ulfex`; `check_overlays.py` compares them with
+  the en-US value of the node/prop in the `.xcu` fragment. Menu labels in
+  `officecfg/.../UI.po` use the same merge, but their msgctxt is a nested node
+  path that `check_overlays.py` does not resolve yet: extend `en_us_xcu` before
+  adding such an overlay.
 - After changing an en-US string or an overlay, update the overlay msgid and
   msgstr together. `esilk/l10n/check_overlays.py` fails when an overlay names
   a missing string, cannot be parsed, or its msgid differs from the en-US text
@@ -83,6 +87,9 @@ Installer and readme strings (`ulfex`/`xrmex`):
 | `instsetoo_native/.../msi_languages/Property.ulf` | `OOO_ARPCONTACTTEMPLATE` | Apps and Features, support contact |
 | `readlicense_oo/docs/readme.xrm` | `esilkBasedOn` | `readmes/readme_<lang>.txt` |
 | `ru/sfx2/messages.po` | all 31 strings left untranslated upstream, including `STR_NEW_FROM_TEMPLATE` | File > New > Templates button, style panel, infobars, safe mode query |
+
+| `{kk,ru}/{cui,desktop,sc,sd,sfx2,svtools,svx,sw,uui,xmlsecurity}/messages.po` | en-US strings rewritten without LibreOffice, OpenOffice.org or The Document Foundation (owner decision 12.10.2026): About "Licenses" link, Help > License Information, HTML options "%PRODUCTNAME Basic", extension dependency errors, Calc legacy key bindings and WEEKNUM_OOO, Impress Remote tooltip, ODF 1.1 signature messages, safe mode profile export, Basic library warning, Writer "legacy" compatibility options, "StarOffice XML" object and document type names | the dialogs named |
+| `{kk,ru}/filter/source/config/fragments/filters.po` | 16 filter UI names "OpenOffice.org 1.0 …" → "StarOffice XML …" (merged by `cfgex`, see `gb_XcuMergeTarget` in `solenv/gbuild/Configuration.mk`) | Open/Save As file types |
 
 The kk UI translation has no untranslated strings in the modules esilkOffice
 ships (checked against the `translations` submodule on 12.10.2026); ru still has

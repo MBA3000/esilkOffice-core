@@ -25,6 +25,6 @@
         <prop oor:name="TemplateName"/>
         <prop oor:name="DocumentService"><value>com.sun.star.text.GlobalDocument</value></prop>
         <prop oor:name="UIName">
-            <value xml:lang="en-US">OpenOffice.org 1.0 Master Document</value>
+            <value xml:lang="en-US">StarOffice XML Master Document</value>
         </prop>
     </node>

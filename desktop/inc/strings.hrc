@@ -111,8 +111,8 @@
 #define RID_DLG_UPDATE_INSTALL_EXTENSION_NOINSTALL          NC_("RID_DLG_UPDATE_INSTALL_EXTENSION_NOINSTALL", "The extension will not be installed.")
 
 #define RID_DEPLOYMENT_DEPENDENCIES_UNKNOWN                 NC_("RID_DEPLOYMENT_DEPENDENCIES_UNKNOWN", "Unknown")
-#define RID_DEPLOYMENT_DEPENDENCIES_OOO_MIN                 NC_("RID_DEPLOYMENT_DEPENDENCIES_OOO_MIN", "Extension requires at least OpenOffice.org reference version %VERSION")
-#define RID_DEPLOYMENT_DEPENDENCIES_OOO_MAX                 NC_("RID_DEPLOYMENT_DEPENDENCIES_OOO_MAX", "Extension does not support OpenOffice.org reference versions greater than %VERSION")
+#define RID_DEPLOYMENT_DEPENDENCIES_OOO_MIN                 NC_("RID_DEPLOYMENT_DEPENDENCIES_OOO_MIN", "Extension requires at least version %VERSION of the office API")
+#define RID_DEPLOYMENT_DEPENDENCIES_OOO_MAX                 NC_("RID_DEPLOYMENT_DEPENDENCIES_OOO_MAX", "Extension does not support office API versions greater than %VERSION")
 #define RID_DEPLOYMENT_DEPENDENCIES_LO_MIN                  NC_("RID_DEPLOYMENT_DEPENDENCIES_LO_MIN", "Extension requires at least %PRODUCTNAME version %VERSION")
 #define RID_DEPLOYMENT_DEPENDENCIES_LO_MAX                  NC_("RID_DEPLOYMENT_DEPENDENCIES_LO_MAX", "Extension does not support %PRODUCTNAME versions greater than %VERSION")
 

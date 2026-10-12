@@ -1,0 +1,179 @@
+#. esilk overlay of translations/source/ru/filter/source/config/fragments/filters.po (esilk/l10n/README.md):
+#. filter UI names without the OpenOffice.org name.
+#. extracted from filter/source/config/fragments/filters
+msgid ""
+msgstr ""
+"Project-Id-Version: filters\n"
+"Report-Msgid-Bugs-To: https://bugs.libreoffice.org/enter_bug.cgi?product=LibreOffice&bug_status=UNCONFIRMED&component=UI\n"
+"POT-Creation-Date: 2026-02-05 14:39+0100\n"
+"PO-Revision-Date: 2026-02-26 18:55+0000\n"
+"Last-Translator: bormant <bormant@mail.ru>\n"
+"Language-Team: Russian <https://translations.documentfoundation.org/projects/libo_ui-master/filtersourceconfigfragmentsfilters/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: ~\n"
+"X-Generator: Weblate 5.10.1\n"
+"X-POOTLE-MTIME: 1562754696.000000\n"
+
+#. PsuNu
+#: StarBaseReportChart.xcu
+msgctxt ""
+"StarBaseReportChart.xcu\n"
+"StarOffice XML (Base) Report Chart\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Report Chart"
+msgstr "Отчёт-диаграмма StarOffice XML"
+
+#. GV3iH
+#: StarOffice_XML__Calc_.xcu
+msgctxt ""
+"StarOffice_XML__Calc_.xcu\n"
+"StarOffice XML (Calc)\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Spreadsheet"
+msgstr "Эл. таблица StarOffice XML"
+
+#. ybPJp
+#: StarOffice_XML__Chart_.xcu
+msgctxt ""
+"StarOffice_XML__Chart_.xcu\n"
+"StarOffice XML (Chart)\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Chart"
+msgstr "Диаграмма StarOffice XML"
+
+#. wnAXQ
+#: StarOffice_XML__Draw_.xcu
+msgctxt ""
+"StarOffice_XML__Draw_.xcu\n"
+"StarOffice XML (Draw)\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Drawing"
+msgstr "Рисунок StarOffice XML"
+
+#. rGSr3
+#: StarOffice_XML__Impress_.xcu
+msgctxt ""
+"StarOffice_XML__Impress_.xcu\n"
+"StarOffice XML (Impress)\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Presentation"
+msgstr "Презентация StarOffice XML"
+
+#. QCoxC
+#: StarOffice_XML__Math_.xcu
+msgctxt ""
+"StarOffice_XML__Math_.xcu\n"
+"StarOffice XML (Math)\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Formula"
+msgstr "Формула StarOffice XML"
+
+#. 4Lr4M
+#: StarOffice_XML__Writer_.xcu
+msgctxt ""
+"StarOffice_XML__Writer_.xcu\n"
+"StarOffice XML (Writer)\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Text Document"
+msgstr "Текстовый документ StarOffice XML"
+
+#. QuUM5
+#: calc_StarOffice_XML_Calc_Template.xcu
+msgctxt ""
+"calc_StarOffice_XML_Calc_Template.xcu\n"
+"calc_StarOffice_XML_Calc_Template\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Spreadsheet Template"
+msgstr "Шаблон эл. таблицы StarOffice XML"
+
+#. XqdTg
+#: draw_StarOffice_XML_Draw_Template.xcu
+msgctxt ""
+"draw_StarOffice_XML_Draw_Template.xcu\n"
+"draw_StarOffice_XML_Draw_Template\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Drawing Template"
+msgstr "Шаблон рисунка StarOffice XML"
+
+#. KDAFg
+#: impress_StarOffice_XML_Draw.xcu
+msgctxt ""
+"impress_StarOffice_XML_Draw.xcu\n"
+"impress_StarOffice_XML_Draw\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Drawing (Impress)"
+msgstr "Рисунок (Impress) StarOffice XML"
+
+#. oviUa
+#: impress_StarOffice_XML_Impress_Template.xcu
+msgctxt ""
+"impress_StarOffice_XML_Impress_Template.xcu\n"
+"impress_StarOffice_XML_Impress_Template\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Presentation Template"
+msgstr "Шаблон презентации StarOffice XML"
+
+#. xxieP
+#: writer_StarOffice_XML_Writer_Template.xcu
+msgctxt ""
+"writer_StarOffice_XML_Writer_Template.xcu\n"
+"writer_StarOffice_XML_Writer_Template\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Text Document Template"
+msgstr "Шаблон текстового документа StarOffice XML"
+
+#. vu9L5
+#: writer_globaldocument_StarOffice_XML_Writer.xcu
+msgctxt ""
+"writer_globaldocument_StarOffice_XML_Writer.xcu\n"
+"writer_globaldocument_StarOffice_XML_Writer\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Text Document"
+msgstr "Текстовый документ StarOffice XML"
+
+#. ngztG
+#: writer_globaldocument_StarOffice_XML_Writer_GlobalDocument.xcu
+msgctxt ""
+"writer_globaldocument_StarOffice_XML_Writer_GlobalDocument.xcu\n"
+"writer_globaldocument_StarOffice_XML_Writer_GlobalDocument\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Master Document"
+msgstr "Составной документ StarOffice XML"
+
+#. ipApD
+#: writer_web_StarOffice_XML_Writer.xcu
+msgctxt ""
+"writer_web_StarOffice_XML_Writer.xcu\n"
+"writer_web_StarOffice_XML_Writer\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML Text Document (Writer/Web)"
+msgstr "Текстовый документ (Writer/Web) StarOffice XML"
+
+#. kp5x8
+#: writer_web_StarOffice_XML_Writer_Web_Template.xcu
+msgctxt ""
+"writer_web_StarOffice_XML_Writer_Web_Template.xcu\n"
+"writer_web_StarOffice_XML_Writer_Web_Template\n"
+"UIName\n"
+"value.text"
+msgid "StarOffice XML HTML Template"
+msgstr "Шаблон документа HTML StarOffice XML"

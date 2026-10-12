@@ -1,0 +1,25 @@
+#. esilk overlay of translations/source/ru/uui/messages.po (esilk/l10n/README.md).
+#. Keep the upstream header.
+#. extracted from uui/inc
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: https://bugs.libreoffice.org/enter_bug.cgi?product=LibreOffice&bug_status=UNCONFIRMED&component=UI\n"
+"POT-Creation-Date: 2025-11-18 17:39+0100\n"
+"PO-Revision-Date: 2026-02-26 14:52+0000\n"
+"Last-Translator: bormant <bormant@mail.ru>\n"
+"Language-Team: Russian <https://translations.documentfoundation.org/projects/libo_ui-master/uuimessages/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: ~\n"
+"X-Generator: Weblate 5.10.1\n"
+"X-POOTLE-MTIME: 1553186530.000000\n"
+
+#. m4G3E
+#: uui/inc/ids.hrc:41
+msgctxt "RID_UUI_ERRHDL"
+msgid "You are saving a password protected Basic library containing the following large module(s): \n$(ARG1)\nStoring those large module(s) in binary format, which is necessary for password protection, makes them unreadable in office versions older than 5.0.3. If you want to avoid this please split the module into smaller pieces."
+msgstr "Выполняется сохранение защищённой паролем библиотеки Basic, которая содержит следующие крупные модули: \n$(ARG1)\nСохранение этих модулей в бинарном формате, необходимое для защиты паролем, сделает их недоступными для чтения в старых версиях офисных пакетов (ниже 5.0.3). Если этого следует избежать, разделите модули на части меньшего размера."

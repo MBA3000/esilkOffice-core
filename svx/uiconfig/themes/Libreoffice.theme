@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<theme name="LibreOffice">
-    <theme-colors name="LibreOffice">
+<theme name="esilkOffice">
+    <theme-colors name="esilkOffice">
         <color name="dark1" color="#000000" />
         <color name="light1" color="#ffffff" />
         <color name="dark2" color="#000000" />

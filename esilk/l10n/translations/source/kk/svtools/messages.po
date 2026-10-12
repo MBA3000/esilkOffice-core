@@ -1,0 +1,139 @@
+#. esilk overlay of translations/source/kk/svtools/messages.po (esilk/l10n/README.md).
+#. Keep the upstream header.
+#. extracted from svtools
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: https://bugs.libreoffice.org/enter_bug.cgi?product=LibreOffice&bug_status=UNCONFIRMED&component=UI\n"
+"POT-Creation-Date: 2026-09-15 17:06+0200\n"
+"PO-Revision-Date: 2026-07-06 11:12+0000\n"
+"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
+"Language-Team: Kazakh <https://translations.documentfoundation.org/projects/libo_ui-master/svtoolsmessages/kk/>\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Accelerator-Marker: ~\n"
+"X-Generator: LibreOffice\n"
+"X-POOTLE-MTIME: 1563104930.000000\n"
+
+#. MFnoA
+#: include/svtools/strings.hrc:87
+msgctxt "STR_FORMAT_ID_STARWRITER_60"
+msgid "StarOffice XML Writer object"
+msgstr "StarOffice XML Writer объекті"
+
+#. WuSEB
+#: include/svtools/strings.hrc:88
+msgctxt "STR_FORMAT_ID_STARWRITERWEB_60"
+msgid "StarOffice XML Writer/Web object"
+msgstr "StarOffice XML Writer/Web объекті"
+
+#. GZwRa
+#: include/svtools/strings.hrc:89
+msgctxt "STR_FORMAT_ID_STARWRITERGLOB_60"
+msgid "StarOffice XML Writer/Master object"
+msgstr "StarOffice XML Writer/Master объекті"
+
+#. iEkCL
+#: include/svtools/strings.hrc:90
+msgctxt "STR_FORMAT_ID_STARDRAW_60"
+msgid "StarOffice XML Draw object"
+msgstr "StarOffice XML Draw объекті"
+
+#. nitPp
+#: include/svtools/strings.hrc:91
+msgctxt "STR_FORMAT_ID_STARIMPRESS_60"
+msgid "StarOffice XML Impress object"
+msgstr "StarOffice XML Impress объекті"
+
+#. B37DU
+#: include/svtools/strings.hrc:92
+msgctxt "STR_FORMAT_ID_STARCALC_60"
+msgid "StarOffice XML Calc object"
+msgstr "StarOffice XML Calc объекті"
+
+#. CHCYo
+#: include/svtools/strings.hrc:93
+msgctxt "STR_FORMAT_ID_STARCHART_60"
+msgid "StarOffice XML Chart object"
+msgstr "StarOffice XML Chart объекті"
+
+#. 67SN7
+#: include/svtools/strings.hrc:94
+msgctxt "STR_FORMAT_ID_STARMATH_60"
+msgid "StarOffice XML Math object"
+msgstr "StarOffice XML Math объекті"
+
+#. QbFAy
+#: include/svtools/strings.hrc:99
+msgctxt "STR_FORMAT_ID_DIALOG_60"
+msgid "StarOffice XML dialog"
+msgstr "StarOffice XML сұхбаты"
+
+#. DiNGB
+#: include/svtools/strings.hrc:324
+msgctxt "STR_DESCRIPTION_CALC_TEMPLATE"
+msgid "StarOffice XML Spreadsheet Template"
+msgstr "StarOffice XML электрондық кесте үлгісі"
+
+#. FYKGV
+#: include/svtools/strings.hrc:325
+msgctxt "STR_DESCRIPTION_DRAW_TEMPLATE"
+msgid "StarOffice XML Drawing Template"
+msgstr "StarOffice XML сурет үлгісі"
+
+#. CTUQg
+#: include/svtools/strings.hrc:326
+msgctxt "STR_DESCRIPTION_IMPRESS_TEMPLATE"
+msgid "StarOffice XML Presentation Template"
+msgstr "StarOffice XML презентация үлгісі"
+
+#. Cbvtx
+#: include/svtools/strings.hrc:327
+msgctxt "STR_DESCRIPTION_WRITER_TEMPLATE"
+msgid "StarOffice XML Text Document Template"
+msgstr "StarOffice XML мәтіндік құжат үлгісі"
+
+#. fHGcD
+#: include/svtools/strings.hrc:335
+msgctxt "STR_DESCRIPTION_SXMATH_DOC"
+msgid "StarOffice XML Formula"
+msgstr "StarOffice XML формуласы"
+
+#. CFw78
+#: include/svtools/strings.hrc:336
+msgctxt "STR_DESCRIPTION_SXCHART_DOC"
+msgid "StarOffice XML Chart"
+msgstr "StarOffice XML диаграммасы"
+
+#. tJhDC
+#: include/svtools/strings.hrc:337
+msgctxt "STR_DESCRIPTION_SXDRAW_DOC"
+msgid "StarOffice XML Drawing"
+msgstr "StarOffice XML суреті"
+
+#. f9ZNL
+#: include/svtools/strings.hrc:338
+msgctxt "STR_DESCRIPTION_SXCALC_DOC"
+msgid "StarOffice XML Spreadsheet"
+msgstr "StarOffice XML электрондық кестесі"
+
+#. PCBqi
+#: include/svtools/strings.hrc:339
+msgctxt "STR_DESCRIPTION_SXIMPRESS_DOC"
+msgid "StarOffice XML Presentation"
+msgstr "StarOffice XML презентациясы"
+
+#. Npija
+#: include/svtools/strings.hrc:340
+msgctxt "STR_DESCRIPTION_SXWRITER_DOC"
+msgid "StarOffice XML Text Document"
+msgstr "StarOffice XML мәтіндік құжаты"
+
+#. tVnQQ
+#: include/svtools/strings.hrc:341
+msgctxt "STR_DESCRIPTION_SXGLOBAL_DOC"
+msgid "StarOffice XML Master Document"
+msgstr "StarOffice XML құрамдас құжаты"

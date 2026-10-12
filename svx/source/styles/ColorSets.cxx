@@ -148,7 +148,8 @@ model::ColorSet const* ColorSets::getDefault()
 {
     bool bForceDefault = !o3tl::getEnvironment(u"LO_FORCE_FALLBACK_DOCUMENT_THEME"_ustr).isEmpty();
     ColorSets& rSets = ColorSets::get();
-    auto const* pColorSet = rSets.getColorSet(u"LibreOffice");
+    // esilk: the default theme (svx/uiconfig/themes/Libreoffice.theme) is named esilkOffice
+    auto const* pColorSet = rSets.getColorSet(u"esilkOffice");
     if (pColorSet && !bForceDefault)
     {
         return pColorSet;

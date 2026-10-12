@@ -855,7 +855,7 @@
           <draw:text-box>
             <text:p>
               <text:span text:style-name="T4">Grid </text:span>
-              <text:span text:style-name="T5">As all LibreOffice gallery items the BPMN symbols fit perfect into the default grid </text:span>
+              <text:span text:style-name="T5">As all gallery items the BPMN symbols fit perfect into the default grid </text:span>
             </text:p>
             <text:p>
               <text:span text:style-name="T5">- 1x1 cm with 4 subsections</text:span>

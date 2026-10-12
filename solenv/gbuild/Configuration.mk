@@ -214,7 +214,7 @@ gb_XcuMergeTarget_CFGEXDEPS := $(call gb_Executable_get_runtime_dependencies,cfg
 gb_XcuMergeTarget_CFGEXCOMMAND := $(call gb_Executable_get_command,cfgex)
 
 define gb_XcuMergeTarget__command
-MERGEINPUT=$(call gb_var2file,$(shell $(gb_MKTEMP)),$(POFILES)) && \
+MERGEINPUT=$(call gb_var2file,$(shell $(gb_MKTEMP)),$(POFILES) $(call gb_POLOCATION_get_overlays,$(POFILES))) && \
 $(call gb_Helper_abbreviate_dirs,\
 	mkdir -p $(dir $(1)) && \
 	$(gb_XcuMergeTarget_CFGEXCOMMAND) \
@@ -229,6 +229,7 @@ endef
 $(call gb_XcuMergeTarget_get_target,%) : $(gb_XcuMergeTarget_CFGEXDEPS)
 	$(call gb_Output_announce,$*,$(true),XCX,1)
 	$(call gb_Trace_StartRange,$*,XCX)
+	$(call gb_POLOCATION_check_overlays,$(POFILES))
 	$(if $(filter $(words $(POFILES)),$(words $(wildcard $(POFILES)))),\
 		$(call gb_XcuMergeTarget__command,$@,$*,$(filter %.xcu,$^)),\
 		mkdir -p $(dir $@) && cp $(filter %.xcu,$^) $@)
@@ -241,9 +242,13 @@ $(call gb_XcuMergeTarget_get_clean_target,%) :
 
 # $(call gb_XcuMergeTarget_XcuMergeTarget,target,configuration,prefix,xcufile)
 define gb_XcuMergeTarget_XcuMergeTarget
+# esilk: po overlays (esilk/l10n/README.md) are passed to cfgex after the
+# upstream po files; for the same file/group/id the later entry wins.
 $(call gb_XcuMergeTarget_get_target,$(1)) : \
 	$(SRCDIR)/$(3)/$(4) \
-	$(wildcard $(foreach lang,$(gb_TRANS_LANGS),$(gb_POLOCATION)/$(lang)/$(patsubst %/,%,$(dir $(1))).po))
+	$(wildcard $(foreach lang,$(gb_TRANS_LANGS),$(gb_POLOCATION)/$(lang)/$(patsubst %/,%,$(dir $(1))).po)) \
+	$(call gb_POLOCATION_get_overlays,$(foreach lang,$(gb_TRANS_LANGS),$(gb_POLOCATION)/$(lang)/$(patsubst %/,%,$(dir $(1))).po)) \
+	| $(call gb_POLOCATION_get_overlay_check_deps,$(foreach lang,$(gb_TRANS_LANGS),$(gb_POLOCATION)/$(lang)/$(patsubst %/,%,$(dir $(1))).po))
 $(call gb_XcuMergeTarget_get_target,$(1)) : \
 	POFILES := $(foreach lang,$(gb_TRANS_LANGS),$(gb_POLOCATION)/$(lang)/$(patsubst %/,%,$(dir $(1))).po)
 $(foreach lang,$(gb_TRANS_LANGS),$(gb_POLOCATION)/$(lang)/$(patsubst %/,%,$(dir $(1))).po) :

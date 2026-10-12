@@ -25,6 +25,6 @@
         <prop oor:name="TemplateName"/>
         <prop oor:name="DocumentService"><value>com.sun.star.sheet.SpreadsheetDocument</value></prop>
         <prop oor:name="UIName">
-            <value xml:lang="en-US">OpenOffice.org 1.0 Spreadsheet</value>
+            <value xml:lang="en-US">StarOffice XML Spreadsheet</value>
         </prop>
     </node>

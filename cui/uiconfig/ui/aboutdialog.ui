@@ -135,7 +135,7 @@
                 <property name="spacing">12</property>
                 <child>
                   <object class="GtkLinkButton" id="btnCredits">
-                    <property name="label" translatable="yes" context="aboutdialog|credits">Credits</property>
+                    <property name="label" translatable="yes" context="aboutdialog|credits">Licenses</property>
                     <property name="name">lbCredit</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>

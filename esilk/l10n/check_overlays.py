@@ -11,13 +11,14 @@
 # upstream Content-Type and Plural-Forms, because the overlay comes first in the
 # msgcat merge and its header becomes the header of the .mo file.
 #
-# usage: python esilk/l10n/check_overlays.py [--quiet]
+# usage: python esilk/l10n/check_overlays.py [--quiet] [--translations DIR]
 #   --quiet: print nothing when all entries match. The build runs it this way
 #   before every ulfex/xrmex merge and every .mo build that uses overlays
 #   (gb_POLOCATION_check_overlays in solenv/gbuild/TargetLocations.mk), so a
 #   stale overlay fails the build.
 # exit status: 0 = all entries match, 1 = problems found
 
+import html
 import pathlib
 import re
 import sys
@@ -25,6 +26,8 @@ import xml.etree.ElementTree as ET
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 OVERLAYS = ROOT / 'esilk' / 'l10n' / 'translations' / 'source'
+# upstream po files (the translations submodule); --translations DIR overrides it
+TRANSLATIONS = ROOT / 'translations' / 'source'
 
 
 def unquote(lines):
@@ -70,6 +73,20 @@ def en_us_ulf(path):
     return strings
 
 
+def en_us_xcu(path):
+    """'<node>/<prop>' -> en-US value of a configuration fragment (merged by cfgex;
+    the msgctxt is file, node, prop, value.text). Fragments have no root element,
+    so they are read with a regular expression, not an XML parser."""
+    strings = {}
+    text = path.read_text(encoding='utf-8')
+    for node in re.finditer(r'<node oor:name="([^"]+)"(.*?)</node>', text, re.S):
+        for prop in re.finditer(r'<prop oor:name="([^"]+)"[^>]*>(.*?)</prop>', node.group(2), re.S):
+            m = re.search(r'<value xml:lang="en-US">(.*?)</value>', prop.group(2), re.S)
+            if m:
+                strings[f'{html.unescape(node.group(1))}/{prop.group(1)}'] = html.unescape(m.group(1))
+    return strings
+
+
 def en_us_xrm(path):
     text = path.read_text(encoding='utf-8')
     return {m.group(1): m.group(2) for m in
@@ -84,7 +101,8 @@ def c_strings(text):
 def en_us_hrc(path):
     """msgctxt -> en-US texts of the NC_("ctxt", "text") entries of a .hrc file."""
     strings = {}
-    for m in re.finditer(r'\bNC_\(\s*"((?:[^"\\]|\\.)*)"\s*,\s*((?:"(?:[^"\\]|\\.)*"\s*)+)\)',
+    # string literals may be split over lines, also with a backslash line continuation
+    for m in re.finditer(r'\bNC_\(\s*"((?:[^"\\]|\\.)*)"\s*,\s*((?:"(?:[^"\\]|\\.)*"(?:\s|\\\n)*)+)\)',
                          path.read_text(encoding='utf-8')):
         strings.setdefault(unescape(m.group(1)), []).append(c_strings(m.group(2)))
     return strings
@@ -113,7 +131,7 @@ def po_header(path):
 
 def check_messages(po, rel, lang, entries, problems):
     """Check a UI overlay (<module>/messages.po) against its sources and the upstream po."""
-    upstream = ROOT / 'translations' / 'source' / rel
+    upstream = TRANSLATIONS / rel
     if not upstream.is_file():
         problems.append(f'{rel.as_posix()}: upstream po {upstream} missing')
     else:
@@ -152,7 +170,10 @@ def check_messages(po, rel, lang, entries, problems):
 
 
 def main(argv):
+    global TRANSLATIONS
     quiet = '--quiet' in argv
+    if '--translations' in argv:
+        TRANSLATIONS = pathlib.Path(argv[argv.index('--translations') + 1])
     # The build's console may not be UTF-8; never fail on printing a message.
     sys.stdout.reconfigure(errors='backslashreplace')
     problems, count = [], 0
@@ -179,8 +200,12 @@ def main(argv):
             if not source.is_file():
                 problems.append(f'{where}: source {source} missing')
                 continue
-            strings = en_us_xrm(source) if source.suffix == '.xrm' else en_us_ulf(source)
-            key = parts[-2] if len(parts) >= 2 else ''
+            if source.suffix == '.xcu':
+                strings = en_us_xcu(source)
+                key = '/'.join(parts[-3:-1]) if len(parts) >= 3 else ''
+            else:
+                strings = en_us_xrm(source) if source.suffix == '.xrm' else en_us_ulf(source)
+                key = parts[-2] if len(parts) >= 2 else ''
             if key not in strings:
                 problems.append(f'{where}: no en-US string "{key}" in {source.name}')
             elif strings[key] != msgid:
