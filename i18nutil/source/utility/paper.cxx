@@ -23,6 +23,8 @@
 
 #include <o3tl/unit_conversion.hxx>
 #include <o3tl/string_view.hxx>
+#include <comphelper/configuration.hxx>
+#include <comphelper/processfactory.hxx>
 #include <officecfg/Setup.hxx>
 #include <officecfg/System.hxx>
 #include <rtl/ustring.hxx>
@@ -228,6 +230,30 @@ PaperInfo PaperInfo::getSystemDefaultPaper()
 {
     if (comphelper::IsFuzzing())
         return PaperInfo(PAPER_A4);
+
+    // esilk: the product fixes the default paper. esilk-defaults.xcd defines
+    // /org.openoffice.Office.Esilk/L10N/DefaultPaper = A4, so new documents are
+    // A4 in every UI language, also on an English (USA) Windows whose locale
+    // would give Letter. The esilk component is read by path, not through a
+    // generated officecfg header: without esilk-defaults.xcd (or with an empty
+    // value) the locale/system default below applies unchanged.
+    try
+    {
+        OUString aProductPaper;
+        if ((comphelper::detail::ConfigurationWrapper::get(comphelper::getProcessComponentContext())
+                 .getPropertyValue(u"/org.openoffice.Office.Esilk/L10N/DefaultPaper")
+             >>= aProductPaper)
+            && !aProductPaper.isEmpty())
+        {
+            const Paper eProductPaper = PaperInfo::fromPSName(aProductPaper.toUtf8());
+            if (eProductPaper != PAPER_USER)
+                return PaperInfo(eProductPaper);
+        }
+    }
+    catch (const css::uno::Exception&)
+    {
+        // no esilk configuration component: keep the upstream behaviour
+    }
 
     OUString aLocaleStr = officecfg::Setup::L10N::ooSetupSystemLocale::get();
 
