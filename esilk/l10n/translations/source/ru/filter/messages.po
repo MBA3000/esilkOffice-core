@@ -1,0 +1,37 @@
+#. esilk overlay of translations/source/ru/filter/messages.po (esilk/l10n/README.md).
+#. Keep the upstream header.
+#. extracted from filter/inc
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: https://bugs.libreoffice.org/enter_bug.cgi?product=LibreOffice&bug_status=UNCONFIRMED&component=UI\n"
+"POT-Creation-Date: 2026-04-07 16:46+0200\n"
+"PO-Revision-Date: 2026-02-26 14:51+0000\n"
+"Last-Translator: bormant <bormant@mail.ru>\n"
+"Language-Team: Russian <https://translations.documentfoundation.org/projects/libo_ui-master/filtermessages/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: ~\n"
+"X-Generator: LibreOffice\n"
+"X-POOTLE-MTIME: 1563790912.000000\n"
+
+#. gyjaE
+#: filter/uiconfig/ui/pdfgeneralpage.ui:575
+msgctxt "pdfgeneralpage|extended_tip|pdf_version"
+msgid "Versions can be either the \"classic\" PDF (i.e. PDF 1.7, PDF 2.0) or PDF/A conformant. PDF/A is defined as an electronic document file format for long term preservation and archiving. It allows only a subset of PDF features that are compatible with that use case. For example: All fonts that were used in the source document will be embedded into the generated PDF file. PDF tags will be written."
+msgstr "Можно выбрать либо \"классический\" PDF (например, PDF 1.7, PDF 2.0), либо версию, соответствующую PDF/A. PDF/A — это формат электронных документов, предназначенный для долговременного хранения и архивирования. В нём допускается только часть возможностей PDF, совместимых с этой задачей. Например, все шрифты, использованные в исходном документе, будут внедрены в создаваемый файл PDF, а также будут записаны теги PDF."
+
+#. Y4L8y
+#: filter/uiconfig/ui/pdfgeneralpage.ui:657
+msgctxt "pdfgeneralpage|extended_tip|embed"
+msgid "This setting enables you to export the document as a .pdf file containing two file formats: PDF and ODF as an attachment."
+msgstr "Этот параметр позволяет экспортировать документ в файл .pdf, содержащий два формата: PDF и ODF в виде вложения."
+
+#. 5ytg2
+#: filter/uiconfig/ui/pdfgeneralpage.ui:1055
+msgctxt "pdfgeneralpage|extended_tip|usereferencexobject"
+msgid "When the option is enabled, then the reference XObject markup is used: viewers have to support this markup to show vector images. Otherwise a fallback bitmap is shown in the viewer."
+msgstr "Если параметр включён, используется разметка ссылочного объекта XObject: для отображения векторных изображений программа просмотра должна поддерживать эту разметку. Иначе в программе просмотра отображается резервное растровое изображение."

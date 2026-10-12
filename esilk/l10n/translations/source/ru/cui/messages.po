@@ -31,3 +31,257 @@ msgstr "%PRODUCTNAME _Basic"
 msgctxt "aboutdialog|credits"
 msgid "Licenses"
 msgstr "Лицензии"
+
+#. 5yzeX
+#: cui/inc/strings.hrc:269
+msgctxt "RID_SVXSTR_OPT_DICT_SEARCH_PLACEHOLDER"
+msgid "Type to search..."
+msgstr "Введите для поиска…"
+
+#. eaJMb
+#: cui/inc/strings.hrc:329
+msgctxt "RID_CUISTR_ESPERANTO_HATS"
+msgid "Replace x’s with circumflexes in Esperanto text"
+msgstr "Заменять x-обозначения на буквы с циркумфлексом в тексте на эсперанто"
+
+#. cEhKZ
+#: cui/inc/strings.hrc:533
+msgctxt "REG_WRITERNOTEBOOKBARCOLOR"
+msgid "Writer Notebookbar color"
+msgstr "Цвет ленты Writer"
+
+#. hV3Yg
+#: cui/inc/strings.hrc:534
+msgctxt "REG_CALCNOTEBOOKBARCOLOR"
+msgid "Calc Notebookbar color"
+msgstr "Цвет ленты Calc"
+
+#. 7WFsE
+#: cui/inc/strings.hrc:535
+msgctxt "REG_IMPRESSNOTEBOOKBARCOLOR"
+msgid "Impress Notebookbar color"
+msgstr "Цвет ленты Impress"
+
+#. k4bvX
+#: cui/inc/strings.hrc:536
+msgctxt "REG_DRAWNOTEBOOKBARCOLOR"
+msgid "Draw Notebookbar color"
+msgstr "Цвет ленты Draw"
+
+#. yevwi
+#: cui/inc/tipoftheday.hrc:57
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "To start temporarily with a fresh user profile, or to restore a non-working %PRODUCTNAME, use Help ▸ Restart in Troubleshoot Mode."
+msgstr "Чтобы временно запустить программу с чистым профилем пользователя или восстановить неработающий %PRODUCTNAME, выберите «Справка ▸ Перезапустить в безопасном режиме»."
+
+#. M2LZZ
+#: cui/inc/tipoftheday.hrc:66
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "Select a different icon set from Tools ▸ Options ▸ %PRODUCTNAME ▸ Appearance ▸ Icons."
+msgstr "Выберите другой набор значков в «Сервис ▸ Параметры ▸ %PRODUCTNAME ▸ Внешний вид ▸ Значки»."
+
+#. xGWYj
+#: cui/inc/tipoftheday.hrc:87
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "%MOD1+%SHIFT+F9 recalculates all formulas in all spreadsheets."
+msgstr "%MOD1+%SHIFT+F9 пересчитывает все формулы во всех электронных таблицах."
+
+#. Pj8Lw
+#: cui/inc/tipoftheday.hrc:91
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "To repeat a table header when a table spans over a page, use Table ▸ Table Properties ▸ Text Flow ▸ Repeat header."
+msgstr "Чтобы повторять заголовок таблицы, когда таблица переходит на следующую страницу, используйте «Таблица ▸ Свойства таблицы ▸ Положение на странице ▸ Повторять заголовок»."
+
+#. Fr2CP
+#: cui/inc/tipoftheday.hrc:95
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "Need to insert the date in a spreadsheet cell? Type %MOD1+; or %SHIFT+%MOD1+; to insert the time."
+msgstr "Нужно вставить дату в ячейку электронной таблицы? Нажмите %MOD1+; или %SHIFT+%MOD1+;, чтобы вставить время."
+
+#. oaYQX
+#: cui/inc/tipoftheday.hrc:98
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "Use %SHIFT+Space to select the current row and %MOD3+Space to select the current column."
+msgstr "Используйте %SHIFT+Space, чтобы выделить текущую строку, и %MOD3+Space, чтобы выделить текущий столбец."
+
+#. 9Knz6
+#: cui/inc/tipoftheday.hrc:121
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "Use %MOD1+%MOD2+%SHIFT+V to paste the contents of the clipboard as unformatted text."
+msgstr "Используйте %MOD1+%MOD2+%SHIFT+V, чтобы вставить содержимое буфера обмена как неформатированный текст."
+
+#. awjmS
+#: cui/inc/tipoftheday.hrc:141
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "%SHIFT+%MOD1+Del deletes from cursor to the end of the current sentence."
+msgstr "%SHIFT+%MOD1+Del удаляет текст от курсора до конца текущего предложения."
+
+#. BGkF4
+#: cui/inc/tipoftheday.hrc:177
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "Trace cells used in a formula, precedents (%SHIFT+F9) or dependents (%SHIFT+F5) (or use Tools ▸ Detective). For each hit you go one more step in the chain."
+msgstr "Отслеживайте ячейки, используемые в формуле: влияющие (%SHIFT+F9) или зависимые (%SHIFT+F5) (или используйте «Сервис ▸ Зависимости»). Каждое нажатие продвигает на один шаг дальше по цепочке."
+
+#. DB8YT
+#: cui/inc/tipoftheday.hrc:183
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "Enable massive parallel calculations of formula cells via Tools ▸ Options ▸ %PRODUCTNAME Calc ▸ Calculate ▸ CPU Threading Settings."
+msgstr "Включите массовые параллельные вычисления ячеек с формулами в «Сервис ▸ Параметры ▸ %PRODUCTNAME Calc ▸ Вычисления ▸ Параметры потоков ЦП»."
+
+#. UF2oA
+#: cui/inc/tipoftheday.hrc:210
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "Edit ▸ Find and Replace lets you insert special characters directly: right click in input fields or press %SHIFT+%MOD1+S."
+msgstr "«Правка ▸ Найти и заменить» позволяет вставлять специальные символы напрямую: щёлкните правой кнопкой мыши в поле ввода или нажмите %SHIFT+%MOD1+S."
+
+#. BEB8W
+#: cui/inc/tipoftheday.hrc:227
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "Create a backup of your document in Writer by selecting File ▸ Save a Copy while continuing to work on the original."
+msgstr "Создайте резервную копию документа в Writer командой «Файл ▸ Сохранить копию» и продолжайте работать с оригиналом."
+
+#. RCRLi
+#: cui/inc/tipoftheday.hrc:239
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "Having trouble pasting text from PDF files or webpages into documents? Try to paste as unformatted text (%MOD1+%MOD2+%SHIFT+V)."
+msgstr "Не получается вставить в документ текст из PDF-файлов или веб-страниц? Попробуйте вставить его как неформатированный текст (%MOD1+%MOD2+%SHIFT+V)."
+
+#. ycpXD
+#. local help missing
+#: cui/inc/tipoftheday.hrc:265
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "Want to know if a cell is referred in formulas of other cells? Tools ▸ Detective ▸ Trace Dependents (%SHIFT+F5)."
+msgstr "Хотите узнать, ссылаются ли на ячейку формулы других ячеек? «Сервис ▸ Зависимости ▸ Зависимые ячейки» (%SHIFT+F5)."
+
+#. 4DJJR
+#: cui/inc/tipoftheday.hrc:276
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "Press %SHIFT+F1 to see any available extended tooltips in dialog boxes, when \"Extended tips\" is not enabled in Tools ▸ Options ▸ %PRODUCTNAME ▸ General."
+msgstr "Нажмите %SHIFT+F1, чтобы увидеть доступные подробные всплывающие подсказки в диалоговых окнах, если параметр \"Подробные всплывающие подсказки\" не включён в «Сервис ▸ Параметры ▸ %PRODUCTNAME ▸ Общие»."
+
+#. 3KpVf
+#: cui/inc/tipoftheday.hrc:279
+msgctxt "RID_CUI_TIPOFTHEDAY"
+msgid "Can’t find a command in the menus? Try %SHIFT+ESC."
+msgstr "Не можете найти команду в меню? Попробуйте %SHIFT+ESC."
+
+#. Z3Pqs
+#. use narrow no-break space U+202F here
+#: cui/inc/tipoftheday.hrc:287
+msgctxt "STR_CTRL_MAC"
+msgid "⌃ Ctrl"
+msgstr "⌃ Ctrl"
+
+#. TEnBH
+#: cui/inc/tipoftheday.hrc:289
+msgctxt "STR_SHIFT"
+msgid "⇧ Shift"
+msgstr "⇧ Shift"
+
+#. f4o3L
+#: cui/uiconfig/ui/dimensionlinestabpage.ui:291
+msgctxt "dimensionlinestabpage|TSB_AUTO_DECIMAL_PLACES"
+msgid "_Automatic"
+msgstr "_Автоматически"
+
+#. Tb5go
+#: cui/uiconfig/ui/dimensionlinestabpage.ui:301
+msgctxt "dimensionlinestabpage|extended_tip|TSB_AUTO_DECIMAL_PLACES"
+msgid "Automatically adapts the number of displayed decimal places based on the precision of the measured value."
+msgstr "Автоматически подбирает количество отображаемых знаков после запятой в зависимости от точности измеренного значения."
+
+#. 7AAvr
+#: cui/uiconfig/ui/optlanguagespage.ui:179
+msgctxt "extended_tip|asianlanguage"
+msgid "Specifies the Asian language used for the spellcheck function."
+msgstr "Указывает восточноазиатский язык, используемый для проверки орфографии."
+
+#. H4F36
+#: cui/uiconfig/ui/optlanguagespage.ui:361
+msgctxt "optlanguagespage|useinputlanguage"
+msgid "Apply s_ystem input language to new text"
+msgstr "Применять _язык ввода системы к новому тексту"
+
+#. VetSF
+#: cui/uiconfig/ui/optlanguagespage.ui:369
+msgctxt "extended_tip|useinputlanguage"
+msgid "Indicates whether the system input language is applied to newly typed text; when disabled, the document or paragraph language is used instead."
+msgstr "Указывает, применяется ли язык ввода системы к вновь набираемому тексту; если параметр отключён, используется язык документа или абзаца."
+
+#. ZD7Mj
+#: cui/uiconfig/ui/optuserpage.ui:422
+msgctxt "extended tip | position"
+msgid "Type your position in the organization in this field."
+msgstr "Введите в этом поле свою должность в организации."
+
+#. NFKSM
+#: cui/uiconfig/ui/optuserpage.ui:455
+msgctxt "optuserpage|companyft"
+msgid "Or_ganization:"
+msgstr "Ор_ганизация:"
+
+#. 3tgEW
+#: cui/uiconfig/ui/optuserpage.ui:481
+msgctxt "extended tip | company"
+msgid "Type the name of your organization in this field."
+msgstr "Введите в этом поле название своей организации."
+
+#. Qnsa8
+#: cui/uiconfig/ui/optviewpage.ui:199
+msgctxt "optviewpage|forceskiagpu"
+msgid "Force Skia hardware acceleration"
+msgstr "Принудительное аппаратное ускорение Skia"
+
+#. APxH2
+#: cui/uiconfig/ui/optviewpage.ui:203
+msgctxt "optviewpage|forceskia|tooltip_text"
+msgid "Requires restart. Enabling this will enable the use of Skia hardware acceleration."
+msgstr "Требуется перезапуск. При включении Skia будет использовать аппаратное ускорение."
+
+#. 3jsyE
+#: cui/uiconfig/ui/optviewpage.ui:209
+msgctxt "optviewpage|extended_tips|forceskiagpu"
+msgid "Enables Skia's use of the computer graphics device. This still uses Skia software but with hardware acceleration enabled."
+msgstr "Разрешает Skia использовать графическое устройство компьютера. По-прежнему используется программная часть Skia, но с включённым аппаратным ускорением."
+
+#. maaHp
+#: cui/uiconfig/ui/paragalignpage.ui:676
+msgctxt "paralignpage|checkParaComposer"
+msgid "Paragraph Composer"
+msgstr "Компоновщик абзацев"
+
+#. fkGhh
+#: cui/uiconfig/ui/paragalignpage.ui:685
+msgctxt "textflowpage|extended_tip|checkParaComposer"
+msgid "Select this check box, if you want to get evenly spaced words in the consecutive lines."
+msgstr "Установите этот флажок, чтобы получить равномерные интервалы между словами в соседних строках."
+
+#. 4zsBp
+#: cui/uiconfig/ui/positionpage.ui:521
+msgctxt "positionpage|opticalsizing"
+msgid "Enable optical font sizing based on font's point size for fonts that support it"
+msgstr "Включить оптические размеры шрифта на основе его кегля для шрифтов, которые это поддерживают"
+
+#. mJGxB
+#: cui/uiconfig/ui/toolbartabpage.ui:79
+msgctxt "toolbartabpage|header|Visible"
+msgid "Visible"
+msgstr "Видимые"
+
+#. Giwqe
+#: cui/uiconfig/ui/toolbartabpage.ui:107
+msgctxt "toolbartabpage|header|Sensitive"
+msgid "Context-sensitive"
+msgstr "Контекстные"
+
+#. kDLvX
+#: cui/uiconfig/ui/toolbartabpage.ui:139
+msgctxt "toolbartabpage|lbLockAll"
+msgid "_Lock all:"
+msgstr "_Заблокировать все:"
+
+#. FMaFL
+#: cui/uiconfig/ui/welcomedialog.ui:26
+msgctxt "welcomedialog|showagain"
+msgid "Do not show again"
+msgstr "Больше не показывать"

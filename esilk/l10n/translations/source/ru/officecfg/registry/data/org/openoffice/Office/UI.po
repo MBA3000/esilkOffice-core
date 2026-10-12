@@ -1,0 +1,409 @@
+#. esilk overlay of translations/source/ru/officecfg/registry/data/org/openoffice/Office/UI.po (esilk/l10n/README.md).
+#. Keep the upstream header.
+#. extracted from officecfg/registry/data/org/openoffice/Office/UI
+msgid ""
+msgstr ""
+"Project-Id-Version: UI\n"
+"Report-Msgid-Bugs-To: https://bugs.libreoffice.org/enter_bug.cgi?product=LibreOffice&bug_status=UNCONFIRMED&component=UI\n"
+"POT-Creation-Date: 2026-07-06 12:49+0200\n"
+"PO-Revision-Date: 2026-06-09 14:21+0000\n"
+"Last-Translator: Sergey <kazorin@basealt.ru>\n"
+"Language-Team: Russian <https://translations.documentfoundation.org/projects/libo_ui-master/officecfgregistrydataorgopenofficeofficeui/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: ~\n"
+"X-Generator: LibreOffice\n"
+"X-POOTLE-MTIME: 1564293093.000000\n"
+
+#. 92maw
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:CalculatedFieldRun\n"
+"Label\n"
+"value.text"
+msgid "Calculated Field"
+msgstr "Вычисляемое поле"
+
+#. CNWXg
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:CalculatedFieldRun\n"
+"ContextLabel\n"
+"value.text"
+msgid "Pi~vot Calculated Field..."
+msgstr "Вычисляемое поле сводной ~таблицы…"
+
+#. 9FkxZ
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:CalculatedFieldRun\n"
+"TooltipLabel\n"
+"value.text"
+msgid "Insert or Edit Calculated Field"
+msgstr "Вставить или изменить вычисляемое поле"
+
+#. FxH66
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:CalculatedFieldRun\n"
+"PopupLabel\n"
+"value.text"
+msgid "~Calculated Field..."
+msgstr "~Вычисляемое поле…"
+
+#. eGgDk
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:InsertCalculation\n"
+"Label\n"
+"value.text"
+msgid "~Calculated Field..."
+msgstr "~Вычисляемое поле…"
+
+#. 6svFX
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:InsertCalculationNBLabel\n"
+"Label\n"
+"value.text"
+msgid "~Pivot Calculated Field..."
+msgstr "Вычисляемое поле ~сводной таблицы…"
+
+#. 6LXqd
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:Shuffle\n"
+"Label\n"
+"value.text"
+msgid "Shuffle"
+msgstr "Перемешать"
+
+#. mjBWk
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:AcceptFormula\n"
+"Label\n"
+"value.text"
+msgid "Accept Formula"
+msgstr "Принять формулу"
+
+#. E6Uxg
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:AcceptFormula\n"
+"TooltipLabel\n"
+"value.text"
+msgid "Finalizes the formula entered in the formula bar"
+msgstr "Завершает ввод формулы в строке формул"
+
+#. 64iUG
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:StartFormula\n"
+"Label\n"
+"value.text"
+msgid "Start Formula"
+msgstr "Начать формулу"
+
+#. Dd72H
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:StartFormula\n"
+"TooltipLabel\n"
+"value.text"
+msgid "Set input focus on the formula bar, if open"
+msgstr "Переместить фокус ввода в строку формул, если она открыта"
+
+#. Faaf2
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:Orientation\n"
+"Label\n"
+"value.text"
+msgid "Orientation"
+msgstr "Ориентация"
+
+#. XkGBP
+#: CalcCommands.xcu
+msgctxt ""
+"CalcCommands.xcu\n"
+"..CalcCommands.UserInterface.Commands..uno:Orientation\n"
+"TooltipLabel\n"
+"value.text"
+msgid "Change page orientation to portrait or landscape"
+msgstr "Изменить ориентацию страницы на книжную или альбомную"
+
+#. s7HLG
+#: DrawImpressCommands.xcu
+msgctxt ""
+"DrawImpressCommands.xcu\n"
+"..DrawImpressCommands.UserInterface.Commands..uno:ShowPage\n"
+"Label\n"
+"value.text"
+msgid "Sho~w Page"
+msgstr "Пока~зать страницу"
+
+#. WuRCi
+#: DrawImpressCommands.xcu
+msgctxt ""
+"DrawImpressCommands.xcu\n"
+"..DrawImpressCommands.UserInterface.Commands..uno:HidePage\n"
+"Label\n"
+"value.text"
+msgid "~Hide Page"
+msgstr "~Скрыть страницу"
+
+#. FMBji
+#: DrawImpressCommands.xcu
+msgctxt ""
+"DrawImpressCommands.xcu\n"
+"..DrawImpressCommands.UserInterface.Commands..uno:CopySlide\n"
+"Label\n"
+"value.text"
+msgid "Copy Slide"
+msgstr "Копировать слайд"
+
+#. E6YN8
+#: DrawImpressCommands.xcu
+msgctxt ""
+"DrawImpressCommands.xcu\n"
+"..DrawImpressCommands.UserInterface.Commands..uno:PasteSlide\n"
+"Label\n"
+"value.text"
+msgid "Paste Slide"
+msgstr "Вставить слайд"
+
+#. uufqJ
+#: DrawImpressCommands.xcu
+msgctxt ""
+"DrawImpressCommands.xcu\n"
+"..DrawImpressCommands.UserInterface.Commands..uno:AddSlideSection\n"
+"Label\n"
+"value.text"
+msgid "Add Section"
+msgstr "Добавить раздел"
+
+#. Q7wmX
+#: DrawImpressCommands.xcu
+msgctxt ""
+"DrawImpressCommands.xcu\n"
+"..DrawImpressCommands.UserInterface.Commands..uno:RemoveSlideSection\n"
+"Label\n"
+"value.text"
+msgid "Remove Section"
+msgstr "Удалить раздел"
+
+#. dqsVk
+#: DrawImpressCommands.xcu
+msgctxt ""
+"DrawImpressCommands.xcu\n"
+"..DrawImpressCommands.UserInterface.Commands..uno:RenameSlideSection\n"
+"Label\n"
+"value.text"
+msgid "Rename Section..."
+msgstr "Переименовать раздел…"
+
+#. rA2T3
+#: DrawImpressCommands.xcu
+msgctxt ""
+"DrawImpressCommands.xcu\n"
+"..DrawImpressCommands.UserInterface.Commands..uno:MoveSlideSectionUp\n"
+"Label\n"
+"value.text"
+msgid "Move Section Up"
+msgstr "Переместить раздел вверх"
+
+#. SSG2k
+#: DrawImpressCommands.xcu
+msgctxt ""
+"DrawImpressCommands.xcu\n"
+"..DrawImpressCommands.UserInterface.Commands..uno:MoveSlideSectionDown\n"
+"Label\n"
+"value.text"
+msgid "Move Section Down"
+msgstr "Переместить раздел вниз"
+
+#. FrWrW
+#: GenericCommands.xcu
+msgctxt ""
+"GenericCommands.xcu\n"
+"..GenericCommands.UserInterface.Commands..uno:ConnectorAttributes\n"
+"Label\n"
+"value.text"
+msgid "~Connector Attributes"
+msgstr "Свойства ~соединительной линии"
+
+#. jRKG6
+#: GenericCommands.xcu
+msgctxt ""
+"GenericCommands.xcu\n"
+"..GenericCommands.UserInterface.Commands..uno:OpenHyperlinkOnCursor\n"
+"Label\n"
+"value.text"
+msgid "Open Hyperlin~k"
+msgstr "Открыть гиперсс~ылку"
+
+#. WCKs2
+#: GenericCommands.xcu
+msgctxt ""
+"GenericCommands.xcu\n"
+"..GenericCommands.UserInterface.Commands..uno:Credits\n"
+"Label\n"
+"value.text"
+msgid "Credits Online"
+msgstr "Благодарности онлайн"
+
+#. GVCEE
+#: GenericCommands.xcu
+msgctxt ""
+"GenericCommands.xcu\n"
+"..GenericCommands.UserInterface.Commands..uno:OptionsSecurityDialog\n"
+"Label\n"
+"value.text"
+msgid "Security Options"
+msgstr "Параметры безопасности"
+
+#. 23TgE
+#: GenericCommands.xcu
+msgctxt ""
+"GenericCommands.xcu\n"
+"..GenericCommands.UserInterface.Popups..uno:DeleteColumns\n"
+"ContextLabel\n"
+"value.text"
+msgid "~Delete Columns"
+msgstr "~Удалить столбцы"
+
+#. gZX6F
+#: GenericCommands.xcu
+msgctxt ""
+"GenericCommands.xcu\n"
+"..GenericCommands.UserInterface.Popups..uno:SafeMode\n"
+"Label\n"
+"value.text"
+msgid "~Restart in Troubleshoot Mode..."
+msgstr "~Перезапустить в безопасном режиме…"
+
+#. zETLd
+#: ImpressWindowState.xcu
+msgctxt ""
+"ImpressWindowState.xcu\n"
+"..ImpressWindowState.UIElements.States.private:resource/popupmenu/pagepanecanvas\n"
+"UIName\n"
+"value.text"
+msgid "Slide Sorter/Pane (Canvas)"
+msgstr "Сортировщик слайдов/панель (холст)"
+
+#. BQB9h
+#: ImpressWindowState.xcu
+msgctxt ""
+"ImpressWindowState.xcu\n"
+"..ImpressWindowState.UIElements.States.private:resource/popupmenu/pagepanecanvasmaster\n"
+"UIName\n"
+"value.text"
+msgid "Master Slide Sorter/Pane (Canvas)"
+msgstr "Сортировщик/панель мастер-слайдов (холст)"
+
+#. xEZ4u
+#: WriterCommands.xcu
+msgctxt ""
+"WriterCommands.xcu\n"
+"..WriterCommands.UserInterface.Commands..uno:DraftView\n"
+"Label\n"
+"value.text"
+msgid "~Draft View"
+msgstr "Режим ~черновика"
+
+#. MiLJu
+#: WriterCommands.xcu
+msgctxt ""
+"WriterCommands.xcu\n"
+"..WriterCommands.UserInterface.Commands..uno:DraftView\n"
+"ContextLabel\n"
+"value.text"
+msgid "~Draft"
+msgstr "~Черновик"
+
+#. D8wV4
+#: WriterCommands.xcu
+msgctxt ""
+"WriterCommands.xcu\n"
+"..WriterCommands.UserInterface.Commands..uno:ReinstateTrackedChangeToNext\n"
+"TooltipLabel\n"
+"value.text"
+msgid "Reject change (keep as tracked) and select the next one"
+msgstr "Отклонить изменение (сохранив его как отслеживаемое) и выделить следующее"
+
+#. FCgjx
+#: WriterCommands.xcu
+msgctxt ""
+"WriterCommands.xcu\n"
+"..WriterCommands.UserInterface.Commands..uno:ReinstateAllTrackedChanges\n"
+"TooltipLabel\n"
+"value.text"
+msgid "Reject all changes (keep as tracked)"
+msgstr "Отклонить все изменения (сохранив их как отслеживаемые)"
+
+#. dRruS
+#: WriterCommands.xcu
+msgctxt ""
+"WriterCommands.xcu\n"
+"..WriterCommands.UserInterface.Commands..uno:ReinstateTrackedChange\n"
+"TooltipLabel\n"
+"value.text"
+msgid "Reject change (keep as tracked)"
+msgstr "Отклонить изменение (сохранив его как отслеживаемое)"
+
+#. rD5UF
+#: WriterCommands.xcu
+msgctxt ""
+"WriterCommands.xcu\n"
+"..WriterCommands.UserInterface.Commands..uno:InsertLandscapePage\n"
+"Label\n"
+"value.text"
+msgid "Insert Landscape Page Break"
+msgstr "Вставить разрыв страницы с альбомной ориентацией"
+
+#. FPfL3
+#: WriterCommands.xcu
+msgctxt ""
+"WriterCommands.xcu\n"
+"..WriterCommands.UserInterface.Commands..uno:UpdateFields\n"
+"Label\n"
+"value.text"
+msgid "Update ~Fields"
+msgstr "Обновить ~поля"
+
+#. ZAAiG
+#: WriterCommands.xcu
+msgctxt ""
+"WriterCommands.xcu\n"
+"..WriterCommands.UserInterface.Commands..uno:UpdateFields?UnlockSoftFixed:bool=1\n"
+"Label\n"
+"value.text"
+msgid "Update ~Fields"
+msgstr "Обновить ~поля"
+
+#. CKe4s
+#: WriterCommands.xcu
+msgctxt ""
+"WriterCommands.xcu\n"
+"..WriterCommands.UserInterface.Popups..uno:Orientation\n"
+"TooltipLabel\n"
+"value.text"
+msgid "Change page orientation to portrait or landscape"
+msgstr "Изменить ориентацию страницы на книжную или альбомную"

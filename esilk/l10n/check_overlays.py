@@ -46,7 +46,7 @@ def read_po(path):
         ref = next((l[3:].strip() for l in lines if l.startswith('#: ')), None)
         fields, cur = {}, None
         for l in lines:
-            m = re.match(r'(msgctxt|msgid|msgstr) (".*")$', l)
+            m = re.match(r'(msgctxt|msgid|msgid_plural|msgstr(?:\[\d+\])?) (".*")$', l)
             if m:
                 cur = m.group(1)
                 fields[cur] = [m.group(2)]
@@ -57,8 +57,14 @@ def read_po(path):
                     raise ValueError(f'{path}: comment inside an entry: {l}')
         if 'msgid' not in fields or not unquote(fields['msgid']):
             continue  # header
-        yield (ref, unescape(unquote(fields['msgctxt'])), unescape(unquote(fields['msgid'])),
-               unescape(unquote(fields['msgstr'])))
+        if 'msgid_plural' in fields:
+            # plural entry: the msgid is the en-US singular; an empty plural form
+            # makes the whole msgstr count as empty
+            forms = [unescape(unquote(v)) for k, v in fields.items() if k.startswith('msgstr[')]
+            msgstr = '' if not forms or '' in forms else ' | '.join(forms)
+        else:
+            msgstr = unescape(unquote(fields['msgstr']))
+        yield (ref, unescape(unquote(fields['msgctxt'])), unescape(unquote(fields['msgid'])), msgstr)
 
 
 def en_us_ulf(path):
@@ -87,6 +93,31 @@ def en_us_xcu(path):
     return strings
 
 
+def en_us_xcu_tree(path):
+    """'<access path>/<prop>' -> en-US value of a complete configuration file
+    (oor:component-data, e.g. officecfg/.../Office/UI/CalcCommands.xcu). cfgex
+    joins the names of the enclosing elements with dots, so its msgctxt node line
+    is the component name and the nested node names (".uno:Foo" keeps its dot),
+    after empty names for the document prologue: '..CalcCommands.UserInterface.
+    Commands..uno:Foo', with the names still XML-escaped (&amp;). The key here
+    leaves out those leading dots and uses the plain names."""
+    oor, xml = '{http://openoffice.org/2001/registry}', '{http://www.w3.org/XML/1998/namespace}'
+    strings = {}
+
+    def walk(el, path):
+        for child in el:
+            if child.tag == 'node':
+                walk(child, f'{path}.{child.get(oor + "name")}')
+            elif child.tag == 'prop':
+                for value in child.findall('value'):
+                    if value.get(xml + 'lang') == 'en-US':
+                        strings[f'{path}/{child.get(oor + "name")}'] = value.text or ''
+
+    root = ET.parse(path).getroot()
+    walk(root, root.get(oor + 'name'))
+    return strings
+
+
 def en_us_xrm(path):
     text = path.read_text(encoding='utf-8')
     return {m.group(1): m.group(2) for m in
@@ -103,6 +134,11 @@ def en_us_hrc(path):
     strings = {}
     # string literals may be split over lines, also with a backslash line continuation
     for m in re.finditer(r'\bNC_\(\s*"((?:[^"\\]|\\.)*)"\s*,\s*((?:"(?:[^"\\]|\\.)*"(?:\s|\\\n)*)+)\)',
+                         path.read_text(encoding='utf-8')):
+        strings.setdefault(unescape(m.group(1)), []).append(c_strings(m.group(2)))
+    # plural strings: NNC_("ctxt", "singular", "plural"); the po msgid is the singular
+    lit = r'(?:"(?:[^"\\]|\\.)*"(?:\s|\\\n)*)+'
+    for m in re.finditer(r'\bNNC_\(\s*"((?:[^"\\]|\\.)*)"\s*,\s*(' + lit + r')\s*,\s*' + lit + r'\)',
                          path.read_text(encoding='utf-8')):
         strings.setdefault(unescape(m.group(1)), []).append(c_strings(m.group(2)))
     return strings
@@ -221,7 +257,14 @@ def main(argv):
             if not source.is_file():
                 problems.append(f'{where}: source {source} missing')
                 continue
-            if source.suffix == '.xcu':
+            if source.suffix == '.xcu' and '<oor:component-data' in source.read_text(encoding='utf-8'):
+                try:
+                    strings = en_us_xcu_tree(source)
+                except ET.ParseError as e:
+                    problems.append(f'{where}: cannot read {source.name} ({e})')
+                    continue
+                key = f'{html.unescape(parts[1].lstrip("."))}/{parts[2]}' if len(parts) == 4 else ''
+            elif source.suffix == '.xcu':
                 strings = en_us_xcu(source)
                 key = '/'.join(parts[-3:-1]) if len(parts) >= 3 else ''
             else:
