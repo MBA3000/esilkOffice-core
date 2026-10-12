@@ -24,3 +24,1341 @@ msgstr ""
 msgctxt "presentationdialog|learnmore|tooltip_text"
 msgid "Download the Impress Remote app to remotely control the presentation from your smartphone or smartwatch."
 msgstr "Загрузите приложение Impress Remote для дистанционного управления презентацией со смартфона или смарт-часов."
+
+#. bULTW
+#: sd/inc/pchelp.hrc:29
+msgctxt "STR_PRESCONHTEXT_A_KEY"
+msgid "Left click, right or down arrow, spacebar, page down, enter, return"
+msgstr "Щелчок левой кнопкой мыши, стрелка вправо или вниз, пробел, Page Down, Enter, Return"
+
+#. EqYuA
+#: sd/inc/pchelp.hrc:30
+msgctxt "STR_PRESCONHTEXT_B_KEY"
+msgid "Right click, left or up arrow, page up, backspace"
+msgstr "Щелчок правой кнопкой мыши, стрелка влево или вверх, Page Up, Backspace"
+
+#. EqKBk
+#: sd/inc/pchelp.hrc:31
+msgctxt "STR_PRESCONHTEXT_C_KEY"
+msgid "'P'"
+msgstr "'P'"
+
+#. L7J3G
+#: sd/inc/pchelp.hrc:31
+msgctxt "STR_PRESCONHTEXT_C_DESC"
+msgid "Use mouse pointer as pen"
+msgstr "Использовать указатель мыши как перо"
+
+#. voAVJ
+#: sd/inc/pchelp.hrc:32
+msgctxt "STR_PRESCONHTEXT_D_KEY"
+msgid "Home"
+msgstr "Home"
+
+#. xThZ5
+#: sd/inc/pchelp.hrc:33
+msgctxt "STR_PRESCONHTEXT_E_KEY"
+msgid "End"
+msgstr "End"
+
+#. ptmKh
+#: sd/inc/pchelp.hrc:34
+msgctxt "STR_PRESCONHTEXT_F_KEY"
+msgid "'E'"
+msgstr "'E'"
+
+#. yDiCf
+#: sd/inc/pchelp.hrc:34
+msgctxt "STR_PRESCONHTEXT_F_DESC"
+msgid "Erase all ink on slide"
+msgstr "Стереть все пометки пером на слайде"
+
+#. ke8eU
+#: sd/inc/pchelp.hrc:35
+msgctxt "STR_PRESCONHTEXT_G_KEY"
+msgid "Alt-Page Up"
+msgstr "Alt-Page Up"
+
+#. nNnRg
+#: sd/inc/pchelp.hrc:36
+msgctxt "STR_PRESCONHTEXT_H_KEY"
+msgid "Alt-Page Down"
+msgstr "Alt-Page Down"
+
+#. YmWCE
+#: sd/inc/pchelp.hrc:37
+msgctxt "STR_PRESCONHTEXT_J_KEY"
+msgid "'B', '.'"
+msgstr "'B', '.'"
+
+#. BkFFJ
+#: sd/inc/pchelp.hrc:37
+msgctxt "STR_PRESCONHTEXT_J_DESC"
+msgid "Blacks/Unblacks the screen"
+msgstr "Включить/выключить чёрный экран"
+
+#. MjqNg
+#: sd/inc/pchelp.hrc:38
+msgctxt "STR_PRESCONHTEXT_K_KEY"
+msgid "'W', ','"
+msgstr "'W', ','"
+
+#. 3kwLP
+#: sd/inc/pchelp.hrc:38
+msgctxt "STR_PRESCONHTEXT_K_DESC"
+msgid "Whites/Unwhites the screen"
+msgstr "Включить/выключить белый экран"
+
+#. RCyHC
+#: sd/inc/pchelp.hrc:39
+msgctxt "STR_PRESCONHTEXT_M_KEY"
+msgid "Esc, '-'"
+msgstr "Esc, '-'"
+
+#. Mfp4o
+#: sd/inc/pchelp.hrc:41
+msgctxt "STR_PRESCONHTEXT_Q_KEY"
+msgid "'G', 'S'"
+msgstr "'G', 'S'"
+
+#. m4eyu
+#: sd/inc/pchelp.hrc:42
+msgctxt "STR_PRESCONHTEXT_R_KEY"
+msgid "'A', 'Z'"
+msgstr "'A', 'Z'"
+
+#. T7wvG
+#: sd/inc/pchelp.hrc:43
+msgctxt "STR_PRESCONHTEXT_S_KEY"
+msgid "'H', 'L'"
+msgstr "'H', 'L'"
+
+#. ungYS
+#: sd/inc/pchelp.hrc:44
+msgctxt "STR_PRESCONHTEXT_U_KEY"
+msgid "Ctrl-'1'"
+msgstr "Ctrl-'1'"
+
+#. 4DbFH
+#: sd/inc/pchelp.hrc:45
+msgctxt "STR_PRESCONHTEXT_V_KEY"
+msgid "Ctrl-'2'"
+msgstr "Ctrl-'2'"
+
+#. EDWAD
+#: sd/inc/pchelp.hrc:46
+msgctxt "STR_PRESCONHTEXT_W_KEY"
+msgid "Ctrl-'3'"
+msgstr "Ctrl-'3'"
+
+#. 65G6c
+#: sd/inc/pchelp.hrc:47
+msgctxt "STR_PRESCONHTEXT_X_KEY"
+msgid "Ctrl-'4'"
+msgstr "Ctrl-'4'"
+
+#. uSkDs
+#: sd/inc/pchelp.hrc:48
+msgctxt "STR_PRESCONHTEXT_Z_KEY"
+msgid "Ctrl-'A'"
+msgstr "Ctrl-'A'"
+
+#. 5fn6u
+#: sd/inc/pchelp.hrc:48
+msgctxt "STR_PRESCONHTEXT_Z_DESC"
+msgid "Turn off pointer as pen mode"
+msgstr "Выключить режим указателя-пера"
+
+#. 3n97S
+#: sd/inc/strings.hrc:494
+msgctxt "STR_ADD_SLIDE_SECTION"
+msgid "Add Section"
+msgstr "Добавить раздел"
+
+#. 2E9VR
+#: sd/inc/strings.hrc:495
+msgctxt "STR_REMOVE_SLIDE_SECTION"
+msgid "Remove Section"
+msgstr "Удалить раздел"
+
+#. PzG4Q
+#: sd/inc/strings.hrc:496
+msgctxt "STR_RENAME_SLIDE_SECTION"
+msgid "Rename Section"
+msgstr "Переименовать раздел"
+
+#. qDtj2
+#: sd/inc/strings.hrc:497
+msgctxt "STR_DEFAULT_SLIDE_SECTION_NAME"
+msgid "Untitled Section"
+msgstr "Раздел без имени"
+
+#. 7oX2N
+#: sd/inc/strings.hrc:498
+msgctxt "STR_UNDO_ADD_SLIDE_SECTION"
+msgid "Add section"
+msgstr "Добавить раздел"
+
+#. DvBht
+#: sd/inc/strings.hrc:499
+msgctxt "STR_UNDO_REMOVE_SLIDE_SECTION"
+msgid "Remove section"
+msgstr "Удалить раздел"
+
+#. GjEGu
+#: sd/inc/strings.hrc:500
+msgctxt "STR_UNDO_RENAME_SLIDE_SECTION"
+msgid "Rename section"
+msgstr "Переименовать раздел"
+
+#. hZ93w
+#: sd/inc/strings.hrc:501
+msgctxt "STR_UNDO_MOVE_SLIDE_SECTION"
+msgid "Move section"
+msgstr "Переместить раздел"
+
+#. JLee9
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:2323
+msgctxt "TabbedDraw|labelFileNew"
+msgid "New"
+msgstr "Создать"
+
+#. TPG5j
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:2452
+msgctxt "TabbedDraw|labelFileFile"
+msgid "File"
+msgstr "Файл"
+
+#. Km22Z
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:2666
+msgctxt "TabbedDraw|labelFilePrint"
+msgid "Print"
+msgstr "Печать"
+
+#. QjyFC
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:2856
+msgctxt "TabbedDraw|labelFileProperties"
+msgid "Properties"
+msgstr "Свойства"
+
+#. DMxgf
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:2973
+msgctxt "TabbedDraw|FileMenuButton"
+msgid "_File"
+msgstr "_Файл"
+
+#. tqVEj
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:2992
+msgctxt "TabbedDraw|FileHelpMenuButton"
+msgid "_Help"
+msgstr "_Справка"
+
+#. E7hVY
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:3030
+msgctxt "TabbedDraw|FileTabLabel"
+msgid "~File"
+msgstr "~Файл"
+
+#. o7gW3
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:3066
+msgctxt "TabbedDraw|labelHomeClipboard"
+msgid "Clipboard"
+msgstr "Буфер обмена"
+
+#. FFQLm
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:3193
+msgctxt "TabbedDraw|labelHomePage"
+msgid "Page"
+msgstr "Страница"
+
+#. VLQEz
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:3322
+msgctxt "TabbedDraw|labelHomeFont"
+msgid "Font"
+msgstr "Шрифт"
+
+#. XFBqw
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:3657
+msgctxt "TabbedDraw|labelHomeParagraph"
+msgid "Paragraph"
+msgstr "Абзац"
+
+#. YBUTM
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:3957
+msgctxt "TabbedDraw|HomeMenuButton"
+msgid "_Home"
+msgstr "_Главная"
+
+#. WPhfC
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:4038
+msgctxt "TabbedDraw|HomeTabLabel"
+msgid "~Home"
+msgstr "~Главная"
+
+#. DtbM5
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:4079
+msgctxt "TabbedDraw|labelInsertPage"
+msgid "Page"
+msgstr "Страница"
+
+#. HmzZ2
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:4206
+msgctxt "TabbedDraw|labelInsertData"
+msgid "Data"
+msgstr "Данные"
+
+#. t6UQF
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:4333
+msgctxt "TabbedDraw|labelInsertGraphic"
+msgid "Graphic"
+msgstr "Графика"
+
+#. 5pxFd
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:4460
+msgctxt "TabbedDraw|labelInsertText"
+msgid "Text"
+msgstr "Текст"
+
+#. aGuH8
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:4618
+msgctxt "TabbedDraw|labelInsertFontwork"
+msgid "Fontwork"
+msgstr "Текстовые эффекты"
+
+#. 3gEDC
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:4771
+msgctxt "TabbedDraw|labelInsertDrawingObjects"
+msgid "Drawing Objects"
+msgstr "Графические объекты"
+
+#. yEmY9
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:5057
+msgctxt "TabbedDraw|InsertMenuButton"
+msgid "_Insert"
+msgstr "_Вставка"
+
+#. e3bEY
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:5147
+msgctxt "TabbedDraw|InsertTabLabel"
+msgid "~Insert"
+msgstr "~Вставка"
+
+#. ciTsh
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:5184
+msgctxt "TabbedDraw|labelLayoutFormat"
+msgid "Format"
+msgstr "Формат"
+
+#. FvSdr
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:5312
+msgctxt "TabbedDraw|labelLayoutPage"
+msgid "Page"
+msgstr "Страница"
+
+#. HmJYm
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:5486
+msgctxt "TabbedDraw|labelLayoutMaster"
+msgid "Master"
+msgstr "Мастер"
+
+#. sJFPL
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:5566
+msgctxt "TabbedDraw|labelLayoutBackground"
+msgid "Background"
+msgstr "Фон"
+
+#. SxtCx
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:5699
+msgctxt "TabbedDraw|LayoutMenuButton"
+msgid "_Layout"
+msgstr "_Разметка"
+
+#. MBcvo
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:5768
+msgctxt "TabbedDraw|LayoutTabLabel"
+msgid "~Layout"
+msgstr "~Разметка"
+
+#. BERKe
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:5803
+msgctxt "TabbedDraw|labelReviewSpelling"
+msgid "Spelling"
+msgstr "Орфография"
+
+#. S7WiQ
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:5939
+msgctxt "TabbedDraw|labelReviewComments"
+msgid "Comments"
+msgstr "Комментарии"
+
+#. Bv3kQ
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:6145
+msgctxt "TabbedDraw|labelReviewRedact"
+msgid "Redact"
+msgstr "Редактура"
+
+#. FHDsb
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:6259
+msgctxt "TabbedDraw|ReviewMenuButton"
+msgid "_Review"
+msgstr "_Проверка"
+
+#. CUiDL
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:6326
+msgctxt "TabbedDraw|ReviewTabLabel"
+msgid "~Review"
+msgstr "~Проверка"
+
+#. G2QF7
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:6361
+msgctxt "TabbedDraw|labelViewMode"
+msgid "View Mode"
+msgstr "Режим просмотра"
+
+#. wYeXq
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:6451
+msgctxt "TabbedDraw|labelViewZoom"
+msgid "Zoom"
+msgstr "Масштаб"
+
+#. zvFyX
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:6622
+msgctxt "TabbedDraw|labelViewOptions"
+msgid "Options"
+msgstr "Параметры"
+
+#. BtneH
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:6855
+msgctxt "TabbedDraw|labelViewGluepoints"
+msgid "Gluepoints"
+msgstr "Точки соединения"
+
+#. yWNv5
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:7130
+msgctxt "TabbedDraw|ViewMenuButton"
+msgid "_View"
+msgstr "_Вид"
+
+#. Cz2EC
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:7199
+msgctxt "TabbedDraw|ViewTabLabel"
+msgid "~View"
+msgstr "~Вид"
+
+#. sCLCW
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:7234
+msgctxt "TabbedDraw|labelTable"
+msgid "Table"
+msgstr "Таблица"
+
+#. YsTE5
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:7371
+msgctxt "TabbedDraw|labelTableCells"
+msgid "Cells"
+msgstr "Ячейки"
+
+#. GtyjT
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:7581
+msgctxt "TabbedDraw|labelTableLayout"
+msgid "Layout"
+msgstr "Разметка"
+
+#. kDrpT
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:7800
+msgctxt "TabbedDraw|TableMenuButton"
+msgid "_Table"
+msgstr "_Таблица"
+
+#. 7EAtd
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:7868
+msgctxt "TabbedDraw|TableTabLabel"
+msgid "~Table"
+msgstr "~Таблица"
+
+#. jzYSD
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:7908
+msgctxt "TabbedDraw|labelImage"
+msgid "Image"
+msgstr "Изображение"
+
+#. th7hg
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:8088
+msgctxt "TabbedDraw|labelImageFillBorder"
+msgid "Fill & Border"
+msgstr "Заливка и обрамление"
+
+#. FmPVW
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:8296
+msgctxt "TabbedDraw|labelImagePositioning"
+msgid "Positioning"
+msgstr "Расположение"
+
+#. GjUE2
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:8490
+msgctxt "TabbedDraw|labelImageModify"
+msgid "Modify"
+msgstr "Изменение"
+
+#. 2y6CQ
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:8726
+msgctxt "TabbedDraw|ImageMenuButton"
+msgid "Ima_ge"
+msgstr "_Изображение"
+
+#. eZ9h2
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:8821
+msgctxt "TabbedDraw|ImageTabLabel"
+msgid "Ima~ge"
+msgstr "~Изображение"
+
+#. BwoWC
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:8861
+msgctxt "TabbedDraw|labelDraw"
+msgid "Drawing Object"
+msgstr "Графический объект"
+
+#. AMGTY
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:9040
+msgctxt "TabbedDraw|labelDrawFillBorder"
+msgid "Fill & Border"
+msgstr "Заливка и обрамление"
+
+#. NyEG9
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:9249
+msgctxt "TabbedDraw|labelDrawPositioning"
+msgid "Positioning"
+msgstr "Расположение"
+
+#. E8Cpe
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:9443
+msgctxt "TabbedDraw|labelDrawCombination"
+msgid "Combination"
+msgstr "Комбинирование"
+
+#. 4yn3U
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:9624
+msgctxt "TabbedDraw|labelDrawGrouping"
+msgid "Grouping"
+msgstr "Группировка"
+
+#. fssSC
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:9770
+msgctxt "TabbedDraw|labelDraw3D"
+msgid "3D"
+msgstr "3D"
+
+#. qnqtk
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:9911
+msgctxt "TabbedDraw|DrawMenuButton"
+msgid "_Draw"
+msgstr "_Рисование"
+
+#. 94hir
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:10003
+msgctxt "TabbedDraw|DrawTabLabel"
+msgid "~Draw"
+msgstr "~Рисование"
+
+#. AKcXA
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:10043
+msgctxt "TabbedDraw|labelObject"
+msgid "Object"
+msgstr "Объект"
+
+#. GhN2E
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:10201
+msgctxt "TabbedDraw|labelObjectFillBorder"
+msgid "Fill & Border"
+msgstr "Заливка и обрамление"
+
+#. m8Cis
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:10409
+msgctxt "TabbedDraw|labelObjectPositioning"
+msgid "Positioning"
+msgstr "Расположение"
+
+#. 2Kk8q
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:10609
+msgctxt "TabbedDraw|ObjectMenuButton"
+msgid "_Object"
+msgstr "_Объект"
+
+#. iMXAq
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:10702
+msgctxt "TabbedDraw|ObjectTabLabel"
+msgid "~Object"
+msgstr "~Объект"
+
+#. toJDd
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:10741
+msgctxt "TabbedDraw|labelMedia"
+msgid "Media"
+msgstr "Медиа"
+
+#. HvtT4
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:10826
+msgctxt "TabbedDraw|labelMediaPositioning"
+msgid "Positioning"
+msgstr "Расположение"
+
+#. wBFBA
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:11020
+msgctxt "TabbedDraw|labelMediaPlayer"
+msgid "Media Player"
+msgstr "Медиаплеер"
+
+#. Cr7Fs
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:11128
+msgctxt "TabbedDraw|MediaMenuButton"
+msgid "_Media"
+msgstr "_Медиа"
+
+#. BcFZa
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:11218
+msgctxt "TabbedDraw|MediaTabLabel"
+msgid "~Media"
+msgstr "~Медиа"
+
+#. zEujs
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:11256
+msgctxt "TabbedDraw|label3DObject"
+msgid "3D Object"
+msgstr "3D-объект"
+
+#. RZykC
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:11432
+msgctxt "TabbedDraw|label3DFillBorder"
+msgid "Fill & Border"
+msgstr "Заливка и обрамление"
+
+#. bdAcu
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:11638
+msgctxt "TabbedDraw|label3DPositioning"
+msgid "Positioning"
+msgstr "Расположение"
+
+#. FUfGV
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:11829
+msgctxt "TabbedDraw|label3D"
+msgid "3D"
+msgstr "3D"
+
+#. 3eNKC
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:11917
+msgctxt "TabbedDraw|3DMenuButton"
+msgid "3_D"
+msgstr "3_D"
+
+#. ANAZ7
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:12010
+msgctxt "TabbedDraw|3DTabLabel"
+msgid "3~D"
+msgstr "3~D"
+
+#. W6cnB
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:12046
+msgctxt "TabbedDraw|labelMaster"
+msgid "Master"
+msgstr "Мастер"
+
+#. uGxkt
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:12249
+msgctxt "TabbedDraw|labelMasterSlide"
+msgid "Slide"
+msgstr "Слайд"
+
+#. 2QvfQ
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:12425
+msgctxt "TabbedDraw|labelMasterColor"
+msgid "Color"
+msgstr "Цвет"
+
+#. NBfFH
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:12636
+msgctxt "TabbedDraw|MasterMenuButton"
+msgid "_Master"
+msgstr "_Мастер"
+
+#. 8ggqC
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:12704
+msgctxt "TabbedDraw|MasterTabLabel"
+msgid "~Master"
+msgstr "~Мастер"
+
+#. QEvQP
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:12742
+msgctxt "TabbedDraw|labelFormMode"
+msgid "Mode"
+msgstr "Режим"
+
+#. QvVjq
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:12876
+msgctxt "TabbedDraw|labelFormProperties"
+msgid "Properties"
+msgstr "Свойства"
+
+#. CFUbh
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:13071
+msgctxt "TabbedDraw|labelFormControls"
+msgid "Controls"
+msgstr "Элементы управления"
+
+#. ZPwmd
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:13404
+msgctxt "TabbedDraw|FormMenuButton"
+msgid "Fo_rm"
+msgstr "_Форма"
+
+#. bf2vC
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:13472
+msgctxt "TabbedDraw|FormTabLabel"
+msgid "Form"
+msgstr "Форма"
+
+#. t2ryw
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:13529
+msgctxt "TabbedDraw|ExtensionMenuButton"
+msgid "E_xtension"
+msgstr "_Расширение"
+
+#. EFwHT
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:13603
+msgctxt "TabbedDraw|ExtensionTabLabel"
+msgid "E~xtension"
+msgstr "~Расширение"
+
+#. 2dLhC
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:13640
+msgctxt "TabbedDraw|labelToolsMacro"
+msgid "Macro"
+msgstr "Макрос"
+
+#. JH9wm
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:13769
+msgctxt "TabbedDraw|labelTools"
+msgid "Tools"
+msgstr "Сервис"
+
+#. VUDCJ
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:13858
+msgctxt "TabbedDraw|ToolsMenuButton"
+msgid "_Tools"
+msgstr "_Сервис"
+
+#. ABEGX
+#: sd/uiconfig/sdraw/ui/notebookbar.ui:13926
+msgctxt "TabbedDraw|ToolsTabLabel"
+msgid "~Tools"
+msgstr "~Сервис"
+
+#. 6RHNA
+#: sd/uiconfig/simpress/ui/notebookbar.ui:2355
+msgctxt "TabbedImpress|labelFileNew"
+msgid "New"
+msgstr "Создать"
+
+#. 2c3KH
+#: sd/uiconfig/simpress/ui/notebookbar.ui:2484
+msgctxt "TabbedImpress|labelFileFile"
+msgid "File"
+msgstr "Файл"
+
+#. Pm8DR
+#: sd/uiconfig/simpress/ui/notebookbar.ui:2698
+msgctxt "TabbedImpress|labelFilePrint"
+msgid "Print"
+msgstr "Печать"
+
+#. CM3Cx
+#: sd/uiconfig/simpress/ui/notebookbar.ui:2888
+msgctxt "TabbedImpress|labelFileProperties"
+msgid "Properties"
+msgstr "Свойства"
+
+#. CaPHr
+#: sd/uiconfig/simpress/ui/notebookbar.ui:2937
+msgctxt "TabbedImpress|FileMenuLabel"
+msgid "_File"
+msgstr "_Файл"
+
+#. N7FcF
+#: sd/uiconfig/simpress/ui/notebookbar.ui:2956
+msgctxt "TabbedImpress|FileMenuHelp"
+msgid "_Help"
+msgstr "_Справка"
+
+#. njuxz
+#: sd/uiconfig/simpress/ui/notebookbar.ui:2994
+msgctxt "TabbedImpress|FileTabLabel"
+msgid "~File"
+msgstr "~Файл"
+
+#. sfdfJ
+#: sd/uiconfig/simpress/ui/notebookbar.ui:3030
+msgctxt "TabbedImpress|labelHomeClipboard"
+msgid "Clipboard"
+msgstr "Буфер обмена"
+
+#. q2VGS
+#: sd/uiconfig/simpress/ui/notebookbar.ui:3157
+msgctxt "TabbedImpress|labelHomeSlide"
+msgid "Slide"
+msgstr "Слайд"
+
+#. 4fBAY
+#: sd/uiconfig/simpress/ui/notebookbar.ui:3286
+msgctxt "TabbedImpress|labelHomeFont"
+msgid "Font"
+msgstr "Шрифт"
+
+#. bXExZ
+#: sd/uiconfig/simpress/ui/notebookbar.ui:3621
+msgctxt "TabbedImpress|labelHomeParagraph"
+msgid "Paragraph"
+msgstr "Абзац"
+
+#. UBWmV
+#: sd/uiconfig/simpress/ui/notebookbar.ui:3921
+msgctxt "TabbedImpress|HomeMenuButton"
+msgid "_Home"
+msgstr "_Главная"
+
+#. 5cuif
+#: sd/uiconfig/simpress/ui/notebookbar.ui:4003
+msgctxt "TabbedImpress|HomeTabLabel"
+msgid "~Home"
+msgstr "~Главная"
+
+#. 3YrSm
+#: sd/uiconfig/simpress/ui/notebookbar.ui:4045
+msgctxt "TabbedImpress|labelInsertSlide"
+msgid "Slide"
+msgstr "Слайд"
+
+#. Dm7os
+#: sd/uiconfig/simpress/ui/notebookbar.ui:4172
+msgctxt "TabbedImpress|labelInsertData"
+msgid "Data"
+msgstr "Данные"
+
+#. SHL4Y
+#: sd/uiconfig/simpress/ui/notebookbar.ui:4299
+msgctxt "TabbedImpress|labelInsertGraphic"
+msgid "Graphic"
+msgstr "Графика"
+
+#. zpr8D
+#: sd/uiconfig/simpress/ui/notebookbar.ui:4426
+msgctxt "TabbedImpress|labelInsertText"
+msgid "Text"
+msgstr "Текст"
+
+#. WWxQP
+#: sd/uiconfig/simpress/ui/notebookbar.ui:4584
+msgctxt "TabbedImpress|labelInsertFontwork"
+msgid "Fontwork"
+msgstr "Текстовые эффекты"
+
+#. fkj3k
+#: sd/uiconfig/simpress/ui/notebookbar.ui:4737
+msgctxt "TabbedImpress|labelInsertDrawingObjects"
+msgid "Drawing Objects"
+msgstr "Графические объекты"
+
+#. agQhb
+#: sd/uiconfig/simpress/ui/notebookbar.ui:5023
+msgctxt "TabbedImpress|InsertMenuButton"
+msgid "_Insert"
+msgstr "_Вставка"
+
+#. JA7LG
+#: sd/uiconfig/simpress/ui/notebookbar.ui:5112
+msgctxt "TabbedImpress|InsertTabLabel"
+msgid "~Insert"
+msgstr "~Вставка"
+
+#. wDDiF
+#: sd/uiconfig/simpress/ui/notebookbar.ui:5149
+msgctxt "TabbedImpress|labelLayoutFormat"
+msgid "Format"
+msgstr "Формат"
+
+#. TGcVT
+#: sd/uiconfig/simpress/ui/notebookbar.ui:5240
+msgctxt "TabbedImpress|labelLayoutSlide"
+msgid "Slide"
+msgstr "Слайд"
+
+#. zAohC
+#: sd/uiconfig/simpress/ui/notebookbar.ui:5414
+msgctxt "TabbedImpress|labelLayoutMaster"
+msgid "Master"
+msgstr "Мастер"
+
+#. XKFBC
+#: sd/uiconfig/simpress/ui/notebookbar.ui:5541
+msgctxt "TabbedImpress|labelLayoutBackground"
+msgid "Background"
+msgstr "Фон"
+
+#. qPH3R
+#: sd/uiconfig/simpress/ui/notebookbar.ui:5674
+msgctxt "TabbedImpress|LayoutMenuButton"
+msgid "_Layout"
+msgstr "_Разметка"
+
+#. h46dN
+#: sd/uiconfig/simpress/ui/notebookbar.ui:5743
+msgctxt "TabbedImpress|LayoutTabLabel"
+msgid "~Layout"
+msgstr "~Разметка"
+
+#. Dwbfn
+#: sd/uiconfig/simpress/ui/notebookbar.ui:5778
+msgctxt "TabbedImpress|labelDesignTheme"
+msgid "Color Theme"
+msgstr "Цветовая тема"
+
+#. nWAaW
+#: sd/uiconfig/simpress/ui/notebookbar.ui:5856
+msgctxt "TabbedImpress|DesignTabLabel"
+msgid "~Design"
+msgstr "~Дизайн"
+
+#. 546sp
+#: sd/uiconfig/simpress/ui/notebookbar.ui:5891
+msgctxt "TabbedImpress|labelSlideShowSlide"
+msgid "Slide Show"
+msgstr "Демонстрация"
+
+#. vK64r
+#: sd/uiconfig/simpress/ui/notebookbar.ui:6030
+msgctxt "TabbedImpress|labelSlideShowSettings"
+msgid "Settings"
+msgstr "Настройки"
+
+#. M3NeQ
+#: sd/uiconfig/simpress/ui/notebookbar.ui:6162
+msgctxt "TabbedImpress|labelSlideShowOptions"
+msgid "Options"
+msgstr "Параметры"
+
+#. pAYn6
+#: sd/uiconfig/simpress/ui/notebookbar.ui:6299
+msgctxt "TabbedImpress|SlideMenuButton"
+msgid "_Slide Show"
+msgstr "_Демонстрация"
+
+#. 2UpRF
+#: sd/uiconfig/simpress/ui/notebookbar.ui:6367
+msgctxt "TabbedImpress|SlideTabLabel"
+msgid "~Slide Show"
+msgstr "~Демонстрация"
+
+#. 7YLAp
+#: sd/uiconfig/simpress/ui/notebookbar.ui:6400
+msgctxt "TabbedImpress|labelReviewSpelling"
+msgid "Spelling"
+msgstr "Орфография"
+
+#. efTs5
+#: sd/uiconfig/simpress/ui/notebookbar.ui:6536
+msgctxt "TabbedImpress|labelReviewComments"
+msgid "Comments"
+msgstr "Комментарии"
+
+#. 7Rhuy
+#: sd/uiconfig/simpress/ui/notebookbar.ui:6742
+msgctxt "TabbedImpress|labelReviewRedact"
+msgid "Redact"
+msgstr "Редактура"
+
+#. KnTi9
+#: sd/uiconfig/simpress/ui/notebookbar.ui:6856
+msgctxt "TabbedImpress|ReviewMenuButton"
+msgid "_Review"
+msgstr "_Проверка"
+
+#. yiR5m
+#: sd/uiconfig/simpress/ui/notebookbar.ui:6923
+msgctxt "TabbedImpress|ReviewTabLabel"
+msgid "~Review"
+msgstr "~Проверка"
+
+#. gZ7vB
+#: sd/uiconfig/simpress/ui/notebookbar.ui:6956
+msgctxt "TabbedImpress|labelViewMode"
+msgid "View Mode"
+msgstr "Режим просмотра"
+
+#. KapXW
+#: sd/uiconfig/simpress/ui/notebookbar.ui:7097
+msgctxt "TabbedImpress|labelViewMaster"
+msgid "Master"
+msgstr "Мастер"
+
+#. PBrrB
+#: sd/uiconfig/simpress/ui/notebookbar.ui:7226
+msgctxt "TabbedImpress|labelViewZoom"
+msgid "Zoom"
+msgstr "Масштаб"
+
+#. HRrp5
+#: sd/uiconfig/simpress/ui/notebookbar.ui:7397
+msgctxt "TabbedImpress|labelViewOptions"
+msgid "Options"
+msgstr "Параметры"
+
+#. iWDTp
+#: sd/uiconfig/simpress/ui/notebookbar.ui:7603
+msgctxt "TabbedImpress|labelViewGrid"
+msgid "Grid"
+msgstr "Сетка"
+
+#. uWLgv
+#: sd/uiconfig/simpress/ui/notebookbar.ui:7821
+msgctxt "TabbedImpress|ViewMenuButton"
+msgid "_View"
+msgstr "_Вид"
+
+#. kqFAf
+#: sd/uiconfig/simpress/ui/notebookbar.ui:7890
+msgctxt "TabbedImpress|ViewTabLabel"
+msgid "~View"
+msgstr "~Вид"
+
+#. oHozU
+#: sd/uiconfig/simpress/ui/notebookbar.ui:7923
+msgctxt "TabbedImpress|labelTableTable"
+msgid "Table"
+msgstr "Таблица"
+
+#. yaBz4
+#: sd/uiconfig/simpress/ui/notebookbar.ui:8060
+msgctxt "TabbedImpress|labelTableCells"
+msgid "Cells"
+msgstr "Ячейки"
+
+#. qNZ4p
+#: sd/uiconfig/simpress/ui/notebookbar.ui:8270
+msgctxt "TabbedImpress|labelTableLayout"
+msgid "Layout"
+msgstr "Разметка"
+
+#. 7QHT9
+#: sd/uiconfig/simpress/ui/notebookbar.ui:8489
+msgctxt "TabbedImpress|TableMenuButton"
+msgid "_Table"
+msgstr "_Таблица"
+
+#. 3EGaD
+#: sd/uiconfig/simpress/ui/notebookbar.ui:8557
+msgctxt "TabbedImpress|TableTabLabel"
+msgid "~Table"
+msgstr "~Таблица"
+
+#. jQhqC
+#: sd/uiconfig/simpress/ui/notebookbar.ui:8595
+msgctxt "TabbedImpress|labeImage"
+msgid "Image"
+msgstr "Изображение"
+
+#. iAcEf
+#: sd/uiconfig/simpress/ui/notebookbar.ui:8775
+msgctxt "TabbedImpress|labelImageFillBorder"
+msgid "Fill & Border"
+msgstr "Заливка и обрамление"
+
+#. sZwDP
+#: sd/uiconfig/simpress/ui/notebookbar.ui:8983
+msgctxt "TabbedImpress|labelImagePositioning"
+msgid "Positioning"
+msgstr "Расположение"
+
+#. qHtyG
+#: sd/uiconfig/simpress/ui/notebookbar.ui:9177
+msgctxt "TabbedImpress|labelImageModify"
+msgid "Modify"
+msgstr "Изменение"
+
+#. ofc6q
+#: sd/uiconfig/simpress/ui/notebookbar.ui:9413
+msgctxt "TabbedImpress|ImageMenuButton"
+msgid "Ima_ge"
+msgstr "_Изображение"
+
+#. aZFws
+#: sd/uiconfig/simpress/ui/notebookbar.ui:9508
+msgctxt "TabbedImpress|ImageTabLabel"
+msgid "Ima~ge"
+msgstr "~Изображение"
+
+#. PQJfm
+#: sd/uiconfig/simpress/ui/notebookbar.ui:9546
+msgctxt "TabbedImpress|labelDraw"
+msgid "Drawing Object"
+msgstr "Графический объект"
+
+#. xGpBR
+#: sd/uiconfig/simpress/ui/notebookbar.ui:9725
+msgctxt "TabbedImpress|labelDrawFillBorder"
+msgid "Fill & Border"
+msgstr "Заливка и обрамление"
+
+#. zxELK
+#: sd/uiconfig/simpress/ui/notebookbar.ui:9934
+msgctxt "TabbedImpress|labelDrawPositioning"
+msgid "Positioning"
+msgstr "Расположение"
+
+#. 97Ctw
+#: sd/uiconfig/simpress/ui/notebookbar.ui:10128
+msgctxt "TabbedImpress|labelDrawCombination"
+msgid "Combination"
+msgstr "Комбинирование"
+
+#. KfDRB
+#: sd/uiconfig/simpress/ui/notebookbar.ui:10309
+msgctxt "TabbedImpress|labelDrawGrouping"
+msgid "Grouping"
+msgstr "Группировка"
+
+#. reTE9
+#: sd/uiconfig/simpress/ui/notebookbar.ui:10455
+msgctxt "TabbedImpress|labelDraw3D"
+msgid "3D"
+msgstr "3D"
+
+#. mnjaB
+#: sd/uiconfig/simpress/ui/notebookbar.ui:10596
+msgctxt "TabbedImpress|DrawMenuButton"
+msgid "_Draw"
+msgstr "_Рисование"
+
+#. anufQ
+#: sd/uiconfig/simpress/ui/notebookbar.ui:10689
+msgctxt "TabbedImpress|DrawTabLabel"
+msgid "~Draw"
+msgstr "~Рисование"
+
+#. igxrp
+#: sd/uiconfig/simpress/ui/notebookbar.ui:10730
+msgctxt "TabbedImpress|labelObject"
+msgid "Object"
+msgstr "Объект"
+
+#. ycpEG
+#: sd/uiconfig/simpress/ui/notebookbar.ui:10888
+msgctxt "TabbedImpress|labelObjectFillBorder"
+msgid "Fill & Border"
+msgstr "Заливка и обрамление"
+
+#. srxCt
+#: sd/uiconfig/simpress/ui/notebookbar.ui:11096
+msgctxt "TabbedImpress|labelObjectPositioning"
+msgid "Positioning"
+msgstr "Расположение"
+
+#. GtRFG
+#: sd/uiconfig/simpress/ui/notebookbar.ui:11296
+msgctxt "TabbedImpress|ObjectMenuButton"
+msgid "_Object"
+msgstr "_Объект"
+
+#. 5ABQQ
+#: sd/uiconfig/simpress/ui/notebookbar.ui:11389
+msgctxt "TabbedImpress|ObjectTabLabel"
+msgid "~Object"
+msgstr "~Объект"
+
+#. ZiVVc
+#: sd/uiconfig/simpress/ui/notebookbar.ui:11428
+msgctxt "TabbedImpress|labelMedia"
+msgid "Media"
+msgstr "Медиа"
+
+#. SaLBt
+#: sd/uiconfig/simpress/ui/notebookbar.ui:11513
+msgctxt "TabbedImpress|labelMediaPositioning"
+msgid "Positioning"
+msgstr "Расположение"
+
+#. vTRMU
+#: sd/uiconfig/simpress/ui/notebookbar.ui:11707
+msgctxt "TabbedImpress|labelMediaPlayer"
+msgid "Media Player"
+msgstr "Медиаплеер"
+
+#. ycbKA
+#: sd/uiconfig/simpress/ui/notebookbar.ui:11815
+msgctxt "TabbedImpress|MediaMenuButton"
+msgid "_Media"
+msgstr "_Медиа"
+
+#. Fc9oA
+#: sd/uiconfig/simpress/ui/notebookbar.ui:11905
+msgctxt "TabbedImpress|MediaTabLabel"
+msgid "~Media"
+msgstr "~Медиа"
+
+#. xVa4u
+#: sd/uiconfig/simpress/ui/notebookbar.ui:11943
+msgctxt "TabbedImpress|labelFormMode"
+msgid "Mode"
+msgstr "Режим"
+
+#. CGQfM
+#: sd/uiconfig/simpress/ui/notebookbar.ui:12077
+msgctxt "TabbedImpress|labelFormProperties"
+msgid "Properties"
+msgstr "Свойства"
+
+#. B8LnN
+#: sd/uiconfig/simpress/ui/notebookbar.ui:12272
+msgctxt "TabbedImpress|labelFormControls"
+msgid "Controls"
+msgstr "Элементы управления"
+
+#. VPuTD
+#: sd/uiconfig/simpress/ui/notebookbar.ui:12605
+msgctxt "TabbedImpress|FormMenuButton"
+msgid "Fo_rm"
+msgstr "_Форма"
+
+#. 6rjQT
+#: sd/uiconfig/simpress/ui/notebookbar.ui:12673
+msgctxt "TabbedImpress|FormTabLabel"
+msgid "Fo~rm"
+msgstr "~Форма"
+
+#. 5kxbe
+#: sd/uiconfig/simpress/ui/notebookbar.ui:12709
+msgctxt "TabbedImpress|labelMaster"
+msgid "Master"
+msgstr "Мастер"
+
+#. G5BXD
+#: sd/uiconfig/simpress/ui/notebookbar.ui:12915
+msgctxt "TabbedImpress|labelMasterSlide"
+msgid "Slide"
+msgstr "Слайд"
+
+#. Ckz8p
+#: sd/uiconfig/simpress/ui/notebookbar.ui:13179
+msgctxt "TabbedImpress|MasterMenuButton"
+msgid "_Master"
+msgstr "_Мастер"
+
+#. mv2Su
+#: sd/uiconfig/simpress/ui/notebookbar.ui:13247
+msgctxt "TabbedImpress|MasterTabLabel"
+msgid "~Master"
+msgstr "~Мастер"
+
+#. BP4q5
+#: sd/uiconfig/simpress/ui/notebookbar.ui:13283
+msgctxt "TabbedImpress|labelOutlineMode"
+msgid "View Mode"
+msgstr "Режим просмотра"
+
+#. dG2bV
+#: sd/uiconfig/simpress/ui/notebookbar.ui:13424
+msgctxt "TabbedImpress|labelOutlineLevel"
+msgid "Level"
+msgstr "Уровень"
+
+#. HECW6
+#: sd/uiconfig/simpress/ui/notebookbar.ui:13595
+msgctxt "TabbedImpress|labelOutlineShow"
+msgid "Show"
+msgstr "Показать"
+
+#. G7FAq
+#: sd/uiconfig/simpress/ui/notebookbar.ui:13755
+msgctxt "TabbedImpress|OutlineMenuButton"
+msgid "_View"
+msgstr "_Вид"
+
+#. rhpg4
+#: sd/uiconfig/simpress/ui/notebookbar.ui:13823
+msgctxt "TabbedImpress|OutlineTabLabel"
+msgid "~Outline"
+msgstr "~Структура"
+
+#. CwxBh
+#: sd/uiconfig/simpress/ui/notebookbar.ui:13861
+msgctxt "TabbedImpress|label3DObject"
+msgid "Drawing Object"
+msgstr "Графический объект"
+
+#. gvNch
+#: sd/uiconfig/simpress/ui/notebookbar.ui:14040
+msgctxt "TabbedImpress|label3DFillBorder"
+msgid "Fill & Border"
+msgstr "Заливка и обрамление"
+
+#. X2npH
+#: sd/uiconfig/simpress/ui/notebookbar.ui:14249
+msgctxt "TabbedImpress|label3DPositioning"
+msgid "Positioning"
+msgstr "Расположение"
+
+#. BiLqG
+#: sd/uiconfig/simpress/ui/notebookbar.ui:14443
+msgctxt "TabbedImpress|label3D"
+msgid "3D"
+msgstr "3D"
+
+#. RbZbD
+#: sd/uiconfig/simpress/ui/notebookbar.ui:14534
+msgctxt "TabbedImpress|3DMenuButton"
+msgid "3_D"
+msgstr "3_D"
+
+#. NABD6
+#: sd/uiconfig/simpress/ui/notebookbar.ui:14627
+msgctxt "TabbedImpress|3DTabLabel"
+msgid "3~D"
+msgstr "3~D"
+
+#. pd6VB
+#: sd/uiconfig/simpress/ui/notebookbar.ui:14684
+msgctxt "TabbedImpress|ExtensionMenuButton"
+msgid "E_xtension"
+msgstr "_Расширение"
+
+#. 2XrQu
+#: sd/uiconfig/simpress/ui/notebookbar.ui:14758
+msgctxt "TabbedImpress|ExtensionTabLabel"
+msgid "E~xtension"
+msgstr "~Расширение"
+
+#. JtcUD
+#: sd/uiconfig/simpress/ui/notebookbar.ui:14793
+msgctxt "TabbedImpress|labelToolsMacro"
+msgid "Macro"
+msgstr "Макрос"
+
+#. Hiv6j
+#: sd/uiconfig/simpress/ui/notebookbar.ui:14928
+msgctxt "TabbedImpress|ToolsMenuButton"
+msgid "_Tools"
+msgstr "_Сервис"
+
+#. EBC5P
+#: sd/uiconfig/simpress/ui/notebookbar.ui:14996
+msgctxt "TabbedImpress|ToolsTabLabel"
+msgid "~Tools"
+msgstr "~Сервис"
+
+#. Ap2Ya
+#: sd/uiconfig/simpress/ui/sdviewpage.ui:98
+msgctxt "sdviewpage|zoomwithwheel"
+msgid "_Swap mouse wheel zoom and scroll"
+msgstr "_Поменять местами масштабирование и прокрутку колесом мыши"
+
+#. VcaT4
+#: sd/uiconfig/simpress/ui/sdviewpage.ui:106
+msgctxt "extended_tip|zoomwithwheel"
+msgid "When enabled in Draw, the mouse wheel zooms instead of scrolling, and Ctrl plus the mouse wheel scrolls instead of zooming."
+msgstr "Если включено, в Draw колесо мыши изменяет масштаб вместо прокрутки, а Ctrl + колесо мыши выполняет прокрутку вместо изменения масштаба."

@@ -59,17 +59,20 @@ Installer and readme strings (`ulfex`/`xrmex`):
 - Copy the upstream entry format: `#: <source file>`, the msgctxt (three
   lines for `.ulf`/`.xrm`, one line for UI strings), msgid = the current en-US
   text, msgstr = the translation. For a UI overlay, copy the entry from the
-  upstream po and fill in its msgstr; plural entries (`msgid_plural`) are not
-  supported by the check.
+  upstream po and fill in its msgstr. A plural entry (`msgid_plural`, from
+  `NNC_` in the `.hrc` file) keeps all its `msgstr[n]` forms (ru has three);
+  the check compares the msgid with the en-US singular and fails when a form
+  is empty.
 - Keep all entries of one source file together. Never put a `# ` comment
   inside an entry: the parser stops there and l10ntools skips the whole file.
   `#.` comments are fine.
 - Configuration strings merged by `cfgex` (`gb_XcuMergeTarget`, e.g. the filter
   UI names) take overlays like `ulfex`; `check_overlays.py` compares them with
-  the en-US value of the node/prop in the `.xcu` fragment. Menu labels in
-  `officecfg/.../UI.po` use the same merge, but their msgctxt is a nested node
-  path that `check_overlays.py` does not resolve yet: extend `en_us_xcu` before
-  adding such an overlay.
+  the en-US value of the node/prop in the `.xcu` fragment. Menu and command
+  labels in `officecfg/.../Office/UI.po` use the same merge; their msgctxt is the
+  nested node path of a complete `.xcu` file (`..CalcCommands.UserInterface.
+  Commands..uno:Foo`, prop `Label`), which `check_overlays.py` resolves with
+  `en_us_xcu_tree`.
 - After changing an en-US string or an overlay, update the overlay msgid and
   msgstr together. `esilk/l10n/check_overlays.py` fails when an overlay names
   a missing string, cannot be parsed, or its msgid differs from the en-US text
@@ -90,11 +93,13 @@ Installer and readme strings (`ulfex`/`xrmex`):
 | `instsetoo_native/.../msi_languages/Property.ulf` | `OOO_ARPCONTACTTEMPLATE` | Apps and Features, support contact |
 | `readlicense_oo/docs/readme.xrm` | `esilkBasedOn` | `readmes/readme_<lang>.txt` |
 | `ru/sfx2/messages.po` | all 31 strings left untranslated upstream, including `STR_NEW_FROM_TEMPLATE` | File > New > Templates button, style panel, infobars, safe mode query |
-
 | `{kk,ru}/{cui,desktop,sc,sd,sfx2,svtools,svx,sw,uui,xmlsecurity}/messages.po` | en-US strings rewritten without LibreOffice, OpenOffice.org or The Document Foundation (owner decision 12.10.2026): About "Licenses" link, Help > License Information, HTML options "%PRODUCTNAME Basic", extension dependency errors, Calc legacy key bindings and WEEKNUM_OOO, Impress Remote tooltip, ODF 1.1 signature messages, safe mode profile export, Basic library warning, Writer "legacy" compatibility options, "StarOffice XML" object and document type names | the dialogs named |
 | `{kk,ru}/filter/source/config/fragments/filters.po` | 16 filter UI names "OpenOffice.org 1.0 …" → "StarOffice XML …" (merged by `cfgex`, see `gb_XcuMergeTarget` in `solenv/gbuild/Configuration.mk`) | Open/Save As file types |
+| `ru/{sd,sc,sw,cui,svx,starmath,svtools,chart2,filter,dbaccess,formula,sdext,framework}/messages.po` | all 714 UI strings left untranslated or empty upstream (12.10.2026): sd 223, sc 215, sw 177, cui 42, svx 21, starmath 18, svtools 5, chart2 3, filter 3, dbaccess 2, formula 2, sdext 2 (plural), framework 1 | Tabbed (notebookbar) UI of Writer/Calc/Impress/Draw, Impress presenter console keys and slide sections, Calc pivot calculated fields and function arguments, quick find panel, Options pages, troubleshoot (safe) mode dialog |
+| `ru/officecfg/registry/data/org/openoffice/Office/UI.po` | all 39 menu/command labels left untranslated upstream (Calc/Draw/Impress/Writer/Generic commands, merged by `cfgex`) | menus, context menus, tooltips |
 
 The kk UI translation has no untranslated strings in the modules esilkOffice
-ships (checked against the `translations` submodule on 12.10.2026); ru still has
-about 750 untranslated UI strings, mostly in Writer, Calc and Impress
-(sw, sc, sd, cui, svx), and 39 menu labels in `officecfg/.../UI.po`.
+ships (checked against the `translations` submodule on 12.10.2026). The ru
+overlays above cover every UI string the upstream ru po files leave empty or
+fuzzy (784: 745 in `messages.po` files, 39 menu labels); recheck after a
+`translations` submodule update.

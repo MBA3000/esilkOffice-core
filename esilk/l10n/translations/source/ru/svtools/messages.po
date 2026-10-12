@@ -178,3 +178,33 @@ msgstr "Изображение в устаревшем формате"
 msgctxt "STR_DESCRIPTION_SOFFICE_TEMPLATE_DOC"
 msgid "Legacy office template (versions 3.0–5.0)"
 msgstr "Шаблон в устаревшем формате (версии 3.0–5.0)"
+
+#. GwjrQ
+#: include/svtools/strings.hrc:238
+msgctxt "STR_FIELD_COMPANY"
+msgid "Organization"
+msgstr "Организация"
+
+#. JzPix
+#: svtools/uiconfig/ui/querydeletedialog.ui:34
+msgctxt "querydeletedialog|extended_tip|yes"
+msgid "Click to delete the file with the name shown in this dialog."
+msgstr "Нажмите, чтобы удалить файл с именем, указанным в этом диалоговом окне."
+
+#. aAJb2
+#: svtools/uiconfig/ui/querydeletedialog.ui:54
+msgctxt "querydeletedialog|extended_tip|all"
+msgid "Click to delete all selected files."
+msgstr "Нажмите, чтобы удалить все выбранные файлы."
+
+#. ogggs
+#: svtools/uiconfig/ui/querydeletedialog.ui:73
+msgctxt "querydeletedialog|extended_tip|no"
+msgid "Click to cancel deletion of the file with the name shown in this dialog."
+msgstr "Нажмите, чтобы отменить удаление файла с именем, указанным в этом диалоговом окне."
+
+#. r9yeB
+#: svtools/uiconfig/ui/querydialog.ui:25
+msgctxt "QueryDialog|Checkbox"
+msgid "Do not show again"
+msgstr "Больше не показывать"

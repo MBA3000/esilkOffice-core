@@ -45,3 +45,1072 @@ msgstr "Использовать размещение объектов стар�
 msgctxt "STR_COMPAT_OPT_USEOURTEXTWRAPPING"
 msgid "Use legacy text wrapping around objects"
 msgstr "Использовать обтекание объектов текстом старых версий"
+
+#. o8DSD
+#: sw/inc/dbui.hrc:48
+msgctxt "SA_ADDRESS_HEADER"
+msgid "Organization Name"
+msgstr "Название организации"
+
+#. hqKBC
+#: sw/inc/inspectorproperties.hrc:201
+msgctxt "RID_ATTRIBUTE_NAMES_MAP"
+msgid "Para Composer"
+msgstr "Абзац: Composer"
+
+#. P3jGn
+#: sw/inc/strings.hrc:461
+msgctxt "STR_RENAMETABLE_UNDO"
+msgid "Rename table"
+msgstr "Переименовать таблицу"
+
+#. sDmze
+#: sw/inc/strings.hrc:465
+msgctxt "STR_INSERT_PORTRAIT_PAGE"
+msgid "Insert Portrait Page Break"
+msgstr "Вставить разрыв страницы с книжной ориентацией"
+
+#. 8hCEQ
+#: sw/inc/strings.hrc:466
+msgctxt "STR_INSERT_LANDSCAPE_PAGE"
+msgid "Insert Landscape Page Break"
+msgstr "Вставить разрыв страницы с альбомной ориентацией"
+
+#. 7DkhF
+#: sw/inc/strings.hrc:892
+msgctxt "STR_ERR_GLOS_NET_PATH_ACCESS"
+msgid "Access to network paths denied. Please check with Windows Explorer if authentication is required to access."
+msgstr "Доступ к сетевым путям запрещён. Проверьте в Проводнике Windows, требуется ли проверка подлинности для доступа."
+
+#. e26Bu
+#. --------------------------------------------------------------------
+#. Description: SubType Extuser
+#. --------------------------------------------------------------------
+#: sw/inc/strings.hrc:1028
+msgctxt "FLD_EU_FIRMA"
+msgid "Organization"
+msgstr "Организация"
+
+#. jnfAn
+#. Attribute names for style property chips in the Organizer tab.
+#. These labels are shown alongside property values when a style overrides
+#. a property from its parent (e.g. "Outline Level: 6", "Fill Style: Gradient").
+#. They are needed for Writer-specific attributes not covered by SvxAttrNameTable.
+#: sw/inc/strings.hrc:1565
+msgctxt "STR_ATTR_OUTLINE_LEVEL"
+msgid "Outline Level"
+msgstr "Уровень структуры"
+
+#. eBFC6
+#: sw/inc/strings.hrc:1566
+msgctxt "STR_ATTR_LIST_LEVEL"
+msgid "List Level"
+msgstr "Уровень списка"
+
+#. uqXMF
+#: sw/inc/strings.hrc:1567
+msgctxt "STR_ATTR_LIST_RESTART"
+msgid "List Restart"
+msgstr "Перезапуск списка"
+
+#. JCaBJ
+#: sw/inc/strings.hrc:1568
+msgctxt "STR_ATTR_LIST_RESTART_VALUE"
+msgid "List Restart Value"
+msgstr "Значение перезапуска списка"
+
+#. yBgLc
+#: sw/inc/strings.hrc:1569
+msgctxt "STR_ATTR_TEXT_DIRECTION"
+msgid "Text Direction"
+msgstr "Направление текста"
+
+#. RMNfD
+#: sw/inc/strings.hrc:1570
+msgctxt "STR_ATTR_HIDDEN"
+msgid "Hidden"
+msgstr "Скрытый"
+
+#. XXrNM
+#: sw/inc/strings.hrc:1571
+msgctxt "STR_ATTR_FILL_STYLE"
+msgid "Fill Style"
+msgstr "Стиль заливки"
+
+#. 3eUSA
+#: sw/inc/strings.hrc:1572
+msgctxt "STR_ATTR_GRADIENT"
+msgid "Gradient"
+msgstr "Градиент"
+
+#. FG8Tu
+#: sw/inc/strings.hrc:1573
+msgctxt "STR_ATTR_GRADIENT_STEPS"
+msgid "Gradient Steps"
+msgstr "Шаги градиента"
+
+#. eDh2Z
+#: sw/inc/utlui.hrc:56
+msgctxt "RID_SHELLRES_AUTOFMTSTRS"
+msgid "Replace X with circumflex"
+msgstr "Заменять X на букву с циркумфлексом"
+
+#. s5Mqc
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:26
+msgctxt "businessdatapage|label5"
+msgid "Organization:"
+msgstr "Организация:"
+
+#. ivFBr
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:51
+msgctxt "businessdatapage|company-atkobject"
+msgid "Organization"
+msgstr "Организация"
+
+#. 3tgEW
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:52
+msgctxt "extended tip | company"
+msgid "Type the name of your organization in this field."
+msgstr "Введите в это поле название вашей организации."
+
+#. EePK3
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:96
+msgctxt "businessdatapage|company2-atkobject"
+msgid "Organization second line"
+msgstr "Организация (2-я строка)"
+
+#. fFA6u
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:97
+msgctxt "extended tips | company2"
+msgid "Organization second line"
+msgstr "Организация (2-я строка)"
+
+#. DffbM
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:142
+msgctxt "extended tips | slogan"
+msgid "Organization slogan"
+msgstr "Девиз организации"
+
+#. kCHwT
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:187
+msgctxt "extended tip | street"
+msgid "Type the name of organization street in this field."
+msgstr "Введите в это поле название улицы, на которой находится организация."
+
+#. WqHSs
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:232
+msgctxt "extended tip | izip"
+msgid "Type organization ZIP in this field."
+msgstr "Введите почтовый индекс организации в это поле."
+
+#. QUMYa
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:251
+msgctxt "extended tip | icity"
+msgid "Type the organization city"
+msgstr "Введите город организации"
+
+#. jiidC
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:297
+msgctxt "extended tips | country"
+msgid "Organization country"
+msgstr "Страна организации"
+
+#. K2Zr2
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:316
+msgctxt "extended tip | state"
+msgid "Type organization state."
+msgstr "Введите регион (штат) организации."
+
+#. ZD7Mj
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:362
+msgctxt "extended tip | position"
+msgid "Type your position in the organization in this field."
+msgstr "Введите в это поле вашу должность в организации."
+
+#. nExK7
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:427
+msgctxt "extended tips | mobile"
+msgid "Type organization mobile"
+msgstr "Введите мобильный телефон организации"
+
+#. xvdYg
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:472
+msgctxt "extended tip | fax"
+msgid "Type organization fax number in this field."
+msgstr "Введите в это поле номер факса организации."
+
+#. UxS3A
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:519
+msgctxt "extended tips | url"
+msgid "Organization homepage"
+msgstr "Домашняя страница организации"
+
+#. xYYAT
+#: sw/uiconfig/swriter/ui/businessdatapage.ui:538
+msgctxt "extended tip | email"
+msgid "Type your organization email address."
+msgstr "Введите адрес электронной почты организации."
+
+#. ATeFE
+#: sw/uiconfig/swriter/ui/converttexttable.ui:295
+msgctxt "converttexttable|headingcb"
+msgid "Header"
+msgstr "Заголовок"
+
+#. rQc96
+#: sw/uiconfig/swriter/ui/converttexttable.ui:303
+msgctxt "converttexttable|extended_tip|headingcb"
+msgid "Formats the first row of the new table as a header."
+msgstr "Форматирует первую строку новой таблицы как заголовок."
+
+#. pfyiG
+#: sw/uiconfig/swriter/ui/converttexttable.ui:314
+msgctxt "converttexttable|repeatheading"
+msgid "Repeat header"
+msgstr "Повторять заголовок"
+
+#. JceDx
+#: sw/uiconfig/swriter/ui/inserttable.ui:290
+msgctxt "inserttable|headercb"
+msgid "Hea_der"
+msgstr "_Заголовок"
+
+#. ZyDxy
+#: sw/uiconfig/swriter/ui/inserttable.ui:298
+msgctxt "inserttable|extended_tip|headercb"
+msgid "Includes a header row in the table."
+msgstr "Добавляет в таблицу строку заголовка."
+
+#. ENQYt
+#: sw/uiconfig/swriter/ui/inserttable.ui:309
+msgctxt "inserttable|repeatcb"
+msgid "Repeat header rows on new _pages"
+msgstr "Повторять строки заголовка на новых _страницах"
+
+#. myLjs
+#: sw/uiconfig/swriter/ui/inserttable.ui:320
+msgctxt "inserttable|extended_tip|repeatcb"
+msgid "Repeats the header of the table at the top of each subsequent page if the table spans more than one page."
+msgstr "Повторяет заголовок таблицы в начале каждой следующей страницы, если таблица занимает больше одной страницы."
+
+#. FXKbX
+#: sw/uiconfig/swriter/ui/inserttable.ui:366
+msgctxt "inserttable|extended_tip|repeatheaderspin"
+msgid "Select the number of rows that you want to use for the header."
+msgstr "Выберите количество строк, которые нужно использовать для заголовка."
+
+#. 4i9VT
+#: sw/uiconfig/swriter/ui/inserttable.ui:379
+msgctxt "inserttable|repeatheaderafter"
+msgid "Header ro_ws:"
+msgstr "Строк з_аголовка:"
+
+#. D6GdF
+#: sw/uiconfig/swriter/ui/notebookbar.ui:2425
+msgctxt "TabbedWriter|labelFileNew"
+msgid "New"
+msgstr "Создать"
+
+#. NUWcZ
+#: sw/uiconfig/swriter/ui/notebookbar.ui:2554
+msgctxt "TabbedWriter|labelFileFile"
+msgid "File"
+msgstr "Файл"
+
+#. KB3YG
+#: sw/uiconfig/swriter/ui/notebookbar.ui:2791
+msgctxt "TabbedWriter|labelFilePrint"
+msgid "Print"
+msgstr "Печать"
+
+#. 4FnjA
+#: sw/uiconfig/swriter/ui/notebookbar.ui:2981
+msgctxt "TabbedWriter|labelFileProperties"
+msgid "Properties"
+msgstr "Свойства"
+
+#. DswAN
+#: sw/uiconfig/swriter/ui/notebookbar.ui:3029
+msgctxt "TabbedWriter|FileMenuButton"
+msgid "_File"
+msgstr "_Файл"
+
+#. Q9KNU
+#: sw/uiconfig/swriter/ui/notebookbar.ui:3048
+msgctxt "TabbedWriter|HelpMenuButton"
+msgid "_Help"
+msgstr "_Справка"
+
+#. bsPEi
+#: sw/uiconfig/swriter/ui/notebookbar.ui:3086
+msgctxt "TabbedWriter|FileTabLabel"
+msgid "~File"
+msgstr "~Файл"
+
+#. UyFKD
+#: sw/uiconfig/swriter/ui/notebookbar.ui:3120
+msgctxt "TabbedWriter|labelHomeClipboard"
+msgid "Clipboard"
+msgstr "Буфер обмена"
+
+#. QXeVG
+#: sw/uiconfig/swriter/ui/notebookbar.ui:3247
+msgctxt "TabbedWriter|labelHomeFont"
+msgid "Font"
+msgstr "Шрифт"
+
+#. kqcBm
+#: sw/uiconfig/swriter/ui/notebookbar.ui:3580
+msgctxt "TabbedWriter|labelHomeParagraph"
+msgid "Paragraph"
+msgstr "Абзац"
+
+#. 4rBsV
+#: sw/uiconfig/swriter/ui/notebookbar.ui:3913
+msgctxt "TabbedWriter|labelHomeStyle"
+msgid "Style"
+msgstr "Стиль"
+
+#. YaT7c
+#: sw/uiconfig/swriter/ui/notebookbar.ui:3999
+msgctxt "TabbedWriter|HomeMenuButton"
+msgid "_Home"
+msgstr "_Главное"
+
+#. KUP4P
+#: sw/uiconfig/swriter/ui/notebookbar.ui:4070
+msgctxt "TabbedWriter|HomeTabLabel"
+msgid "~Home"
+msgstr "~Главное"
+
+#. DJcvo
+#: sw/uiconfig/swriter/ui/notebookbar.ui:4109
+msgctxt "TabbedWriter|labelInsertPage"
+msgid "Page"
+msgstr "Страница"
+
+#. HB4zi
+#: sw/uiconfig/swriter/ui/notebookbar.ui:4236
+msgctxt "TabbedWriter|labelInsertData"
+msgid "Data"
+msgstr "Данные"
+
+#. xa5qB
+#: sw/uiconfig/swriter/ui/notebookbar.ui:4390
+msgctxt "TabbedWriter|labelInsertGraphic"
+msgid "Graphic"
+msgstr "Графика"
+
+#. VoS8D
+#: sw/uiconfig/swriter/ui/notebookbar.ui:4517
+msgctxt "TabbedWriter|labelInsertReferences"
+msgid "References"
+msgstr "Ссылки"
+
+#. 5EwkL
+#: sw/uiconfig/swriter/ui/notebookbar.ui:4670
+msgctxt "TabbedWriter|labelInsertText"
+msgid "Text"
+msgstr "Текст"
+
+#. JmirT
+#: sw/uiconfig/swriter/ui/notebookbar.ui:4835
+msgctxt "TabbedWriter|labelInsertDrawingObjects"
+msgid "Drawing Objects"
+msgstr "Графические объекты"
+
+#. 9x6jo
+#: sw/uiconfig/swriter/ui/notebookbar.ui:5082
+msgctxt "TabbedWriter|InsertMenuButton"
+msgid "_Insert"
+msgstr "_Вставка"
+
+#. X8CfF
+#: sw/uiconfig/swriter/ui/notebookbar.ui:5162
+msgctxt "TabbedWriter|InsertTabLabel"
+msgid "~Insert"
+msgstr "~Вставка"
+
+#. SYaWK
+#: sw/uiconfig/swriter/ui/notebookbar.ui:5197
+msgctxt "TabbedWriter|labelLayoutPageLayout"
+msgid "Page"
+msgstr "Страница"
+
+#. GKu52
+#: sw/uiconfig/swriter/ui/notebookbar.ui:5359
+msgctxt "TabbedWriter|labelLayoutBreaks"
+msgid "Breaks"
+msgstr "Разрывы"
+
+#. CxUMa
+#: sw/uiconfig/swriter/ui/notebookbar.ui:5459
+msgctxt "TabbedWriter|labelLayoutParagraphLayout"
+msgid "Paragraph"
+msgstr "Абзац"
+
+#. UfuFX
+#: sw/uiconfig/swriter/ui/notebookbar.ui:5604
+msgctxt "TabbedWriter|labelLayoutTools"
+msgid "Tools"
+msgstr "Сервис"
+
+#. LCWg7
+#: sw/uiconfig/swriter/ui/notebookbar.ui:5781
+msgctxt "TabbedWriter|labelLayoutObjects"
+msgid "Objects"
+msgstr "Объекты"
+
+#. HEDN4
+#: sw/uiconfig/swriter/ui/notebookbar.ui:6116
+msgctxt "TabbedWriter|LayoutMenuButton"
+msgid "_Layout"
+msgstr "_Разметка страницы"
+
+#. CEBN7
+#: sw/uiconfig/swriter/ui/notebookbar.ui:6185
+msgctxt "TabbedWriter|LayoutTabLabel"
+msgid "~Layout"
+msgstr "~Разметка страницы"
+
+#. eLKkb
+#: sw/uiconfig/swriter/ui/notebookbar.ui:6218
+msgctxt "TabbedWriter|labelReferencesIndex"
+msgid "Index"
+msgstr "Указатель"
+
+#. jSb65
+#: sw/uiconfig/swriter/ui/notebookbar.ui:6348
+msgctxt "TabbedWriter|labelReferencesReference"
+msgid "References"
+msgstr "Ссылки"
+
+#. pyTDF
+#: sw/uiconfig/swriter/ui/notebookbar.ui:6544
+msgctxt "TabbedWriter|labelReferencesFields"
+msgid "Fields"
+msgstr "Поля"
+
+#. hXnZ6
+#: sw/uiconfig/swriter/ui/notebookbar.ui:6787
+msgctxt "TabbedWriter|ReferencesMenuButton"
+msgid "Reference_s"
+msgstr "_Ссылки"
+
+#. nubbk
+#: sw/uiconfig/swriter/ui/notebookbar.ui:6855
+msgctxt "TabbedWriter|ReferencesTabLabel"
+msgid "Reference~s"
+msgstr "~Ссылки"
+
+#. PnWWU
+#: sw/uiconfig/swriter/ui/notebookbar.ui:6888
+msgctxt "TabbedWriter|labelReviewSpelling"
+msgid "Spelling"
+msgstr "Орфография"
+
+#. qyREA
+#: sw/uiconfig/swriter/ui/notebookbar.ui:7029
+msgctxt "TabbedWriter|labelReviewComments"
+msgid "Comments"
+msgstr "Комментарии"
+
+#. ZgNNW
+#: sw/uiconfig/swriter/ui/notebookbar.ui:7163
+msgctxt "TabbedWriter|labelReviewTrackChanges"
+msgid "Track Changes"
+msgstr "Отслеживание исправлений"
+
+#. dGwrt
+#: sw/uiconfig/swriter/ui/notebookbar.ui:7257
+msgctxt "TabbedWriter|labelReviewResolveChanges"
+msgid "Resolve Changes"
+msgstr "Принятие исправлений"
+
+#. sWtgE
+#: sw/uiconfig/swriter/ui/notebookbar.ui:7504
+msgctxt "TabbedWriter|ReviewMenuButton"
+msgid "_Review"
+msgstr "_Проверка"
+
+#. 3ZCmb
+#: sw/uiconfig/swriter/ui/notebookbar.ui:7573
+msgctxt "TabbedWriter|ReviewTabLabel"
+msgid "~Review"
+msgstr "~Проверка"
+
+#. AYCFZ
+#: sw/uiconfig/swriter/ui/notebookbar.ui:7606
+msgctxt "TabbedWriter|labelViewMode"
+msgid "Mode"
+msgstr "Режим"
+
+#. bGjGG
+#: sw/uiconfig/swriter/ui/notebookbar.ui:7713
+msgctxt "TabbedWriter|labelViewMarks"
+msgid "Marks"
+msgstr "Пометки"
+
+#. zKQCT
+#: sw/uiconfig/swriter/ui/notebookbar.ui:7816
+msgctxt "TabbedWriter|labelViewZoom"
+msgid "Zoom"
+msgstr "Масштаб"
+
+#. n5rFK
+#: sw/uiconfig/swriter/ui/notebookbar.ui:7992
+msgctxt "TabbedWriter|labelViewWidgets"
+msgid "Widgets"
+msgstr "Элементы интерфейса"
+
+#. hXACe
+#: sw/uiconfig/swriter/ui/notebookbar.ui:8203
+msgctxt "TabbedWriter|labelViewObjects"
+msgid "Objects"
+msgstr "Объекты"
+
+#. y7RMo
+#: sw/uiconfig/swriter/ui/notebookbar.ui:8343
+msgctxt "TabbedWriter|ViewMenuButton"
+msgid "_View"
+msgstr "_Вид"
+
+#. hymtP
+#: sw/uiconfig/swriter/ui/notebookbar.ui:8412
+msgctxt "TabbedWriter|ViewTabLabel"
+msgid "~View"
+msgstr "~Вид"
+
+#. DJaog
+#: sw/uiconfig/swriter/ui/notebookbar.ui:8445
+msgctxt "TabbedWriter|labelTableLayout"
+msgid "Layout"
+msgstr "Макет"
+
+#. EBikx
+#: sw/uiconfig/swriter/ui/notebookbar.ui:8696
+msgctxt "TabbedWriter|labelTableSelect"
+msgid "Selection"
+msgstr "Выделение"
+
+#. uaGaC
+#: sw/uiconfig/swriter/ui/notebookbar.ui:8848
+msgctxt "TabbedWriter|labelTableStyle"
+msgid "Style"
+msgstr "Стиль"
+
+#. avgmd
+#: sw/uiconfig/swriter/ui/notebookbar.ui:9000
+msgctxt "TabbedWriter|labelTableAlignment"
+msgid "Alignment"
+msgstr "Выравнивание"
+
+#. fq4f6
+#: sw/uiconfig/swriter/ui/notebookbar.ui:9210
+msgctxt "TabbedWriter|labelTableFunctions"
+msgid "Functions"
+msgstr "Функции"
+
+#. D52mf
+#: sw/uiconfig/swriter/ui/notebookbar.ui:9342
+msgctxt "TabbedWriter|labelTableNumbers"
+msgid "Numbers"
+msgstr "Числа"
+
+#. uA4GC
+#: sw/uiconfig/swriter/ui/notebookbar.ui:9500
+msgctxt "TabbedWriter|TableMenuButton"
+msgid "_Table"
+msgstr "_Таблица"
+
+#. 7hBPL
+#: sw/uiconfig/swriter/ui/notebookbar.ui:9568
+msgctxt "TabbedWriter|TableTabLabel"
+msgid "~Table"
+msgstr "~Таблица"
+
+#. XRNZB
+#: sw/uiconfig/swriter/ui/notebookbar.ui:9604
+msgctxt "TabbedWriter|labelImage"
+msgid "Image"
+msgstr "Изображение"
+
+#. DfoQ2
+#: sw/uiconfig/swriter/ui/notebookbar.ui:9795
+msgctxt "TabbedWriter|labelImageFillBorder"
+msgid "Fill & Border"
+msgstr "Заливка и обрамление"
+
+#. 6GmDL
+#: sw/uiconfig/swriter/ui/notebookbar.ui:9982
+msgctxt "TabbedWriter|labelImageAnchorWrap"
+msgid "Anchor & Wrap"
+msgstr "Привязка и обтекание"
+
+#. Z64bd
+#: sw/uiconfig/swriter/ui/notebookbar.ui:10204
+msgctxt "TabbedWriter|labelImagePositioning"
+msgid "Positioning"
+msgstr "Положение"
+
+#. DDoAF
+#: sw/uiconfig/swriter/ui/notebookbar.ui:10443
+msgctxt "TabbedWriter|labelImageModify"
+msgid "Modify"
+msgstr "Изменить"
+
+#. 9txkf
+#: sw/uiconfig/swriter/ui/notebookbar.ui:10679
+msgctxt "TabbedWriter|ImageMenuButton"
+msgid "Ima_ge"
+msgstr "_Изображение"
+
+#. e6C9i
+#: sw/uiconfig/swriter/ui/notebookbar.ui:10761
+msgctxt "TabbedWriter|ImageTabLabel"
+msgid "Ima~ge"
+msgstr "~Изображение"
+
+#. wF4mh
+#: sw/uiconfig/swriter/ui/notebookbar.ui:10797
+msgctxt "TabbedWriter|labelDraw"
+msgid "Drawing Object"
+msgstr "Графический объект"
+
+#. Sf9db
+#: sw/uiconfig/swriter/ui/notebookbar.ui:10964
+msgctxt "TabbedWriter|labelDrawFillBorder"
+msgid "Fill & Border"
+msgstr "Заливка и обрамление"
+
+#. pGFYk
+#: sw/uiconfig/swriter/ui/notebookbar.ui:11160
+msgctxt "TabbedWriter|labelDrawAnchorWrap"
+msgid "Anchor & Wrap"
+msgstr "Привязка и обтекание"
+
+#. yBCDN
+#: sw/uiconfig/swriter/ui/notebookbar.ui:11382
+msgctxt "TabbedWriter|labelDrawPositioning"
+msgid "Positioning"
+msgstr "Положение"
+
+#. 8CCdY
+#: sw/uiconfig/swriter/ui/notebookbar.ui:11621
+msgctxt "TabbedWriter|labelDrawGrouping"
+msgid "Grouping"
+msgstr "Группировка"
+
+#. ELBUv
+#: sw/uiconfig/swriter/ui/notebookbar.ui:11755
+msgctxt "TabbedWriter|labelDraw3D"
+msgid "3D"
+msgstr "3D"
+
+#. qGnP4
+#: sw/uiconfig/swriter/ui/notebookbar.ui:11896
+msgctxt "TabbedWriter|DrawMenuButton"
+msgid "_Draw"
+msgstr "_Рисование"
+
+#. ovPQg
+#: sw/uiconfig/swriter/ui/notebookbar.ui:11989
+msgctxt "TabbedWriter|DrawTabLabel"
+msgid "~Draw"
+msgstr "~Рисование"
+
+#. fYJC7
+#: sw/uiconfig/swriter/ui/notebookbar.ui:12028
+msgctxt "TabbedWriter|labelObject"
+msgid "Object"
+msgstr "Объект"
+
+#. BpbaU
+#: sw/uiconfig/swriter/ui/notebookbar.ui:12160
+msgctxt "TabbedWriter|labelObjectFillBorder"
+msgid "Fill & Border"
+msgstr "Заливка и обрамление"
+
+#. NEhXs
+#: sw/uiconfig/swriter/ui/notebookbar.ui:12347
+msgctxt "TabbedWriter|labelObjectAnchorWrap"
+msgid "Anchor & Wrap"
+msgstr "Привязка и обтекание"
+
+#. L6T2G
+#: sw/uiconfig/swriter/ui/notebookbar.ui:12569
+msgctxt "TabbedWriter|labelObjectPositioning"
+msgid "Positioning"
+msgstr "Положение"
+
+#. pc5AB
+#: sw/uiconfig/swriter/ui/notebookbar.ui:12814
+msgctxt "TabbedWriter|ObjectMenuButton"
+msgid "_Object"
+msgstr "_Объект"
+
+#. sQQb5
+#: sw/uiconfig/swriter/ui/notebookbar.ui:12883
+msgctxt "TabbedWriter|ObjectTabLabel"
+msgid "~Object"
+msgstr "~Объект"
+
+#. DSGJ7
+#: sw/uiconfig/swriter/ui/notebookbar.ui:12920
+msgctxt "TabbedWriter|labelMedia"
+msgid "Object"
+msgstr "Объект"
+
+#. FDHUQ
+#: sw/uiconfig/swriter/ui/notebookbar.ui:13076
+msgctxt "TabbedWriter|labelMediaAnchorWrap"
+msgid "Anchor & Wrap"
+msgstr "Привязка и обтекание"
+
+#. xBWdD
+#: sw/uiconfig/swriter/ui/notebookbar.ui:13298
+msgctxt "TabbedWriter|labelMediaPositioning"
+msgid "Positioning"
+msgstr "Положение"
+
+#. EFDLQ
+#: sw/uiconfig/swriter/ui/notebookbar.ui:13537
+msgctxt "TabbedWriter|labelMediaPlayer"
+msgid "Media Player"
+msgstr "Медиаплеер"
+
+#. 3wwgB
+#: sw/uiconfig/swriter/ui/notebookbar.ui:13645
+msgctxt "TabbedWriter|MediaMenuButton"
+msgid "_Media"
+msgstr "_Медиа"
+
+#. B9EzK
+#: sw/uiconfig/swriter/ui/notebookbar.ui:13735
+msgctxt "TabbedWriter|MediaTabLabel"
+msgid "~Media"
+msgstr "~Медиа"
+
+#. cvapf
+#: sw/uiconfig/swriter/ui/notebookbar.ui:13771
+msgctxt "TabbedWriter|labelPrintMode"
+msgid "Mode"
+msgstr "Режим"
+
+#. t4Wmd
+#: sw/uiconfig/swriter/ui/notebookbar.ui:13928
+msgctxt "TabbedWriter|labelPrintZoom"
+msgid "Zoom"
+msgstr "Масштаб"
+
+#. VC7Vh
+#: sw/uiconfig/swriter/ui/notebookbar.ui:14096
+msgctxt "TabbedWriter|labelPrintPrint"
+msgid "Print"
+msgstr "Печать"
+
+#. 5nMkL
+#: sw/uiconfig/swriter/ui/notebookbar.ui:14211
+msgctxt "TabbedWriter|PrintMenuButton"
+msgid "_Print"
+msgstr "_Печать"
+
+#. LBWo7
+#: sw/uiconfig/swriter/ui/notebookbar.ui:14294
+msgctxt "TabbedWriter|PrintTabLabel"
+msgid "~Print"
+msgstr "~Печать"
+
+#. VdFiC
+#: sw/uiconfig/swriter/ui/notebookbar.ui:14330
+msgctxt "TabbedWriter|labelFormMode"
+msgid "Mode"
+msgstr "Режим"
+
+#. 44aFo
+#: sw/uiconfig/swriter/ui/notebookbar.ui:14464
+msgctxt "TabbedWriter|labelFormProperties"
+msgid "Properties"
+msgstr "Свойства"
+
+#. Gr5zd
+#: sw/uiconfig/swriter/ui/notebookbar.ui:14659
+msgctxt "TabbedWriter|labelFormControls"
+msgid "Controls"
+msgstr "Элементы управления"
+
+#. ZyxEL
+#: sw/uiconfig/swriter/ui/notebookbar.ui:14992
+msgctxt "TabbedWriter|FormMenuButton"
+msgid "Fo_rm"
+msgstr "_Форма"
+
+#. JiHfB
+#: sw/uiconfig/swriter/ui/notebookbar.ui:15060
+msgctxt "TabbedWriter|FormTabLabel"
+msgid "Fo~rm"
+msgstr "~Форма"
+
+#. Zxmzy
+#: sw/uiconfig/swriter/ui/notebookbar.ui:15128
+msgctxt "TabbedWriter|ExtensionMenuButton"
+msgid "E_xtension"
+msgstr "_Расширение"
+
+#. YjgEv
+#: sw/uiconfig/swriter/ui/notebookbar.ui:15202
+msgctxt "TabbedWriter|ExtensionLabel"
+msgid "E~xtension"
+msgstr "~Расширение"
+
+#. sqdXY
+#: sw/uiconfig/swriter/ui/notebookbar.ui:15235
+msgctxt "TabbedWriter|labelToolsMacro"
+msgid "Macro"
+msgstr "Макрос"
+
+#. Ec47Q
+#: sw/uiconfig/swriter/ui/notebookbar.ui:15364
+msgctxt "TabbedWriter|labelToolsMessage"
+msgid "Message"
+msgstr "Сообщение"
+
+#. cZakd
+#: sw/uiconfig/swriter/ui/notebookbar.ui:15504
+msgctxt "TabbedWriter|ToolsMenuButton"
+msgid "_Tools"
+msgstr "_Сервис"
+
+#. AmHjE
+#: sw/uiconfig/swriter/ui/notebookbar.ui:15572
+msgctxt "TabbedWriter|ToolsTabLabel"
+msgid "~Tools"
+msgstr "~Сервис"
+
+#. X8n2d
+#: sw/uiconfig/swriter/ui/optformataidspage.ui:790
+msgctxt "extended_tip|enclosewithcharacters"
+msgid "Specifies that you can enclose selected text with parentheses, square brackets, curly braces or double/single quotation marks when pressing the respective key."
+msgstr "Указывает, что выделенный текст можно заключить в круглые, квадратные или фигурные скобки либо в двойные или одинарные кавычки нажатием соответствующей клавиши."
+
+#. BbHH5
+#: sw/uiconfig/swriter/ui/optformataidspage.ui:924
+msgctxt "optformataidspage|typingreplacesselection"
+msgid "Typing replaces selection"
+msgstr "Ввод заменяет выделение"
+
+#. gg2gL
+#: sw/uiconfig/swriter/ui/optformataidspage.ui:932
+msgctxt "extended_tip|typingreplacesselection"
+msgid "Specifies whether typing replaces the selected text."
+msgstr "Указывает, заменяет ли вводимый текст выделенный фрагмент."
+
+#. vEDN2
+#: sw/uiconfig/swriter/ui/optformataidspage.ui:965
+msgctxt "optformataidspage|lbTyping"
+msgid "Typing"
+msgstr "Ввод текста"
+
+#. KnPTa
+#: sw/uiconfig/swriter/ui/optgeneralpage.ui:390
+msgctxt "optgeneralpage|squaremode"
+msgid "_Use CJK manuscript grid"
+msgstr "_Использовать рукописную сетку CJK"
+
+#. Pt9Mj
+#: sw/uiconfig/swriter/ui/optgeneralpage.ui:399
+msgctxt "extended_tip|squaremode"
+msgid "When this setting is enabled, the text grid will consist of interleaved phonetic-guide lines and lines of square boxes for writing CJK characters."
+msgstr "Если этот параметр включён, сетка текста будет состоять из чередующихся строк фонетических подсказок и строк квадратных ячеек для письма символами CJK."
+
+#. vQYFN
+#: sw/uiconfig/swriter/ui/opttablepage.ui:60
+msgctxt "opttablepage|header"
+msgid "H_eader"
+msgstr "_Заголовок"
+
+#. DHiJx
+#: sw/uiconfig/swriter/ui/opttablepage.ui:88
+msgctxt "extended_tip|repeatheader"
+msgid "Specifies whether the table header is carried over onto the new page after a page break."
+msgstr "Указывает, переносится ли заголовок таблицы на новую страницу после разрыва страницы."
+
+#. zeVnL
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:50
+msgctxt "quickfindpanel|extended_tip|searchterm"
+msgid "Enter the text that you want to find, or select a previous search from the list."
+msgstr "Введите текст для поиска или выберите предыдущий поиск из списка."
+
+#. CJScT
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:74
+msgctxt "quickfindpanel|moresearchoptions|accessible_name"
+msgid "Search Options"
+msgstr "Параметры поиска"
+
+#. 7SebB
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:75
+msgctxt "quickfindpanel|extended_tip|moresearchoptions"
+msgid "Click here to show more search options."
+msgstr "Нажмите здесь, чтобы показать дополнительные параметры поиска."
+
+#. PSYUA
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:152
+msgctxt "quickfindpanel|searchoptionsbox|matchcase"
+msgid "Match case"
+msgstr "Учитывать регистр"
+
+#. NEdQz
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:161
+msgctxt "quickfindpanel|searchoptionsbox|extended_tip|matchcase"
+msgid "Finds only exact case matches."
+msgstr "Находит только совпадения с точным учётом регистра."
+
+#. QtyKD
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:172
+msgctxt "quickfindpanel|searchoptionsbox|wholewordsonly"
+msgid "Whole words only"
+msgstr "Слова целиком"
+
+#. 75FLg
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:181
+msgctxt "quickfindpanel|searchoptionsbox|extended_tip|wholewordsonly"
+msgid "Finds only whole words."
+msgstr "Находит только слова целиком."
+
+#. LsDRA
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:192
+msgctxt "quickfindpanel|searchoptionsbox|comments"
+msgid "Comments"
+msgstr "Комментарии"
+
+#. RooGA
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:201
+msgctxt "quickfindpanel|searchoptionsbox|extended_tip|comments"
+msgid "Allow search in comments."
+msgstr "Разрешить поиск в комментариях."
+
+#. AJCk2
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:212
+msgctxt "quickfindpanel|searchoptionsbox|regularexpressions"
+msgid "Regular expressions"
+msgstr "Регулярные выражения"
+
+#. CqdTc
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:221
+msgctxt "quickfindpanel|searchoptionsbox|extended_tip|regularexpressions"
+msgid "Search using regular expression."
+msgstr "Поиск с помощью регулярных выражений."
+
+#. TFdLU
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:237
+msgctxt "quickfindpanel|searchoptionsbox|similarity"
+msgid "Similarity"
+msgstr "Поиск подобных"
+
+#. 42EsC
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:246
+msgctxt "quickfindpanel|searchoptionsbox|extended_tip|similarity"
+msgid "Find terms that are similar to the Find text. Select this checkbox, and then click the Similarities button to define the similarity options."
+msgstr "Поиск терминов, похожих на текст поиска. Установите этот флажок, а затем нажмите кнопку Подобные, чтобы задать параметры сходства."
+
+#. rRfwh
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:258
+msgctxt "quickfindpanel|searchoptionsbox|similaritybtn"
+msgid "Similarities..."
+msgstr "Подобные…"
+
+#. dD6fd
+#: sw/uiconfig/swriter/ui/sidebarquickfind.ui:268
+msgctxt "quickfindpanel|searchoptionsbox|extended_tip|similaritybtn"
+msgid "Set the options for the similarity search."
+msgstr "Задайте параметры для поиска по сходству."
+
+#. NBYKb
+#: sw/uiconfig/swriter/ui/tabletextflowpage.ui:331
+msgctxt "tabletextflowpage|headline"
+msgid "R_epeat header"
+msgstr "_Повторять заголовок"
+
+#. wTWCz
+#: sw/uiconfig/swriter/ui/tabletextflowpage.ui:339
+msgctxt "tabletextflowpage|extended_tip|headline"
+msgid "Repeats the table header on a new page when the table spans more than one page."
+msgstr "Повторяет заголовок таблицы на новой странице, если таблица занимает больше одной страницы."
+
+#. GC3Zv
+#: sw/uiconfig/swriter/ui/tabletextflowpage.ui:387
+msgctxt "tabletextflowpage|extended_tip|repeatheadernf"
+msgid "Enter the number of rows to include in the header."
+msgstr "Введите количество строк, включаемых в заголовок."
+
+#. HoQFh
+#: sw/uiconfig/swriter/ui/textgridpage.ui:75
+msgctxt "textgridpage|extended_tip|radioRB_NOGRID"
+msgid "Removes the text grid of the current page style."
+msgstr "Удаляет сетку текста из текущего стиля страницы."
+
+#. v7owJ
+#: sw/uiconfig/swriter/ui/textgridpage.ui:95
+msgctxt "textgridpage|extended_tip|radioRB_LINESGRID"
+msgid "Adds a line grid for the current page style."
+msgstr "Добавляет сетку строк для текущего стиля страницы."
+
+#. Z5CC5
+#: sw/uiconfig/swriter/ui/textgridpage.ui:115
+msgctxt "textgridpage|extended_tip|radioRB_CHARSGRID"
+msgid "Adds lines and character grid for the current page style."
+msgstr "Добавляет сетку строк и символов для текущего стиля страницы."
+
+#. BmhpC
+#: sw/uiconfig/swriter/ui/textgridpage.ui:136
+msgctxt "textgridpage|extended_tip|checkCB_SNAPTOCHARS"
+msgid "Snaps to the edges of characters."
+msgstr "Привязывает к границам символов."
+
+#. Pyktu
+#: sw/uiconfig/swriter/ui/textgridpage.ui:411
+msgctxt "textgridpage|extended_tip|spinMF_CHARWIDTH"
+msgid "Enter the character width for the grid with lines and characters."
+msgstr "Введите ширину символов для сетки строк и символов."
+
+#. Gkpad
+#: sw/uiconfig/swriter/ui/textgridpage.ui:500
+msgctxt "textgridpage|extended_tip|checkCB_DISPLAY"
+msgid "Specifies if the text grid is to be displayed. "
+msgstr "Указывает, отображается ли сетка текста. "
+
+#. TqaFJ
+#: sw/uiconfig/swriter/ui/textgridpage.ui:521
+msgctxt "textgridpage|extended_tip|checkCB_PRINT"
+msgid "Specifies the printing of the text grid."
+msgstr "Задаёт печать сетки текста."
+
+#. DZpkS
+#: sw/uiconfig/swriter/ui/textgridpage.ui:558
+msgctxt "textgridpage|extended_tip|listLB_COLOR"
+msgid "Specifies the color options of the text grid."
+msgstr "Задаёт параметры цвета сетки текста."
+
+#. epDvv
+#: sw/uiconfig/swriter/ui/textgridpage.ui:594
+msgctxt "textgridpage|extended_tip|TextGridPage"
+msgid "Adds a text grid to the current page style for Asian languages."
+msgstr "Добавляет сетку текста в текущий стиль страницы для азиатских языков."
+
+#. VtBWR
+#: sw/uiconfig/swriter/ui/tocentriespage.ui:175
+msgctxt "tocentriespage|extended_tip|reltostyle"
+msgid "Positions the tab stop relative to the \"before the text\" indent value defined in the paragraph style selected on the Styles tab. Otherwise the tab stop is positioned relative to the left text margin."
+msgstr "Размещает позицию табуляции относительно значения отступа \"перед текстом\", заданного в стиле абзаца, выбранном на вкладке «Стили». В противном случае позиция табуляции отсчитывается от левого поля текста."
+
+#. 6AF4e
+#: sw/uiconfig/swriter/ui/tocentriespage.ui:761
+msgctxt "tocentriespage|extended_tip|entrytext"
+msgid "Insert in the \"Structure\" to include the text of the index entries generated from the settings in the \"Type\" tab."
+msgstr "Вставьте в \"Структуру\", чтобы включить текст элементов указателя, созданный на основе параметров на вкладке \"Тип\"."
+
+#. K4BLF
+#: sw/uiconfig/swriter/ui/wordcount.ui:354
+msgctxt "wordcount|label_cursor"
+msgid "Words before/after cursor"
+msgstr "Слов до/после курсора"

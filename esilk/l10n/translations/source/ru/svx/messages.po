@@ -24,3 +24,132 @@ msgstr ""
 msgctxt "RID_SVXSTR_SAFEMODE_USER_PROFILE_EXPORTED"
 msgid "Your user profile has been exported as '%PRODUCTNAME-profile.zip'."
 msgstr "Профиль пользователя экспортирован как «%PRODUCTNAME-profile.zip»."
+
+#. sbSsa
+#: include/svx/strings.hrc:210
+msgctxt "STR_DiagramModelDissolveData"
+msgid "Diagram model dissolve %1"
+msgstr "Разъединение модели схемы %1"
+
+#. EBWZY
+#: svx/uiconfig/ui/crashreportdlg.ui:163
+msgctxt "crashreportdlg|check_safemode"
+msgid "Restart %PRODUCTNAME to enter troubleshoot mode"
+msgstr "Перезапустить %PRODUCTNAME в безопасном режиме"
+
+#. y2WBz
+#: svx/uiconfig/ui/inspectortextpanel.ui:123
+msgctxt "inspectortextpanel|paragraphstyles-atkobject"
+msgid "Paragraph Styles"
+msgstr "Стили абзаца"
+
+#. VPtzx
+#: svx/uiconfig/ui/inspectortextpanel.ui:139
+msgctxt "inspectortextpanel|characterstyles-atkobject"
+msgid "Character Styles"
+msgstr "Стили символов"
+
+#. BmCaG
+#: svx/uiconfig/ui/inspectortextpanel.ui:155
+msgctxt "inspectortextpanel|directformatting-atkobject"
+msgid "Direct Formatting"
+msgstr "Прямое форматирование"
+
+#. BxMt6
+#: svx/uiconfig/ui/safemodedialog.ui:8
+msgctxt "safemodedialog|SafeModeDialog"
+msgid "Troubleshoot Mode"
+msgstr "Безопасный режим"
+
+#. m2W9v
+#: svx/uiconfig/ui/safemodedialog.ui:43
+msgctxt "safemodedialog|btn_continue"
+msgid "_Continue in Troubleshoot Mode"
+msgstr "_Продолжить в безопасном режиме"
+
+#. XFnvh
+#: svx/uiconfig/ui/safemodedialog.ui:59
+msgctxt "safemodedialog|btn_restart"
+msgid "_Restart Normally"
+msgstr "_Обычный перезапуск"
+
+#. VFqDA
+#: svx/uiconfig/ui/safemodedialog.ui:97
+msgctxt "safemodedialog|label1"
+msgid ""
+"%PRODUCTNAME is now running in troubleshoot mode, which temporarily disables your user configuration and extensions.\n"
+"\n"
+"You can make one or more of the following changes to your user profile to return %PRODUCTNAME to a working state."
+msgstr "%PRODUCTNAME сейчас работает в безопасном режиме, в котором конфигурация пользователя и расширения временно отключены.\n\nЧтобы вернуть %PRODUCTNAME в рабочее состояние, можно внести в профиль пользователя одно или несколько из следующих изменений."
+
+#. rcWz8
+#: svx/uiconfig/ui/safemodedialog.ui:379
+msgctxt "safemodedialog|label3"
+msgid "If using troubleshoot mode does not fix your issues, click this link to get assistance or report a bug."
+msgstr "Если безопасный режим не помог решить проблему, перейдите по этой ссылке, чтобы получить помощь или сообщить об ошибке."
+
+#. LSYRB
+#: svx/uiconfig/ui/sidebarline.ui:91
+msgctxt "sidebarline|SelectWidth|tooltip_text"
+msgid "Line Thickness"
+msgstr "Толщина линии"
+
+#. cDwyK
+#: svx/uiconfig/ui/sidebarline.ui:97
+msgctxt "sidebarline|SelectWidth-atkobject"
+msgid "Line Thickness"
+msgstr "Толщина линии"
+
+#. CDWQN
+#: svx/uiconfig/ui/sidebarshadow.ui:123
+msgctxt "sidebarshadow|transparency_label"
+msgid "_Transparency:"
+msgstr "_Прозрачность:"
+
+#. EFczY
+#: svx/uiconfig/ui/tablestylesdlg.ui:156
+msgctxt "basicnameentry-atkobject|accessible-name"
+msgid "Name"
+msgstr "Имя"
+
+#. 6oAyB
+#: svx/uiconfig/ui/tablestylesdlg.ui:157
+msgctxt "basicnameentry-atkobject|accessible-description"
+msgid "Enter table style name"
+msgstr "Введите имя стиля таблицы"
+
+#. Vt9hT
+#: svx/uiconfig/ui/tablestylesdlg.ui:345
+msgctxt "elementbox-atkobject|accessible-name"
+msgid "Element"
+msgstr "Элемент"
+
+#. Su8sC
+#: svx/uiconfig/ui/tablestylesdlg.ui:465
+msgctxt "cellpaddingsb-atkobject|accessible-name"
+msgid "Padding"
+msgstr "Отступы"
+
+#. PXBnK
+#: svx/uiconfig/ui/tablestylesdlg.ui:865
+msgctxt "vertcenteralign|tooltip-text"
+msgid "Center Vertically"
+msgstr "Центрировать вертикально"
+
+#. B5BYX
+#: svx/uiconfig/ui/tablestylesdlg.ui:1017
+msgctxt "charnamebox-atkobject|accessible-name"
+msgid "Font Name"
+msgstr "Гарнитура"
+
+#. p9FHo
+#: svx/uiconfig/ui/tablestylesdlg.ui:1066
+msgctxt "charsizebox-atkobject|accessible-name"
+msgid "Font Size"
+msgstr "Кегль"
+
+#. 3iFYC
+#: svx/uiconfig/ui/tablestylesdlg.ui:1261
+msgctxt "rightframe-atkobject|accessible-name"
+msgid "Properties"
+msgstr "Свойства"
