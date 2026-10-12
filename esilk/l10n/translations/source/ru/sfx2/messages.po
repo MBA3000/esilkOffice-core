@@ -1,0 +1,210 @@
+#. esilk overlay of translations/source/ru/sfx2/messages.po (esilk/l10n/README.md):
+#. the strings left untranslated upstream. Keep the upstream header.
+#. extracted from sfx2
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: https://bugs.libreoffice.org/enter_bug.cgi?product=LibreOffice&bug_status=UNCONFIRMED&component=UI\n"
+"POT-Creation-Date: 2026-06-16 12:24+0200\n"
+"PO-Revision-Date: 2026-02-26 18:55+0000\n"
+"Last-Translator: bormant <bormant@mail.ru>\n"
+"Language-Team: Russian <https://translations.documentfoundation.org/projects/libo_ui-master/sfx2messages/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: ~\n"
+"X-Generator: LibreOffice\n"
+"X-POOTLE-MTIME: 1564293234.000000\n"
+
+#. NEiSM
+#. infobar for allowing links to update or not
+#: include/sfx2/strings.hrc:151
+msgctxt "STR_INFOBAR_LINKS_DISABLED"
+msgid "Automatic update of external links has been disabled."
+msgstr "Автоматическое обновление внешних ссылок отключено."
+
+#. T4E3r
+#. infobar button for allowing links to update
+#: include/sfx2/strings.hrc:153
+msgctxt "STR_INFOBAR_ALLOW_UPDATING"
+msgid "Allow updating"
+msgstr "Разрешить обновление"
+
+#. yFc5N
+#. tooltip for the "Allow updating" infobar button
+#: include/sfx2/strings.hrc:155
+msgctxt "STR_INFOBAR_ALLOW_UPDATING_TOOLTIP"
+msgid "Only allow updating if you trust this document."
+msgstr "Разрешайте обновление, только если доверяете этому документу."
+
+#. GaHho
+#: include/sfx2/strings.hrc:156
+msgctxt "STR_INFOBAR_ALLOW_UPDATING_TOOLTIP_DISABLED"
+msgid "Active content is disabled in the security settings. It is not possible to allow updating."
+msgstr "Активное содержимое отключено в параметрах безопасности. Разрешить обновление невозможно."
+
+#. xG4aP
+#: include/sfx2/strings.hrc:228
+msgctxt "STR_PB_COMPAREDOC"
+msgid "Compare with"
+msgstr "Сравнить с"
+
+#. 9ffGh
+#: include/sfx2/strings.hrc:241
+msgctxt "STR_RESET_PROPERTY_TOOLTIP"
+msgid "Reset this property to inherit from parent style"
+msgstr "Сбросить свойство, чтобы оно наследовалось от родительского стиля"
+
+#. Z9UGV
+#: include/sfx2/strings.hrc:242
+msgctxt "STR_NO_MODIFIED_PROPERTIES"
+msgid "All properties are inherited from parent style."
+msgstr "Все свойства унаследованы от родительского стиля."
+
+#. X6uDp
+#: include/sfx2/strings.hrc:271
+msgctxt "STR_BLUETOOTH_PACKAGE_ERROR"
+msgid ""
+"The Bluetooth transfer tool '%TOOL' could not be found on the system.\n"
+"Please install the '%PKG' package for your distribution."
+msgstr "Средство передачи по Bluetooth «%TOOL» не найдено в системе.\nУстановите пакет «%PKG» для вашего дистрибутива."
+
+#. Bxh6C
+#: include/sfx2/strings.hrc:282
+msgctxt "STR_NEW_FROM_TEMPLATE"
+msgid "New From Template"
+msgstr "Создать из шаблона"
+
+#. hszb8
+#: include/sfx2/strings.hrc:330
+msgctxt "STR_VCLGEN_TITLE"
+msgid "Fallback UI controls in use"
+msgstr "Используются резервные элементы интерфейса"
+
+#. 3dNke
+#: include/sfx2/strings.hrc:331
+msgctxt "STR_VCLGEN_TEXT"
+msgid "Look for a desktop environment integration package offered by your distribution."
+msgstr "Установите пакет интеграции с рабочим окружением из вашего дистрибутива."
+
+#. 9LERL
+#: include/sfx2/strings.hrc:404
+msgctxt "STR_AUTOCORR_LEADTRAIL"
+msgid "Autocorrection has removed a leading or trailing character."
+msgstr "Автозамена удалила начальный или конечный символ."
+
+#. Bzrar
+#: include/sfx2/strings.hrc:405
+msgctxt "STR_NOSHOWAGAIN"
+msgid "Don't show again"
+msgstr "Больше не показывать"
+
+#. 3RJGf
+#: include/sfx2/strings.hrc:406
+msgctxt "STR_CHANGEOPTIONS"
+msgid "Change options"
+msgstr "Изменить параметры"
+
+#. 8g7yc
+#: sfx2/uiconfig/ui/managestylepage.ui:312
+msgctxt "managestylepage|viewprops"
+msgid "View"
+msgstr "Просмотр"
+
+#. i4fHL
+#: sfx2/uiconfig/ui/managestylepage.ui:318
+msgctxt "managestylepage|viewprops"
+msgid "View style properties as description text"
+msgstr "Показывать свойства стиля в виде текстового описания"
+
+#. tBEan
+#: sfx2/uiconfig/ui/managestylepage.ui:330
+msgctxt "managestylepage|editprops"
+msgid "Edit"
+msgstr "Правка"
+
+#. DABG7
+#: sfx2/uiconfig/ui/managestylepage.ui:336
+msgctxt "managestylepage|editprops"
+msgid "Edit style properties as interactive chips"
+msgstr "Изменять свойства стиля с помощью интерактивных меток"
+
+#. hmQWf
+#: sfx2/uiconfig/ui/propertycategoryrow.ui:19
+msgctxt "propertycategoryrow|label"
+msgid "Property category name"
+msgstr "Название категории свойств"
+
+#. BPUb7
+#: sfx2/uiconfig/ui/propertychip.ui:21
+msgctxt "propertychip|remove"
+msgid "Reset this property to inherit from parent style"
+msgstr "Сбросить свойство, чтобы оно наследовалось от родительского стиля"
+
+#. QZ5ur
+#: sfx2/uiconfig/ui/safemodequerydialog.ui:7
+msgctxt "safemodequerydialog|SafeModeQueryDialog"
+msgid "Enter Troubleshoot Mode"
+msgstr "Перейти в безопасный режим"
+
+#. eEXsy
+#: sfx2/uiconfig/ui/safemodequerydialog.ui:12
+msgctxt "safemodequerydialog|label"
+msgid "Are you sure you want to restart %PRODUCTNAME and enter troubleshoot mode?"
+msgstr "Перезапустить %PRODUCTNAME в безопасном режиме?"
+
+#. wB5su
+#: sfx2/uiconfig/ui/startcenter.ui:708
+msgctxt "startcenter|donatetitle"
+msgid "%PRODUCTNAME is free software."
+msgstr "%PRODUCTNAME — свободное программное обеспечение."
+
+#. D3RnU
+#: sfx2/uiconfig/ui/startcenter.ui:727
+msgctxt "startcenter|donatetext"
+msgid "Please support the community that makes it!"
+msgstr "Поддержите сообщество, которое его создаёт!"
+
+#. iweEL
+#: sfx2/uiconfig/ui/startcenter.ui:736
+msgctxt "startcenter|donatelink"
+msgid "Click here to donate"
+msgstr "Нажмите здесь, чтобы сделать пожертвование"
+
+#. n5BD7
+#: sfx2/uiconfig/ui/templatepanel.ui:311
+msgctxt "templatepanel|STR_STYLE_FILTERS_MENU_TOOLTIP"
+msgid "Style Filters"
+msgstr "Фильтры стилей"
+
+#. mLnBB
+#: sfx2/uiconfig/ui/templatepanel.ui:312
+msgctxt "templatepanel|STR_STYLE_FILTERS_MENU_LABEL"
+msgid "Filter"
+msgstr "Фильтр"
+
+#. AV36A
+#: sfx2/uiconfig/ui/templatepanel.ui:316
+msgctxt "templatepanel|accessible_name|stylefiltersmenutoolbutton"
+msgid "Style Filters"
+msgstr "Фильтры стилей"
+
+#. GNFTF
+#: sfx2/uiconfig/ui/templatepanel.ui:334
+msgctxt "commontemplate|STR_HIERARCHICAL_CHECKBOX"
+msgid "Hierarchical"
+msgstr "По иерархии"
+
+#. VDD6o
+#: sfx2/uiconfig/ui/templatepanel.ui:342
+msgctxt "templatepanel|extended_tip|hierarchical"
+msgid "Display the style list in hierarchical formatting. "
+msgstr "Показывает список стилей в виде иерархии. "
+
+#. Vzf2x
+#: sfx2/uiconfig/ui/templatepanel.ui:354
+msgctxt "commontemplate|STR_PREVIEW_CHECKBOX"
+msgid "Preview"
+msgstr "Предварительный просмотр"
