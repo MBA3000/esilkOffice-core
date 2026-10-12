@@ -24,16 +24,19 @@ the English text.
 UI strings (`<module>/messages.po`, compiled to `.mo` files):
 
 - `solenv/gbuild/AllLangMoTarget.mk`: when an overlay
-  `translations/source/<lang>/<module>/messages.po` exists, the `.mo` file is
-  built from `msgcat --use-first <overlay> <upstream po>` instead of
-  `msguniq <upstream po>`. gettext keys messages by msgctxt and msgid, so for a
-  message found in both files the overlay translation wins, and an untranslated
-  upstream message gets the overlay translation. The `.mo` file depends on its
-  overlay, and `check_overlays.py` runs before the merge.
-- The first file's header becomes the `.mo` header. An overlay therefore starts
-  with the header of the upstream po (at least the same `Content-Type` and
-  `Plural-Forms`; `check_overlays.py` compares them), otherwise plural forms of
-  the whole module would break.
+  `translations/source/<lang>/<module>/messages.po` exists, `merge_po.py`
+  (the build's python, after `check_overlays.py`) writes the po that msgfmt
+  compiles: the upstream header, every overlay entry, and the upstream entries
+  the overlay does not replace. gettext keys messages by msgctxt and msgid, so
+  an overlay entry with the same msgctxt and msgid replaces the upstream
+  translation, and an untranslated upstream message gets the overlay
+  translation. The `.mo` file depends on its overlay and on `merge_po.py`.
+- When esilk rewrites an en-US string, its overlay entry has the new msgid and a
+  comment `#. esilk-replaces: "<old msgid>"`; `merge_po.py` then drops the old
+  upstream entry, so the old text does not stay in the `.mo`, and
+  `check_overlays.py` fails if no upstream entry has that msgctxt and msgid.
+- Start an overlay with the header of the upstream po (`check_overlays.py`
+  compares `Content-Type` and `Plural-Forms`).
 
 Installer and readme strings (`ulfex`/`xrmex`):
 
