@@ -377,6 +377,9 @@ private:
     /** Returns a pivot table field by its index. */
     PivotTableField*    getTableField( sal_Int32 nFieldIdx );
 
+    /** Import solid built-in band fills for a flat pivot data body (one axis only). */
+    void applyStyleBanding(ScDPObject& rObject);
+
     /** Reads a field index for the row or column dimension. */
     static void         importField( IndexVector& orFields, const AttributeList& rAttribs );
     /** Reads an array of field indexes for the row or column dimension. */

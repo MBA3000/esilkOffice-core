@@ -33,6 +33,7 @@
 #include <com/sun/star/sheet/DataPilotFieldShowItemsMode.hpp>
 #include <com/sun/star/sheet/DataPilotFieldSortInfo.hpp>
 #include <com/sun/star/sheet/DataPilotFieldSortMode.hpp>
+#include <com/sun/star/sheet/DataPilotOutputRangeType.hpp>
 #include <com/sun/star/sheet/GeneralFunction.hpp>
 #include <com/sun/star/sheet/XDataPilotDataLayoutFieldSupplier.hpp>
 #include <com/sun/star/sheet/XDataPilotTablesSupplier.hpp>
@@ -65,6 +66,9 @@
 #include <documentimport.hxx>
 #include <workbooksettings.hxx>
 #include <PivotTableFormat.hxx>
+#include <pivotstripefills.hxx>
+#include <patattr.hxx>
+#include <editeng/brushitem.hxx>
 
 namespace oox::xls {
 
@@ -1318,6 +1322,85 @@ PivotTableFormat& PivotTable::createFormat()
     return *xFormat;
 }
 
+void PivotTable::applyStyleBanding(ScDPObject& rObject)
+{
+    const auto& rInfo = rObject.getStyleInfo();
+    // Deliberately narrow first import: no nested subtotals/page fields, no explicit pivot
+    // formats to override, one measure, and no unresolved row-vs-column stripe precedence.
+    if (rInfo.mbShowRowStripes == rInfo.mbShowColStripes || !maFormats.empty()
+        || !maPageFields.empty() || maRowFields.size() != 1 || maColFields.size() != 1
+        || maDataFields.size() != 1)
+        return;
+
+    const PivotStripeFill* pFill = nullptr;
+    for (const auto& rFill : aBuiltinPivotStripeFills)
+    {
+        if (rInfo.maName == rFill.name)
+        {
+            pFill = &rFill;
+            break;
+        }
+    }
+    if (!pFill)
+        return; // Includes custom/Dark styles and border-only Light/Medium stripe presets.
+
+    ScRange aBody = rObject.GetOutputRangeByType(DataPilotOutputRangeType::RESULT);
+    const ScDPSaveData* pSave = rObject.GetSaveData();
+    if (!aBody.IsValid() || !pSave)
+        return;
+    // RESULT includes grand totals. Keep them, all labels and headers outside this draft.
+    if (pSave->GetRowGrand())
+        aBody.aEnd.IncRow(-1);
+    if (pSave->GetColumnGrand())
+        aBody.aEnd.IncCol(-1);
+    if (aBody.aEnd.Row() < aBody.aStart.Row() || aBody.aEnd.Col() < aBody.aStart.Col())
+        return;
+    // A changed/rebuilt output geometry must never paint unrelated sheet cells.
+    if (!maLocationModel.maRange.Contains(aBody))
+        return;
+
+    ScDocument& rDoc = getDocImport().getDoc();
+    auto makePattern = [&](int nTheme, double fTint) {
+        XlsColor aColor;
+        aColor.setTheme(nTheme, fTint);
+        const auto& rGraphicHelper = getBaseFilter().getGraphicHelper();
+        SvxBrushItem aBrush(ATTR_BACKGROUND);
+        aBrush.SetColor(aColor.getColor(rGraphicHelper));
+        aBrush.setComplexColor(aColor.createComplexColor(rGraphicHelper, -1));
+        ScPatternAttr aPattern(rDoc.getCellAttributeHelper());
+        aPattern.GetItemSetWritable().Put(aBrush);
+        return aPattern;
+    };
+    auto apply = [&](const ScRange& rRange, const ScPatternAttr& rPattern) {
+        rDoc.ApplyPatternAreaTab(rRange.aStart.Col(), rRange.aStart.Row(), rRange.aEnd.Col(),
+                                 rRange.aEnd.Row(), rRange.aStart.Tab(), rPattern);
+    };
+    if (pFill->baseTheme >= 0)
+        apply(aBody, makePattern(pFill->baseTheme, pFill->baseTint));
+
+    const ScPatternAttr aStripe = makePattern(pFill->theme, pFill->tint);
+    if (rInfo.mbShowRowStripes)
+    {
+        for (SCROW nRow = aBody.aStart.Row() + pFill->phase; nRow <= aBody.aEnd.Row(); nRow += 2)
+        {
+            ScRange aStripeRange = aBody;
+            aStripeRange.aStart.SetRow(nRow);
+            aStripeRange.aEnd.SetRow(nRow);
+            apply(aStripeRange, aStripe);
+        }
+    }
+    else
+    {
+        for (SCCOL nCol = aBody.aStart.Col() + pFill->phase; nCol <= aBody.aEnd.Col(); nCol += 2)
+        {
+            ScRange aStripeRange = aBody;
+            aStripeRange.aStart.SetCol(nCol);
+            aStripeRange.aEnd.SetCol(nCol);
+            apply(aStripeRange, aStripe);
+        }
+    }
+}
+
 void PivotTable::finalizeImport()
 {
     if( !getAddressConverter().validateCellRange( maLocationModel.maRange, true, true ) )
@@ -1431,6 +1514,11 @@ void PivotTable::finalizeImport()
         rDoc.SetImportingXML(true);
         xDPTables->insertNewByName( maDefModel.maName, aPos, mxDPDescriptor );
         rDoc.SetImportingXML(false);
+        if (ScDPCollection* pPivots = rDoc.GetDPCollection())
+        {
+            if (ScDPObject* pInserted = pPivots->GetByName(maDefModel.maName))
+                applyStyleBanding(*pInserted);
+        }
     }
     catch( Exception& )
     {
