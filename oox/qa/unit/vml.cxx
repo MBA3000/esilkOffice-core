@@ -11,6 +11,7 @@
 
 #include <test/unoapi_test.hxx>
 
+#include <com/sun/star/beans/PropertyValue.hpp>
 #include <com/sun/star/beans/XPropertySet.hpp>
 #include <com/sun/star/drawing/LineStyle.hpp>
 #include <com/sun/star/drawing/PointSequence.hpp>
@@ -237,6 +238,29 @@ CPPUNIT_TEST_FIXTURE(OoxVmlTest, testVMLDetectWordArtOnImport)
     CPPUNIT_ASSERT_DOUBLES_EQUAL(7514, aSize.Width, 2);
     // Without the fix the test would have failed with expected 4540 actual 309.
     CPPUNIT_ASSERT_DOUBLES_EQUAL(4540, aSize.Height, 2);
+}
+
+CPPUNIT_TEST_FIXTURE(OoxVmlTest, testTextWatermarkWithoutShapetype)
+{
+    // Given a document with a text watermark in the header: a <v:shape type="#_x0000_t136"> with
+    // <v:textpath>, but no <v:shapetype id="_x0000_t136"> definition (Word draws it anyway):
+    loadFromFile(u"watermark-text-no-shapetype.docx");
+
+    uno::Reference<drawing::XDrawPageSupplier> xDrawPageSupplier(mxComponent, uno::UNO_QUERY);
+    uno::Reference<beans::XPropertySet> xShape(xDrawPageSupplier->getDrawPage()->getByIndex(0),
+                                               uno::UNO_QUERY);
+    uno::Sequence<beans::PropertyValue> aGeometry;
+    xShape->getPropertyValue(u"CustomShapeGeometry"_ustr) >>= aGeometry;
+    OUString aType;
+    for (const beans::PropertyValue& rProp : aGeometry)
+        if (rProp.Name == "Type")
+            rProp.Value >>= aType;
+    // Without the accompanying fix in place, this test would have failed with:
+    // - Expected: fontwork-plain-text
+    // - Actual  : 0
+    // i.e. the shape type 136 was not taken from the type reference, so the shape had no
+    // geometry and the watermark text was not drawn.
+    CPPUNIT_ASSERT_EQUAL(u"fontwork-plain-text"_ustr, aType);
 }
 
 CPPUNIT_PLUGIN_IMPLEMENT();
