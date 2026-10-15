@@ -29,6 +29,7 @@ $(eval $(call gb_CppunitTest_use_libraries,sw_ww8export$(1), \
     emboleobj \
     sal \
     sfx \
+    sot \
     test \
     unotest \
     utl \

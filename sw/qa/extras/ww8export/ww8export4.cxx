@@ -23,6 +23,7 @@
 
 #include <comphelper/sequenceashashmap.hxx>
 #include <o3tl/string_view.hxx>
+#include <sot/storage.hxx>
 #include <svx/svdpage.hxx>
 
 #include <docsh.hxx>
@@ -845,6 +846,50 @@ CPPUNIT_TEST_FIXTURE(Test, testTdf167583)
     fnVerify(false);
     saveAndReload(TestFilter::DOC);
     fnVerify(false);
+}
+
+CPPUNIT_TEST_FIXTURE(Test, testTdf108772LastParagraphMarkChpx)
+{
+    // A new document with three paragraphs and no character attributes: the main text is the
+    // only text story, so its last paragraph mark is the last character written.
+    createSwDoc();
+    SwWrtShell* pWrtShell = getSwDocShell()->GetWrtShell();
+    pWrtShell->Insert(u"first-paragraph-text"_ustr);
+    pWrtShell->SplitNode();
+    pWrtShell->Insert(u"second-paragraph-text"_ustr);
+    pWrtShell->SplitNode();
+    pWrtShell->Insert(u"third-paragraph-text"_ustr);
+    save(TestFilter::DOC);
+
+    rtl::Reference<SotStorage> xStorage = new SotStorage(maTempFile.GetURL(), StreamMode::READ);
+    rtl::Reference<SotStorageStream> xWordDocument
+        = xStorage->OpenSotStream(u"WordDocument"_ustr, StreamMode::READ);
+    sal_uInt16 nFlags = 0;
+    sal_uInt32 nFcMac = 0;
+    sal_uInt32 nFcPlcfBteChpx = 0;
+    sal_uInt32 nLcbPlcfBteChpx = 0;
+    xWordDocument->Seek(0x0A);
+    xWordDocument->ReadUInt16(nFlags);
+    xWordDocument->Seek(0x1C); // fcMac: end of all text in the WordDocument stream
+    xWordDocument->ReadUInt32(nFcMac);
+    xWordDocument->Seek(0xFA); // FibRgFcLcb97: fcPlcfBteChpx, lcbPlcfBteChpx
+    xWordDocument->ReadUInt32(nFcPlcfBteChpx);
+    xWordDocument->ReadUInt32(nLcbPlcfBteChpx);
+    CPPUNIT_ASSERT_GREATEREQUAL(sal_uInt32(12), nLcbPlcfBteChpx);
+
+    rtl::Reference<SotStorageStream> xTable = xStorage->OpenSotStream(
+        (nFlags & 0x0200) ? u"1Table"_ustr : u"0Table"_ustr, StreamMode::READ);
+    // PlcBteChpx: n+1 FCs, then n page numbers; the last FC is the end of the last CHPX run.
+    const sal_uInt32 nRuns = (nLcbPlcfBteChpx - 4) / 8;
+    sal_uInt32 nChpxEnd = 0;
+    xTable->Seek(nFcPlcfBteChpx + 4 * nRuns);
+    xTable->ReadUInt32(nChpxEnd);
+    // Without the fix in place, this test would have failed with:
+    // - Expected: 2176
+    // - Actual  : 2174
+    // i.e. the last paragraph mark was outside every CHPX run, and Word 2013+ did not show the
+    // last paragraph.
+    CPPUNIT_ASSERT_EQUAL(nFcMac, nChpxEnd);
 }
 
 DECLARE_WW8EXPORT_TEST(testTdf117636, "tdf117636.doc")
