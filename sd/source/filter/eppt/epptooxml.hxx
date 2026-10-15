@@ -55,6 +55,10 @@ enum PlaceholderType
     Picture
 };
 
+/// esilk compat: the p:ph idx of subtitle placeholders on slides and layouts; the
+/// date, footer and slide number placeholders count up from 1 and skip it.
+constexpr sal_Int32 SUBTITLE_PLACEHOLDER_INDEX = 1000;
+
 class PowerPointShapeExport;
 
 class PowerPointExport final : public XmlFilterBase, public PPTWriterBase

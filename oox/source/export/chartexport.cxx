@@ -114,6 +114,7 @@
 #include <svl/numformat.hxx>
 #include <svl/numuno.hxx>
 #include <comphelper/diagnose_ex.hxx>
+#include <comphelper/flagguard.hxx>
 #include <sal/log.hxx>
 
 #include <set>
@@ -3156,6 +3157,37 @@ void ChartExport::exportManualLayout(const css::chart2::RelativePosition& rPos,
     pFS->endElement(FSNS(XML_c, XML_layout));
 }
 
+namespace
+{
+/// esilk compat: a solid fill without transparency (and without transparency gradient).
+bool isOpaqueSolidFill(const Reference<XPropertySet>& xPropSet)
+{
+    try
+    {
+        Reference<beans::XPropertySetInfo> xInfo = xPropSet->getPropertySetInfo();
+        if (xInfo.is() && xInfo->hasPropertyByName(u"FillTransparence"_ustr))
+        {
+            sal_Int16 nTransparence = 0;
+            xPropSet->getPropertyValue(u"FillTransparence"_ustr) >>= nTransparence;
+            if (nTransparence != 0)
+                return false;
+        }
+        if (xInfo.is() && xInfo->hasPropertyByName(u"FillTransparenceGradientName"_ustr))
+        {
+            OUString aName;
+            xPropSet->getPropertyValue(u"FillTransparenceGradientName"_ustr) >>= aName;
+            if (!aName.isEmpty())
+                return false;
+        }
+    }
+    catch (const uno::Exception&)
+    {
+        return false;
+    }
+    return true;
+}
+}
+
 void ChartExport::exportFill( const Reference< XPropertySet >& xPropSet )
 {
     // Similar to DrawingML::WriteFill, but gradient access via name
@@ -3202,9 +3234,29 @@ void ChartExport::exportFill( const Reference< XPropertySet >& xPropSet )
     if (aFillStyle == FillStyle_SOLID &&
             aComplexColor.getType() == model::ColorType::Theme &&
             aComplexColor.getTransformations().empty()) {
-        // If we're dealing with a theme color, then we don't want to export the
-        // explicit value. We want it to remain implicit, as a theme.
-        return;
+        if (mbExportingDataPoint)
+        {
+            // esilk compat: a data point is written only for a point with its own
+            // formatting (or for every point of a series that varies colors by point),
+            // and the automatic color of the reader is not necessarily the theme color
+            // of the point (e.g. accent6 on one pie slice, where Excel's automatic fill
+            // is accent2): leaving it implicit lost the color. Keep it a theme color,
+            // but write it; a transparent one is written as before by exportSolidFill().
+            if (isOpaqueSolidFill(xPropSet))
+            {
+                mpFS->startElementNS(XML_a, XML_solidFill);
+                ThemeExport aTE(mpFB, GetDocumentType(), mpFS);
+                aTE.writeComplexColor(aComplexColor);
+                mpFS->endElementNS(XML_a, XML_solidFill);
+                return;
+            }
+        }
+        else
+        {
+            // If we're dealing with a theme color, then we don't want to export the
+            // explicit value. We want it to remain implicit, as a theme.
+            return;
+        }
     }
 
     switch( aFillStyle )
@@ -6047,6 +6099,9 @@ void ChartExport::exportDataPoints(
     const uno::Reference< beans::XPropertySet > & xSeriesProperties,
     sal_Int32 nSeriesLength, sal_Int32 eChartType )
 {
+    // esilk compat: theme fills of data points are written, see exportFill().
+    comphelper::FlagRestorationGuard aDataPointGuard(mbExportingDataPoint, true);
+
     uno::Reference< chart2::XDataSeries > xSeries( xSeriesProperties, uno::UNO_QUERY );
     bool bVaryColorsByPoint = false;
     Sequence< sal_Int32 > aDataPointSeq;

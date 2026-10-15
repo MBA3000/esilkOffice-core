@@ -841,6 +841,50 @@ CPPUNIT_TEST_FIXTURE(ScFiltersTest3, testTdf98481)
     CPPUNIT_ASSERT_EQUAL(3.0, pDoc->GetValue(ScAddress(3, 4, 0)));
 }
 
+CPPUNIT_TEST_FIXTURE(ScFiltersTest3, testEsilkGeneratorCachedTextResultXLSX)
+{
+    // esilk compat: hand-made XLSX whose docProps/app.xml Application is
+    // "esilkOffice/26.8.4.0.0...". B1 has a text result of a function this office does
+    // not know (as a KZ add-in function when the KZ extension is missing), C1 a text
+    // result of CONCATENATE.
+    createScDoc("xlsx/esilk-cached-text-result.xlsx");
+
+    ScDocument* pDoc = getScDoc();
+
+    // Without the fix in place, the generator was not "known good", so cached text
+    // results were not used and the cell was recalculated on load:
+    // - Expected: one hundred
+    // - Actual  : #NAME?
+    CPPUNIT_ASSERT_EQUAL(u"one hundred"_ustr, pDoc->GetString(ScAddress(1, 0, 0)));
+    CPPUNIT_ASSERT_EQUAL(u"x100"_ustr, pDoc->GetString(ScAddress(2, 0, 0)));
+    // The formula itself is kept.
+    CPPUNIT_ASSERT_EQUAL(CELLTYPE_FORMULA, pDoc->GetCellType(ScAddress(1, 0, 0)));
+}
+
+CPPUNIT_TEST_FIXTURE(ScFiltersTest3, testEsilkCachedUnknownFunctionResultODS)
+{
+    // esilk compat: B1 calls a function this office does not know (as a KZ add-in function
+    // when the KZ extension is missing) and has the cached number 4325 but no cell style.
+    // C1 =B1+1, D1 =A1*2 with a wrong cached value 7. None of the cells has a cell style.
+    createScDoc("fods/esilk-cached-unknown-function.fods");
+
+    ScDocument* pDoc = getScDoc();
+
+    // Without the fix in place, B1 was recalculated on load to find its number format:
+    // - Expected: 4325
+    // - Actual  : #NAME?
+    CPPUNIT_ASSERT_EQUAL(FormulaError::NONE, pDoc->GetErrCode(ScAddress(1, 0, 0)));
+    CPPUNIT_ASSERT_EQUAL(4325.0, pDoc->GetValue(ScAddress(1, 0, 0)));
+    // Formulas without an unknown name still recalculate for their number format.
+    CPPUNIT_ASSERT_EQUAL(4326.0, pDoc->GetValue(ScAddress(2, 0, 0)));
+    CPPUNIT_ASSERT_EQUAL(200.0, pDoc->GetValue(ScAddress(3, 0, 0)));
+
+    // A hard recalculation still gives the error.
+    ScDocShell* pDocSh = getScDocShell();
+    pDocSh->DoHardRecalc();
+    CPPUNIT_ASSERT(pDoc->GetErrCode(ScAddress(1, 0, 0)) != FormulaError::NONE);
+}
+
 CPPUNIT_TEST_FIXTURE(ScFiltersTest3, testTdf115022)
 {
     createScDoc("xlsx/tdf115022.xlsx");

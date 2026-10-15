@@ -172,6 +172,8 @@ private:
     bool                mbStacked;
     bool                mbPercent;
     bool                mbHasDateCategories;
+    /// esilk compat: exportFill() is writing the fill of a data point (c:dPt).
+    bool                mbExportingDataPoint = false;
 
     std::set<sal_Int32> maExportedAxis;
 

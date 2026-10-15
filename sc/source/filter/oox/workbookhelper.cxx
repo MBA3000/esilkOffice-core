@@ -78,6 +78,7 @@
 #include <editutil.hxx>
 #include <editeng/editstat.hxx>
 #include <unotools/charclass.hxx>
+#include <unotools/configmgr.hxx>
 #include <o3tl/string_view.hxx>
 #include <ViewSettingsSequenceDefines.hxx>
 
@@ -538,6 +539,20 @@ void WorkbookGlobals::useInternalChartDataTable( bool bInternal )
 
 // private --------------------------------------------------------------------
 
+namespace {
+
+/** esilk compat: whether the document generator (meta:generator in ODF, Application in
+    OOXML docProps/app.xml) names esilkOffice or the product name of this build. */
+bool isProductGenerator(std::u16string_view aGenerator)
+{
+    if (o3tl::matchIgnoreAsciiCase(aGenerator, u"esilkOffice"))
+        return true;
+    const OUString aProductName(utl::ConfigManager::getProductName());
+    return !aProductName.isEmpty() && o3tl::matchIgnoreAsciiCase(aGenerator, aProductName);
+}
+
+}
+
 void WorkbookGlobals::initialize()
 {
     maCellStyles = "CellStyles";
@@ -569,8 +584,12 @@ void WorkbookGlobals::initialize()
         aCalcConfig.SetStringRefSyntax( formula::FormulaGrammar::CONV_XL_A1 ) ;
         mpDoc->SetCalcConfig(aCalcConfig);
     }
-    else if (aGenerator.startsWithIgnoreAsciiCase("LibreOffice"))
+    else if (aGenerator.startsWithIgnoreAsciiCase("LibreOffice")
+             || isProductGenerator(aGenerator))
     {
+        // esilk compat: files written by esilkOffice (or by whatever product name this
+        // build carries) come from the same Calc export as LibreOffice-written ones, so
+        // their cached formula results (text results too) are trusted the same way.
         mbGeneratorKnownGood = true;
     }
     mbHasCalculatedFormulaCells = mbGeneratorKnownGood;

@@ -2887,16 +2887,40 @@ public:
     void operator() (size_t nRow, ScFormulaCell* pCell)
     {
         sal_uInt32 nFormat = mrCol.GetNumberFormat(mrCol.GetDoc().GetNonThreadedContext(), nRow);
+        // esilk compat: a cell that only needs its number format (General format, a
+        // cached result loaded) is recalculated after it is compiled, see below.
+        bool bDirtyForNumberFormat = false;
         if( (nFormat % SV_COUNTRY_LANGUAGE_OFFSET) != 0)
             // Non-default number format is set.
             pCell->SetNeedNumberFormat(false);
         else if (pCell->NeedsNumberFormat())
-            pCell->SetDirtyVar();
+            bDirtyForNumberFormat = true;
 
         if (pCell->GetMatrixFlag() != ScMatrixMode::NONE)
+        {
             pCell->SetDirtyVar();
+            bDirtyForNumberFormat = false;
+        }
 
+        const bool bHadCachedResult = !pCell->GetDirty();
         pCell->CompileXML(mrCxt, mrProgress);
+
+        if (bDirtyForNumberFormat)
+        {
+            // esilk compat: recalculating a formula with an unknown name (e.g. a function
+            // of an add-in that is not installed here) can only give #NAME?, so it would
+            // replace the result the file was saved with by an error just to find a
+            // number format. Keep the cached result of such a cell, as for cells that
+            // have a cell style; the cell still recalculates when its inputs change or
+            // on a hard recalculation.
+            const ScTokenArray* pCode = pCell->GetCode();
+            const bool bUnknownName = pCode
+                && (pCode->GetCodeError() == FormulaError::NoName || pCode->HasOpCode(ocBad));
+            if (bHadCachedResult && bUnknownName && !pCell->GetDirty())
+                pCell->SetNeedNumberFormat(false);
+            else
+                pCell->SetDirtyVar();
+        }
     }
 };
 
