@@ -219,6 +219,29 @@ ImplSdPPTImport::~ImplSdPPTImport()
     mxPicturesStream.clear();
 }
 
+namespace
+{
+/// The layout that matches the title and body placeholders of a slide, AUTOLAYOUT_NONE if none.
+AutoLayout lcl_getAutoLayoutFromPresObjs(SdPage& rPage)
+{
+    if (!rPage.GetPresObj(PresObjKind::Title))
+        return AUTOLAYOUT_NONE;
+    const bool bSubtitle = rPage.GetPresObj(PresObjKind::Text) != nullptr;
+    const bool bOutline1 = rPage.GetPresObj(PresObjKind::Outline) != nullptr;
+    const bool bOutline2 = rPage.GetPresObj(PresObjKind::Outline, 2) != nullptr;
+    const bool bOutline3 = rPage.GetPresObj(PresObjKind::Outline, 3) != nullptr;
+    if (bSubtitle)
+        return bOutline1 ? AUTOLAYOUT_NONE : AUTOLAYOUT_TITLE;
+    if (bOutline3)
+        return AUTOLAYOUT_NONE;
+    if (bOutline2)
+        return AUTOLAYOUT_TITLE_2CONTENT;
+    if (bOutline1)
+        return AUTOLAYOUT_TITLE_CONTENT;
+    return AUTOLAYOUT_TITLE_ONLY;
+}
+}
+
 // Import
 bool ImplSdPPTImport::Import()
 {
@@ -1217,8 +1240,15 @@ bool ImplSdPPTImport::Import()
                         eAutoLayout = AUTOLAYOUT_VTITLE_VCONTENT_OVER_VCONTENT;
                     break;
 
-                    case PptSlideLayout::BOTTOMROW2COLUMNS :
                     case PptSlideLayout::BLANKSLIDE :
+                        /*  PowerPoint 2007 and later write every slide as a blank slide
+                            and keep the real layout in its own records, but the slide
+                            still has its title and body placeholders. Without a layout,
+                            saving the slide as .ppt again turns them into text boxes. */
+                        eAutoLayout = lcl_getAutoLayoutFromPresObjs( *pPage );
+                    break;
+
+                    case PptSlideLayout::BOTTOMROW2COLUMNS :
                     case PptSlideLayout::MASTERSLIDE :           // layout of the standard and title master page
                     case PptSlideLayout::TITLEMASTERSLIDE :
                     case PptSlideLayout::MASTERNOTES :           // layout of the note master page
