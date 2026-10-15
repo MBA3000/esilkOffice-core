@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" office:version="1.4" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
+ <office:meta>
+  <meta:generator>esilkOffice/26.8.4.0.0$Windows_X86_64</meta:generator>
+ </office:meta>
+ <office:body>
+  <office:spreadsheet>
+   <table:table table:name="Sheet1">
+    <table:table-column table:number-columns-repeated="4"/>
+    <table:table-row>
+     <table:table-cell office:value-type="float" office:value="100">
+      <text:p>100</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=ESILKNOSUCHFUNCTION([.A1])" office:value-type="float" office:value="4325">
+      <text:p>4325</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=[.B1]+1" office:value-type="float" office:value="4326">
+      <text:p>4326</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=[.A1]*2" office:value-type="float" office:value="7">
+      <text:p>7</text:p>
+     </table:table-cell>
+    </table:table-row>
+   </table:table>
+  </office:spreadsheet>
+ </office:body>
+</office:document>
