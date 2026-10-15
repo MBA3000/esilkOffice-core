@@ -1017,6 +1017,28 @@ CPPUNIT_TEST_FIXTURE(Chart2ExportTest3, test1904NullDate)
     }
 }
 
+CPPUNIT_TEST_FIXTURE(Chart2ExportTest3, testPieVaryColorsRoundtripXLSX)
+{
+    // A pie chart made by Excel: the slices have the theme fills accent1..accent4. The export
+    // keeps the theme fills implicit, so the data points of the saved file only have a border.
+    loadFromFile(u"xlsx/pie_vary_colors.xlsx");
+    saveAndReload(TestFilter::XLSX);
+
+    Reference<chart2::XChartDocument> xChartDoc = getChartDocFromSheet(0);
+    Reference<chart2::XDataSeries> xDataSeries = getDataSeriesFromDoc(xChartDoc, 0);
+    CPPUNIT_ASSERT(xDataSeries.is());
+
+    // Without the fix in place, every slice had the color of the first one (0x4472c4).
+    const Color aExpected[] = { Color(0x4472c4), Color(0xed7d31), Color(0xa5a5a5), Color(0xffc000) };
+    for (sal_Int32 i = 0; i < 4; ++i)
+    {
+        Reference<beans::XPropertySet> xPoint(xDataSeries->getDataPointByIndex(i), UNO_SET_THROW);
+        Color aColor;
+        xPoint->getPropertyValue(u"FillColor"_ustr) >>= aColor;
+        CPPUNIT_ASSERT_EQUAL(aExpected[i], aColor);
+    }
+}
+
 CPPUNIT_PLUGIN_IMPLEMENT();
 
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */
