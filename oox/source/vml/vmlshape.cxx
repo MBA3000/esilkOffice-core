@@ -326,7 +326,10 @@ void ShapeBase::finalizeFragmentImport()
         if (aType.startsWith(sShapeTypePrefix)) {
             maTypeModel.moShapeType = o3tl::toInt32(aType.subView(sShapeTypePrefix.getLength()));
         }
-        else if (aType.startsWith("_x0000_t", &tmp)) {
+        else if (aType.startsWith("_x0000_t", &tmp)
+                 // maType is read with getXString(), which decodes "_x0000_" to U+0000
+                 || aType.startsWith(std::u16string_view(u"\0t", 2), &tmp))
+        {
             maTypeModel.moShapeType = o3tl::toInt32(tmp);
         }
     }
