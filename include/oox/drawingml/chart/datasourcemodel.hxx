@@ -43,6 +43,7 @@ struct DataSequenceModel
     sal_Int32           mnPointCount;       /// Number of points in this series source.
     sal_Int32           mnLevelCount;       /// Number of category levels.
     SvNumFormatType     meFormatType;       /// Type of number format in maFormatCode.
+    bool                mbPivotSource;      /// True = categories or values of a pivot chart: maFormula may contain the grand total that is not part of the chart.
 
     explicit            DataSequenceModel();
                         ~DataSequenceModel();

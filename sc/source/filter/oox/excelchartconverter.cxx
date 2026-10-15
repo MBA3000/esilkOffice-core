@@ -24,6 +24,7 @@
 #include <com/sun/star/chart2/data/XDataProvider.hpp>
 #include <com/sun/star/chart2/data/XDataReceiver.hpp>
 #include <com/sun/star/chart2/data/XSheetDataProvider.hpp>
+#include <com/sun/star/sheet/ComplexReference.hpp>
 
 #include <osl/diagnose.h>
 #include <oox/core/filterbase.hxx>
@@ -38,6 +39,48 @@ using namespace ::com::sun::star::chart2::data;
 using namespace ::com::sun::star::uno;
 
 using ::oox::drawingml::chart::DataSequenceModel;
+
+namespace {
+
+/** Leaves the grand total out of a categories or values range of a pivot chart.
+
+    Excel references the whole body of the pivot table in the series of a
+    pivot chart, including the grand total row (or column), e.g. $A$5:$A$15,
+    but the chart shows only the points of the pivot table items, and the
+    cached data of the sequence has one point less (ptCount 10). Without
+    pivot chart support for these files, the plain cell range would add the
+    grand total as an extra category, whose bars dwarf all others.
+ */
+void lclExcludePivotGrandTotal( ApiTokenSequence& rTokens, const FormulaParser& rParser,
+        sal_Int32 nPointCount )
+{
+    ScRange aRange;
+    if( (nPointCount <= 0) || !rParser.extractCellRange( aRange, rTokens ) )
+        return;
+
+    const sal_Int32 nCols = aRange.aEnd.Col() - aRange.aStart.Col() + 1;
+    const sal_Int32 nRows = aRange.aEnd.Row() - aRange.aStart.Row() + 1;
+    bool bTrimRow = (nCols == 1) && (nRows == nPointCount + 1);
+    bool bTrimCol = (nRows == 1) && (nCols == nPointCount + 1);
+    if( !bTrimRow && !bTrimCol )
+        return;
+
+    for( auto& rToken : asNonConstRange( rTokens ) )
+    {
+        css::sheet::ComplexReference aRef;
+        if( rToken.Data >>= aRef )
+        {
+            if( bTrimRow )
+                --aRef.Reference2.Row;
+            else
+                --aRef.Reference2.Column;
+            rToken.Data <<= aRef;
+            return;
+        }
+    }
+}
+
+}
 
 ExcelChartConverter::ExcelChartConverter( const WorkbookHelper& rHelper ) :
     WorkbookHelper( rHelper )
@@ -81,6 +124,8 @@ Reference< XDataSequence > ExcelChartConverter::createDataSequence(
         FormulaParser& rParser = getFormulaParser();
         ScAddress aBaseAddr( SCCOL( 0 ), SCROW( 0 ), SCTAB( getCurrentSheetIndex() ) );
         ApiTokenSequence aTokens = rParser.importFormula( aBaseAddr, rDataSeq.maFormula );
+        if( rDataSeq.mbPivotSource )
+            lclExcludePivotGrandTotal( aTokens, rParser, rDataSeq.mnPointCount );
 
         try
         {

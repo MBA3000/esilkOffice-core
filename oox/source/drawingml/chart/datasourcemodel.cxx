@@ -26,7 +26,8 @@ namespace oox::drawingml::chart {
 DataSequenceModel::DataSequenceModel() :
     mnPointCount( -1 ),
     mnLevelCount( 1 ),
-    meFormatType( SvNumFormatType::UNDEFINED )
+    meFormatType( SvNumFormatType::UNDEFINED ),
+    mbPivotSource( false )
 {
 }
 

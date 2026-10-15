@@ -1265,6 +1265,31 @@ CPPUNIT_TEST_FIXTURE(Chart2ImportTest2, TestParetoDefaultColor)
     CPPUNIT_ASSERT_EQUAL(nCorrectColor, nFillColor);
 }
 
+CPPUNIT_TEST_FIXTURE(Chart2ImportTest2, testPivotChartWithoutGrandTotalXLSX)
+{
+    // A pivot chart made by Excel: its series reference $A$4:$A$8 and $B$4:$B$8, which include
+    // the grand total row of the pivot table, but the chart (and the cached data) has 4 points.
+    loadFromFile(u"xlsx/pivot_chart_grand_total.xlsx");
+    Reference<chart2::XChartDocument> xChartDoc = getChartDocFromSheet(0);
+    CPPUNIT_ASSERT(xChartDoc.is());
+
+    Reference<chart2::data::XDataSequence> xValues
+        = getDataSequenceFromDocByRole(xChartDoc, u"values-y");
+    CPPUNIT_ASSERT(xValues.is());
+    // Without the fix in place, this was 5: the grand total was an extra column of the chart.
+    CPPUNIT_ASSERT_EQUAL(sal_Int32(4), xValues->getData().getLength());
+
+    Reference<chart2::XAxis> xAxis = getAxisFromDoc(xChartDoc, 0, 0, 0);
+    CPPUNIT_ASSERT(xAxis.is());
+    chart2::ScaleData aScaleData = xAxis->getScaleData();
+    CPPUNIT_ASSERT(aScaleData.Categories.is());
+    Reference<chart2::data::XTextualDataSequence> xCategories(aScaleData.Categories->getValues(),
+                                                             UNO_QUERY_THROW);
+    Sequence<OUString> aCategories = xCategories->getTextualData();
+    CPPUNIT_ASSERT_EQUAL(sal_Int32(4), aCategories.getLength());
+    CPPUNIT_ASSERT_EQUAL(u"West"_ustr, aCategories[3]);
+}
+
 CPPUNIT_PLUGIN_IMPLEMENT();
 
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */
