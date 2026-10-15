@@ -767,8 +767,12 @@ DataPointConverter::~DataPointConverter()
 }
 
 void DataPointConverter::convertFromModel( const Reference< XDataSeries >& rxDataSeries,
-        const TypeGroupConverter& rTypeGroup, const SeriesModel& rSeries )
+        const TypeGroupConverter& rTypeGroup, const SeriesModel& rSeries, bool bVaryColorsByPoint )
 {
+    // index used for the automatic formatting of this point: with varying colors, every point
+    // has its own automatic fill (e.g. accent1, accent2... in a pie chart), otherwise the
+    // automatic fill of the series is used
+    const sal_Int32 nAutoFormatIdx = bVaryColorsByPoint ? mrModel.mnIndex : rSeries.mnIndex;
     bool bMSO2007Doc = getFilter().isMSO2007Document();
     try
     {
@@ -793,13 +797,13 @@ void DataPointConverter::convertFromModel( const Reference< XDataSeries >& rxDat
         if( mrModel.mxShapeProp.is() )
         {
             if( rTypeGroup.getTypeInfo().mbPictureOptions )
-                getFormatter().convertFrameFormatting( aPropSet, mrModel.mxShapeProp, mrModel.mxPicOptions.getOrCreate(bMSO2007Doc), rTypeGroup.getSeriesObjectType(), rSeries.mnIndex );
+                getFormatter().convertFrameFormatting( aPropSet, mrModel.mxShapeProp, mrModel.mxPicOptions.getOrCreate(bMSO2007Doc), rTypeGroup.getSeriesObjectType(), nAutoFormatIdx );
             else
-                getFormatter().convertFrameFormatting( aPropSet, mrModel.mxShapeProp, rTypeGroup.getSeriesObjectType(), rSeries.mnIndex );
+                getFormatter().convertFrameFormatting( aPropSet, mrModel.mxShapeProp, rTypeGroup.getSeriesObjectType(), nAutoFormatIdx );
         }
         else if (rSeries.mxShapeProp.is())
         {
-            getFormatter().convertFrameFormatting( aPropSet, rSeries.mxShapeProp, rTypeGroup.getSeriesObjectType(), rSeries.mnIndex );
+            getFormatter().convertFrameFormatting( aPropSet, rSeries.mxShapeProp, rTypeGroup.getSeriesObjectType(), nAutoFormatIdx );
         }
     }
     catch( Exception& )
@@ -938,7 +942,10 @@ Reference< XDataSeries > SeriesConverter::createDataSeries( const TypeGroupConve
 
     // own area formatting for every data point (TODO: varying line color not supported)
     // #i91271# always set area formatting for every point in pie/doughnut charts to override their automatic point formatting
-    if( bIsPie || (bVaryColorsByPoint && rTypeGroup.isSeriesFrameFormat() && ObjectFormatter::isAutomaticFill( mrModel.mxShapeProp )) )
+    const bool bPointAutoFill = bIsPie || (bVaryColorsByPoint && rTypeGroup.isSeriesFrameFormat() && ObjectFormatter::isAutomaticFill( mrModel.mxShapeProp ));
+    // the automatic fill of each point depends on the point index
+    const bool bVaryAutoFillByPoint = bPointAutoFill && bVaryColorsByPoint;
+    if( bPointAutoFill )
     {
         /*  Set the series point number as color cycle size at the object
             formatter to get correct start-shade/end-tint. TODO: in doughnut
@@ -962,10 +969,19 @@ Reference< XDataSeries > SeriesConverter::createDataSeries( const TypeGroupConve
     }
 
     // data point settings
-    for (auto const& point : mrModel.maPoints)
     {
-        DataPointConverter aPointConv(*this, *point);
-        aPointConv.convertFromModel( xDataSeries, rTypeGroup, mrModel );
+        /*  A data point with own formatting but without own fill (e.g. only a
+            border, as written for pie slices whose fill is the automatic theme
+            color) keeps the automatic fill of its own point index. */
+        sal_Int32 nOldMax = rFormatter.getMaxSeriesIndex();
+        if( bVaryAutoFillByPoint )
+            rFormatter.setMaxSeriesIndex( nDataPointCount - 1 );
+        for (auto const& point : mrModel.maPoints)
+        {
+            DataPointConverter aPointConv(*this, *point);
+            aPointConv.convertFromModel( xDataSeries, rTypeGroup, mrModel, bVaryAutoFillByPoint );
+        }
+        rFormatter.setMaxSeriesIndex( nOldMax );
     }
 
     // Track whether the series itself had data labels (not inherited from type group)

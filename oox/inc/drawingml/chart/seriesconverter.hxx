@@ -108,11 +108,18 @@ public:
     explicit            DataPointConverter( const ConverterRoot& rParent, DataPointModel& rModel );
     virtual             ~DataPointConverter() override;
 
-    /** Converts settings for a data point in the passed series. */
+    /** Converts settings for a data point in the passed series.
+
+        @param bVaryColorsByPoint  True, if the automatic fill of the points of
+            the series varies by point (e.g. pie charts with varyColors). Then
+            the automatic formatting of this point is taken from the point
+            index, not from the series index.
+     */
     void                convertFromModel(
                             const css::uno::Reference< css::chart2::XDataSeries >& rxDataSeries,
                             const TypeGroupConverter& rTypeGroup,
-                            const SeriesModel& rSeries );
+                            const SeriesModel& rSeries,
+                            bool bVaryColorsByPoint = false );
 };
 
 

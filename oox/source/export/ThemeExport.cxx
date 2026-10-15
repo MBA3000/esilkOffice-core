@@ -671,9 +671,14 @@ void ThemeExport::writeBlipFill(model::BlipFill const& rBlipFill)
 
 void ThemeExport::writeFillStyle(model::FillStyle const& rFillStyle)
 {
+    if (!rFillStyle.mpFill)
+        return;
+
     switch (rFillStyle.mpFill->meType)
     {
         case model::FillType::None:
+            mpFS->singleElementNS(XML_a, XML_noFill);
+            break;
         case model::FillType::Solid:
         {
             auto* pSolidFill = static_cast<model::SolidFill*>(rFillStyle.mpFill.get());
@@ -763,6 +768,23 @@ void ThemeExport::writeLineStyle(model::LineStyle const& rLineStyle)
                          sax_fastparser::UseIf(sCap, !sCap.isEmpty()), XML_cmpd,
                          sax_fastparser::UseIf(sCompoundLine, !sCompoundLine.isEmpty()), XML_algn,
                          sax_fastparser::UseIf(sPenAlign, !sPenAlign.isEmpty()));
+
+    // The line fill comes first in CT_LineProperties. Without it, a shape that refers to this
+    // line style (e.g. the boxes and connectors of a SmartArt diagram) has no visible line.
+    if (rLineStyle.maLineFillStyle.mpFill)
+    {
+        switch (rLineStyle.maLineFillStyle.mpFill->meType)
+        {
+            case model::FillType::None:
+            case model::FillType::Solid:
+            case model::FillType::Gradient:
+            case model::FillType::Pattern:
+                writeFillStyle(rLineStyle.maLineFillStyle);
+                break;
+            case model::FillType::Blip: // not allowed in a:ln
+                break;
+        }
+    }
 
     if (rLineStyle.maLineDash.mePresetType != model::PresetDashType::Unset)
     {

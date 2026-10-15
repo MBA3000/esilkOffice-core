@@ -155,6 +155,27 @@ void ChartSpaceConverter::convertFromModel( const Reference< XShapes >& rxExtern
     PropertySet aBackPropSet( getChartDocument()->getPageBackground() );
     getFormatter().convertFrameFormatting( aBackPropSet, mrModel.mxShapeProp, OBJECTTYPE_CHARTSPACE );
 
+    /*  The categories and values of a pivot chart reference the whole body of
+        the pivot table, including its grand total, but the chart shows only
+        the points of the cached data (Excel writes e.g. $A$5:$A$15 with a
+        ptCount of 10). Mark these sequences, so that the chart converter can
+        leave out the grand total. */
+    if( mrModel.mbPivotChart && mrModel.mxPlotArea.is() )
+    {
+        for( auto const& rxTypeGroup : mrModel.mxPlotArea->maTypeGroups )
+        {
+            for( auto const& rxSeries : rxTypeGroup->maSeries )
+            {
+                for( DataSourceType eType : { DataSourceType::STR_CAT, DataSourceType::NUM_VAL } )
+                {
+                    SeriesModel::DataSourceMap::mapped_type xSource = rxSeries->maSources.get( eType );
+                    if( xSource && xSource->mxDataSeq.is() )
+                        xSource->mxDataSeq->mbPivotSource = true;
+                }
+            }
+        }
+    }
+
     bool bMSO2007Doc = getFilter().isMSO2007Document();
     // convert plot area (container of all chart type groups)
     PlotAreaConverter aPlotAreaConv( *this, mrModel.mxPlotArea.getOrCreate() );

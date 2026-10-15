@@ -1649,6 +1649,30 @@ CPPUNIT_TEST_FIXTURE(SdExportTest, testTdf115394PPT)
     CPPUNIT_ASSERT_EQUAL(1.0, fTransitionDuration);
 }
 
+CPPUNIT_TEST_FIXTURE(SdExportTest, testPPTPlaceholdersOfBlankLayoutSlides)
+{
+    // Written by PowerPoint 2007 or later: the slides are stored with the blank layout, but have
+    // a title and a subtitle (slide 1), a title and a body placeholder (slide 2).
+    createSdImpressDoc("n758621.ppt");
+
+    SdXImpressDocument* pXImpressDocument = dynamic_cast<SdXImpressDocument*>(mxComponent.get());
+    CPPUNIT_ASSERT(pXImpressDocument);
+    SdDrawDocument* pDoc = pXImpressDocument->GetDoc();
+    // Without the fix in place, both slides had no layout (AUTOLAYOUT_NONE).
+    CPPUNIT_ASSERT_EQUAL(sal_Int32(AUTOLAYOUT_TITLE),
+                         sal_Int32(pDoc->GetSdPage(0, PageKind::Standard)->GetAutoLayout()));
+    CPPUNIT_ASSERT_EQUAL(sal_Int32(AUTOLAYOUT_TITLE_CONTENT),
+                         sal_Int32(pDoc->GetSdPage(1, PageKind::Standard)->GetAutoLayout()));
+
+    saveAndReload(TestFilter::PPT);
+
+    // Without the fix in place, the placeholders were saved as plain text boxes.
+    uno::Reference<drawing::XShape> xTitle(getShapeFromPage(0, 0), uno::UNO_QUERY_THROW);
+    CPPUNIT_ASSERT_EQUAL(u"com.sun.star.presentation.TitleTextShape"_ustr, xTitle->getShapeType());
+    uno::Reference<drawing::XShape> xBody(getShapeFromPage(1, 1), uno::UNO_QUERY_THROW);
+    CPPUNIT_ASSERT_EQUAL(u"com.sun.star.presentation.OutlinerShape"_ustr, xBody->getShapeType());
+}
+
 CPPUNIT_TEST_FIXTURE(SdExportTest, testBulletsAsImageImpress8)
 {
     createSdImpressDoc("odp/BulletsAsImage.odp");

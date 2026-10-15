@@ -149,6 +149,25 @@ CPPUNIT_TEST_FIXTURE(SdOOXMLExportTest3, testTdf92222)
                 u"19050");
 }
 
+CPPUNIT_TEST_FIXTURE(SdOOXMLExportTest3, testThemeLineStyleFill)
+{
+    // The line styles of the theme have a solid fill with the placeholder color. Without it,
+    // PowerPoint drew the shapes that use the theme line styles (e.g. the boxes and the
+    // connectors of SmartArt diagrams) without any line after the file was saved.
+    createSdImpressDoc("pptx/tdf92222.pptx");
+    save(TestFilter::PPTX);
+
+    xmlDocUniquePtr pXmlDocTheme = parseExport(u"ppt/theme/theme1.xml"_ustr);
+    for (int i = 1; i <= 3; ++i)
+    {
+        OString sLine = "/a:theme/a:themeElements/a:fmtScheme/a:lnStyleLst/a:ln["
+                        + OString::number(i) + "]";
+        // fill first, before the dash and join elements (CT_LineProperties)
+        assertXPath(pXmlDocTheme, sLine + "/*[1]/a:schemeClr", "val", u"phClr");
+        assertXPath(pXmlDocTheme, sLine + "/a:solidFill/a:schemeClr", "val", u"phClr");
+    }
+}
+
 CPPUNIT_TEST_FIXTURE(SdOOXMLExportTest3, testTdf129430)
 {
     createSdImpressDoc("odp/tdf129430.odp");
