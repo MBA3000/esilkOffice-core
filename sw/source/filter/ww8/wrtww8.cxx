@@ -3276,6 +3276,12 @@ void WW8Export::StoreDoc1()
     }
     delete[] pLastSprms;
 
+    // tdf#108772: the character runs (CHPX) must cover the text up to its very end. The run
+    // properties of a paragraph are only emitted before its final CR, so when the last paragraph
+    // has no character attributes, its paragraph mark was left outside every CHPX run, and Word
+    // 2013+ does not render that last paragraph (it still counts it and finds its text).
+    m_pChpPlc->AppendFkpEntry( Strm().Tell() );
+
     m_pSepx->Finish( Fc2Cp( Strm().Tell() ));// Text + Footnote + HdFt as section end
     m_pMagicTable->Finish( Fc2Cp( Strm().Tell() ),0);
 
