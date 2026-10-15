@@ -3853,7 +3853,15 @@ bool SwNodes::MergeTable( SwNode& rPos, bool bWithPrev )
         rTable.SetTableChgMode( rDelTable.GetTableChgMode() );
 
         rTable.GetFrameFormat()->LockModify();
+        // esilk compat: the (defaulted) SwFrameFormat assignment also copies the weak
+        // reference to the UNO object, i.e. the SwXTextTable of the table deleted below.
+        // While a client still held that object, the remaining table was given it back
+        // (disposed: no name, no rows), and saving to ODF failed with a write error.
+        // Keep the UNO object of the remaining table.
+        const css::uno::Reference<css::uno::XInterface> xTableObject(
+            rTable.GetFrameFormat()->GetXObject());
         *rTable.GetFrameFormat() = *rDelTable.GetFrameFormat();
+        rTable.GetFrameFormat()->SetXObject(xTableObject);
         // Also switch the Name
         rTable.GetFrameFormat()->SetFormatName( rDelTable.GetFrameFormat()->GetName() );
         rTable.GetFrameFormat()->UnlockModify();
