@@ -587,7 +587,9 @@ bool SvxAutoCorrect::FnChgToEnEmDash(
     CharClass& rCC = GetCharClass( eLang );
     if (eLang == LANGUAGE_SYSTEM)
         eLang = GetAppLang().getLanguageType();
-    bool bAlwaysUseEmDash = (eLang == LANGUAGE_RUSSIAN || eLang == LANGUAGE_UKRAINIAN);
+    // esilk: Kazakh typography uses the spaced em dash like Russian («Алматы — қала»)
+    bool bAlwaysUseEmDash = (eLang == LANGUAGE_RUSSIAN || eLang == LANGUAGE_UKRAINIAN
+                             || eLang == LANGUAGE_KAZAKH);
 
     // rTxt may refer to the frame text that will change in the calls to rDoc.Delete / rDoc.Insert;
     // keep a local copy for later use

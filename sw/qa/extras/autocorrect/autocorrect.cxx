@@ -151,6 +151,22 @@ CPPUNIT_TEST_FIXTURE(SwAutoCorrectTest, testTdf123786_RussianSecondLevelEndingQu
     CPPUNIT_ASSERT_EQUAL(sReplaced, getParagraph(1)->getString());
 }
 
+CPPUNIT_TEST_FIXTURE(SwAutoCorrectTest, testEsilkKazakhEmDash)
+{
+    createSwDoc("kk-KZ.fodt");
+
+    // See testTdf123786_RussianSecondLevelEndingQuote: keep the document language on Windows
+    SvtSysLocaleOptions aOptions;
+    aOptions.SetIgnoreLanguageChange(true);
+    aOptions.Commit();
+
+    // Kazakh uses the spaced em dash, like Russian; without the fix this gave an en dash:
+    // - Expected: Алматы — әсем қала
+    // - Actual  : Алматы – әсем қала
+    emulateTyping(u"Алматы - әсем қала ");
+    CPPUNIT_ASSERT_EQUAL(u"Алматы — әсем қала "_ustr, getParagraph(1)->getString());
+}
+
 CPPUNIT_TEST_FIXTURE(SwAutoCorrectTest, testTdf106164_CapitalizeFirstWordWithCurlyApostrophe)
 {
     createSwDoc(); // Default lang is en-US
