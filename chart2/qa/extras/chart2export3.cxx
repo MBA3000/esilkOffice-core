@@ -1020,7 +1020,8 @@ CPPUNIT_TEST_FIXTURE(Chart2ExportTest3, test1904NullDate)
 CPPUNIT_TEST_FIXTURE(Chart2ExportTest3, testPieVaryColorsRoundtripXLSX)
 {
     // A pie chart made by Excel: the slices have the theme fills accent1..accent4. The export
-    // keeps the theme fills implicit, so the data points of the saved file only have a border.
+    // kept the theme fills implicit, so the data points of the saved file only had a border
+    // (now the theme fills of data points are written, see testPieSliceThemeColorXLSX).
     loadFromFile(u"xlsx/pie_vary_colors.xlsx");
     saveAndReload(TestFilter::XLSX);
 
@@ -1037,6 +1038,38 @@ CPPUNIT_TEST_FIXTURE(Chart2ExportTest3, testPieVaryColorsRoundtripXLSX)
         xPoint->getPropertyValue(u"FillColor"_ustr) >>= aColor;
         CPPUNIT_ASSERT_EQUAL(aExpected[i], aColor);
     }
+}
+
+CPPUNIT_TEST_FIXTURE(Chart2ExportTest3, testPieSliceThemeColorXLSX)
+{
+    // esilk compat: the pie chart of pie_vary_colors.xlsx (made by Excel), with the second
+    // slice changed to the theme fill accent6 (Excel's automatic fill of it is accent2).
+    loadFromFile(u"xlsx/pie_slice_accent6.xlsx");
+    save(TestFilter::XLSX);
+    xmlDocUniquePtr pXmlDoc = parseExport(u"xl/charts/chart1.xml"_ustr);
+    CPPUNIT_ASSERT(pXmlDoc);
+
+    // Without the fix in place, the theme fill of the data point was left implicit, so
+    // Excel showed its automatic color (accent2) instead of accent6:
+    // - In <>, XPath '.../a:solidFill/a:schemeClr' number of nodes is incorrect
+    assertXPath(pXmlDoc,
+                "/c:chartSpace/c:chart/c:plotArea/c:pieChart/c:ser/c:dPt[c:idx/@val='1']/c:spPr/"
+                "a:solidFill/a:schemeClr",
+                "val", u"accent6");
+    assertXPath(pXmlDoc,
+                "/c:chartSpace/c:chart/c:plotArea/c:pieChart/c:ser/c:dPt[c:idx/@val='0']/c:spPr/"
+                "a:solidFill/a:schemeClr",
+                "val", u"accent1");
+
+    // And after reloading, the slice still has the accent6 color of the Office theme.
+    saveAndReload(TestFilter::XLSX);
+    Reference<chart2::XChartDocument> xChartDoc = getChartDocFromSheet(0);
+    Reference<chart2::XDataSeries> xDataSeries = getDataSeriesFromDoc(xChartDoc, 0);
+    CPPUNIT_ASSERT(xDataSeries.is());
+    Reference<beans::XPropertySet> xPoint(xDataSeries->getDataPointByIndex(1), UNO_SET_THROW);
+    Color aColor;
+    xPoint->getPropertyValue(u"FillColor"_ustr) >>= aColor;
+    CPPUNIT_ASSERT_EQUAL(Color(0x70ad47), aColor);
 }
 
 CPPUNIT_PLUGIN_IMPLEMENT();
