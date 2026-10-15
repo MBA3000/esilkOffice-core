@@ -33,6 +33,7 @@
 #include <com/sun/star/lang/Locale.hpp>
 #include <com/sun/star/style/ParagraphAdjust.hpp>
 #include <com/sun/star/text/GraphicCrop.hpp>
+#include <com/sun/star/text/XTextRange.hpp>
 #include <com/sun/star/text/WritingMode2.hpp>
 
 #include <sdpage.hxx>
@@ -1991,6 +1992,65 @@ CPPUNIT_TEST_FIXTURE(SdOOXMLExportTest4, testtdf169825_vertical_layouts_from_scr
 
     // without the fix in place this would be exported as "picTx"
     assertXPath(pXmlDocLayout, "/p:sldLayout", "type", u"vertTitleAndTx");
+}
+
+CPPUNIT_TEST_FIXTURE(SdOOXMLExportTest4, testEsilkSubtitlePlaceholderIndex)
+{
+    // esilk compat: a title slide with a subtitle, footer and slide number shown.
+    createSdImpressDoc();
+
+    uno::Reference<drawing::XDrawPagesSupplier> xDoc(mxComponent, uno::UNO_QUERY_THROW);
+    uno::Reference<drawing::XDrawPages> xPages = xDoc->getDrawPages();
+    uno::Reference<drawing::XDrawPage> xPage(xPages->getByIndex(0), uno::UNO_QUERY_THROW);
+    uno::Reference<beans::XPropertySet> xPageSet(xPage, uno::UNO_QUERY_THROW);
+    xPageSet->setPropertyValue(u"Layout"_ustr,
+                               uno::Any(static_cast<sal_Int32>(AutoLayout::AUTOLAYOUT_TITLE)));
+    xPageSet->setPropertyValue(u"IsFooterVisible"_ustr, uno::Any(true));
+    xPageSet->setPropertyValue(u"FooterText"_ustr, uno::Any(u"Footer text"_ustr));
+    xPageSet->setPropertyValue(u"IsPageNumberVisible"_ustr, uno::Any(true));
+
+    bool bSubtitleFound = false;
+    for (sal_Int32 i = 0; i < xPage->getCount(); ++i)
+    {
+        uno::Reference<drawing::XShape> xShape(xPage->getByIndex(i), uno::UNO_QUERY_THROW);
+        uno::Reference<text::XTextRange> xText(xShape, uno::UNO_QUERY);
+        if (xShape->getShapeType() == "com.sun.star.presentation.TitleTextShape" && xText)
+            xText->setString(u"Title text"_ustr);
+        else if (xShape->getShapeType() == "com.sun.star.presentation.SubtitleShape" && xText)
+        {
+            xText->setString(u"Subtitle text"_ustr);
+            bSubtitleFound = true;
+        }
+    }
+    CPPUNIT_ASSERT(bSubtitleFound);
+
+    save(TestFilter::PPTX);
+
+    // Without the fix in place, the subtitle had no idx (= 0, the idx of the title), so
+    // PowerPoint gave it the title style of the layout:
+    // - In <>, XPath '//p:ph[@type='subTitle']' no attribute 'idx' exist
+    xmlDocUniquePtr pXmlDocSlide = parseExport(u"ppt/slides/slide1.xml"_ustr);
+    assertXPath(pXmlDocSlide, "//p:ph[@type='subTitle']", 1);
+    const OUString aSubtitleIdx = getXPath(pXmlDocSlide, "//p:ph[@type='subTitle']", "idx");
+    CPPUNIT_ASSERT(!aSubtitleIdx.isEmpty());
+    CPPUNIT_ASSERT(aSubtitleIdx != "0");
+    // No other placeholder of the slide has the same idx.
+    assertXPath(pXmlDocSlide, OString("//p:ph[@idx='" + aSubtitleIdx.toUtf8() + "']"), 1);
+
+    // The layout of the slide has a subtitle with the same idx and no other placeholder
+    // with that idx.
+    xmlDocUniquePtr pXmlDocRels = parseExport(u"ppt/slides/_rels/slide1.xml.rels"_ustr);
+    CPPUNIT_ASSERT(pXmlDocRels);
+    OUString sLayoutRelRelative = getXPath(
+        pXmlDocRels,
+        "/rels:Relationships/rels:Relationship[@Type='http://schemas.openxmlformats.org/"
+        "officeDocument/2006/relationships/slideLayout']",
+        "Target");
+    xmlDocUniquePtr pXmlDocLayout = parseExport(sLayoutRelRelative.replaceFirst("..", "ppt"));
+    CPPUNIT_ASSERT(pXmlDocLayout);
+    assertXPath(pXmlDocLayout, "/p:sldLayout", "type", u"title");
+    assertXPath(pXmlDocLayout, "//p:ph[@type='subTitle']", "idx", aSubtitleIdx);
+    assertXPath(pXmlDocLayout, OString("//p:ph[@idx='" + aSubtitleIdx.toUtf8() + "']"), 1);
 }
 
 CPPUNIT_TEST_FIXTURE(SdOOXMLExportTest4, testtdf169825_layout_type)

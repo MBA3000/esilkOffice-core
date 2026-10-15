@@ -2659,6 +2659,20 @@ ShapeExport& PowerPointShapeExport::WritePlaceholderShape(const Reference< XShap
                 static_cast<PowerPointExport*>(GetFB())->CreateNewPlaceholderIndex(xShape)),
                     XML_hasCustomPrompt, sax_fastparser::UseIf("1", bUseCustomPrompt));
     }
+    else if (ePlaceholder == Subtitle
+             && (mePageType == PageType::LAYOUT || mePageType == PageType::NORMAL))
+    {
+        // esilk compat: PowerPoint matches a slide placeholder to the layout placeholder
+        // with the same idx, and a missing idx means 0, the idx of the title. A subtitle
+        // without idx therefore inherited the title style of the layout (e.g. capitals and
+        // wide letter spacing). Write a fixed idx that the subtitle of an exported layout
+        // has too. A layout written from a master page has no subtitle (see tdf#112557
+        // above); then no layout placeholder has this idx and the subtitle takes the body
+        // style of the master, as for a subTitle placeholder without a layout counterpart.
+        mpFS->singleElementNS(XML_p, XML_ph, XML_type, pType, XML_idx,
+                              OString::number(SUBTITLE_PLACEHOLDER_INDEX), XML_hasCustomPrompt,
+                              sax_fastparser::UseIf("1", bUseCustomPrompt));
+    }
     else
     {
         if ((mePageType == PageType::LAYOUT || mePageType == PageType::NORMAL)
@@ -3175,6 +3189,9 @@ void PowerPointExport::WritePlaceholderReferenceShapes(PowerPointShapeExport& rD
 
 sal_Int32 PowerPointExport::CreateNewPlaceholderIndex(const css::uno::Reference<XShape> &rXShape)
 {
+    // esilk compat: this index is reserved for subtitle placeholders.
+    if (mnPlaceholderIndexMax == SUBTITLE_PLACEHOLDER_INDEX)
+        ++mnPlaceholderIndexMax;
     maPlaceholderShapeToIndexMap.insert({rXShape, mnPlaceholderIndexMax});
     return mnPlaceholderIndexMax++;
 }
