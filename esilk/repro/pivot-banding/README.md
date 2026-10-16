@@ -1,74 +1,122 @@
-# Draft: built-in PivotTable solid band fills on XLSX import
+# Draft: built-in PivotTable fills on XLSX import
 
-**Compile-only prototype; keep the PR a draft. No runtime import, CppunitTest or Office/Excel
-comparison has been performed.** The patch is deliberately narrower than complete PivotTable styling.
+**Compile-only research prototype. Keep PR#14 DRAFT/UNMERGED.** No runtime import, CppunitTest,
+Office/Excel comparison, screenshot or round trip has been performed. This is not complete pivot
+styling: in particular, Dark backgrounds without the corresponding font colors can be unreadable.
 
-Verification on16.10.2026: Windows production `make sc` completed with exit0 (10s); after removing
-the draft overlay, the original sources were recompiled with exit0 (12s). The build tree was restored
-to core main58c57dba. Three fast Python ZIP/XML fixture checks pass (0.09s). None of this proves rendering.
+The original prototype covered35solid-band Light/Medium presets. The16.10run7 design now inventories
+**all84 built-in presets** (Light1–28, Medium1–28, Dark1–28), all28 style-element slots and
+**406 solid theme/tint fills**. The flat-layout C++ prototype consumes base/band/header/total fills;
+complex page/subtotal/subheading slots remain data/design only, never guessed from cell text.
 
-## Upstream behavior and source
+## Sources and reproducible data
 
-The 26.8 baseline reads `pivotTableStyleInfo`, stores its name/row/column flags on `ScDPObject`
-and writes them back on XLSX export. None of the stored stripe flags is consumed by the drawing/output
-path. By contrast, ordinary database tables have a separate `ScTableStyle` implementation.
-The existing default-table-style generator explicitly skips pivot definitions. References:
+Upstream26.8 imports/stores/exports `pivotTableStyleInfo`, but does not consume stripe flags in
+the output path. Ordinary database table styles are a separate implementation:
 
 - [import](https://github.com/LibreOffice/core/blob/e155df48174bf3e64426fb1b912b9c15fa375704/sc/source/filter/oox/pivottablefragment.cxx),
-  [stored model](https://github.com/LibreOffice/core/blob/e155df48174bf3e64426fb1b912b9c15fa375704/sc/inc/dpobject.hxx),
-  [export](https://github.com/LibreOffice/core/blob/e155df48174bf3e64426fb1b912b9c15fa375704/sc/source/filter/excel/xepivotxml.cxx).
-- [upstream generator](https://github.com/LibreOffice/core/blob/e155df48174bf3e64426fb1b912b9c15fa375704/sc/workben/generate_ooxml_tablestyle_info.py),
-  `parse_pivot_style`/`parse_style`.
+  [model](https://github.com/LibreOffice/core/blob/e155df48174bf3e64426fb1b912b9c15fa375704/sc/inc/dpobject.hxx),
+  [export](https://github.com/LibreOffice/core/blob/e155df48174bf3e64426fb1b912b9c15fa375704/sc/source/filter/excel/xepivotxml.cxx),
+  [output geometry](https://github.com/LibreOffice/core/blob/e155df48174bf3e64426fb1b912b9c15fa375704/sc/source/core/data/dpoutput.cxx).
 - [ECMA-376 Part1](https://ecma-international.org/publications-and-standards/standards/ecma-376/),
-  `OfficeOpenXML-SpreadsheetMLStyles.zip/presetTableStyles.xml` in the Part1 download.
-  These pivot presets are not interchangeable with equally numbered `TableStyleLight/Medium` styles.
-- [Microsoft row stripes](https://learn.microsoft.com/en-us/office/vba/api/excel.pivottable.showtablestylerowstripes)
-  and [table style elements](https://learn.microsoft.com/en-us/openspecs/office_file_formats/ms-xls/5c1d12a9-01db-4471-897a-e2d2875980c5).
+  `OfficeOpenXML-SpreadsheetMLStyles.zip/presetTableStyles.xml` inside the Part1 download;
+  source XML SHA256 `74c6cf73d551bb2bd33a51690d4922095260b6647b2a38fcbc0d6da6c6275d7e`.
+- [TableStyleElement / pivot precedence](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.tablestyleelement?view=openxml-3.0.1)
+  and [pivot-region meanings](https://learn.microsoft.com/en-us/openspecs/office_file_formats/ms-xls/5c1d12a9-01db-4471-897a-e2d2875980c5).
+- [Office's applicable pivot elements](https://learn.microsoft.com/en-us/openspecs/office_standards/ms-oi29500/af86bfea-020b-45aa-8faa-4ad272fe6617)
+  and [style flags](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.pivottablestyle?view=openxml-3.0.1).
 
-## Minimal design
+`sc/workben/generate_pivot_stripe_fills.py INPUT sc/source/filter/inc/pivotstripefills.hxx
+esilk/repro/pivot-banding/preset-fill-inventory.md` produces both the full numeric C++ data and a
+[review matrix](preset-fill-inventory.md). No standard prose, user document or government text is
+copied. The extractor requires all84names, unit stripe widths, unique/known regions, valid dxf
+indices and solid theme colors with finite tint in−1..1. It rejects unsupported input rather than
+silently substituting another style. Equally numbered TableStyle and PivotStyle are not interchangeable.
 
-After creating the imported pivot, obtain its actual `RESULT` rectangle and exclude its grand total
-row/column. Apply background-only `ScPatternAttr` items on alternating rows **or** columns of that
-data body; preserve number formats, borders and fonts. Use `XlsColor` for the workbook theme/tint
-and preserve the complex theme color on `SvxBrushItem`.
+Absence of a fill is represented by theme−1: **inherit the previous layer**, not white, transparent
+or a fill inferred from the dxf's font/border. Dark1–7 have row stripe fills but no corresponding
+column stripe fills; they must not use the old equal-axis shortcut. All84presets have no explicit
+`lastColumn` fill: no grand-total-column color is fabricated from `totalRow` or subtotal styles.
 
-The generated table contains the **35** Light/Medium presets whose band definitions have a solid
-fill. Light1–7 and Light15–28 use first-stripe fills; Medium15–21 use first-stripe fills and a base
-fill; Medium22–28 use a second-stripe fill and a base fill. Some Medium first-stripe/base colors
-are equal: their remaining band distinction is border/font formatting, outside this prototype.
-Light8–14 and Medium1–14 have no solid band fill and are intentionally left unchanged.
+## Flat-layout prototype and layering
 
-Guardrails: exactly one row field, one column field, one data field; no page fields, explicit pivot
-formats or both-axis stripes. Unknown/custom/Dark styles are skipped. The data body must fit entirely
-inside the imported location rectangle; changed geometry is skipped. Labels, headers, subtotals,
-grand totals, refresh-time styling, full preset borders/fonts and persistent ODF style semantics
-are outside this first import. These exclusions avoid guessing precedence or repainting other cells.
+The importer looks up the exact built-in name, gets the actual TABLE and RESULT rectangles after
+creating the pivot, and requires TABLE to equal the imported location. RESULT must share its end
+and start exactly one row/column later, matching both imported offsets. It accepts one row field,
+one column field and one measure, with no page fields or explicit pivot formats. Rebuilt/moved
+geometry, unknown/custom presets and wider/deeper header layouts skip the entire style operation.
 
-Regenerate the compact data header from the published preset XML using
-`sc/workben/generate_pivot_stripe_fills.py INPUT sc/source/filter/inc/pivotstripefills.hxx`.
-The extractor rejects non-theme/unequal-axis fills and non-unit stripe widths instead of approximating them.
+The fill-only layers are applied in this order:
 
-## Hand-made reproducers and deferred runtime check
+1. `wholeTable` covers the validated table, including labels/headers/totals.
+2. Enabled first/second column stripes cover the data body, excluding grand totals.
+3. Enabled first/second row stripes cover that same body; a specified row fill takes precedence
+   at a crossing. A missing row fill inherits any column/base fill.
+4. `firstColumn` covers the flat row-label area when row-header styling is enabled.
+5. `headerRow` covers the single header row when column-header styling is enabled;
+   `firstHeaderCell` then covers its intersection with the row-label area when both flags are on.
+6. An existing grand-total column receives `lastColumn` only with the stored last-column flag
+   (currently no built-in supplies a fill). An existing grand-total row receives `totalRow` last,
+   including its bottom-right intersection. Totals are independent of the stripe toggles.
 
-`make_reproducers.py` creates all seven XLSX files from raw XML and fixed ZIP metadata. Content is
-only groups A–D, quarters Q1–Q4, integers 10–43; no user file, private text, author, external link or
-office automation was used. Source/cache/cached-output values agree: row totals46/86/126/166,
-column totals100/104/108/112 and grand total424. `test_fixtures.py` checks XML/relationships and these
-independent hand-calculated totals in milliseconds.
+This follows the relevant pivot-element precedence in the primary references; the flat region/flag
+mapping is a **prototype hypothesis requiring later Excel comparison**. The body stripe scope is
+deliberately narrower than all possible label/subheading applications. Only `ATTR_BACKGROUND` is
+applied, with theme/tint preserved as a complex color; number formats, borders and font items are
+not supplied by this patch. Header flags off do not erase a base fill. No stripes does not mean
+no table style: base/header/total layers still apply where defined.
 
-Intended data body: C4:F7, with header row3, row labelsB and grand totalsG/8.
+## Full-region design beyond this prototype
 
-| File | Deferred expected fill-only change |
-|---|---|
-| `light16-rows.xlsx` | Rows4/6: theme0 with tint−0.14999847407452621 |
-| `light23-columns.xlsx` | ColumnsC/E: accent1(theme4), tint0.79998168889431442 |
-| `medium23-rows.xlsx` | Whole body accent1 tint0.79998168889431442; rows5/7 tint0.59999389629810485 |
-| `medium24-columns.xlsx` | Whole body accent2 tint0.79998168889431442; columnsD/F tint0.59999389629810485 |
-| `disabled-control.xlsx` | No fill import |
-| `both-axes-control.xlsx` | No fill import: precedence deferred |
-| `dark-control.xlsx` | No fill import: unsupported preset family |
+The generated header retains page labels/values, three subtotal levels in each axis, three
+subheading levels in each axis and blank-row fill data. Implementing these needs semantic regions
+from `ScDPOutput`/result-member flags, with item hierarchy and total intersection identity, rather
+than inferring regions from display strings or reusing ordinary table styles. Apply those layers
+between headers and grand totals in the standard's pivot order. The three ordinary-table-only
+corner elements are retained as data slots but ignored for pivots.
 
-Before considering merge: import each fixture in Calc and Excel, check actual geometry/values/fills,
-unchanged labels/totals, custom themes, refresh, XLSX/ODS round trips and no-change controls; add
-native import regressions after those expectations are established. A successful compile or static
-ZIP check does not establish those results.
+Before enabling those regions, resolve grouped/compact/outline/multiple-measure layouts, inserted
+blank rows, collapsed members, custom/explicit-format precedence and differential font/border
+merging. Refresh and XLSX/ODS persistence require a proper persistent pivot style/output model;
+this first-import cell formatting does not implement them. In particular, **full Dark fidelity
+requires its light font colors** and cannot be inferred from successful compilation.
+
+## Hand-made reproducers and fast checks
+
+`make_reproducers.py` creates **95 deterministic XLSX files from raw XML**. Content is only groups
+A–D, quartersQ1–Q4 and integers10–43, with fixed ZIP metadata and no author/private data/external
+relationships. Each of84built-in presets has its own both-axis fixture in `presets/`. The original
+seven specimens remain, plus header-disabled, no-grand-totals, unknown-custom-style and changed-offset
+controls. `dark-control.xlsx` is now a supported Dark1 probe; `disabled-control` disables only bands,
+and `both-axes-control` now exercises layering rather than an intentional skip.
+
+Hand-computed values: bodyC4:F7 totals424; row totals46/86/126/166; column totals100/104/108/112.
+The normal table isB3:G8, headerrow3, labelsB, grand totalsG/8; the no-totals table isB3:F7.
+The deliberately changed firstDataRow=2 control must skip painting even though its cached table
+has the original geometry. The custom-style control must skip the built-in approximation.
+
+Representative deferred expected **fill-only** observations (theme indices, before fonts/borders):
+
+| Specimen | Body | Header/total | Important distinction |
+|---|---|---|---|
+| Light16 rows | rows4/6: T0@−0.14999847407452621 | row3/8: T4@0.79998168889431442 | header/total remain when bands disabled |
+| Medium23 both axes | baseT4@0.79998168889431442; rows5/7 and columnsD/F: T4@0.59999389629810485 | header/total have no own fill | row-label fill is also the darker tint |
+| Dark1 rows | baseT0@−0.249977111117893; rows5/7: T0@−0.34998626667073579 | row3/8: T1@0.499984740745262 | column-only bands have no fill |
+| Dark28 both axes | baseT9; rows5/7 and columnsD/F: T9@0.39997558519241921 | header/labels:T9@−0.249977111117893; total inherits base | missing total fill must not erase base |
+
+Eleven fast Python units check self-contained relationships/XML, deterministic source parity,
+hand-calculated values, fixture flags/offsets, all84presets, extractor rejection cases and known
+asymmetric/header/total data. They run in under a second without opening the documents.
+
+## Compile-only acceptance boundary
+
+The16.10run7 production compile and baseline-restore evidence is recorded in the private project's
+`docs/research/pivot-banding.md`; it is not a rendering result. Use the official launcher with
+`-Module sc`, the unchanged configured OXT/brand inputs and an outer atomic build.lock. Restore
+the original two sources, remove the generated draft header and touch/recompile originals before
+releasing the lock. Never use default make, make−n or hand object compilation for this check.
+
+Before any merge, owner-authorized runtime checks must cover all84presets, custom themes,
+independent/both/no bands, header flags, every total combination, changed geometry, negative
+controls, fonts/borders, refresh and round trips in Calc and Excel, followed by native regression
+tests using established expectations. Compile success and XML consistency do not prove those results.

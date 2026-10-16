@@ -42,7 +42,7 @@ def worksheet(rows, pivot=False):
     return xml('worksheet', body)
 
 
-def parts(style, rows, columns):
+def parts(style, rows, columns, row_headers=1, col_headers=1, grand_totals=True, first_data_row=1):
     records = [(g, q, 10 * (i + 1) + j) for i, g in enumerate('ABCD') for j, q in enumerate(('Q1', 'Q2', 'Q3', 'Q4'))]
     source = [(1, ''.join(cell('%s1' % c, value) for c, value in zip('ABC', ('Group', 'Quarter', 'Value'))))]
     source += [(i, cell('A%d' % i, g) + cell('B%d' % i, q) + cell('C%d' % i, value))
@@ -129,21 +129,59 @@ def parts(style, rows, columns):
     data['[Content_Types].xml'] = HEADER + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
     data['[Content_Types].xml'] += ('<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
         '<Default Extension="xml" ContentType="application/xml"/>' + ''.join(overrides) + '</Types>')
+    pivot_name = 'xl/pivotTables/pivotTable1.xml'
+    pivot_xml = ET.fromstring(data[pivot_name])
+    tag = '{' + S + '}'
+    style_info = pivot_xml.find(tag + 'pivotTableStyleInfo')
+    style_info.set('showRowHeaders', str(row_headers))
+    style_info.set('showColHeaders', str(col_headers))
+    style_info.set('showLastColumn', '1')
+    pivot_xml.find(tag + 'location').set('firstDataRow', str(first_data_row))
+    if not grand_totals:
+        pivot_xml.set('rowGrandTotals', '0')
+        pivot_xml.set('colGrandTotals', '0')
+        pivot_xml.find(tag + 'location').set('ref', 'B3:F7')
+        for name in ('rowItems', 'colItems'):
+            items_xml = pivot_xml.find(tag + name)
+            items_xml.remove(items_xml[-1])
+            items_xml.set('count', '4')
+        sheet = ET.fromstring(data['xl/worksheets/sheet2.xml'])
+        sheet_data = sheet.find(tag + 'sheetData')
+        sheet_data.remove(sheet_data[-1])
+        for row in sheet_data:
+            row.remove(row[-1])  # cached column G
+        data['xl/worksheets/sheet2.xml'] = ET.tostring(sheet, encoding='unicode')
+    data[pivot_name] = ET.tostring(pivot_xml, encoding='unicode')
     return data
 
 
+def cases():
+    result = [('light16-rows', 'PivotStyleLight16', 1, 0), ('light23-columns', 'PivotStyleLight23', 0, 1),
+              ('medium23-rows', 'PivotStyleMedium23', 1, 0), ('medium24-columns', 'PivotStyleMedium24', 0, 1),
+              ('disabled-control', 'PivotStyleLight16', 0, 0), ('both-axes-control', 'PivotStyleLight16', 1, 1),
+              ('dark-control', 'PivotStyleDark1', 1, 0)]
+    result += [('presets/PivotStyle%s%d' % (family, number), 'PivotStyle%s%d' % (family, number), 1, 1)
+               for family in ('Light', 'Medium', 'Dark') for number in range(1, 29)]
+    result += [('headers-disabled', 'PivotStyleDark28', 1, 1, 0, 0),
+               ('no-grand-totals', 'PivotStyleDark15', 1, 1, 1, 1, False),
+               ('custom-style-control', 'CustomPivotStyleDark28', 1, 1),
+               ('changed-offset-control', 'PivotStyleDark28', 1, 1, 1, 1, True, 2)]
+    return result
+
+
+def write_fixture(path, data):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(path, 'w') as package:
+        for name, text in sorted(data.items()):
+            ET.fromstring(text)
+            info = zipfile.ZipInfo(name, (2026, 1, 1, 0, 0, 0))
+            info.create_system = 0
+            info.compress_type = zipfile.ZIP_STORED
+            package.writestr(info, text.encode('utf-8'))
+
+
 if __name__ == '__main__':
-    cases = [('light16-rows', 'PivotStyleLight16', 1, 0), ('light23-columns', 'PivotStyleLight23', 0, 1),
-             ('medium23-rows', 'PivotStyleMedium23', 1, 0), ('medium24-columns', 'PivotStyleMedium24', 0, 1),
-             ('disabled-control', 'PivotStyleLight16', 0, 0), ('both-axes-control', 'PivotStyleLight16', 1, 1),
-             ('dark-control', 'PivotStyleDark1', 1, 0)]
-    for name, style, rows, columns in cases:
+    for name, *arguments in cases():
         path = Path(__file__).resolve().parent / (name + '.xlsx')
-        with zipfile.ZipFile(path, 'w') as package:
-            for name, text in sorted(parts(style, rows, columns).items()):
-                ET.fromstring(text)
-                info = zipfile.ZipInfo(name, (2026, 1, 1, 0, 0, 0))
-                info.create_system = 0
-                info.compress_type = zipfile.ZIP_STORED
-                package.writestr(info, text.encode('utf-8'))
+        write_fixture(path, parts(*arguments))
         print(path.name)

@@ -1322,82 +1322,121 @@ PivotTableFormat& PivotTable::createFormat()
     return *xFormat;
 }
 
-void PivotTable::applyStyleBanding(ScDPObject& rObject)
+void PivotTable::applyStyleFills(ScDPObject& rObject)
 {
     const auto& rInfo = rObject.getStyleInfo();
-    // Deliberately narrow first import: no nested subtotals/page fields, no explicit pivot
-    // formats to override, one measure, and no unresolved row-vs-column stripe precedence.
-    if (rInfo.mbShowRowStripes == rInfo.mbShowColStripes || !maFormats.empty()
-        || !maPageFields.empty() || maRowFields.size() != 1 || maColFields.size() != 1
+    // A fill-only draft for a flat layout. Page fields, nested dimensions and explicit
+    // pivot formats need semantic regions, not guessed coordinates.
+    if (!maFormats.empty() || !maPageFields.empty()
+        || maRowFields.size() != 1 || maColFields.size() != 1
         || maDataFields.size() != 1)
         return;
 
-    const PivotStripeFill* pFill = nullptr;
-    for (const auto& rFill : aBuiltinPivotStripeFills)
+    const PivotStyleFills* pStyle = nullptr;
+    for (const auto& rStyle : aBuiltinPivotFills)
     {
-        if (rInfo.maName == rFill.name)
+        if (rInfo.maName == rStyle.name)
         {
-            pFill = &rFill;
+            pStyle = &rStyle;
             break;
         }
     }
-    if (!pFill)
-        return; // Includes custom/Dark styles and border-only Light/Medium stripe presets.
+    if (!pStyle)
+        return; // Unknown/custom styles are never approximated by a similarly named preset.
 
-    ScRange aBody = rObject.GetOutputRangeByType(DataPilotOutputRangeType::RESULT);
+    const ScRange aTable = rObject.GetOutputRangeByType(DataPilotOutputRangeType::TABLE);
+    const ScRange aResult = rObject.GetOutputRangeByType(DataPilotOutputRangeType::RESULT);
     const ScDPSaveData* pSave = rObject.GetSaveData();
-    if (!aBody.IsValid() || !pSave)
+    // Equality is stricter than containment: a changed/rebuilt pivot must not paint cached
+    // headers/totals at stale coordinates, even when the smaller result fits inside them.
+    if (!aTable.IsValid() || !aResult.IsValid() || !pSave
+        || aTable != maLocationModel.maRange || !aTable.Contains(aResult)
+        || maLocationModel.mnFirstDataRow != 1 || maLocationModel.mnFirstDataCol != 1
+        || aResult.aStart.Row() != aTable.aStart.Row() + 1
+        || aResult.aStart.Col() != aTable.aStart.Col() + 1
+        || aResult.aEnd != aTable.aEnd)
         return;
-    // RESULT includes grand totals. Keep them, all labels and headers outside this draft.
+
+    ScRange aBody = aResult;
+    // RESULT includes grand totals. Their layers are applied after headers and stripes.
     if (pSave->GetRowGrand())
         aBody.aEnd.IncRow(-1);
     if (pSave->GetColumnGrand())
         aBody.aEnd.IncCol(-1);
     if (aBody.aEnd.Row() < aBody.aStart.Row() || aBody.aEnd.Col() < aBody.aStart.Col())
         return;
-    // A changed/rebuilt output geometry must never paint unrelated sheet cells.
-    if (!maLocationModel.maRange.Contains(aBody))
-        return;
-
     ScDocument& rDoc = getDocImport().getDoc();
-    auto makePattern = [&](int nTheme, double fTint) {
+    auto apply = [&](const ScRange& rRange, PivotFillElement eElement) {
+        const auto& rFill = pStyle->get(eElement);
+        if (rFill.theme < 0)
+            return; // No fill in a dxf means inherit the earlier layer; never erase it.
         XlsColor aColor;
-        aColor.setTheme(nTheme, fTint);
+        aColor.setTheme(rFill.theme, rFill.tint);
         const auto& rGraphicHelper = getBaseFilter().getGraphicHelper();
         SvxBrushItem aBrush(ATTR_BACKGROUND);
         aBrush.SetColor(aColor.getColor(rGraphicHelper));
         aBrush.setComplexColor(aColor.createComplexColor(rGraphicHelper, -1));
         ScPatternAttr aPattern(rDoc.getCellAttributeHelper());
         aPattern.GetItemSetWritable().Put(aBrush);
-        return aPattern;
-    };
-    auto apply = [&](const ScRange& rRange, const ScPatternAttr& rPattern) {
         rDoc.ApplyPatternAreaTab(rRange.aStart.Col(), rRange.aStart.Row(), rRange.aEnd.Col(),
-                                 rRange.aEnd.Row(), rRange.aStart.Tab(), rPattern);
+                                 rRange.aEnd.Row(), rRange.aStart.Tab(), aPattern);
     };
-    if (pFill->baseTheme >= 0)
-        apply(aBody, makePattern(pFill->baseTheme, pFill->baseTint));
-
-    const ScPatternAttr aStripe = makePattern(pFill->theme, pFill->tint);
-    if (rInfo.mbShowRowStripes)
+    // ECMA-376 18.8.41: wholeTable < column stripes < row stripes < firstColumn <
+    // headerRow < firstHeaderCell < ... < grand total column < grand total row.
+    apply(aTable, PivotFillElement::WholeTable);
+    if (rInfo.mbShowColStripes)
     {
-        for (SCROW nRow = aBody.aStart.Row() + pFill->phase; nRow <= aBody.aEnd.Row(); nRow += 2)
+        for (SCCOL nCol = aBody.aStart.Col(); nCol <= aBody.aEnd.Col(); ++nCol)
         {
-            ScRange aStripeRange = aBody;
-            aStripeRange.aStart.SetRow(nRow);
-            aStripeRange.aEnd.SetRow(nRow);
-            apply(aStripeRange, aStripe);
+            ScRange aStripe = aBody;
+            aStripe.aStart.SetCol(nCol);
+            aStripe.aEnd.SetCol(nCol);
+            apply(aStripe, (nCol - aBody.aStart.Col()) % 2 == 0
+                              ? PivotFillElement::FirstColumnStripe
+                              : PivotFillElement::SecondColumnStripe);
         }
     }
-    else
+    if (rInfo.mbShowRowStripes)
     {
-        for (SCCOL nCol = aBody.aStart.Col() + pFill->phase; nCol <= aBody.aEnd.Col(); nCol += 2)
+        for (SCROW nRow = aBody.aStart.Row(); nRow <= aBody.aEnd.Row(); ++nRow)
         {
-            ScRange aStripeRange = aBody;
-            aStripeRange.aStart.SetCol(nCol);
-            aStripeRange.aEnd.SetCol(nCol);
-            apply(aStripeRange, aStripe);
+            ScRange aStripe = aBody;
+            aStripe.aStart.SetRow(nRow);
+            aStripe.aEnd.SetRow(nRow);
+            apply(aStripe, (nRow - aBody.aStart.Row()) % 2 == 0
+                              ? PivotFillElement::FirstRowStripe
+                              : PivotFillElement::SecondRowStripe);
         }
+    }
+    if (rInfo.mbShowRowHeaders)
+    {
+        ScRange aLabels = aTable;
+        aLabels.aStart.SetRow(aResult.aStart.Row());
+        aLabels.aEnd.SetCol(aResult.aStart.Col() - 1);
+        apply(aLabels, PivotFillElement::FirstColumn);
+    }
+    if (rInfo.mbShowColHeaders)
+    {
+        ScRange aHeader = aTable;
+        aHeader.aEnd.SetRow(aResult.aStart.Row() - 1);
+        apply(aHeader, PivotFillElement::HeaderRow);
+        if (rInfo.mbShowRowHeaders)
+        {
+            aHeader.aEnd.SetCol(aResult.aStart.Col() - 1);
+            apply(aHeader, PivotFillElement::FirstHeaderCell);
+        }
+    }
+    if (pSave->GetColumnGrand() && rInfo.mbShowLastColumn)
+    {
+        ScRange aTotal = aTable;
+        aTotal.aStart.SetCol(aResult.aEnd.Col());
+        apply(aTotal, PivotFillElement::LastColumn);
+    }
+    if (pSave->GetRowGrand())
+    {
+        ScRange aTotal = aTable;
+        aTotal.aStart.SetRow(aResult.aEnd.Row());
+        apply(aTotal, PivotFillElement::TotalRow);
     }
 }
 
@@ -1517,7 +1556,7 @@ void PivotTable::finalizeImport()
         if (ScDPCollection* pPivots = rDoc.GetDPCollection())
         {
             if (ScDPObject* pInserted = pPivots->GetByName(maDefModel.maName))
-                applyStyleBanding(*pInserted);
+                applyStyleFills(*pInserted);
         }
     }
     catch( Exception& )
