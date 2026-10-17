@@ -1083,6 +1083,7 @@ $(eval $(call gb_Helper_register_packages_for_install,ooo_fonts,\
 		fonts_noto_serif_hebrew \
 		fonts_noto_serif_lao \
 		fonts_reem \
+		fonts_roboto \
 		fonts_scheherazade \
 		$(if $(WITH_DOCREPAIR_FONTS),fonts_agdasima,) \
 		$(if $(WITH_DOCREPAIR_FONTS),fonts_bacasime_antique,) \

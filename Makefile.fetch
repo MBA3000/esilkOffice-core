@@ -256,6 +256,9 @@ $(WORKDIR)/download: $(BUILDDIR)/config_$(gb_Side).mk $(SRCDIR)/download.lst $(S
 		$(call fetch_Optional,OFFICEOTRON,OFFICEOTRON_JAR) \
 		$(call fetch_Optional,VERAPDF,VERAPDF_JAR) \
 	,$(call fetch_Download_item,https://dev-www.libreoffice.org/extern,$(item)))
+	$(foreach item, \
+		$(call fetch_Optional,MORE_FONTS,FONT_ROBOTO_TARBALL) \
+	,$(call fetch_Download_item,https://github.com/googlefonts/roboto-3-classic/releases/download/v3.016,$(item)))
 	-@mkdir -p $(TARFILE_LOCATION)/cargo
 	$(if $(call fetch_Optional,YRS,1),\
 		CARGO_HOME=$(TARFILE_LOCATION)/cargo cargo fetch $(if $(verbose),--verbose,) --locked --manifest-path $(SRCDIR)/external/y-crdt/Cargo.toml)

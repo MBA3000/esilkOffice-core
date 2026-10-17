@@ -4382,6 +4382,25 @@
           <value>Normal,Fixed</value>
         </prop>
       </node>
+      <!-- esilkOffice: Roboto (stat.gov.kz and Office cloud documents). The font is bundled
+           (external/more_fonts); this entry is the fallback when it is missing, so the fuzzy
+           matcher never picks Arial Black for bold or a serif italic. Weight and width words
+           (Light, Medium, Thin, Black, Condensed) are stripped from the name before the lookup,
+           so this one entry covers every Roboto family name. All substitutes have the Kazakh letters. -->
+      <node oor:name="roboto" oor:op="replace">
+        <prop oor:name="SubstFonts">
+          <value>notosans;liberationsans;arimo;arial;helvetica;dejavusans</value>
+        </prop>
+        <prop oor:name="FontWeight">
+          <value>Normal</value>
+        </prop>
+        <prop oor:name="FontWidth">
+          <value>Normal</value>
+        </prop>
+        <prop oor:name="FontType">
+          <value>Normal,SansSerif</value>
+        </prop>
+      </node>
       <node oor:name="roman" oor:op="replace">
         <prop oor:name="SubstFonts">
           <value>cumberlandamt;cumberland;couriernew;nimbusmonol;courier;lucidatypewriter;lucidasanstypewriter;monaco;monospaced;nimbusmono;nimbusmonol</value>
