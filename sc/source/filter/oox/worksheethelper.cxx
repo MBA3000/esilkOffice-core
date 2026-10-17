@@ -22,6 +22,7 @@
 #include <worksheethelper.hxx>
 
 #include <algorithm>
+#include <cmath>
 #include <com/sun/star/awt/Point.hpp>
 #include <com/sun/star/awt/Size.hpp>
 #include <com/sun/star/drawing/XDrawPageSupplier.hpp>
@@ -747,8 +748,20 @@ void WorksheetGlobals::setBaseColumnWidth( sal_Int32 nWidth )
     // do not modify width, if setDefaultColumnWidth() has been used
     if( !mbHasDefWidth && (nWidth > 0) )
     {
-        // #i3006# add 5 pixels padding to the width
-        maDefColModel.mfWidth = nWidth + getUnitConverter().scaleValue( 5, Unit::ScreenX, Unit::Digit );
+        /*  Calculate the default width the way Excel does: baseColWidth
+            characters of the maximum digit width plus 5 pixels padding (2
+            pixels margin on each side and 1 pixel gridline, ECMA-376 Part 1,
+            18.3.1.13 and 18.3.1.81), which Excel rounds up to a multiple of 8
+            pixels, converted back to characters and truncated to 1/256 of a
+            character (18.3.1.13). For Calibri 11 or Arial 10 (7 pixels) the
+            default base width of 8 gives 64 pixels = 9.140625 characters, the
+            value Excel itself writes. Use logical pixels of 96 DPI, so that
+            the result does not depend on the screen of the importing system. */
+        const double fDigitPx = getUnitConverter().scaleValue( 1.0, Unit::Digit, Unit::Emu )
+            / o3tl::convert( 1.0, o3tl::Length::px, o3tl::Length::emu );
+        const sal_Int32 nDigitPx = std::max( static_cast< sal_Int32 >( std::round( fDigitPx ) ), sal_Int32( 1 ) );
+        const sal_Int32 nWidthPx = ( std::min( nWidth, sal_Int32( 255 ) ) * nDigitPx + 5 + 7 ) / 8 * 8;
+        maDefColModel.mfWidth = std::trunc( 256.0 * nWidthPx / nDigitPx ) / 256.0;
     }
 }
 
