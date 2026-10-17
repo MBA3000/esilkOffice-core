@@ -52,8 +52,18 @@ namespace {
     list as writerfilter::dmapper fromLCIDToScriptTag() for "Cyrl". */
 std::u16string_view lclGetLatinSupplementalScript( const OUString& rLang )
 {
-    switch (static_cast<sal_uInt16>(LanguageTag(rLang).getLanguageType()))
+    LanguageTag aTag(rLang);
+    // A tag with an explicit script, e.g. "sr-Cyrl" or "kk-Cyrl-KZ".
+    if (aTag.getScript() == u"Cyrl")
+        return u"Cyrl";
+    switch (static_cast<sal_uInt16>(aTag.getLanguageType()))
     {
+        case 0x6c1a: // Serbian Cyrillic (script-only tag sr-Cyrl)
+        case 0x641a: // Bosnian Cyrillic (bs-Cyrl)
+        case 0x783f: // Kazakh Cyrillic (kk-Cyrl)
+        case 0x742c: // Azerbaijani Cyrillic (az-Cyrl)
+        case 0x7843: // Uzbek Cyrillic (uz-Cyrl)
+        case 0x7850: // Mongolian Cyrillic (mn-Cyrl)
         case 0x419: // Russian
         case 0x402: // Bulgarian
         case 0x281a: // Serbian Cyrillic
@@ -147,26 +157,36 @@ void TextCharacterProperties::assignUsed( const TextCharacterProperties& rSource
     maFillProperties.assignUsed( rSourceProps.maFillProperties );
 }
 
-void TextCharacterProperties::pushToPropMap( PropertyMap& rPropMap, const XmlFilterBase& rFilter ) const
+bool TextCharacterProperties::getLatinFontData( OUString& rFontName, sal_Int16& rnFontPitch,
+                                                sal_Int16& rnFontFamily, const XmlFilterBase& rFilter ) const
 {
-    OUString aFontName;
-    sal_Int16 nFontPitch = 0;
-    sal_Int16 nFontFamily = 0;
-
-    bool bRet = maLatinFont.getFontData( aFontName, nFontPitch, nFontFamily, nullptr, rFilter );
+    bool bRet = maLatinFont.getFontData( rFontName, rnFontPitch, rnFontFamily, nullptr, rFilter );
     if (!bRet)
         // In case there is no direct font, try to look it up as a theme reference.
-        bRet = maLatinThemeFont.getFontData( aFontName, nFontPitch, nFontFamily, nullptr, rFilter );
+        bRet = maLatinThemeFont.getFontData( rFontName, rnFontPitch, rnFontFamily, nullptr, rFilter );
     if (bRet)
     {
         OUString aSupplementalFontName = lclResolveLatinSupplementalFont(
             maLatinFont.getTypeface(), moLang, rFilter);
         if (!aSupplementalFontName.isEmpty())
         {
-            aFontName = aSupplementalFontName;
-            nFontPitch = awt::FontPitch::DONTKNOW;
-            nFontFamily = awt::FontFamily::DONTKNOW;
+            rFontName = aSupplementalFontName;
+            rnFontPitch = awt::FontPitch::DONTKNOW;
+            rnFontFamily = awt::FontFamily::DONTKNOW;
         }
+    }
+    return bRet;
+}
+
+void TextCharacterProperties::pushToPropMap( PropertyMap& rPropMap, const XmlFilterBase& rFilter ) const
+{
+    OUString aFontName;
+    sal_Int16 nFontPitch = 0;
+    sal_Int16 nFontFamily = 0;
+
+    bool bRet = getLatinFontData( aFontName, nFontPitch, nFontFamily, rFilter );
+    if (bRet)
+    {
         rPropMap.setProperty( PROP_CharFontName, aFontName);
         rPropMap.setProperty( PROP_CharFontPitch, nFontPitch);
         rPropMap.setProperty( PROP_CharFontFamily, nFontFamily);

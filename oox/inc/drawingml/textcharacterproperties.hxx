@@ -84,6 +84,15 @@ struct TextCharacterProperties
         the default value is returned. */
     float               getCharHeightPoints( float fDefault ) const;
 
+    /** Resolves the Western ("Latin") font: the direct latin font, else the theme
+        font reference; a +mj-lt / +mn-lt theme font becomes the theme's supplemental
+        font for the script of the run language when the theme has one (Cyrl). */
+    bool                getLatinFontData(
+                            OUString& rFontName,
+                            sal_Int16& rnFontPitch,
+                            sal_Int16& rnFontFamily,
+                            const ::oox::core::XmlFilterBase& rFilter ) const;
+
     /** Writes the properties to the passed property map. */
     void                pushToPropMap(
                             PropertyMap& rPropMap,

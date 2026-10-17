@@ -1089,11 +1089,12 @@ CPPUNIT_TEST_FIXTURE(SdImportTest4, testEsilkThemeFontCyrillicSupplemental)
     // Title placeholder, lang="ru-RU", font +mj-lt inherited from the master title style.
     // Without the fix this was "Tw Cen MT Condensed".
     CPPUNIT_ASSERT_EQUAL(u"Calibri Light"_ustr, getFontName(0, 0));
-    // Text box runs with an explicit +mn-lt: ru-RU and kk-KZ use the Cyrl font, en-US keeps
-    // the latin theme font.
+    // Text box runs with an explicit +mn-lt: ru-RU, kk-KZ and the script-only tag sr-Cyrl use
+    // the Cyrl font, en-US keeps the latin theme font.
     CPPUNIT_ASSERT_EQUAL(u"Calibri"_ustr, getFontName(1, 0));
     CPPUNIT_ASSERT_EQUAL(u"Tw Cen MT"_ustr, getFontName(1, 1));
     CPPUNIT_ASSERT_EQUAL(u"Calibri"_ustr, getFontName(1, 2));
+    CPPUNIT_ASSERT_EQUAL(u"Calibri"_ustr, getFontName(1, 3));
 }
 
 CPPUNIT_PLUGIN_IMPLEMENT();
