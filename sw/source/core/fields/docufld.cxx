@@ -70,6 +70,7 @@
 #include <rootfrm.hxx>
 #include <pagefrm.hxx>
 #include <cntfrm.hxx>
+#include <tabfrm.hxx>
 #include <pam.hxx>
 #include <utility>
 #include <viewsh.hxx>
@@ -145,10 +146,15 @@ void SwPageNumberFieldType::ChangeExpansion( SwDoc* pDoc,
         const SwPageFrame* pPageFrameIter = pRootFrame->GetLastPage();
         while (pPageFrameIter)
         {
-            const SwContentFrame* pContentFrame = pPageFrameIter->FindFirstBodyContent();
-            if (pContentFrame)
+            const SwFrame* pFlow = pPageFrameIter->FindFirstBodyContent();
+            if (pFlow)
             {
-                const SwFormatPageDesc& rFormatPageDesc = pContentFrame->GetPageDescItem();
+                // esilk: a page number offset held by a table (e.g. a DOCX section that starts
+                // with a table) is in the table format, not in the first paragraph of the cell;
+                // look at the outermost table frame like lcl_FindStartOfVirtualPages does.
+                while (const SwFrame* pTable = pFlow->GetUpper()->FindTabFrame())
+                    pFlow = pTable;
+                const SwFormatPageDesc& rFormatPageDesc = pFlow->GetPageDescItem();
                 if ( rFormatPageDesc.GetNumOffset() && rFormatPageDesc.GetDefinedIn() )
                 {
                     const SwContentNode* pNd = dynamic_cast<const SwContentNode*>( rFormatPageDesc.GetDefinedIn()  );
