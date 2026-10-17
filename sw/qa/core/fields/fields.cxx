@@ -209,6 +209,20 @@ CPPUNIT_TEST_FIXTURE(Test, testTdf86790)
     CPPUNIT_ASSERT(!xFields->hasMoreElements());
 }
 
+CPPUNIT_TEST_FIXTURE(Test, testEsilkPageNumberStartOnTable)
+{
+    // A DOCX section that starts with a table and has <w:pgNumType w:start="49"/>: the page
+    // number offset is held by the table format, not by the first paragraph.
+    createSwDoc("esilk-page-number-start-on-table.docx");
+
+    xmlDocUniquePtr pLayout = parseLayoutDump();
+    assertXPath(pLayout, "/root/page", 1);
+    // Without the fix the header's PAGE field was empty: the offset on the table was not seen,
+    // so the number 49 counted as "above the page count".
+    assertXPath(pLayout, "/root/page[1]/header/txt[1]/SwParaPortion/SwLineLayout/SwFieldPortion",
+                "expand", u"49");
+}
+
 void InsertParagraphBreak(const uno::Reference<text::XTextCursor>& xCursor)
 {
     uno::Reference<text::XText> xText = xCursor->getText();
