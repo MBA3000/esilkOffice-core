@@ -55,6 +55,9 @@ public:
 
     void fillThemeFont(model::ThemeFont& rThemeFont) const;
 
+    /** Returns the typeface as written, e.g. a theme placeholder name like '+mn-lt'. */
+    const OUString&     getTypeface() const { return maTypeface; }
+
     static void resolvePitch(sal_Int32 nOoxPitch, sal_Int16& rnFontPitch, sal_Int16& rnFontFamily);
 
 private:

@@ -1069,6 +1069,33 @@ CPPUNIT_TEST_FIXTURE(SdImportTest4, testTdf168109)
     }
 }
 
+CPPUNIT_TEST_FIXTURE(SdImportTest4, testEsilkThemeFontCyrillicSupplemental)
+{
+    // Theme: major latin "Tw Cen MT Condensed" + <a:font script="Cyrl" typeface="Calibri Light"/>,
+    // minor latin "Tw Cen MT" + <a:font script="Cyrl" typeface="Calibri"/>. PowerPoint draws
+    // runs in a Cyrillic-script language with the Cyrl font.
+    createSdImpressDoc("pptx/esilk-theme-font-cyrl.pptx");
+
+    auto getFontName = [this](int nShape, int nPara) {
+        uno::Reference<beans::XPropertySet> xShape(getShapeFromPage(nShape, 0));
+        uno::Reference<text::XTextRange> xParagraph(getParagraphFromShape(nPara, xShape));
+        uno::Reference<beans::XPropertySet> xRun(getRunFromParagraph(0, xParagraph),
+                                                 uno::UNO_QUERY_THROW);
+        OUString aFontName;
+        xRun->getPropertyValue(u"CharFontName"_ustr) >>= aFontName;
+        return aFontName;
+    };
+
+    // Title placeholder, lang="ru-RU", font +mj-lt inherited from the master title style.
+    // Without the fix this was "Tw Cen MT Condensed".
+    CPPUNIT_ASSERT_EQUAL(u"Calibri Light"_ustr, getFontName(0, 0));
+    // Text box runs with an explicit +mn-lt: ru-RU and kk-KZ use the Cyrl font, en-US keeps
+    // the latin theme font.
+    CPPUNIT_ASSERT_EQUAL(u"Calibri"_ustr, getFontName(1, 0));
+    CPPUNIT_ASSERT_EQUAL(u"Tw Cen MT"_ustr, getFontName(1, 1));
+    CPPUNIT_ASSERT_EQUAL(u"Calibri"_ustr, getFontName(1, 2));
+}
+
 CPPUNIT_PLUGIN_IMPLEMENT();
 
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */
