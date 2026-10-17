@@ -19,6 +19,8 @@
 
 #include <drawingml/textcharacterproperties.hxx>
 #include <com/sun/star/lang/Locale.hpp>
+#include <com/sun/star/awt/FontFamily.hpp>
+#include <com/sun/star/awt/FontPitch.hpp>
 #include <com/sun/star/awt/FontSlant.hpp>
 #include <com/sun/star/awt/FontWeight.hpp>
 #include <com/sun/star/i18n/ScriptType.hpp>
@@ -32,6 +34,7 @@
 #include <oox/helper/graphichelper.hxx>
 #include <oox/core/xmlfilterbase.hxx>
 #include <oox/drawingml/drawingmltypes.hxx>
+#include <oox/drawingml/theme.hxx>
 #include <oox/token/properties.hxx>
 #include <oox/token/tokens.hxx>
 
@@ -41,6 +44,85 @@ using namespace ::com::sun::star::uno;
 using namespace ::com::sun::star::beans;
 
 namespace oox::drawingml {
+
+namespace {
+
+/** esilk: ISO 15924 script tag of the Office supplemental theme font list for a run language,
+    limited to scripts that LibreOffice draws with the Western ("Latin") font. Same language
+    list as writerfilter::dmapper fromLCIDToScriptTag() for "Cyrl". */
+std::u16string_view lclGetLatinSupplementalScript( const OUString& rLang )
+{
+    LanguageTag aTag(rLang);
+    // A tag with an explicit script, e.g. "sr-Cyrl" or "kk-Cyrl-KZ".
+    if (aTag.getScript() == u"Cyrl")
+        return u"Cyrl";
+    switch (static_cast<sal_uInt16>(aTag.getLanguageType()))
+    {
+        case 0x6c1a: // Serbian Cyrillic (script-only tag sr-Cyrl)
+        case 0x641a: // Bosnian Cyrillic (bs-Cyrl)
+        case 0x783f: // Kazakh Cyrillic (kk-Cyrl)
+        case 0x742c: // Azerbaijani Cyrillic (az-Cyrl)
+        case 0x7843: // Uzbek Cyrillic (uz-Cyrl)
+        case 0x7850: // Mongolian Cyrillic (mn-Cyrl)
+        case 0x419: // Russian
+        case 0x402: // Bulgarian
+        case 0x281a: // Serbian Cyrillic
+        case 0x422: // Ukrainian
+        case 0x819: // Russian (Moldova)
+        case 0xc1a: // Serbian Cyrillic (Serbia and Montenegro)
+        case 0x1c1a: // Serbian Cyrillic (Bosnia and Herzegovina)
+        case 0x201a: // Bosnian Cyrillic
+        case 0x301a: // Serbian Cyrillic (Montenegro)
+        case 0x423: // Belarusian
+        case 0x428: // Tajik
+        case 0x82c: // Azerbaijani Cyrillic
+        case 0x42f: // Macedonian
+        case 0x43f: // Kazakh
+        case 0x440: // Kyrgyz
+        case 0x843: // Uzbek Cyrillic
+        case 0x444: // Tatar
+        case 0x450: // Mongolian Cyrillic
+        case 0x46d: // Bashkir
+        case 0x485: // Sakha
+            return u"Cyrl";
+        default:
+            return {};
+    }
+}
+
+/** esilk: PowerPoint draws a run whose latin font is the theme font (+mj-lt / +mn-lt) in the
+    theme's supplemental font for the script of the run language (<a:font script="Cyrl"
+    typeface="..."/>), e.g. Cyrillic text of a localized theme in Calibri although the theme's
+    latin font (Tw Cen MT) has no Cyrillic glyphs. Returns that typeface, or an empty string. */
+OUString lclResolveLatinSupplementalFont( const OUString& rTypeface, const std::optional<OUString>& roLang,
+                                          const XmlFilterBase& rFilter )
+{
+    if (!roLang.has_value() || roLang->isEmpty())
+        return OUString();
+    sal_Int32 nScheme = 0;
+    if (rTypeface == u"+mj-lt")
+        nScheme = XML_major;
+    else if (rTypeface == u"+mn-lt")
+        nScheme = XML_minor;
+    else
+        return OUString();
+    const Theme* pTheme = rFilter.getCurrentTheme();
+    if (!pTheme)
+        return OUString();
+    std::u16string_view aScript = lclGetLatinSupplementalScript(*roLang);
+    if (aScript.empty())
+        return OUString();
+    const auto& rSupplementalFontMap = pTheme->getSupplementalFontMap();
+    auto it = rSupplementalFontMap.find(nScheme);
+    if (it == rSupplementalFontMap.end())
+        return OUString();
+    for (const auto& [rScript, rSupplementalTypeface] : it->second)
+        if (rScript == aScript && !rSupplementalTypeface.isEmpty())
+            return rSupplementalTypeface;
+    return OUString();
+}
+
+} // namespace
 
 void TextCharacterProperties::assignUsed( const TextCharacterProperties& rSourceProps )
 {
@@ -75,16 +157,34 @@ void TextCharacterProperties::assignUsed( const TextCharacterProperties& rSource
     maFillProperties.assignUsed( rSourceProps.maFillProperties );
 }
 
+bool TextCharacterProperties::getLatinFontData( OUString& rFontName, sal_Int16& rnFontPitch,
+                                                sal_Int16& rnFontFamily, const XmlFilterBase& rFilter ) const
+{
+    bool bRet = maLatinFont.getFontData( rFontName, rnFontPitch, rnFontFamily, nullptr, rFilter );
+    if (!bRet)
+        // In case there is no direct font, try to look it up as a theme reference.
+        bRet = maLatinThemeFont.getFontData( rFontName, rnFontPitch, rnFontFamily, nullptr, rFilter );
+    if (bRet)
+    {
+        OUString aSupplementalFontName = lclResolveLatinSupplementalFont(
+            maLatinFont.getTypeface(), moLang, rFilter);
+        if (!aSupplementalFontName.isEmpty())
+        {
+            rFontName = aSupplementalFontName;
+            rnFontPitch = awt::FontPitch::DONTKNOW;
+            rnFontFamily = awt::FontFamily::DONTKNOW;
+        }
+    }
+    return bRet;
+}
+
 void TextCharacterProperties::pushToPropMap( PropertyMap& rPropMap, const XmlFilterBase& rFilter ) const
 {
     OUString aFontName;
     sal_Int16 nFontPitch = 0;
     sal_Int16 nFontFamily = 0;
 
-    bool bRet = maLatinFont.getFontData( aFontName, nFontPitch, nFontFamily, nullptr, rFilter );
-    if (!bRet)
-        // In case there is no direct font, try to look it up as a theme reference.
-        bRet = maLatinThemeFont.getFontData( aFontName, nFontPitch, nFontFamily, nullptr, rFilter );
+    bool bRet = getLatinFontData( aFontName, nFontPitch, nFontFamily, rFilter );
     if (bRet)
     {
         rPropMap.setProperty( PROP_CharFontName, aFontName);

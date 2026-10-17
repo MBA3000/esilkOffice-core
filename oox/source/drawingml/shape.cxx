@@ -765,11 +765,8 @@ static void lcl_copyCharPropsToShape(const uno::Reference<drawing::XShape>& xSha
 
             // Replace theme fonts with formatting at run if any. ToDo: Inspect paragraph too?
             // Latin
-            bRet = rCharProps.maLatinFont.getFontData(sFontName, nFontPitch, nFontFamily, nullptr, rFilter);
-            if (!bRet)
-                // In case there is no direct font, try to look it up as a theme reference.
-                bRet = rCharProps.maLatinThemeFont.getFontData(sFontName, nFontPitch, nFontFamily, nullptr,
-                                                               rFilter);
+            // esilk: also resolves the theme's supplemental (Cyrl) font, like run text.
+            bRet = rCharProps.getLatinFontData(sFontName, nFontPitch, nFontFamily, rFilter);
 
             if (bRet)
             {
