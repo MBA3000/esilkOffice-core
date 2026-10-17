@@ -594,6 +594,37 @@ CPPUNIT_TEST_FIXTURE(ScExportTest, testCustomColumnWidthExportXLSX)
     assertXPath(pSheet, "/x:worksheet/x:sheetData/x:row[1]", "customFormat", u"false");
     assertXPath(pSheet, "/x:worksheet/x:sheetData/x:row[1]", "customHeight", u"false");
 }
+
+CPPUNIT_TEST_FIXTURE(ScExportTest, testEsilkDefaultColumnWidthFromBaseXLSX)
+{
+    // Calibri 11 workbook whose sheets have no defaultColWidth: Excel derives the default column
+    // width from baseColWidth (default 8) as 8 * 7 px + 5 px, rounded up to 64 px = 9.140625
+    // characters. Previously the import added only 5 screen pixels (8.45 on a 144 DPI screen),
+    // which Excel read back as 59 px and showed ##### in columns that fit in the original.
+    createScDoc("xlsx/esilk-default-colwidth.xlsx");
+
+    save(TestFilter::XLSX);
+
+    // no baseColWidth: 8 * 7 + 5 = 61 px -> 64 px
+    xmlDocUniquePtr pSheet = parseExport(u"xl/worksheets/sheet1.xml"_ustr);
+    CPPUNIT_ASSERT(pSheet);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(
+        9.140625, getXPath(pSheet, "/x:worksheet/x:sheetFormatPr", "defaultColWidth").toDouble(),
+        0.02);
+
+    // baseColWidth="10": 10 * 7 + 5 = 75 px -> 80 px
+    pSheet = parseExport(u"xl/worksheets/sheet2.xml"_ustr);
+    CPPUNIT_ASSERT(pSheet);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(
+        11.42578125, getXPath(pSheet, "/x:worksheet/x:sheetFormatPr", "defaultColWidth").toDouble(),
+        0.02);
+
+    // defaultColWidth="12" wins over baseColWidth="10"
+    pSheet = parseExport(u"xl/worksheets/sheet3.xml"_ustr);
+    CPPUNIT_ASSERT(pSheet);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(
+        12.0, getXPath(pSheet, "/x:worksheet/x:sheetFormatPr", "defaultColWidth").toDouble(), 0.02);
+}
 #endif
 
 CPPUNIT_TEST_FIXTURE(ScExportTest, testXfDefaultValuesXLSX)
