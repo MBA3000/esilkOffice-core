@@ -1182,6 +1182,35 @@ CPPUNIT_TEST_FIXTURE(ScExportTest, testMiscRowHeightExport2)
                        DfltRowData);
 }
 
+CPPUNIT_TEST_FIXTURE(ScExportTest, testPrintTitlesXLSX)
+{
+    // Repeated rows/columns (_xlnm.Print_Titles) must survive an XLSX round trip;
+    // the import sets them directly at the document.
+    createScDoc();
+    ScDocument* pDoc = getScDoc();
+    pDoc->InsertTab(1, u"Sheet2"_ustr);
+    pDoc->SetString(ScAddress(0, 0, 0), u"a"_ustr);
+    pDoc->SetString(ScAddress(0, 0, 1), u"b"_ustr);
+    pDoc->SetRepeatRowRange(0, ScRange(0, 0, 0, pDoc->MaxCol(), 1, 0));
+    pDoc->SetRepeatColRange(1, ScRange(1, 0, 1, 2, pDoc->MaxRow(), 1));
+
+    saveAndReload(TestFilter::XLSX);
+    pDoc = getScDoc();
+
+    std::optional<ScRange> oRange = pDoc->GetRepeatRowRange(0);
+    CPPUNIT_ASSERT(oRange);
+    CPPUNIT_ASSERT_EQUAL(SCROW(0), oRange->aStart.Row());
+    CPPUNIT_ASSERT_EQUAL(SCROW(1), oRange->aEnd.Row());
+    CPPUNIT_ASSERT(!pDoc->GetRepeatColRange(0));
+
+    oRange = pDoc->GetRepeatColRange(1);
+    CPPUNIT_ASSERT(oRange);
+    CPPUNIT_ASSERT_EQUAL(SCCOL(1), oRange->aStart.Col());
+    CPPUNIT_ASSERT_EQUAL(SCCOL(2), oRange->aEnd.Col());
+    CPPUNIT_ASSERT_EQUAL(SCTAB(1), oRange->aStart.Tab());
+    CPPUNIT_ASSERT(!pDoc->GetRepeatRowRange(1));
+}
+
 CPPUNIT_TEST_FIXTURE(ScExportTest, testMiscRowHeightExport3)
 {
     // Checks that repeated rows ( of various heights ) remain set after export ( to xlsx )

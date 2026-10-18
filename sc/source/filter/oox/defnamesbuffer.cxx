@@ -339,11 +339,14 @@ void DefinedName::convertFormula( const css::uno::Sequence<css::sheet::ExternalL
     break;
     case BIFF_DEFNAME_PRINTTITLES:
     {
-        rtl::Reference< ScTableSheetObj > xPrintAreas( getSheetFromDoc( mnCalcSheet ) );
         ScRangeList aTitleRanges;
         getFormulaParser().extractCellRangeList( aTitleRanges, aFTokenSeq, mnCalcSheet );
-        if( xPrintAreas.is() && !aTitleRanges.empty() )
+        ScDocument& rDoc = getScDocument();
+        if( rDoc.HasTable( mnCalcSheet ) && !aTitleRanges.empty() )
         {
+            /*  Set the repeated ranges directly at the document: going through
+                the sheet API would create an undo action and repaginate the
+                sheet on every call, which is expensive and useless on import. */
             bool bHasRowTitles = false;
             bool bHasColTitles = false;
             const ScAddress& rMaxPos = getAddressConverter().getMaxAddress();
@@ -354,18 +357,12 @@ void DefinedName::convertFormula( const css::uno::Sequence<css::sheet::ExternalL
                 bool bFullCol = (rRange.aStart.Row() == 0) && ( rRange.aEnd.Row() >= rMaxPos.Row() );
                 if( !bHasRowTitles && bFullRow && !bFullCol )
                 {
-                    xPrintAreas->setTitleRows( CellRangeAddress(rRange.aStart.Tab(),
-                                                                rRange.aStart.Col(), rRange.aStart.Row(),
-                                                                rRange.aEnd.Col(), rRange.aEnd.Row()) );
-                    xPrintAreas->setPrintTitleRows( true );
+                    rDoc.SetRepeatRowRange( mnCalcSheet, rRange );
                     bHasRowTitles = true;
                 }
                 else if( !bHasColTitles && bFullCol && !bFullRow )
                 {
-                    xPrintAreas->setTitleColumns( CellRangeAddress(rRange.aStart.Tab(),
-                                                                   rRange.aStart.Col(), rRange.aStart.Row(),
-                                                                   rRange.aEnd.Col(), rRange.aEnd.Row()) );
-                    xPrintAreas->setPrintTitleColumns( true );
+                    rDoc.SetRepeatColRange( mnCalcSheet, rRange );
                     bHasColTitles = true;
                 }
             }
