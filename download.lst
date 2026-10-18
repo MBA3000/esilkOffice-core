@@ -292,6 +292,13 @@ FONT_LUNASIMA_SHA256SUM := 4302809cf4b95b481bec53de87484d919b391c90a518d065f6c77
 # three static lines
 # so that git cherry-pick
 # will not run into conflicts
+# esilkOffice: Roboto 3.016 (SIL OFL 1.1), official googlefonts/roboto-3-classic release; fetched from GitHub,
+# not from dev-www (see Makefile.fetch)
+FONT_ROBOTO_TARBALL := Roboto_v3.016.zip
+FONT_ROBOTO_SHA256SUM := 1653dbe12f248da8fb0b9920db7b9496cd677ed3981154f6f15285c8bd4e334f
+# three static lines
+# so that git cherry-pick
+# will not run into conflicts
 FREEHAND_SHA256SUM := 350b10d24a76d7e8c8ae98b74c2d432a2c8ddec08935d09856d20b695a35e600
 FREEHAND_TARBALL := libfreehand-0.1.4.tar.xz
 # three static lines

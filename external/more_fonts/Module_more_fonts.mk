@@ -35,6 +35,7 @@ $(eval $(call gb_Module_add_targets,more_fonts,\
 	ExternalPackage_noto_serif_hebrew \
 	ExternalPackage_noto_serif_lao \
 	ExternalPackage_reem \
+	ExternalPackage_roboto \
 	ExternalPackage_scheherazade \
 	$(if $(WITH_DOCREPAIR_FONTS),ExternalPackage_agdasima,) \
 	$(if $(WITH_DOCREPAIR_FONTS),ExternalPackage_bacasime_antique,) \
@@ -68,6 +69,7 @@ $(eval $(call gb_Module_add_targets,more_fonts,\
 	UnpackedTarball_noto_serif_hebrew \
 	UnpackedTarball_noto_serif_lao \
 	UnpackedTarball_reem \
+	UnpackedTarball_roboto \
 	UnpackedTarball_scheherazade \
 	$(if $(WITH_DOCREPAIR_FONTS),UnpackedTarball_agdasima,) \
 	$(if $(WITH_DOCREPAIR_FONTS),UnpackedTarball_bacasime_antique,) \
