@@ -52,7 +52,13 @@ static void PyUNO_callable_del (PyObject* self)
     PyUNO_callable* me;
 
     me = reinterpret_cast<PyUNO_callable*>(self);
-    delete me->members;
+    {
+        // Release the GIL like PyUNO_del: dropping the last reference to the
+        // invocation can run a UNO destructor that waits for another lock
+        // (e.g. the SolarMutex) held by a thread that waits for the GIL.
+        PyThreadDetach antiguard;
+        delete me->members;
+    }
     PyObject_Del (self);
 }
 
