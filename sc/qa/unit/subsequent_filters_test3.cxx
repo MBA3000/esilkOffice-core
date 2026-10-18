@@ -28,6 +28,7 @@
 #include <postit.hxx>
 #include <scitems.hxx>
 #include <docsh.hxx>
+#include <formulacell.hxx>
 #include <cellvalue.hxx>
 #include <attrib.hxx>
 #include <stlpool.hxx>
@@ -873,7 +874,10 @@ CPPUNIT_TEST_FIXTURE(ScFiltersTest3, testEsilkCachedUnknownFunctionResultODS)
     // Without the fix in place, B1 was recalculated on load to find its number format:
     // - Expected: 4325
     // - Actual  : #NAME?
-    CPPUNIT_ASSERT_EQUAL(FormulaError::NONE, pDoc->GetErrCode(ScAddress(1, 0, 0)));
+    // ScDocument::GetErrCode is not exported from sc on Windows; ask the formula cell.
+    ScFormulaCell* pB1 = pDoc->GetFormulaCell(ScAddress(1, 0, 0));
+    CPPUNIT_ASSERT(pB1);
+    CPPUNIT_ASSERT_EQUAL(FormulaError::NONE, pB1->GetErrCode());
     CPPUNIT_ASSERT_EQUAL(4325.0, pDoc->GetValue(ScAddress(1, 0, 0)));
     // Formulas without an unknown name still recalculate for their number format.
     CPPUNIT_ASSERT_EQUAL(4326.0, pDoc->GetValue(ScAddress(2, 0, 0)));
@@ -882,7 +886,9 @@ CPPUNIT_TEST_FIXTURE(ScFiltersTest3, testEsilkCachedUnknownFunctionResultODS)
     // A hard recalculation still gives the error.
     ScDocShell* pDocSh = getScDocShell();
     pDocSh->DoHardRecalc();
-    CPPUNIT_ASSERT(pDoc->GetErrCode(ScAddress(1, 0, 0)) != FormulaError::NONE);
+    pB1 = pDoc->GetFormulaCell(ScAddress(1, 0, 0));
+    CPPUNIT_ASSERT(pB1);
+    CPPUNIT_ASSERT(pB1->GetErrCode() != FormulaError::NONE);
 }
 
 CPPUNIT_TEST_FIXTURE(ScFiltersTest3, testTdf115022)
