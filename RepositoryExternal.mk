@@ -1977,8 +1977,11 @@ $(call gb_LinkTarget_use_libraries,$(1),\
 
 endef
 
+# esilk: the .exports file, not the import library, as for LinkTarget library dependencies: a relink
+# that keeps the ABI (e.g. a version bump, which rebuilds every version resource) must not re-unpack,
+# reconfigure and rebuild every librevenge-based external project
 define gb_ExternalProject__use_revenge
-$(call gb_ExternalProject_get_preparation_target,$(1)) : $(call gb_Library_get_target,revenge)
+$(call gb_ExternalProject_get_preparation_target,$(1)) : $(call gb_Library_get_exports_target,revenge)
 
 endef
 
@@ -2230,8 +2233,9 @@ $(call gb_LinkTarget_use_libraries,$(1),\
 
 endef
 
+# esilk: .exports, see gb_ExternalProject__use_revenge
 define gb_ExternalProject__use_wpd
-$(call gb_ExternalProject_get_preparation_target,$(1)) : $(call gb_Library_get_target,wpd)
+$(call gb_ExternalProject_get_preparation_target,$(1)) : $(call gb_Library_get_exports_target,wpd)
 
 endef
 
