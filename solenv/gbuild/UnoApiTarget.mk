@@ -135,9 +135,31 @@ define gb_UnoApiHeadersTarget__command
 	$(gb_UnoApiHeadersTarget_CPPUMAKERCOMMAND) \
 		-Gc $(4) -O$(3) $(call gb_UnoApiTarget_get_target,$(2)) \
 		 $(UNOAPI_DEPS) && \
+	$(call gb_UnoApiHeadersTarget__update_content,$(1),$(3)) && \
 	touch $(1)
 
 endef
+
+# esilk: the .done stamp moves whenever cppumaker runs, and cppumaker runs whenever the rdb or one of
+# cppumaker's runtime libraries is relinked, e.g. after a version bump rebuilt every version resource
+# (Windows). cppumaker -Gc rewrites only the headers whose content changed, so the generated headers are
+# usually untouched; but .done was a normal prerequisite of every LinkTarget's headers target and through
+# it of every precompiled header, so a version bump recompiled ~7100 files.
+# A <variant>.content stamp next to .done therefore moves only when this cppumaker run wrote a header
+# (a file in the header directory newer than the previous .done) or when there was no previous .done.
+# LinkTarget headers depend on .content instead of .done (gb_LinkTarget__use_api). A tree without the
+# stamp gets one with the time of the previous .done, so introducing it rebuilds nothing.
+# $(call gb_UnoApiHeadersTarget__update_content,donestamp,headerdir)
+define gb_UnoApiHeadersTarget__update_content
+{ if test -e $(1) && test -z "$$(find $(2) -type f -newer $(1) -print -quit)"; then \
+	test -e $(basename $(1)).content || touch -r $(1) $(basename $(1)).content; \
+else touch $(basename $(1)).content; fi; }
+endef
+
+# Normally written by the cppumaker command above; this creates it, with the time of .done, in a tree
+# whose headers were generated before the stamp existed.
+$(WORKDIR)/UnoApiHeadersTarget/%.content : $(WORKDIR)/UnoApiHeadersTarget/%.done
+	test -e $@ || touch -r $< $@
 
 $(call gb_UnoApiHeadersTarget_get_real_bootstrap_target,%) : \
 		$(gb_UnoApiHeadersTarget_CPPUMAKERDEPS)
@@ -170,6 +192,9 @@ $(call gb_UnoApiHeadersTarget_get_clean_target,%) :
 			$(call gb_UnoApiHeadersTarget_get_real_bootstrap_dir,$*) \
 			$(call gb_UnoApiHeadersTarget_get_real_comprehensive_dir,$*) \
 			$(call gb_UnoApiHeadersTarget_get_real_target,$*) \
+			$(WORKDIR)/UnoApiHeadersTarget/$*/normal.content \
+			$(WORKDIR)/UnoApiHeadersTarget/$*/bootstrap.content \
+			$(WORKDIR)/UnoApiHeadersTarget/$*/comprehensive.content \
 			$(call gb_UnoApiHeadersTarget_get_real_bootstrap_target,$*)) \
 			$(call gb_UnoApiHeadersTarget_get_real_comprehensive_target,$*)
 

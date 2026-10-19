@@ -215,6 +215,8 @@ gb_UnoApiHeadersTarget_get_real_target = $(WORKDIR)/UnoApiHeadersTarget/$(1)/nor
 gb_UnoApiHeadersTarget_get_bootstrap_target = $(WORKDIR)/UnoApiHeadersTarget/$(1)/$(call gb_UnoApiHeadersTarget_select_variant,$(1),bootstrap).done
 gb_UnoApiHeadersTarget_get_comprehensive_target = $(WORKDIR)/UnoApiHeadersTarget/$(1)/$(call gb_UnoApiHeadersTarget_select_variant,$(1),comprehensive).done
 gb_UnoApiHeadersTarget_get_target = $(WORKDIR)/UnoApiHeadersTarget/$(1)/$(call gb_UnoApiHeadersTarget_select_variant,$(1),normal).done
+# esilk: moves only when cppumaker wrote a header of the normal variant (UnoApiTarget.mk)
+gb_UnoApiHeadersTarget_get_content_target = $(WORKDIR)/UnoApiHeadersTarget/$(1)/$(call gb_UnoApiHeadersTarget_select_variant,$(1),normal).content
 gb_UnpackedTarball_get_dir = $(error please use plain gb_UnpackedTarball_workdir instead)
 gb_UnpackedTarball_workdir := $(WORKDIR)/UnpackedTarball
 gb_UnpackedTarball_get_pristine_dir = $(WORKDIR)/UnpackedTarball/$(1).org

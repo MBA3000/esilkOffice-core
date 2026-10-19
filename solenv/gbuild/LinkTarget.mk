@@ -1226,8 +1226,9 @@ $(call gb_LinkTarget_get_target,$(1)) : T_STDLIBS_CXX :=
 endef
 
 # call gb_LinkTarget__use_api,linktarget,api
+# esilk: the content stamp, not .done: it moves only when a generated header changed (UnoApiTarget.mk)
 define gb_LinkTarget__use_api
-$(call gb_LinkTarget_get_headers_target,$(1)) : $(call gb_UnoApiHeadersTarget_get_target,$(2))
+$(call gb_LinkTarget_get_headers_target,$(1)) : $(call gb_UnoApiHeadersTarget_get_content_target,$(2))
 $(call gb_LinkTarget__add_include,$(1),$(call gb_UnoApiHeadersTarget_get_dir,$(2)))
 
 endef

@@ -99,6 +99,7 @@ endef
 
 gb_LinkTarget_use_static_libraries =
 gb_UnoApiHeadersTarget_get_target = $(gb_Helper_MISCDUMMY)
+gb_UnoApiHeadersTarget_get_content_target = $(gb_Helper_MISCDUMMY)
 gb_UnpackedTarball_get_final_target = $(gb_Helper_MISCDUMMY)
 gb_LinkTarget__get_headers_check =
 define gb_LinkTarget_add_cobject
