@@ -211,35 +211,38 @@ $(call gb_UnoApiHeadersTarget_get_comprehensive_target,$(1)) : UNOAPI_DEPS :=
 # need dummy recipes so that header files are delivered in Package_inc;
 # otherwise make will consider the header to be up-to-date because it was
 # actually built by the recipe for gb_UnoApiHeadersTarget_get_target
+# esilk: the recipes are empty instead of "touch", and the cppumaker run is a
+# normal prerequisite instead of an order-only one. After every cppumaker run
+# make checks the header's time again, so a header that cppumaker rewrote
+# rebuilds its includers in the same make run (with order-only, make could
+# have read the time before the run: bootstrap/comprehensive headers have no
+# .idl prerequisite), while a header that cppumaker -Gc left alone keeps its
+# time. Touching it made everything that includes it (.d files list the
+# generated headers) recompile whenever cppumaker was relinked or an IDL file
+# was touched without a change.
 $(call gb_UnoApiHeadersTarget_get_real_dir,$(1))/%.hdl : \
 		$(call gb_Executable_get_target_for_build,cppumaker) \
-		| $(call gb_UnoApiHeadersTarget_get_real_target,$(1))
-	touch $$@
+		$(call gb_UnoApiHeadersTarget_get_real_target,$(1)) ;
 
 $(call gb_UnoApiHeadersTarget_get_real_dir,$(1))/%.hpp : \
 		$(call gb_Executable_get_target_for_build,cppumaker) \
-		| $(call gb_UnoApiHeadersTarget_get_real_target,$(1))
-	touch $$@
+		$(call gb_UnoApiHeadersTarget_get_real_target,$(1)) ;
 
 $(call gb_UnoApiHeadersTarget_get_real_bootstrap_dir,$(1))/%.hdl : \
 		$(call gb_Executable_get_target_for_build,cppumaker) \
-		| $(call gb_UnoApiHeadersTarget_get_real_bootstrap_target,$(1))
-	touch $$@
+		$(call gb_UnoApiHeadersTarget_get_real_bootstrap_target,$(1)) ;
 
 $(call gb_UnoApiHeadersTarget_get_real_bootstrap_dir,$(1))/%.hpp : \
 		$(call gb_Executable_get_target_for_build,cppumaker) \
-		| $(call gb_UnoApiHeadersTarget_get_real_bootstrap_target,$(1))
-	touch $$@
+		$(call gb_UnoApiHeadersTarget_get_real_bootstrap_target,$(1)) ;
 
 $(call gb_UnoApiHeadersTarget_get_real_comprehensive_dir,$(1))/%.hdl : \
 		$(call gb_Executable_get_target_for_build,cppumaker) \
-		| $(call gb_UnoApiHeadersTarget_get_real_comprehensive_target,$(1))
-	touch $$@
+		$(call gb_UnoApiHeadersTarget_get_real_comprehensive_target,$(1)) ;
 
 $(call gb_UnoApiHeadersTarget_get_real_comprehensive_dir,$(1))/%.hpp : \
 		$(call gb_Executable_get_target_for_build,cppumaker) \
-		| $(call gb_UnoApiHeadersTarget_get_real_comprehensive_target,$(1))
-	touch $$@
+		$(call gb_UnoApiHeadersTarget_get_real_comprehensive_target,$(1)) ;
 
 endef
 
