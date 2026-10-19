@@ -153,3 +153,10 @@ msgstr "Кегль"
 msgctxt "rightframe-atkobject|accessible-name"
 msgid "Properties"
 msgstr "Свойства"
+
+#. P8cfU
+#: svx/uiconfig/ui/docrecoveryrecoverdialog.ui:94
+#. esilk: the button is "Отклонить все" (docrecoveryrecoverdialog|cancel), audit Q33
+msgctxt "docrecoveryrecoverdialog|desc"
+msgid "%PRODUCTNAME will attempt to recover the state of the files you were working on before it crashed. Click 'Recover Selected' to begin the process, or click 'Discard' to cancel the recovery."
+msgstr "%PRODUCTNAME попытается восстановить состояние файлов, с которыми работали до сбоя. Нажмите «Восстановить выбранное», чтобы начать процесс, или нажмите «Отклонить все», чтобы отменить восстановление."

@@ -36,7 +36,7 @@ WindowsCustomAction gid_Customaction_EsilkExtensionLocationRequired
     Name = "EsilkExtensionLocationRequired";
     Typ = "19";
     Source = "";
-    Target = "This esilkOffice build requires a machine-wide installation in the default esilkOffice directory under Program Files.";
+    Target = "[EsilkMsgLocationRequired]"; // Property table, localised: OOO_ESILK_MSG_LOCATION_REQUIRED in Property.ulf
     Inbinarytable = 0;
     Styles = (NO_FILE);
     Assignment1 = ("InstallExecuteSequence", "Not REMOVE=\"ALL\" And Not ACTION=\"ADMIN\" And Not (ProductName >< \"SDK\") And (ALLUSERS <> \"1\" Or INSTALLLOCATION ~<> EsilkExtensionExpectedLocation)", "behind_InstallValidate");
@@ -49,7 +49,7 @@ WindowsCustomAction gid_Customaction_EsilkLibreOfficeConflict
     Name = "EsilkLibreOfficeConflict";
     Typ = "19";
     Source = "";
-    Target = "esilkOffice cannot be installed while LibreOffice is installed on this computer. Uninstall LibreOffice first, then run this installer again.";
+    Target = "[EsilkMsgLibreOfficeConflict]"; // Property table, localised: OOO_ESILK_MSG_LIBREOFFICE_CONFLICT in Property.ulf
     Inbinarytable = 0;
     Styles = (NO_FILE);
     Assignment1 = ("InstallExecuteSequence", "ESILKLIBREOFFICEFOUND And Not Installed And Not (ProductName >< \"SDK\")", "behind_FindRelatedProducts");
@@ -63,7 +63,7 @@ WindowsCustomAction gid_Customaction_EsilkExtensionRollbackRequired
     Name = "EsilkExtensionRollbackRequired";
     Typ = "19";
     Source = "";
-    Target = "esilkOffice bundled extension installation requires Windows Installer rollback. Enable rollback before installing or repairing this product.";
+    Target = "[EsilkMsgRollbackRequired]"; // Property table, localised: OOO_ESILK_MSG_ROLLBACK_REQUIRED in Property.ulf
     Inbinarytable = 0;
     Styles = (NO_FILE);
     Assignment1 = ("InstallExecuteSequence", "Not REMOVE=\"ALL\" And Not ACTION=\"ADMIN\" And (RollbackDisabled Or DISABLEROLLBACK)", "behind_EsilkExtensionLocationRequired");

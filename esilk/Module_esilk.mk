@@ -12,4 +12,13 @@ $(eval $(call gb_Module_add_targets,esilk,\
 	Package_esilk-defaults \
 ))
 
+# Bundled spelling dictionaries (ru, en-US); the dictionaries submodule must be
+# checked out. Never a Kazakh dictionary: the 2009 kk_KZ dictionary is banned
+# (owner decision), and tools/build/check-msi-branding.ps1 in the private repo
+# fails an MSI that contains one.
+$(eval $(call gb_Module_add_l10n_targets,esilk,\
+	Dictionary_esilk-dict-en \
+	Dictionary_esilk-dict-ru \
+))
+
 # vim: set noet sw=4 ts=4:

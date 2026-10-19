@@ -73,6 +73,8 @@ class BackingWindow : public InterimItemWindow
     std::unique_ptr<weld::Button> mxMathAllButton;
     std::unique_ptr<BrandImage> mxBrandImage;
     std::unique_ptr<weld::CustomWeld> mxBrandImageWeld;
+    // esilk: preferred height of the Start Center with the brand image shown (see Resize)
+    tools::Long mnHeightWithBrand = 0;
 
     std::unique_ptr<weld::Button> mxHelpButton;
     std::unique_ptr<weld::Button> mxExtensionsButton;
@@ -140,6 +142,7 @@ public:
 
     virtual bool PreNotify(NotifyEvent& rNEvt) override;
     virtual void GetFocus() override;
+    virtual void Resize() override;
 
     void setOwningFrame(const css::uno::Reference<css::frame::XFrame>& xFrame);
 

@@ -129,6 +129,23 @@ bool prepareLocale() {
     OUString setupSysLoc(officecfg::Setup::L10N::ooSetupSystemLocale::get());
     if (!setupSysLoc.isEmpty())
         aSysLocTag.reset( setupSysLoc);
+    else if (aSysLocTag.getLanguageType(false) == LANGUAGE_ENGLISH_US)
+    {
+        // esilk: English (USA) is the usual Windows locale in Kazakhstan, also
+        // for people who work in Kazakh or Russian. With a Kazakh or Russian
+        // interface its US conventions (MM/DD/YYYY dates, decimal point,
+        // inches in the print dialog) are wrong, so the default locale
+        // setting ("Default" in Tools > Options > Languages) becomes the one
+        // of the interface language: kk-KZ or ru-RU (DD.MM.YYYY, decimal
+        // comma, metric). Any other Windows locale, any other interface
+        // language and a locale chosen in Tools > Options stay as upstream.
+        // The default currency is tenge in every case (esilk-defaults.xcd).
+        const OUString aUILanguage = tag.getLanguage();
+        if (aUILanguage == "kk")
+            aSysLocTag.reset(LANGUAGE_KAZAKH);
+        else if (aUILanguage == "ru")
+            aSysLocTag.reset(LANGUAGE_RUSSIAN);
+    }
     // Ensure the system locale is set to a known supported locale.
     aSysLocTag.makeFallback();
     LanguageTag::setConfiguredSystemLanguage( aSysLocTag.getLanguageType(false));

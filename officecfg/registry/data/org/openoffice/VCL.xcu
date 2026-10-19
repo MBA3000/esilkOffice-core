@@ -4382,6 +4382,57 @@
           <value>Normal,Fixed</value>
         </prop>
       </node>
+      <!-- esilkOffice: Aptos, the Microsoft 365 default font since 2024 (Aptos, Aptos Display, Aptos Narrow
+           in new DOCX/XLSX/PPTX). It is a cloud font: not on Windows unless Office downloaded it, and not
+           redistributable. Without an entry the fuzzy matcher picked Lucida Sans / Arial Unicode MS (wider
+           lines, other breaks; corpus g-odp-01). Carlito first: its line height is exactly Aptos' (1.221 em,
+           typo metrics) and its advance widths are 3-6 % narrower (Aptos Display/Narrow: 2-4 %), measured on
+           en/ru/kk sample text; Arial/Liberation Sans are 2-5 % wider and 9 % lower. Carlito is bundled and has
+           every Kazakh letter and the tenge sign; Calibri has the same metrics. Weight words (Light, SemiBold,
+           ExtraBold, Black) are stripped before the lookup, so "aptos" covers them; "display" is not a known
+           attribute word and "aptosnarrow" is matched before the width word is stripped, hence three nodes. -->
+      <node oor:name="aptos" oor:op="replace">
+        <prop oor:name="SubstFonts">
+          <value>carlito;calibri;liberationsans;arimo;arial;notosans;dejavusans</value>
+        </prop>
+        <prop oor:name="FontWeight">
+          <value>Normal</value>
+        </prop>
+        <prop oor:name="FontWidth">
+          <value>Normal</value>
+        </prop>
+        <prop oor:name="FontType">
+          <value>Normal,SansSerif</value>
+        </prop>
+      </node>
+      <node oor:name="aptosdisplay" oor:op="replace">
+        <prop oor:name="SubstFonts">
+          <value>carlito;calibri;liberationsans;arimo;arial;notosans;dejavusans</value>
+        </prop>
+        <prop oor:name="FontWeight">
+          <value>Normal</value>
+        </prop>
+        <prop oor:name="FontWidth">
+          <value>Normal</value>
+        </prop>
+        <prop oor:name="FontType">
+          <value>Normal,SansSerif</value>
+        </prop>
+      </node>
+      <node oor:name="aptosnarrow" oor:op="replace">
+        <prop oor:name="SubstFonts">
+          <value>carlito;calibri;liberationsans;arimo;arial;notosans;dejavusans</value>
+        </prop>
+        <prop oor:name="FontWeight">
+          <value>Normal</value>
+        </prop>
+        <prop oor:name="FontWidth">
+          <value>Condensed</value>
+        </prop>
+        <prop oor:name="FontType">
+          <value>Normal,SansSerif</value>
+        </prop>
+      </node>
       <!-- esilkOffice: Roboto (stat.gov.kz and Office cloud documents). The font is bundled
            (external/more_fonts); this entry is the fallback when it is missing, so the fuzzy
            matcher never picks Arial Black for bold or a serif italic. Weight and width words

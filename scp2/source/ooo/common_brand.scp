@@ -36,6 +36,13 @@
 PACKAGE_FILELIST(gid_Brand_File_Esilk_Kz_Calc, "esilk-kz-calc.filelist")
 #endif
 
+// esilk: bundled ru and en-US spelling dictionaries (esilk/Dictionary_esilk-dict-*.mk),
+// built by the esilk module, which exists only with ESILK_OXT_DIR (= ESILK_KZ_BUNDLED).
+#if defined ESILK_KZ_BUNDLED
+PACKAGE_FILELIST(gid_Brand_File_Esilk_Dict_En, "Dictionary/esilk-dict-en.filelist")
+PACKAGE_FILELIST(gid_Brand_File_Esilk_Dict_Ru, "Dictionary/esilk-dict-ru.filelist")
+#endif
+
 Module gid_Module_Root_Brand
     ParentID = gid_Module_Root;
     InstallOrder = "150";
@@ -58,6 +65,8 @@ Module gid_Module_Root_Brand
     Files = (auto_brand_ALL,
 #if defined ESILK_KZ_BUNDLED
              gid_Brand_File_Esilk_Kz_Calc,
+             gid_Brand_File_Esilk_Dict_En,
+             gid_Brand_File_Esilk_Dict_Ru,
 #endif
 	     gid_Brand_File_Desktophelper_Txt,
              gid_Brand_File_Share_Xdg_Base,

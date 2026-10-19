@@ -27,6 +27,8 @@
 
 #include <officecfg/Office/Common.hxx>
 
+#include <algorithm>
+#include <cmath>
 #include <memory>
 #include <string.h>
 #include <limits.h>
@@ -2726,6 +2728,30 @@ void WinSalFrame::UpdateSettings( AllSettings& rSettings )
             GetThemeColor(hTheme, TEXT_HYPERLINKTEXT, TS_HYPERLINK_NORMAL, TMT_TEXTCOLOR, &color);
             aStyleSettings.SetLinkColor(ImplWinColorToSal(color));
             CloseThemeData(hTheme);
+        }
+
+        // esilk: this "Textstyle" theme data is the light one (the window theme
+        // was reset above), so links came out dark blue on the dark dialog
+        // background, e.g. the Licenses/Website/Release Notes links in Help >
+        // About (pilot-readiness audit Q30). Use the light blue of Windows'
+        // dark mode links when the theme colour is too dark for the window
+        // colour (WCAG contrast below 4.5:1). Visited links get the same colour.
+        {
+            auto aLuminance = [](const Color& rColor) {
+                auto aChannel = [](sal_uInt8 n) {
+                    const double f = n / 255.0;
+                    return f <= 0.03928 ? f / 12.92 : std::pow((f + 0.055) / 1.055, 2.4);
+                };
+                return 0.2126 * aChannel(rColor.GetRed()) + 0.7152 * aChannel(rColor.GetGreen())
+                       + 0.0722 * aChannel(rColor.GetBlue());
+            };
+            const double fLink = aLuminance(aStyleSettings.GetLinkColor());
+            const double fWindow = aLuminance(aStyleSettings.GetWindowColor());
+            const double fContrast
+                = (std::max(fLink, fWindow) + 0.05) / (std::min(fLink, fWindow) + 0.05);
+            if (fContrast < 4.5)
+                aStyleSettings.SetLinkColor(Color(0x60, 0xCD, 0xFF));
+            aStyleSettings.SetVisitedLinkColor(aStyleSettings.GetLinkColor());
         }
 
         // tdf#148448 pick a warning color more likely to be readable as a
