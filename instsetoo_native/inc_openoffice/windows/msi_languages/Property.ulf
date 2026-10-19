@@ -34,6 +34,21 @@ en-US = "https://esilk.akbrd.com/en/"
 [OOO_ARPURLUPDATEINFOTEMPLATE]
 en-US = "https://esilk.akbrd.com/en/"
 
+/*
+ * esilk: texts of the installer refusals (scp2/source/ooo/windowscustomaction_ooo.scp,
+ * Type 19 actions show [EsilkMsg...]). en-US, used on every Windows that is not kk or ru,
+ * carries Kazakh, Russian and English; the kk and ru overlays in esilk/l10n give one language.
+ */
+
+[OOO_ESILK_MSG_LOCATION_REQUIRED]
+en-US = "esilkOffice-тің бұл жинағын тек компьютердің барлық пайдаланушылары үшін, Program Files ішіндегі әдепкі esilkOffice қалтасына орнатуға болады.  /  Эту сборку esilkOffice можно установить только для всех пользователей компьютера, в папку esilkOffice по умолчанию в Program Files.  /  This esilkOffice build requires a machine-wide installation in the default esilkOffice directory under Program Files."
+
+[OOO_ESILK_MSG_LIBREOFFICE_CONFLICT]
+en-US = "Бұл компьютерде LibreOffice орнатылған кезде esilkOffice орнату мүмкін емес. Алдымен LibreOffice бағдарламасын жойып, содан кейін осы орнату бағдарламасын қайта іске қосыңыз.  /  esilkOffice нельзя установить, пока на этом компьютере установлен LibreOffice. Сначала удалите LibreOffice, затем снова запустите эту программу установки.  /  esilkOffice cannot be installed while LibreOffice is installed on this computer. Uninstall LibreOffice first, then run this installer again."
+
+[OOO_ESILK_MSG_ROLLBACK_REQUIRED]
+en-US = "esilkOffice кірістірілген кеңейтімін орнату үшін Windows Installer-дің кері қайтару (rollback) мүмкіндігі қажет. Бағдарламаны орнату немесе қалпына келтіру алдында оны қосыңыз.  /  Для установки встроенного расширения esilkOffice нужен откат (rollback) установщика Windows. Включите его перед установкой или восстановлением программы.  /  esilkOffice bundled extension installation requires Windows Installer rollback. Enable rollback before installing or repairing this product."
+
 [OOO_STR_NEW_DISPLAY_NAME]
 en-US = "~New"
 

@@ -10,6 +10,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. esilk: Start menu shortcut, untranslated upstream (audit Q32)
+#: folderitem_ooo.ulf
+msgctxt ""
+"folderitem_ooo.ulf\n"
+"STR_FI_NAME_SAFEMODE\n"
+"LngText.text"
+msgid "%PRODUCTNAME (Troubleshoot Mode)"
+msgstr "%PRODUCTNAME (Безопасный режим)"
+
 #. esilk: Start menu and desktop shortcut tooltip
 #: folderitem_ooo.ulf
 msgctxt ""

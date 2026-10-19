@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ esilkOffice bundled Russian spelling dictionary. The dictionary data
+ (ru_RU.aff, ru_RU.dic, README_ru_RU.txt) comes unmodified from the
+ dictionaries submodule; see esilk/Dictionary_esilk-dict-ru.mk.
+-->
+<description xmlns="http://openoffice.org/extensions/description/2006" xmlns:d="http://openoffice.org/extensions/description/2006" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <version value="2012.12.03.2" />
+    <identifier value="kz.esilk.dictionaries.ru" />
+    <display-name>
+        <name lang="en-US">Russian spelling dictionary</name>
+        <name lang="ru">Русский орфографический словарь</name>
+        <name lang="kk">Орыс тілінің емле сөздігі</name>
+    </display-name>
+    <platform value="all" />
+    <dependencies>
+        <OpenOffice.org-minimal-version value="3.0" d:name="OpenOffice.org 3.0" />
+    </dependencies>
+</description>

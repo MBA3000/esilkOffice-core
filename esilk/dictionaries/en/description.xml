@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ esilkOffice bundled English (USA) spelling dictionary, hyphenation patterns
+ and thesaurus. The data files and their README/licence files come unmodified
+ from the dictionaries submodule; see esilk/Dictionary_esilk-dict-en.mk.
+-->
+<description xmlns="http://openoffice.org/extensions/description/2006" xmlns:d="http://openoffice.org/extensions/description/2006" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <version value="2020.12.07" />
+    <identifier value="kz.esilk.dictionaries.en-US" />
+    <display-name>
+        <name lang="en-US">English (USA) spelling dictionary, hyphenation rules and thesaurus</name>
+        <name lang="ru">Английский (США) орфографический словарь, правила переноса и тезаурус</name>
+        <name lang="kk">Ағылшын (АҚШ) емле сөздігі, тасымалдау ережелері және тезаурус</name>
+    </display-name>
+    <platform value="all" />
+    <dependencies>
+        <OpenOffice.org-minimal-version value="3.0" d:name="OpenOffice.org 3.0" />
+    </dependencies>
+</description>

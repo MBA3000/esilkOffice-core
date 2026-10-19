@@ -19,8 +19,10 @@ $(eval $(call gb_Package_add_files_with_dir,extras_templates,$(LIBO_SHARE_FOLDER
 	styles/Modern.ott \
 	styles/Simple.ott \
 	draw/bpmn.otg \
-	l10n/zh_CN_ott_normal.ott \
-	l10n/ja_ott_normal.ott \
 ))
+
+# esilk: no l10n/zh_CN_ott_normal.ott and l10n/ja_ott_normal.ott. esilkOffice ships
+# kk/ru/en only; the template manager listed them as "Japanese normal" and
+# "Simplified Chinese normal" (pilot-readiness audit Q07).
 
 # vim: set noet sw=4 ts=4:

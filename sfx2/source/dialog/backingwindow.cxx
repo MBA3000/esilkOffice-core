@@ -491,17 +491,52 @@ void BackingWindow::ApplyStyleSettings()
     // fdo#34392: we do the layout dynamically, the layout depends on the font,
     // so we should handle data changed events (font changing) of the last child
     // control, at this point all the controls have updated settings (i.e. font).
+    // esilk: two digits of slack for the button column. At 200 % display
+    // scaling the longest Kazakh label ("Calc электрондық кестесі") was cut by
+    // its last letter (pilot-readiness audit Q13).
+    // Measure without the earlier requests (the brand image width follows the
+    // column width, so it would otherwise add the slack again on every call).
+    mxAllButtonsBox->set_size_request(-1, -1);
+    mxBrandImage->GetDrawingArea()->set_size_request(-1, -1);
     Size aPrefSize(mxAllButtonsBox->get_preferred_size());
+    aPrefSize.AdjustWidth(2 * mxCalcAllButton->get_approximate_digit_width());
+    mxAllButtonsBox->set_size_request(aPrefSize.Width(), -1);
     set_width_request(aPrefSize.Width());
 
     // Now set a brand image wide enough to fill this width
     weld::DrawingArea* pDrawingArea = mxBrandImage->GetDrawingArea();
+    // esilk: measure with the brand image shown; Resize hides it again if needed
+    pDrawingArea->set_visible(true);
     mxBrandImage->ConfigureForWidth(aPrefSize.Width() -
                                     (pDrawingArea->get_margin_start() + pDrawingArea->get_margin_end()));
     // Refetch because the brand image height to match this width is now set
     aPrefSize = mxAllButtonsBox->get_preferred_size();
+    mnHeightWithBrand = m_xContainer->get_preferred_size().Height();
 
     set_height_request(nMenuHeight + aPrefSize.Height() + mxBrandImage->getSize().getHeight());
+    Resize();
+}
+
+// esilk: the Start Center window keeps its size from the last session (or the
+// default size), which is not grown to the height request above. At 200 %
+// display scaling the column of buttons plus the brand image is then taller
+// than the window: the layout squeezes the buttons, the image is drawn over the
+// last ones ("Base" disappeared under the logo, pilot-readiness audit Q13).
+// Hide the brand image whenever the window is lower than the Start Center with
+// the image; every button stays visible, and the image comes back when the
+// window is tall enough. The title bar still shows the product name.
+void BackingWindow::Resize()
+{
+    if (mxBrandImage && mnHeightWithBrand > 0)
+    {
+        if (weld::DrawingArea* pBrand = mxBrandImage->GetDrawingArea())
+        {
+            const bool bShow = GetOutputSizePixel().Height() >= mnHeightWithBrand;
+            if (pBrand->get_visible() != bShow)
+                pBrand->set_visible(bShow);
+        }
+    }
+    InterimItemWindow::Resize();
 }
 
 void BackingWindow::initializeLocalView()

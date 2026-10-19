@@ -46,3 +46,30 @@ msgctxt ""
 "LngText.text"
 msgid "https://esilk.akbrd.com/en/"
 msgstr "https://esilk.akbrd.com/ru/"
+
+#. esilk: installer refusal shown by a Type 19 custom action
+#: Property.ulf
+msgctxt ""
+"Property.ulf\n"
+"OOO_ESILK_MSG_LOCATION_REQUIRED\n"
+"LngText.text"
+msgid "esilkOffice-тің бұл жинағын тек компьютердің барлық пайдаланушылары үшін, Program Files ішіндегі әдепкі esilkOffice қалтасына орнатуға болады.  /  Эту сборку esilkOffice можно установить только для всех пользователей компьютера, в папку esilkOffice по умолчанию в Program Files.  /  This esilkOffice build requires a machine-wide installation in the default esilkOffice directory under Program Files."
+msgstr "Эту сборку esilkOffice можно установить только для всех пользователей компьютера, в папку esilkOffice по умолчанию в Program Files."
+
+#. esilk: installer refusal shown by a Type 19 custom action
+#: Property.ulf
+msgctxt ""
+"Property.ulf\n"
+"OOO_ESILK_MSG_LIBREOFFICE_CONFLICT\n"
+"LngText.text"
+msgid "Бұл компьютерде LibreOffice орнатылған кезде esilkOffice орнату мүмкін емес. Алдымен LibreOffice бағдарламасын жойып, содан кейін осы орнату бағдарламасын қайта іске қосыңыз.  /  esilkOffice нельзя установить, пока на этом компьютере установлен LibreOffice. Сначала удалите LibreOffice, затем снова запустите эту программу установки.  /  esilkOffice cannot be installed while LibreOffice is installed on this computer. Uninstall LibreOffice first, then run this installer again."
+msgstr "esilkOffice нельзя установить, пока на этом компьютере установлен LibreOffice. Сначала удалите LibreOffice, затем снова запустите эту программу установки."
+
+#. esilk: installer refusal shown by a Type 19 custom action
+#: Property.ulf
+msgctxt ""
+"Property.ulf\n"
+"OOO_ESILK_MSG_ROLLBACK_REQUIRED\n"
+"LngText.text"
+msgid "esilkOffice кірістірілген кеңейтімін орнату үшін Windows Installer-дің кері қайтару (rollback) мүмкіндігі қажет. Бағдарламаны орнату немесе қалпына келтіру алдында оны қосыңыз.  /  Для установки встроенного расширения esilkOffice нужен откат (rollback) установщика Windows. Включите его перед установкой или восстановлением программы.  /  esilkOffice bundled extension installation requires Windows Installer rollback. Enable rollback before installing or repairing this product."
+msgstr "Для установки встроенного расширения esilkOffice нужен откат (rollback) установщика Windows. Включите его перед установкой или восстановлением программы."
