@@ -225,6 +225,8 @@ void ImplSalLogFontToFontW( HDC hDC, const LOGFONTW& rLogFont, vcl::Font& rFont 
 #define SAL_MSG_SETINPUTCONTEXT     (WM_USER+144)
 // wParam == nFlags; lParam == 0
 #define SAL_MSG_ENDEXTTEXTINPUT     (WM_USER+145)
+// deferred WM_SETTINGCHANGE & co.; wParam == SalEvent; lParam == original message
+#define SAL_MSG_POSTSETTINGSCHANGED (WM_USER+146)
 
 // SysChild-ToTop; wParam = 0; lParam = 0
 #define SALOBJ_MSG_TOTOP            (WM_USER+160)
