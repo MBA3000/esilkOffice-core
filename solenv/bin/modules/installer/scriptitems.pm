@@ -615,9 +615,13 @@ sub replace_setup_variables
 
     if ( $localbuild =~ /^\s*(\w+?)(\d+)\s*$/ ) { $localbuild = $2; }   # using "680" instead of "src680"
 
-    my $buildidstring = `git -C $ENV{'SRCDIR'} log -n 1 --pretty=format:"%H"`;
-    if ($? || !$buildidstring) {
-        $buildidstring = $localbuild . "(Build:" . $installer::globals::buildid . ")";
+    # esilk: ESILK_BUILDID (the esilk core commit) wins over the checkout HEAD.
+    my $buildidstring = $ENV{'ESILK_BUILDID'};
+    if (!$buildidstring) {
+        $buildidstring = `git -C $ENV{'SRCDIR'} log -n 1 --pretty=format:"%H"`;
+        if ($? || !$buildidstring) {
+            $buildidstring = $localbuild . "(Build:" . $installer::globals::buildid . ")";
+        }
     }
 
     my $updateid = $productname . "_" . $libo_version_major . "_" . $$languagestringref;
