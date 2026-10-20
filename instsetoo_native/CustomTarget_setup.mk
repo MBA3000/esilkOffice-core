@@ -119,7 +119,7 @@ $(gb_CustomTarget_workdir)/instsetoo_native/setup/$(call gb_Helper_get_rcfile,se
 	$(call gb_Trace_StartRange,$(subst $(WORKDIR)/,,$@),ECH)
 	( \
 		echo '[Bootstrap]' \
-		&& echo 'buildid=$(shell cd $(SRCDIR) && git log -1 --format=%H)' \
+		&& echo 'buildid=$(if $(strip $(ESILK_BUILDID)),$(strip $(ESILK_BUILDID)),$(shell cd $(SRCDIR) && git log -1 --format=%H))' \
 	) > $@
 	$(call gb_Trace_EndRange,$(subst $(WORKDIR)/,,$@),ECH)
 
@@ -188,7 +188,7 @@ $(gb_CustomTarget_workdir)/instsetoo_native/setup/$(call gb_Helper_get_rcfile,un
 define instsetoo_native_genversionini
 [Version]
 AllLanguages=$(if $(gb_WITH_LANG),$(gb_WITH_LANG),en-US)
-buildid=$(shell cd $(SRCDIR) && git log -1 --format=%H)
+buildid=$(if $(strip $(ESILK_BUILDID)),$(strip $(ESILK_BUILDID)),$(shell cd $(SRCDIR) && git log -1 --format=%H))
 ExtensionUpdateURL=$(if $(strip $(ESILK_OXT_DIR)),,https://updateexte.libreoffice.org/ExtensionUpdateService/check.Update)
 UpdateChannel=$(if $(ENABLE_ONLINE_UPDATE_MAR),LOOnlineUpdater)
 ReferenceOOoMajorMinor=4.1

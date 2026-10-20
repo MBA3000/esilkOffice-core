@@ -23,6 +23,8 @@
 
 #include <about.hxx>
 
+#include <algorithm>
+
 #include <osl/process.h> //osl_getProcessLocale
 #include <rtl/bootstrap.hxx>
 #include <sal/log.hxx> //SAL_WARN
@@ -54,6 +56,18 @@
 
 using namespace ::com::sun::star::uno;
 
+namespace
+{
+// esilk: "<version> / <first 12 chars of the core commit>". rVersionString looks like
+// "26.8.15.0.0 (x64)": keep the version, drop the architecture.
+OUString GetEsilkBuildLabel(const OUString& rVersionString, const OUString& rBuildId)
+{
+    OUString aCommit = rBuildId.copy(0, std::min<sal_Int32>(rBuildId.getLength(), 12));
+    OUString aVersion = rVersionString.getToken(0, ' ');
+    return aVersion.isEmpty() ? aCommit : aVersion + " / " + aCommit;
+}
+}
+
 AboutDialog::AboutDialog(weld::Window* pParent)
     : GenericDialogController(pParent, u"cui/ui/aboutdialog.ui"_ustr, u"AboutDialog"_ustr)
     , m_pCreditsButton(m_xBuilder->weld_link_button(u"btnCredits"_ustr))
@@ -79,14 +93,24 @@ AboutDialog::AboutDialog(weld::Window* pParent)
     if (IsStringValidGitHash(sbuildId))
     {
         const tools::Long nMaxChar = 25;
-        // A derived product is not built from this upstream commit alone:
-        // show the id as text, without a link to the LibreOffice repository.
-        if (utl::ConfigManager::getProductName() == "LibreOffice")
+        const bool bUpstream = utl::ConfigManager::getProductName() == "LibreOffice";
+        if (bUpstream)
+        {
             m_pBuildLabel->set_uri("https://git.libreoffice.org/core/commit/" + sbuildId);
-        m_pBuildLabel->set_label(
-            sbuildId.getLength() > nMaxChar
-                ? sbuildId.replaceAt(nMaxChar, sbuildId.getLength() - nMaxChar, u"...")
-                : sbuildId);
+            m_pBuildLabel->set_label(
+                sbuildId.getLength() > nMaxChar
+                    ? sbuildId.replaceAt(nMaxChar, sbuildId.getLength() - nMaxChar, u"...")
+                    : sbuildId);
+        }
+        else
+        {
+            // esilk: show our own build id, "<product version> / <core commit>", and link
+            // to that commit in our public core repository (never to git.libreoffice.org).
+            // The build puts the esilk core commit into the build id (ESILK_BUILDID).
+            m_pBuildLabel->set_uri("https://github.com/MBA3000/esilkOffice-core/commit/"
+                                   + sbuildId);
+            m_pBuildLabel->set_label(GetEsilkBuildLabel(GetVersionString(), sbuildId));
+        }
     }
     else
     {
