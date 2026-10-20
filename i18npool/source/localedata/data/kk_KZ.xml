@@ -105,13 +105,15 @@
       <FormatCode># ##0,-- [CURRENCY];[RED]-# ##0,-- [CURRENCY]</FormatCode>
     </FormatElement>
     <FormatElement msgid="DateFormatskey11" default="true" type="short" usage="DATE" formatindex="18">
-      <FormatCode>D.MM.YY</FormatCode>
+      <!-- esilk: four-digit year, as Windows dd.MM.yyyy -->
+      <FormatCode>DD.MM.YYYY</FormatCode>
     </FormatElement>
     <FormatElement msgid="DateFormatskey14" default="true" type="long" usage="DATE" formatindex="19">
       <FormatCode>NNNNDD MMMM YYYY</FormatCode>
     </FormatElement>
     <FormatElement msgid="DateFormatskey6" default="true" type="medium" usage="DATE" formatindex="20">
-      <FormatCode>DD.MM.YY</FormatCode>
+      <!-- esilk: four-digit year, as Windows dd.MM.yyyy -->
+      <FormatCode>DD.MM.YYYY</FormatCode>
     </FormatElement>
     <FormatElement msgid="DateFormatskey5" default="false" type="medium" usage="DATE" formatindex="21">
       <FormatCode>DD.MM.YYYY</FormatCode>
@@ -190,7 +192,8 @@
       <FormatCode>[HH]:MM:SS,00</FormatCode>
     </FormatElement>
     <FormatElement msgid="DateTimeFormatskey1" default="true" type="medium" usage="DATE_TIME" formatindex="46">
-      <FormatCode>DD.MM.YY HH:MM</FormatCode>
+      <!-- esilk: four-digit year, as Windows dd.MM.yyyy -->
+      <FormatCode>DD.MM.YYYY HH:MM</FormatCode>
     </FormatElement>
     <FormatElement msgid="DateTimeFormatskey2" default="false" type="medium" usage="DATE_TIME" formatindex="47">
       <FormatCode>DD.MM.YYYY HH:MM:SS</FormatCode>
