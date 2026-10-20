@@ -4425,6 +4425,26 @@ static bool ImplHandleShutDownMsg( HWND hWnd )
     return nRet;
 }
 
+// the SolarMutex must be held
+static void ImplCallSettingsChanged(WinSalFrame* pFrame, UINT nMsg, SalEvent nSalEvent)
+{
+    if (((nMsg == WM_DISPLAYCHANGE) || (nMsg == WM_SETTINGCHANGE)) && pFrame->isFullScreen())
+        ImplSalFrameFullScreenPos(pFrame);
+
+    pFrame->CallCallback(nSalEvent, nullptr);
+}
+
+static void ImplHandlePostSettingsChangeMsg(HWND hWnd, WPARAM wParam, LPARAM lParam)
+{
+    WinSalFrame* pFrame = ProcessOrDeferMessage( hWnd, 0, 0, DeferPolicy::Blocked );
+    if (!pFrame)
+        return;
+
+    ImplCallSettingsChanged(pFrame, static_cast<UINT>(lParam), static_cast<SalEvent>(wParam));
+
+    ImplSalYieldMutexRelease();
+}
+
 static void ImplHandleSettingsChangeMsg(HWND hWnd, UINT nMsg, WPARAM /*wParam*/, LPARAM lParam)
 {
     SalEvent nSalEvent = SalEvent::SettingsChanged;
@@ -4449,14 +4469,23 @@ static void ImplHandleSettingsChangeMsg(HWND hWnd, UINT nMsg, WPARAM /*wParam*/,
         GetSalData()->mbThemeChanged = true;
     }
 
-    WinSalFrame* pFrame = ProcessOrDeferMessage( hWnd, 0, 0, DeferPolicy::Blocked );
-    if (!pFrame)
+    // Other processes send these messages, often dozens of them in a row (e.g. right after a
+    // Windows logon). While another thread holds the SolarMutex, the main thread waits for it
+    // and dispatches sent messages meanwhile (see WinSalYieldMutex::doAcquire), so waiting here
+    // would nest one handler per message. After about 30 nested sent messages win32k refuses
+    // further callbacks to this thread and CreateWindowEx() fails, e.g. for a dialog that the
+    // mutex holder is just creating ("Could not create system window!"). So don't wait: if the
+    // mutex is busy, handle the change later from the message loop.
+    if (!ImplSalYieldMutexTryToAcquire())
+    {
+        bool const ret = PostMessageW(hWnd, SAL_MSG_POSTSETTINGSCHANGED,
+                                      static_cast<WPARAM>(nSalEvent), static_cast<LPARAM>(nMsg));
+        SAL_WARN_IF(!ret, "vcl", "ERROR: PostMessage() failed!");
         return;
+    }
 
-    if (((nMsg == WM_DISPLAYCHANGE) || (nMsg == WM_SETTINGCHANGE)) && pFrame->isFullScreen())
-        ImplSalFrameFullScreenPos(pFrame);
-
-    pFrame->CallCallback(nSalEvent, nullptr);
+    if (WinSalFrame* pFrame = GetWindowPtr(hWnd))
+        ImplCallSettingsChanged(pFrame, nMsg, nSalEvent);
 
     ImplSalYieldMutexRelease();
 }
@@ -6053,6 +6082,11 @@ static LRESULT CALLBACK SalFrameWndProc( HWND hWnd, UINT nMsg, WPARAM wParam, LP
         case WM_SYSCOLORCHANGE:
         case WM_TIMECHANGE:
             ImplHandleSettingsChangeMsg( hWnd, nMsg, wParam, lParam );
+            break;
+
+        case SAL_MSG_POSTSETTINGSCHANGED:
+            ImplHandlePostSettingsChangeMsg( hWnd, wParam, lParam );
+            rDef = false;
             break;
 
         case WM_THEMECHANGED:
